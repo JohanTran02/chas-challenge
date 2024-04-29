@@ -1,16 +1,18 @@
 'use client'; 
 
 // Icons
-import HomeIcon from '/public/home.svg'; 
-import MapIcon from '../../../public/map-pin-alt.svg'; 
-import StampsIcon from '../../../public/painting-landscape-framed.svg'; 
-import ProfileIcon from '../../../public/profile-1336.svg'; 
+import HomeIcon from '@/public/home.svg'; 
+import MapIcon from '@/public/map-pin-alt.svg'; 
+import StampsIcon from '@/public/painting-landscape-framed.svg'; 
+import ProfileIcon from '@/public/profile-1336.svg'; 
 
 // Components
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation';
 
 export default function SideNav(){
+  const path = usePathname();
   const links = [
     {name: 'Home', href: '/dashboard', src: HomeIcon, alt: 'Home icon'},
     {name: 'Map', href: '/dashboard/map', src: MapIcon, alt: 'Map icon'}, 
@@ -25,7 +27,7 @@ export default function SideNav(){
           <Link 
             key={link.name}
             href={link.href}
-            className="bg-white flex-grow h-10 rounded-md grid place-items-center"
+            className={`bg-white flex-grow h-10 rounded-md grid place-items-center ${path === link.href && 'bg-blue-200'}`}
             >
             <li>
               <Image 
