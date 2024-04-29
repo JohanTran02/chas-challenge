@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="w-full">
                 <SideNav />
             </div>  
-            <div>{children}</div>
+            <div className="flex-1 grid place-items-center">{children}</div>
         </div>
     )
 }
