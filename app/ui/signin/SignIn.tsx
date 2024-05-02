@@ -1,5 +1,7 @@
 'use client'
 
+// react
+import { useState } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
@@ -8,44 +10,71 @@ import { UserInputValues } from "@/app/lib/definitions";
 
 
 export default function SignIn(){
+  const [createAccount, setCreateAccount] = useState<boolean>(false);
   const methods = useForm<UserInputValues>(); 
+  const onSubmit: SubmitHandler<UserInputValues> = (data): void =>{
+    console.log(data);
+  } 
 
-  const onSubmit: SubmitHandler<UserInputValues> = (data) => console.log(data); 
   return (
-    <div className="flex flex-col border-2 border-black min-h-[550px] h-auto min-w-[280px] w-5/6 max-w-[450px] rounded-xl pb-10">
-      <div className=" h-40 w-full mx-auto mb-4 rounded-xl">
-        <img 
-          className="w-full h-full object-cover object-center rounded-t-xl"
-          src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+    <div className="h-11/12 w-10/12 max-w-[600px] py-10">
+      <div className="w-full h-20">
+        <div className="h-full w-24 border-2 border-black grid place-items-center text-xl font-semibold">
+          <p>Logga</p>
+        </div>
+      </div>
+      <div className="flex flex-col justify-between h-48 w-full my-12">
+        <div className="h-8 w-3/6 bg-darkGray"></div>
+        <div className="h-4 w-full bg-darkGray"></div>
+        <div className="h-4 w-full bg-darkGray"></div>
+        <div className="h-4 w-full bg-darkGray"></div>
       </div>
       <FormProvider {...methods}>
-        <form
+        <form 
           onSubmit={methods.handleSubmit(onSubmit)}
-          className="flex-1 flex flex-col gap-2"
-          >
-          <div className="w-5/6 h-64 mx-auto flex flex-col gap-4">
-            <Inputfield
+          className="w-full font-medium">
+          <p className="text-2xl font-semibold my-4">
+            {createAccount ? 'Skapa konto' : 'Logga in'}
+          </p>
+          <div className="flex flex-col gap-4">
+            <Inputfield 
+              type={"text"}
               required={true}
               property={"email"}
-              src={"https://www.svgrepo.com/show/501173/email.svg"}
-              placeholder={"E-post"}
-              type={"text"}
+              error={methods.formState.errors} 
+            />
+            <Inputfield 
+              type={"password"} 
+              required={true} 
+              property={"password"} 
               error={methods.formState.errors}
-              alt={"Email Icon"}
               />
-            <Inputfield
-              required={true}
-              property={"password"}
-              src={"https://www.svgrepo.com/show/513445/lock.svg"}
-              placeholder={"Lösenord"}
-              type={"text"}
+            {createAccount &&
+              <Inputfield 
+              type={"password"} 
+              required={true} 
+              property={"password"} 
               error={methods.formState.errors}
-              alt={"Lock icon"}
-              />
+              />}
           </div>
-          <button type="submit" className="bg-green-500 w-5/6 max-w-[350px] py-3 px-6 border-none rounded-md self-center text-lg text-white">SIGN IN</button>
+          <div className="flex justify-between mt-2">
+            <p 
+              onClick={() => setCreateAccount((prev => !prev))}
+              className="underline">
+                {!createAccount ? 'Skapa konto' : 'Logga in'}
+            </p>
+            <p className="">Glömt lösenord?</p>
+          </div>
+          <div className="flex justify-center mt-8">
+            <button 
+              type="submit"
+              className="px-8 py-3 w-4/6 max-w-64 rounded-3xl border-[1px] border-black text-l font-semibold">
+              Logga in
+            </button>
+          </div>
         </form>
       </FormProvider>
     </div>
+    
   )
 }
