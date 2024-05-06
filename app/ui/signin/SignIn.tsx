@@ -17,7 +17,7 @@ export default function SignIn(){
   } 
 
   return (
-    <div className="h-11/12 w-10/12 max-w-[600px] py-10">
+    <div className="h-11/12 w-full px-8 max-w-[600px] py-10">
       <div className="w-full h-20">
         <div className="h-full w-24 border-2 border-black grid place-items-center text-xl font-semibold">
           <p>Logga</p>

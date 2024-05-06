@@ -21,7 +21,7 @@ export default function SideNav(){
   ]
 
   return (
-    <div className='h-max w-full flex items-start justify-center pb-10 absolute bottom-0 z-10'>
+    <div className='h-max w-full flex items-start justify-center pb-10 absolute bottom-0 z-10 '>
       <ul className='bg-white h-max w-5/6 border-[1px] border-black rounded-3xl flex items-center gap-2 px-4 '>
         {links.map((link) => {
           return (
