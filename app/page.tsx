@@ -1,7 +1,10 @@
+// import GeoLocation from "./ui/home/GeoLocation"
+
 export default function Home() {
   return (
-    <main >
-      <div>Test Hejsan</div>
+    <main>
+      {/* <GeoLocation /> */}
+      <div>Something</div>
     </main>
   );
 }

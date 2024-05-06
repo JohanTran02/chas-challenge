@@ -1,0 +1,94 @@
+{
+  "activities": [
+    {
+      "id": 1,
+      "name": "Fotografiska",
+      "description": "A museum dedicated to photography, with exhibitions by both established and emerging photographers.",
+      "coordinates": {
+        "latitude": 59.316882,
+        "longitude": 18.077915
+      }
+    },
+    {
+      "id": 2,
+      "name": "Södermalmstorgs kaj",
+      "description": "A beautiful walk along the quay with a great view of the water and cityscape.",
+      "coordinates": {
+        "latitude": 59.319013,
+        "longitude": 18.080279
+      }
+    },
+    {
+      "id": 3,
+      "name": "Gallerian",
+      "description": "A large shopping mall with a wide range of shops and restaurants.",
+      "coordinates": {
+        "latitude": 59.335196,
+        "longitude": 18.067587
+      }
+    },
+    {
+      "id": 4,
+      "name": "Gamla Stan",
+      "description": "The historic city center of Stockholm, known for its picturesque alleys and historic buildings.",
+      "coordinates": {
+        "latitude": 59.325519,
+        "longitude": 18.071903
+      }
+    },
+    {
+      "id": 5,
+      "name": "Moderna Museet",
+      "description": "A museum focusing on contemporary art, with works by both Swedish and international artists.",
+      "coordinates": {
+        "latitude": 59.327701,
+        "longitude": 18.081683
+      }
+    },
+    {
+      "id": 6,
+      "name": "Tantolunden",
+      "description": "A park on Södermalm with green areas and walking paths, perfect for relaxation and birdwatching.",
+      "coordinates": {
+        "latitude": 59.313534,
+        "longitude": 18.040816
+      }
+    },
+    {
+      "id": 7,
+      "name": "Tantogården",
+      "description": "A recreational area, including mini golf and other outdoor activities.",
+      "coordinates": {
+        "latitude": 59.308985,
+        "longitude": 18.077274
+      }
+    },
+    {
+      "id": 8,
+      "name": "Långholmen",
+      "description": "An island with green areas and beaches, perfect for relaxation and picnics.",
+      "coordinates": {
+        "latitude": 59.321960,
+        "longitude": 18.029800
+      }
+    },
+    {
+      "id": 9,
+      "name": "Under Kastanjen",
+      "description": "A cozy café in Gamla Stan, known for its delicious pastries and atmosphere.",
+      "coordinates": {
+        "latitude": 59.325066,
+        "longitude": 18.071741
+      }
+    },
+    {
+      "id": 10,
+      "name": "Skansen",
+      "description": "An open-air museum and zoo showcasing Swedish history and culture through various historical buildings and animal species.",
+      "coordinates": {
+        "latitude": 59.324053,
+        "longitude": 18.096455
+      }
+    }
+  ]
+}
