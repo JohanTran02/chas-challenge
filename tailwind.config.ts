@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        darkGray: '#373737'
+        darkGray: '#373737',
+        darkGreen: '#023b27',
+        neturalWhite: '#f6f5ef'
       },
       
       backgroundImage: {

@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="w-full">
                 <SideNav />
             </div>  
-            <div className="flex-1 pb-[84px] absolute inset-0 z-[2]">
+            <div className="flex-1 absolute inset-0 z-[2]">
                 {children}
             </div>
         </div>

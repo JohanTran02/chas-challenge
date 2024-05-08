@@ -1,6 +1,6 @@
 import { Input } from "@/app/lib/definitions"
 import { useFormContext } from "react-hook-form"
-import { differentPatterns } from "./differentPatterns";
+import { differentPatterns } from "../../lib/differentPatterns";
 
 // style
 import style from '@/app/ui/style/signin/form.module.css'; 

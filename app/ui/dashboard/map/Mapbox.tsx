@@ -1,10 +1,11 @@
 'use client'
 
 // Mapbox 
-import Map, { NavigationControl, GeolocateControl, Marker, Popup} from "react-map-gl";
+import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import style from "@/app/ui/style/map/mapbox.module.css";
 import { getUserLocation } from "@/app/lib/map/geolocation";
+import Geocoder from "./Geocoder";
 
 // Json - Tillfällig test data till nålarna på kartan. 
 import data from '@/json/map-activities.json'; 
@@ -16,6 +17,7 @@ import map_pin from '@/public/map-pin.svg'
 // Hooks
 import { useEffect, useState } from "react";
 import { Activity } from "@/app/lib/definitions";
+import Searchbar from "./Searchbar";
 
 const Mapbox = () => {
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -33,7 +35,7 @@ const Mapbox = () => {
 		<div className={style.mainStyle}>
 			{
 				(coords !== undefined) &&
-				<Map
+				<ReactMapGL
 					mapboxAccessToken={mapboxToken}
 					mapStyle="mapbox://styles/mapbox/streets-v12"
 					style={{height: '100vh', width: '100vw', position: 'relative', zIndex: '2', cursor: 'auto'}}
@@ -44,10 +46,10 @@ const Mapbox = () => {
 					maxZoom={20}
 					minZoom={0}
 					>
-					<GeolocateControl 
-						position="bottom-right" 
-						trackUserLocation={true} 
+					<GeolocateControl
 						style={{borderRadius: '50%'}}
+						position="bottom-right" 
+						trackUserLocation 
 					/>
 
 					<NavigationControl 
@@ -59,28 +61,28 @@ const Mapbox = () => {
 						{activities.map((activity, index) => {
 							const {id, coordinates: {latitude, longitude}} = activity; 
 							return (
-								<li key={id}>
-									<Marker
-										// onClick = få upp popup
-										onClick={() => setPopup({showPopup: 'open', index: index})}
-										latitude={latitude}
-										longitude={longitude}
-										color="red">
+								<Marker
+
+									key={id}
+									// onClick = få upp popup
+									onClick={() => setPopup({showPopup: 'open', index: index})}
+									latitude={latitude}
+									longitude={longitude}
+									color="red">
 										<Image src={map_pin} height={32} width={32} alt="map pin"/>
-									</Marker>
-								</li>
+								</Marker>
 							)})
 						}
 					</ul>
 					
 					{popup.showPopup === "open"  && ( 
 						<Popup 
-							latitude={activities[popup.index].coordinates.latitude} 
-							longitude={activities[popup.index].coordinates.longitude} 
-							closeButton={true}
-							closeOnClick={false}
-							focusAfterOpen={true}
-							onOpen={() => console.log('The popup is open!')}
+						latitude={activities[popup.index].coordinates.latitude} 
+						longitude={activities[popup.index].coordinates.longitude} 
+						closeButton={true}
+						closeOnClick={false}
+						focusAfterOpen={true}
+						onOpen={() => console.log('The popup is open!')}
 							onClose={() => setPopup({showPopup: 'close', index: 0})}
 							style={{paddingBottom: '20px'}}
 							children={
@@ -89,9 +91,11 @@ const Mapbox = () => {
 									<p className="leading-relaxed">{activities[popup.index].description}</p>
 								</article>
 							}
-						/>)
-					}
-      	</Map>
+							/>)
+						}
+						<Geocoder />	
+						<Searchbar />
+      	</ReactMapGL>
 			}
 		</div>
   )
