@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         darkGray: '#373737',
         darkGreen: '#023b27',
+        iconNotSelected: '#598f7d',
         neturalWhite: '#f6f5ef'
       },
       

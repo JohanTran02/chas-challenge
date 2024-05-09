@@ -1,13 +1,13 @@
-'use client'
+// 'use client'
 
-import {getUserLocation} from "@/app/lib/map/geolocation"
-import { useEffect } from "react"
+// import {getUserLocation} from "@/app/lib/map/geolocation"
+// import { useEffect } from "react"
 
-const GeoLocation = () => {
-  useEffect(() => {
-    getUserLocation()
-  }, [])
-  return <></>
-}
+// const GeoLocation = () => {
+//   useEffect(() => {
+//     getUserLocation('get')
+//   }, [])
+//   return <></>
+// }
 
-export default GeoLocation;
+// export default GeoLocation;
