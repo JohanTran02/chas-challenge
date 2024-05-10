@@ -16,7 +16,7 @@ const Posts = () => {
     {name: 'Hallie Cortez', profilePic: cat, stamp: {src: bear_stamp, category: 'BJÖRN'}}, 
     {name: 'Dale Simmons', profilePic: dog1, stamp: {src: hotdog_stamp, category: 'KORV'}}, 
     {name: 'Gertrude Barnett', profilePic: beaver, stamp: {src: banana_stamp, category: 'BANAN'}},
-    {name: 'Gertrude Barnett', profilePic: beaver, stamp: {src: banana_stamp, category: 'BANAN'}},
+    {name: 'Gertrude Barnett', profilePic: beaver, stamp: {src: bear_stamp, category: 'BJÖRN'}},
   ]
   
   return (
@@ -26,26 +26,26 @@ const Posts = () => {
         return (
           <li key={index}
             className="flex w-full h-36 border-darkGreen border-[3px] mb-4 p-[8px] rounded-md">
-            <div className="flex flex-col justify-between h-full flex-grow flex-shrink-0">
-                <div className="flex gap-3 items-center w-full h-[49px]">
-                  <div className="h-[45px] w-[45px]"> 
-                    <Image src={user.profilePic} alt='profile picture' width={41} height={41} style={{height: '100%', width: '100%'}} />
-                  </div>
-                  <p className='font-bold text-sm text-nowrap'>{user.name}</p>
+            <div className=" flex flex-col justify-between h-full flex-grow flex-shrink-0">
+              <div className="flex gap-3 items-center w-full h-[49px]">
+                <div className="h-[45px] w-[45px]"> 
+                  <Image src={user.profilePic} alt='profile picture' width={41} height={41} style={{height: '100%', width: '100%'}} />
                 </div>
-                <div className=""> 
-                  <p className="text-xs font-medium">1 nytt stamp fron kategorin: {user.stamp.category}</p>
-                </div>
-                <div className="w-full h-max font-semibold mt-2">
-                    <p className=" inline-block">Gilla</p>
-                    <p className=" inline-block w-max ml-8">Kommentera</p>
-                </div>
+                <p className='font-bold text-sm truncate'>{user.name}</p>
+              </div>
+              <div className=""> 
+                <p className="text-xs font-medium truncate ">1 nytt stamp frå n kategorin: {user.stamp.category}</p>
+              </div>
+              <div className="w-full h-max font-semibold mt-2">
+                  <p className=" inline-block">Gilla</p>
+                  <p className=" inline-block w-max ml-8">Kommentera</p>
+              </div>
             </div>
             <div className="flex-grow flex-shrink-0 grid place-items-center h-full">
               <Image src={user.stamp.src} alt='An image of a collected stamp' width={100} height={100} style={{height: 'auto', width: 'auto'}}/>
-              <p className="font-semibold">KATEGORI</p>
+              <p className="font-semibold mt-2">KATEGORI</p>
             </div>
-        </li>
+          </li>
 
         )
       

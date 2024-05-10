@@ -38,7 +38,16 @@ const Mapbox = () => {
 				<ReactMapGL
 					mapboxAccessToken={mapboxToken}
 					mapStyle="mapbox://styles/mapbox/streets-v12"
-					style={{height: '100vh', width: '100vw', position: 'relative', zIndex: '2', cursor: 'auto', marginTop: 'calc(-100px - 33px)'}}
+					style={
+						{background: '#f6f5ef', 
+						height: '100vh', 
+						width: '100vw', 
+						position: 'absolute', 
+						inset:'-129px 0 0 0', 
+						zIndex: '2', 
+						cursor: 'auto', 
+						}
+					}
 					initialViewState={ coords ? 
 						{latitude: coords.latitude, longitude: coords.longitude, zoom: 11} : 
 						{latitude: 59.20, longitude: 18.03, zoom: 5}

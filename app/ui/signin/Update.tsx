@@ -4,7 +4,7 @@ const Update = () => {
   return (
     <div 
       id="modal"
-      className="bg-darkGreen h-[613px] w-full flex flex-col justify-between rounded-lg pt-8 pb-12 px-12"
+      className="bg-darkGreen h-[613px] w-full flex flex-col justify-between rounded-lg mt-8 pt-8 pb-12 px-12"
       >
       <article className="h-[222px] w-full max-w-[340px] mx-auto ">
         <h1 className="text-2xl text-nowrap text-center text-neturalWhite font-semibold">NYA UPDATERINGAR</h1>
