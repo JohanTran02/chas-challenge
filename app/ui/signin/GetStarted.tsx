@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { RxDotFilled } from "react-icons/rx";
 import Image from "next/image";
 import Link from 'next/link'
@@ -19,13 +19,22 @@ const GetStarted = () => {
     container.scrollIntoView({behavior: 'smooth'/* , block: 'end', inline: 'nearest' */});
     setActiveContainer(index);
     return
+  } 
+
+  const onScroll = (setActiveContainer: Dispatch<SetStateAction<number>>) => {
+    const carousel = document.getElementById('carousel') as HTMLDivElement;
+    // .scrollLeft is a property returning a number for current scroll position. 0 --> start position. 
+    if(carousel.scrollLeft === 0) setActiveContainer(0);
+    if(carousel.scrollLeft === (carousel.scrollWidth / 3)) setActiveContainer(1);
+    if(carousel.scrollLeft === (carousel.scrollWidth / 3) * 2) setActiveContainer(2);
   }
 
   return (
   <div className="relative w-full rounded-2xl">
     <div 
+      onScrollCapture={() => onScroll(setActiveContainer)}
       id="carousel" 
-      className="flex w-full h-full rounded-2xl duration-500 overflow-x-auto snap-x no-scrollbar">
+      className="flex w-full h-full rounded-2xl overflow-x-scroll snap-x no-scrollbar">
       <div id="container1" className="flex-none h-full w-full snap-center" >
         <div className="space-y-6 px-6 pt-6 pb-12">
           <div className="bg-darkGray w-3/6 h-8 rounded-md" />
@@ -62,7 +71,7 @@ const GetStarted = () => {
           <div key={index} 
             className="text-4xl cursor-pointer"
             onClick={() => slideToContainer(index)}>
-            <RxDotFilled className={`${activeContainer === index ? 'text-gray-700' : 'text-gray-300'} transition-colors`}/> 
+            <RxDotFilled className={`${activeContainer === index ? 'text-gray-700 scale-110' : 'text-gray-300 scale-95'} transition-all duration-200`}/> 
           </div>
         )
       })}
