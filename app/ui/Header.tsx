@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 const Header = () => {
   const currentPath = usePathname(); 
   return (
-    <header className={`w-screen h-20 ${currentPath !== '/dashboard/map' && 'mb-6'}`}>
+    <header className={`w-screen h-20 ${currentPath !== '/dashboard/map' && 'mb-6'} ${currentPath === '/' && 'hidden'}`}>
       <div className={`bg-neturalWhite w-full h-20 flex justify-between items-center px-4 relative z-20 ${currentPath === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
           <Image 
               priority

@@ -10,17 +10,27 @@ import ProfileIcon from '@/public/profile-icon.svg';
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function SideNav(){
-  const path = usePathname();
-  path
-  console.log(path)
+  const path: string = usePathname();
   const links = [
     {name: 'Home', href: '/dashboard', src: HomeIcon, alt: 'Home icon'},
     {name: 'Achievements', href: '/dashboard/achievements', src: StampsIcon, alt: 'Stamps Icon'},
     {name: 'Map', href: '/dashboard/map', src: MapIcon, alt: 'Map icon'}, 
     {name: 'Profile', href: '/dashboard/profile', src: ProfileIcon, alt: 'Profile icon'}
   ]
+
+  useEffect(() => {
+    const body = document.body as HTMLBodyElement; 
+    if(path === '/dashboard/map'){
+      // This line makes sure that the map covers the whole screen and disables the scrollbar.
+      body.scrollIntoView({behavior: 'instant', inline: 'start', block: 'start'});
+      body.style.overflowY = 'hidden';
+    } 
+    if(path !== '/dashboard/map') document.body.style.overflowY = 'auto'; 
+    return
+  }, [path])
 
   return (
     <div className={`h-[100px] w-full flex items-start justify-center ${path !== '/dashboard/map' && 'bg-neturalWhite'}`}>

@@ -43,7 +43,7 @@ const Mapbox = () => {
 						height: '100vh', 
 						width: '100vw', 
 						position: 'absolute', 
-						inset:'-129px 0 0 0', 
+						inset:'-133px 0 0 0', 
 						zIndex: '2', 
 						cursor: 'auto', 
 						}
