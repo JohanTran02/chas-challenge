@@ -1,4 +1,4 @@
-import SignIn from "@/app/ui/signin/SignIn";
+import SignIn from "@/app/ui/Components/signin/SignIn";
 
 export default function Page() {
     return (

@@ -15,12 +15,16 @@ import GetStarted from "./GetStarted";
 
 export default function SignIn(){
   const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [user, setUser] = useState<{email: string; password: string} | null>(null)
+  const [user, setUser] = useState<UserInputValues | null>(null)
 
-  const methods = useForm<UserInputValues>(); 
+  const methods = useForm<UserInputValues>();
+  
   const onSubmit: SubmitHandler<UserInputValues> = (data): void =>{
     console.log(data);
-    setUser(data); 
+    if(!createAccount) setUser(data);
+    if(createAccount && data.password === data.validate) setUser(data); 
+    if(createAccount && data.password !== data.validate) alert('Lösenordet stämmer inte, försök igen.'); 
+    return 
   } 
 
   const handleUserState = (state: boolean ): ReactNode => {
@@ -67,7 +71,7 @@ export default function SignIn(){
                   <Inputfield 
                   type={"password"} 
                   required={true} 
-                  property={"password"} 
+                  property={"validate"} 
                   error={methods.formState.errors}
                   />}
               </div>

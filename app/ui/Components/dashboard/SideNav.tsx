@@ -44,7 +44,6 @@ export default function SideNav(){
               >
               <li>
                 <Image
-                  // 
                   rel='icon'
                   height={32}
                   width={32}

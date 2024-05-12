@@ -1,4 +1,4 @@
-import Posts from '../ui/home/Posts'
+import Posts from '@/app/ui/Components/home/Posts'
 
 export default function Page() {
     return (

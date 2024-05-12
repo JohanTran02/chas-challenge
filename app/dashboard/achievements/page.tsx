@@ -1,4 +1,4 @@
-import MissionsCategory from '@/app/ui/achievements/MissonsCategory'
+import MissionsCategory from '@/app/ui/Components/achievements/MissonsCategory'
 
 export default function Page() {
     return (

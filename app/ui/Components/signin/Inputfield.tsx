@@ -1,6 +1,6 @@
 import { Input } from "@/app/lib/definitions"
 import { useFormContext } from "react-hook-form"
-import { differentPatterns } from "../../lib/differentPatterns";
+import { differentPatterns } from "@/app/lib/differentPatterns";
 
 // style
 import style from '@/app/ui/style/signin/form.module.css'; 
@@ -8,7 +8,13 @@ import style from '@/app/ui/style/signin/form.module.css';
 const Inputfield = ({type, property, required, error}: Input) => {
   const { register } = useFormContext(); 
   const { pattern, errorMessage } = differentPatterns(property);
-  const label = property === 'email' ? 'Mejladress' : 'Lösenord' 
+  
+  const setLabel = (property: string) => {
+    if(property === 'email') return 'Mejadress';
+    if(property === 'password') return 'Lösenord';
+    if(property === 'validate') return 'Bekfräfta lösenord';
+  }
+  const label = setLabel(property); 
 
   return (
     <div>

@@ -3,7 +3,7 @@ import { FieldErrors } from "react-hook-form";
 export type Input = {
   type: string; 
   required: boolean; 
-  property: 'email' | 'password'; 
+  property: 'email' | 'password' | 'validate'; 
   error: Partial<FieldErrors<UserInputValues>> 
 }
 
