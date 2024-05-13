@@ -5,15 +5,21 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
 // Hooks
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 //TS 
 import { UserInputValues } from "@/app/lib/definitions";
 import Update from "./Update";
 import GetStarted from "./GetStarted";
 
+// Redux
+import { RootState } from "@/app/lib/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function SignIn(){
+  const userStatus = useSelector((state: RootState) => state.user.isOnline);
+  const dispatch = useDispatch(); 
   const [createAccount, setCreateAccount] = useState<boolean>(false);
   const [user, setUser] = useState<UserInputValues | null>(null)
 
@@ -21,11 +27,23 @@ export default function SignIn(){
   
   const onSubmit: SubmitHandler<UserInputValues> = (data): void =>{
     console.log(data);
-    if(!createAccount) setUser(data);
-    if(createAccount && data.password === data.validate) setUser(data); 
+    if(!createAccount){
+      dispatch({type: 'user/onlineState', payload: true});
+      setUser(data);
+    } 
+    if(createAccount && data.password === data.validate){
+      dispatch({type: 'User/onlineState', payload: true});
+      setUser(data);
+    } 
     if(createAccount && data.password !== data.validate) alert('Lösenordet stämmer inte, försök igen.'); 
     return 
   } 
+
+  useEffect(() => {
+    if(userStatus === null) console.log('User status is:', 'offline'); 
+    if(userStatus) console.log('User status is:', 'online'); 
+    return
+  }, [userStatus])
 
   const handleUserState = (state: boolean ): ReactNode => {
     if(state === true) return <GetStarted />

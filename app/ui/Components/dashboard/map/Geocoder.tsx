@@ -18,10 +18,10 @@ const Geocoder = () => {
     language: 'sv',
   });
 
-  controls.on('result', (e) => {
-    console.log(e.result)
-    mapboxFetch(e.result.context[0].mapbox_id)  
-  })
+  // controls.on('result', (e) => {
+  //   console.log(e.result)
+  //   mapboxFetch(e.result.context[0].mapbox_id)  
+  // })
   useControl(() => controls);
   return null;  
 }
