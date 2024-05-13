@@ -57,8 +57,8 @@ export default function WebcamCapture() {
 
     let videoConstraints: MediaTrackConstraints = {
         facingMode: facingMode,
-        width: 640,
-        height: 360,
+        // width: 640,
+        // height: 280,
         frameRate: 30
     };
 
@@ -78,39 +78,34 @@ export default function WebcamCapture() {
 
     return (
         <>
-            <div className="webcam-container relative">
+            <div className="webcam-container relative w-full p-10">
                 {
-                    <div className="h-[300px]">
-                        {
-                            enableWebcam ? (
-                                <>
-                                    <Webcam
-                                        className="webcam absolute -z-10 h-full w-auto"
-                                        audio={false}
-                                        ref={webcamRef}
-                                        screenshotFormat="image/jpeg"
-                                        videoConstraints={videoConstraints}
-                                        screenshotQuality={1}
-                                    />
-                                    <button onClick={handleClick}>Switch camera</button>
-                                    <button onClick={capture}>Take picture</button>
-                                </>)
-                                : (image &&
-                                    <>
-                                        <Image
-                                            src={image}
-                                            alt="Scan"
-                                            width={500}
-                                            height={200}
-                                            className="h-auto w-auto"
-                                        />
-                                        <button onClick={enableCamera}>Enable camera</button>
-                                    </>
-                                )
-                        }
-                    </div>
+                    enableWebcam ? (
+                        <>
+                            <Webcam
+                                className="webcam object-cover h-[600px]"
+                                audio={false}
+                                ref={webcamRef}
+                                screenshotFormat="image/jpeg"
+                                videoConstraints={videoConstraints}
+                                screenshotQuality={1}
+                            />
+                            <button onClick={handleClick}>Switch camera</button>
+                            <button onClick={capture}>Take picture</button>
+                        </>)
+                        : (image &&
+                            <>
+                                <Image
+                                    src={image}
+                                    alt="Scan"
+                                    width={500}
+                                    height={200}
+                                    className="h-auto w-auto"
+                                />
+                                <button onClick={enableCamera}>Enable camera</button>
+                            </>
+                        )
                 }
-
             </div>
         </>
     );
