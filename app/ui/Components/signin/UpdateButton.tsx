@@ -1,0 +1,19 @@
+import Link from 'next/link'
+
+const UpdateButton = () => {
+  return (
+    <Link 
+      href={'/dashboard'}
+      className='mx-auto w-4/6 max-w-[300px]'
+      >  
+      <button
+        type="button"
+        // onClick={() => router.push('/dashboard')}
+          className="text-neturalWhite text-lg h-[46px] w-full border-[1px] border-neturalWhite rounded-[50px] ">
+          Gå vidare
+      </button>
+    </Link>
+  )
+}
+
+export default UpdateButton;
