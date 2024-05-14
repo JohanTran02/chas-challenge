@@ -34,7 +34,7 @@ const Posts = () => {
                 <p className='font-bold text-sm truncate'>{user.name}</p>
               </div>
               <div className=""> 
-                <p className="text-xs font-medium truncate ">1 nytt stamp frå n kategorin: {user.stamp.category}</p>
+                <p className="text-xs font-medium truncate ">1 nytt stamp från kategorin: {user.stamp.category}</p>
               </div>
               <div className="w-full h-max font-semibold mt-2">
                   <p className=" inline-block">Gilla</p>

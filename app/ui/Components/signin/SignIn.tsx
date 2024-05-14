@@ -31,11 +31,11 @@ export default function SignIn(){
       dispatch({type: 'user/onlineState', payload: true});
       setUser(data);
     } 
-    if(createAccount && data.password === data.validate){
+    if(createAccount && data.password === data.confirmPassword){
       dispatch({type: 'User/onlineState', payload: true});
       setUser(data);
     } 
-    if(createAccount && data.password !== data.validate) alert('Lösenordet stämmer inte, försök igen.'); 
+    if(createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.'); 
     return 
   } 
 
@@ -73,6 +73,12 @@ export default function SignIn(){
                 {createAccount ? 'Skapa konto' : 'Logga in'}
               </p>
               <div className="flex flex-col gap-4">
+                {createAccount && <Inputfield 
+                  type="text"
+                  required={true}
+                  property="displayName"
+                  error={methods.formState.errors}
+                />}
                 <Inputfield 
                   type={"text"}
                   required={true}
@@ -89,7 +95,7 @@ export default function SignIn(){
                   <Inputfield 
                   type={"password"} 
                   required={true} 
-                  property={"validate"} 
+                  property={"confirmPassword"} 
                   error={methods.formState.errors}
                   />}
               </div>
