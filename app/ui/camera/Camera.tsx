@@ -5,6 +5,7 @@ import Webcam from "react-webcam";
 import Image from "next/image";
 import { Buffer } from "buffer";
 import { Base64 } from "app/lib/definitions";
+import styles from "@/app/ui/camera/camera.module.css"
 
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
@@ -57,8 +58,6 @@ export default function WebcamCapture() {
 
     let videoConstraints: MediaTrackConstraints = {
         facingMode: facingMode,
-        width: 640,
-        height: 360,
         frameRate: 30
     };
 
@@ -78,39 +77,39 @@ export default function WebcamCapture() {
 
     return (
         <>
-            <div className="webcam-container relative">
+            <div className="webcam-container relative w-full p-8">
                 {
-                    <div className="h-[300px]">
-                        {
-                            enableWebcam ? (
-                                <>
-                                    <Webcam
-                                        className="webcam absolute -z-10 h-full w-auto"
-                                        audio={false}
-                                        ref={webcamRef}
-                                        screenshotFormat="image/jpeg"
-                                        videoConstraints={videoConstraints}
-                                        screenshotQuality={1}
-                                    />
-                                    <button onClick={handleClick}>Switch camera</button>
-                                    <button onClick={capture}>Take picture</button>
-                                </>)
-                                : (image &&
-                                    <>
-                                        <Image
-                                            src={image}
-                                            alt="Scan"
-                                            width={500}
-                                            height={200}
-                                            className="h-auto w-auto"
-                                        />
-                                        <button onClick={enableCamera}>Enable camera</button>
-                                    </>
-                                )
-                        }
-                    </div>
+                    enableWebcam ? (
+                        <>
+                            <Webcam
+                                className="webcam object-cover h-[500px]"
+                                audio={false}
+                                ref={webcamRef}
+                                screenshotFormat="image/jpeg"
+                                videoConstraints={videoConstraints}
+                                screenshotQuality={1}
+                            />
+                            <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
+                                <button className="rounded-xl bg-black text-white p-1" onClick={capture}>Ta bild</button>
+                                <button className="rounded-xl bg-white text-black border-2 border-black p-1" onClick={handleClick}>Byt kamera</button>
+                            </div>
+                        </>)
+                        : (image &&
+                            <>
+                                <Image
+                                    src={image}
+                                    alt="Scan"
+                                    width={0}
+                                    height={0}
+                                    className="object-cover h-[500px] w-full"
+                                />
+                                <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
+                                    <button className="rounded-xl bg-black text-white p-1">Ladda upp foto</button>
+                                    <button className="rounded-xl bg-white text-black border-2 border-black p-1" onClick={enableCamera}>Ta nytt foto</button>
+                                </div>
+                            </>
+                        )
                 }
-
             </div>
         </>
     );
