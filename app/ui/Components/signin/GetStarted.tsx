@@ -6,9 +6,9 @@ import Image from "next/image";
 import Link from 'next/link'
 
 // images
-import vector1 from '/chas-challenge/Vector-1.svg'
-import vector2 from '/chas-challenge/Vector-2.svg'
-import vector3 from '/chas-challenge/Vector-3.svg'
+// import vector1 from '/chas-challenge/Vector-1.svg'
+// import vector2 from '/chas-challenge/Vector-2.svg'
+// import vector3 from '/chas-challenge/Vector-3.svg'
 
 const GetStarted = () => {
   const [activeContainer, setActiveContainer] = useState<number>(0)
@@ -41,7 +41,7 @@ const GetStarted = () => {
             <div className="bg-darkGray w-full h-4 rounded-md" />
           </div>
           <div className="w-full ">
-            <Image src={vector1} width={100} height={100} className="w-full h-auto p-10" alt="" />
+            <Image src={'/Vector-1.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
           </div>
         </div>
         <div id="container2" className="flex-none flex flex-col-reverse gap-6 h-full w-full snap-center" >
@@ -50,7 +50,7 @@ const GetStarted = () => {
             <div className="bg-darkGray w-full h-4 rounded-md" />
           </div>
           <div className="w-full ">
-            <Image src={vector2} width={100} height={100} className="w-full h-auto p-10" alt="" />
+            <Image src={'/Vector-2.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
           </div>
         </div>
         <div id="container3" className="flex-none h-full w-full snap-center space-y-6" >
@@ -59,7 +59,7 @@ const GetStarted = () => {
             <div className="bg-darkGray w-full h-4 rounded-md" />
           </div>
           <div className="w-full ">
-            <Image src={vector3} width={100} height={100} className="w-full h-auto p-10" alt="" />
+            <Image src={'/Vector-3.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
           </div>
         </div>
 

@@ -1,22 +1,22 @@
 // Stamps
-import hotdog_stamp from '/chas-challenge/hotdog-stamp.svg'
-import banana_stamp from '/chas-challenge/banana-stamp.svg'
-import bear_stamp from '/chas-challenge/bear-stamp.svg'
+// import hotdog_stamp from '/chas-challenge/hotdog-stamp.svg',
+// import banana_stamp from '/chas-challenge/banana-stamp.svg',
+// import bear_stamp from '/chas-challenge/bear-stamp.svg',
 // profile pics
-import dog1 from '/chas-challenge/profile-dog.svg'
-import dog2 from '/chas-challenge/profile-dog2.svg'
-import cat from '/chas-challenge/profile-cat.svg'
-import beaver from '/chas-challenge/profile-beaver.svg'
+// import dog1 from '/chas-challenge/profile-dog.svg',
+// import dog2 from '/chas-challenge/profile-dog2.svg',
+// import cat from '/chas-challenge/profile-cat.svg',
+// import beaver from '/chas-challenge/profile-beaver.svg',
 
 import Image from 'next/image'
 
 const Posts = () => {
   const userNames: { name: string; profilePic: string; stamp: { src: string; category: string }; }[] = [
-    { name: 'Lucas Lawson', profilePic: dog2, stamp: { src: hotdog_stamp, category: 'KORV' } },
-    { name: 'Hallie Cortez', profilePic: cat, stamp: { src: bear_stamp, category: 'BJÖRN' } },
-    { name: 'Dale Simmons', profilePic: dog1, stamp: { src: hotdog_stamp, category: 'KORV' } },
-    { name: 'Gertrude Barnett', profilePic: beaver, stamp: { src: banana_stamp, category: 'BANAN' } },
-    { name: 'Gertrude Barnett', profilePic: beaver, stamp: { src: bear_stamp, category: 'BJÖRN' } },
+    { name: 'Lucas Lawson', profilePic: '/profile-dog2.svg', stamp: { src: '/hotdog-stamp.svg', category: 'KORV' } },
+    { name: 'Hallie Cortez', profilePic: '/profile-cat.svg', stamp: { src: '/bear-stamp.svg', category: 'BJÖRN' } },
+    { name: 'Dale Simmons', profilePic: '/profile-dog.svg', stamp: { src: '/hotdog-stamp.svg', category: 'KORV' } },
+    { name: 'Gertrude Barnett', profilePic: '/profile-beaver.svg', stamp: { src: '/banana-stamp.svg', category: 'BANAN' } },
+    { name: 'Gertrude Barnett', profilePic: '/profile-beaver.svg', stamp: { src: '/bear-stamp.svg', category: 'BJÖRN' } },
   ]
 
   return (

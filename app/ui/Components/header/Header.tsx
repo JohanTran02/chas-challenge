@@ -1,11 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import logo from '/chas-challenge/Logo.svg'
+// import logo from '/chas-challenge/Logo.svg'
 import { usePathname } from 'next/navigation'
 
 const Header = () => {
   const currentPath = usePathname();
+  const logo = '/Logo.svg';
   return (
     <header className={`w-full h-20 ${currentPath !== '/dashboard/map' && 'mb-6'} ${currentPath === '/' && 'hidden'}`}>
       <div className={`bg-neturalWhite w-full h-20 flex justify-between items-center px-4 relative z-20 ${currentPath === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>

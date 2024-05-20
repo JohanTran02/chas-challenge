@@ -1,7 +1,7 @@
 'use client'
 
 import { poppins } from './ui/fonts';
-import logo from '/chas-challenge/Logo.svg';
+// import logo from '/chas-challenge/Logo.svg';
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 export default function Home() {
   const router = useRouter();
   useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
+  const logo = '/Logo.svg';
 
   return (
     <div className='h-full w-full py-4'>

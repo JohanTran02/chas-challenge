@@ -1,12 +1,18 @@
 import Image from 'next/image';
 // Stamps
-import hotdog_stamp from '/chas-challenge/hotdog-stamp.svg'
-import banana_stamp from '/chas-challenge/banana-stamp.svg'
-import bear_stamp from '/chas-challenge/bear-stamp.svg'
-import flower_stamp from '/chas-challenge/flower-stamp.svg'
+// import hotdog_stamp from '/chas-challenge/hotdog-stamp.svg'
+// import banana_stamp from '/chas-challenge/banana-stamp.svg'
+// import bear_stamp from '/chas-challenge/bear-stamp.svg'
+// import flower_stamp from '/chas-challenge/flower-stamp.svg'
 import NextStep from './NextStep';
 
-const stamps: string[] = [hotdog_stamp, banana_stamp, bear_stamp, flower_stamp]
+const stamps: string[] =
+  [
+    '/hotdog-stamp.svg',
+    '/banana-stamp.svg',
+    '/bear-stamp.svg',
+    '/flower-stamp.svg'
+  ]
 
 const MissonsCategory = () => {
 
