@@ -8,33 +8,39 @@ import Inputfield from "./Inputfield";
 import { ReactNode, useEffect, useState } from "react";
 
 //TS 
-import { UserInputValues } from "@/app/lib/definitions";
+import { UserValues } from "@/app/lib/definitions";
 import Update from "./Update";
 import GetStarted from "./GetStarted";
 
 // Redux
-import { RootState } from "@/app/lib/redux/store";
+import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { account } from "@/app/lib/CC_Backend/account";
 
 
 export default function SignIn(){
   const userStatus = useSelector((state: RootState) => state.user.isOnline);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch<AppDispatch>(); 
   const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [user, setUser] = useState<UserInputValues | null>(null)
+  const [user, setUser] = useState<UserValues | null>(null)
 
-  const methods = useForm<UserInputValues>();
+  const methods = useForm<UserValues>();
   
-  const onSubmit: SubmitHandler<UserInputValues> = (data): void =>{
-    console.log(data);
+  const onSubmit: SubmitHandler<UserValues> = (data): void =>{
     if(!createAccount){
+      console.log(data);
       dispatch({type: 'user/onlineState', payload: true});
       setUser(data);
+      
     } 
+
     if(createAccount && data.password === data.confirmPassword){
-      dispatch({type: 'User/onlineState', payload: true});
+      console.log(data);
+      // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
+      account("registeraccount", data)
       setUser(data);
     } 
+    
     if(createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.'); 
     return 
   } 

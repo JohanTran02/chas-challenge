@@ -4,11 +4,11 @@ export type Input = {
   type: string; 
   required: boolean; 
   property: 'email' | 'password' | 'confirmPassword' | 'displayName'; 
-  error: Partial<FieldErrors<UserInputValues>> 
+  error: Partial<FieldErrors<UserValues>> 
 }
 
-export type UserInputValues = {
-  displayName: string;
+export type UserValues = {
+  displayName?: string;
   email: string; 
   password: string; 
   confirmPassword?: string; 
@@ -34,3 +34,7 @@ export type Activity = {
 type ImageType = 'png' | 'jpeg';
 
 export type Base64<imageType extends ImageType> = `data:image/${imageType};base64,${string}`
+
+
+// CC_Backend
+export type AccountEndpoint = 'registeraccount' | 'logout' | 'login'; 
