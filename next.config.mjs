@@ -6,6 +6,10 @@ const nextConfig = {
     basePath: process.env.NODE_ENV === 'production' ? '/chas-challenge' : '/',
     trailingSlash: true,
     output: "export",
+
+    images: {
+        unoptimized: true,
+    },
 };
 
 export default nextConfig;
