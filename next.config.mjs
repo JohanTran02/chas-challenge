@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
+
+
 const nextConfig = {
-    basePath: "/chas-challenge",
+    reactStrictMode: true,
+    basePath: process.env.NODE_ENV === 'production' ? '/chas-challenge/' : '/',
     trailingSlash: true,
     output: "export",
 };
