@@ -3,11 +3,12 @@ import SpecificMission from "./SpecificMission";
 
 
 const ClickedCategory = () => {
-  const missions: ReactNode[] = [<SpecificMission />, <SpecificMission />, <SpecificMission />, <SpecificMission />] 
+  const missions: ReactNode[] = [<SpecificMission key={"first"} />, <SpecificMission key={"second"} />, <SpecificMission key={"third"} />, <SpecificMission key={"fourth"} />]
+
   return (
     <div>
       <div className="flex items-center justify-end gap-2 px-1">
-        <div className="bg-white h-2 w-2/6 border-[1px] border-darkGreen rounded-xl"> 
+        <div className="bg-white h-2 w-2/6 border-[1px] border-darkGreen rounded-xl">
           <div className="h-full w-[70%] bg-[#598f7d] rounded-sm" />
         </div>
         <div className="flex-grow-0 flex-shrink-0">
