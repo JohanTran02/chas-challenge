@@ -21,7 +21,6 @@ export default function Home() {
       <h1 className={`text-4xl font-bold text-darkGreen text-center ${poppins.className}`}>
         <span className='block pb-4'>OUTDOOR</span>
         <span className='block'>EXPLORER</span>
-        <span className='block'>EXPLORER</span>
       </h1>
     </div>
   );
