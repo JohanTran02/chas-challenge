@@ -6,9 +6,9 @@ import Image from "next/image";
 import Link from 'next/link'
 
 // images
-import vector1 from '/public/Vector-1.svg'
-import vector2 from '/public/Vector-2.svg'
-import vector3 from '/public/Vector-3.svg'
+import vector1 from '/Images/Vector-1.svg'
+import vector2 from '/Images/Vector-2.svg'
+import vector3 from '/Images/Vector-3.svg'
 
 const GetStarted = () => {
   const [activeContainer, setActiveContainer] = useState<number>(0)
