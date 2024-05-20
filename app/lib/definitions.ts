@@ -37,4 +37,4 @@ export type Base64<imageType extends ImageType> = `data:image/${imageType};base6
 
 
 // CC_Backend
-export type AccountEndpoint = 'registeraccount' | 'logout' | 'login'; 
+export type AccountEndpoint = 'account/register' | 'account/logout' | 'account/login'; 

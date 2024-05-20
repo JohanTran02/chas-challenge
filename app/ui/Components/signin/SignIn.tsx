@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
 
 
-export default function SignIn(){
+export default  function SignIn(){
   const userStatus = useSelector((state: RootState) => state.user.isOnline);
   const dispatch = useDispatch<AppDispatch>(); 
   const [createAccount, setCreateAccount] = useState<boolean>(false);
@@ -26,19 +26,26 @@ export default function SignIn(){
 
   const methods = useForm<UserValues>();
   
-  const onSubmit: SubmitHandler<UserValues> = (data): void =>{
+  const onSubmit: SubmitHandler<UserValues> = async (data) =>{
     if(!createAccount){
       console.log(data);
-      dispatch({type: 'user/onlineState', payload: true});
-      setUser(data);
-      
+
+      const {code} = await account("account/login", data);
+      if(code === 200){
+        dispatch({type: 'user/onlineState', payload: true});
+        setUser(data);
+      } 
     } 
 
     if(createAccount && data.password === data.confirmPassword){
       console.log(data);
       // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
-      account("registeraccount", data)
-      setUser(data);
+      const {code} = await account("account/register", data);
+      if(code === 200){
+        dispatch({type: 'user/onlineState', payload: true});
+        setUser(data);
+      } 
+      return 
     } 
     
     if(createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.'); 
@@ -124,7 +131,7 @@ export default function SignIn(){
           </FormProvider>
         </div> : 
         handleUserState(createAccount)
-        }
+      }
     </>
   )
 }
