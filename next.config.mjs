@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     basePath: "/chas-challenge",
+    trailingSlash: true,
     output: "export",
-    distDir: 'dist',
 };
 
 export default nextConfig;
