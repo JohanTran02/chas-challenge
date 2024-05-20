@@ -1,9 +1,9 @@
 import Image from 'next/image';
 // Stamps
-import hotdog_stamp from '../public/hotdog-stamp.svg'
-import banana_stamp from '../public/banana-stamp.svg'
-import bear_stamp from '../public/bear-stamp.svg'
-import flower_stamp from '../public/flower-stamp.svg'
+import hotdog_stamp from '/public/hotdog-stamp.svg'
+import banana_stamp from '/public/banana-stamp.svg'
+import bear_stamp from '/public/bear-stamp.svg'
+import flower_stamp from '/public/flower-stamp.svg'
 import NextStep from './NextStep';
 
 const stamps: string[] = [hotdog_stamp, banana_stamp, bear_stamp, flower_stamp]
