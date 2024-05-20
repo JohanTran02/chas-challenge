@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import logo from '/Images/Logo.svg'
+import logo from '@/public/Images/Logo.svg'
 import { usePathname } from 'next/navigation'
 
 const Header = () => {

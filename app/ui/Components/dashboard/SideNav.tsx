@@ -1,10 +1,10 @@
 'use client';
 
 // Icons
-import HomeIcon from '/Images/home-icon.svg';
-import MapIcon from '/Images/map-icon.svg';
-import StampsIcon from '/Images/achievements-icon.svg';
-import ProfileIcon from '/Images/profile-icon.svg';
+import HomeIcon from '@/public/Images/home-icon.svg';
+import MapIcon from '@/public/Images/map-icon.svg';
+import StampsIcon from '@/public/Images/achievements-icon.svg';
+import ProfileIcon from '@/public/Images/profile-icon.svg';
 
 // Components
 import Link from 'next/link'
