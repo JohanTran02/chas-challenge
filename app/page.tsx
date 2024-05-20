@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 export default function Home() {
   const router = useRouter();
   useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
-  const logo = '/Logo.svg';
+  const logo = 'chas-challenge/Logo.svg';
 
   return (
     <div className='h-full w-full py-4'>

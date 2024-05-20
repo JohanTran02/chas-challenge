@@ -12,11 +12,11 @@ import Image from 'next/image'
 
 const Posts = () => {
   const userNames: { name: string; profilePic: string; stamp: { src: string; category: string }; }[] = [
-    { name: 'Lucas Lawson', profilePic: '/profile-dog2.svg', stamp: { src: '/hotdog-stamp.svg', category: 'KORV' } },
-    { name: 'Hallie Cortez', profilePic: '/profile-cat.svg', stamp: { src: '/bear-stamp.svg', category: 'BJÖRN' } },
-    { name: 'Dale Simmons', profilePic: '/profile-dog.svg', stamp: { src: '/hotdog-stamp.svg', category: 'KORV' } },
-    { name: 'Gertrude Barnett', profilePic: '/profile-beaver.svg', stamp: { src: '/banana-stamp.svg', category: 'BANAN' } },
-    { name: 'Gertrude Barnett', profilePic: '/profile-beaver.svg', stamp: { src: '/bear-stamp.svg', category: 'BJÖRN' } },
+    { name: 'Lucas Lawson', profilePic: '/chas-challenge/profile-dog2.svg', stamp: { src: '/chas-challenge/hotdog-stamp.svg', category: 'KORV' } },
+    { name: 'Hallie Cortez', profilePic: '/chas-challenge/profile-cat.svg', stamp: { src: '/chas-challenge/bear-stamp.svg', category: 'BJÖRN' } },
+    { name: 'Dale Simmons', profilePic: '/chas-challenge/profile-dog.svg', stamp: { src: '/chas-challenge/hotdog-stamp.svg', category: 'KORV' } },
+    { name: 'Gertrude Barnett', profilePic: '/chas-challenge/profile-beaver.svg', stamp: { src: '/chas-challenge/banana-stamp.svg', category: 'BANAN' } },
+    { name: 'Gertrude Barnett', profilePic: '/chas-challenge/profile-beaver.svg', stamp: { src: '/chas-challenge/bear-stamp.svg', category: 'BJÖRN' } },
   ]
 
   return (
