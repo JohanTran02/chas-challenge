@@ -1,7 +1,7 @@
 'use client'
 
 import { poppins } from './ui/fonts';
-import logo from '/Logo_Dark_2D.svg';
+import logo from '../public/Logo.svg';
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
