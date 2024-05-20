@@ -11,7 +11,6 @@ const Header = () => {
     <header className={`w-full h-20 ${currentPath !== '/dashboard/map' && 'mb-6'} ${currentPath === '/' && 'hidden'}`}>
       <div className={`bg-neturalWhite w-full h-20 flex justify-between items-center px-4 relative z-20 ${currentPath === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
         <Image
-          priority
           src={logo}
           width={50}
           height={50}
