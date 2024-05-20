@@ -1,7 +1,7 @@
 {
   "name": "chas-challenge",
   "version": "0.1.0",
-  "homepage": "https://gitname.github.io/chas-challenge",
+  "homepage": "https://johantran02.github.io/chas-challenge/",
   "private": true,
   "scripts": {
     "predeploy": "npm run build",
