@@ -1,12 +1,12 @@
 // Stamps
-import hotdog_stamp from '@/public/hotdog-stamp.svg'
-import banana_stamp from '@/public/banana-stamp.svg'
-import bear_stamp from '@/public/bear-stamp.svg'
+import hotdog_stamp from '/chas-challenge/hotdog-stamp.svg'
+import banana_stamp from '/chas-challenge/banana-stamp.svg'
+import bear_stamp from '/chas-challenge/bear-stamp.svg'
 // profile pics
-import dog1 from '@/public/profile-dog.svg'
-import dog2 from '@/public/profile-dog2.svg'
-import cat from '@/public/profile-cat.svg'
-import beaver from '@/public/profile-beaver.svg'
+import dog1 from '/chas-challenge/profile-dog.svg'
+import dog2 from '/chas-challenge/profile-dog2.svg'
+import cat from '/chas-challenge/profile-cat.svg'
+import beaver from '/chas-challenge/profile-beaver.svg'
 
 import Image from 'next/image'
 

@@ -1,10 +1,10 @@
 'use client';
 
 // Icons
-import HomeIcon from '@/public/home-icon.svg';
-import MapIcon from '@/public/map-icon.svg';
-import StampsIcon from '@/public/achievements-icon.svg';
-import ProfileIcon from '@/public/profile-icon.svg';
+import HomeIcon from '/chas-challenge/home-icon.svg';
+import MapIcon from '/chas-challenge/map-icon.svg';
+import StampsIcon from '/chas-challenge/achievements-icon.svg';
+import ProfileIcon from '/chas-challenge/profile-icon.svg';
 
 // Components
 import Link from 'next/link'
