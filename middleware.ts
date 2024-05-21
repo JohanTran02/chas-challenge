@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   
 	// Get a cookie
 	const session = request.cookies.get('Session'); 
-  if(!session && (path !== '/')) return NextResponse.redirect(new URL('/signin', request.url));
+  if(!session && (path !== '/signin') || path === '/') return NextResponse.redirect(new URL('/signin', request.url));
   if(session && (path === '/signin' || path === '/')) return NextResponse.redirect(new URL('/dashboard', request.url));
 
   NextResponse.next();
@@ -14,6 +14,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/',
     '/signin',
     '/dashboard/:path*',
   ]
