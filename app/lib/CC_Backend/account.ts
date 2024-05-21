@@ -1,7 +1,7 @@
 import { AccountEndpoint, UserValues } from "../definitions";
 
 export const account = async(endpoint: AccountEndpoint, userInfo: UserValues) => {
-  let data; 
+  let json; 
   let code; 
   
   try {
@@ -14,15 +14,16 @@ export const account = async(endpoint: AccountEndpoint, userInfo: UserValues) =>
     });
 
     if(response.status === 200){
-      data = await response.json();
+      json = await response.json();
       code = response.status; 
-      console.log('Status code is 200 and the fetching proccess has been successfully completed!', data)
+      console.log('Status code is 200 and the fetching proccess has been successfully completed!', json)
     }
     
     if(!response.ok){
-      data = await response.json();
-      const errorMessage: {code: string; description: string} = await data[0];
-      console.log(response.status, response.statusText, '- json response:', data) // on error
+      json = await response.json();
+      const errorMessage: {code: string; description: string} = await json[0];
+
+      console.log(response.status, response.statusText, '- json response:', json) // on error
       alert(errorMessage.description);
     }
 
@@ -30,5 +31,5 @@ export const account = async(endpoint: AccountEndpoint, userInfo: UserValues) =>
     console.error('Something went wrong fetching data:', error); 
   }
   
-  return {code, data};
+  return {code, json};
 }
