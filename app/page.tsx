@@ -3,13 +3,17 @@
 import { poppins } from './ui/fonts';
 // import logo from '/chas-challenge/Logo.svg';
 import Image from 'next/image'
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
 
+//Error i prod pga fonts fixa skiten  https://stackoverflow.com/questions/67990923/how-to-load-custom-fonts-in-a-next-js-app-when-its-in-production
+
 export default function Home() {
-  const router = useRouter();
-  useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
-  const logo = 'chas-challenge/Logo.svg';
+  useEffect(() => {
+    const handler = setTimeout(() => redirect('/signin'), 2000);
+    return () => clearTimeout(handler)
+  });
+  const logo = '/chas-challenge/Logo.svg';
 
   return (
     <div className='h-full w-full py-4'>
@@ -21,7 +25,6 @@ export default function Home() {
       </div>
       <h1 className={`text-4xl font-bold text-darkGreen text-center ${poppins.className}`}>
         <span className='block pb-4'>OUTDOOR</span>
-        <span className='block'>EXPLORER</span>
         <span className='block'>EXPLORER</span>
       </h1>
     </div>

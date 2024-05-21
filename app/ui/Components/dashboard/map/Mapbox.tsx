@@ -12,7 +12,7 @@ import data from '@/json/map-activities.json';
 
 // Image
 import Image from 'next/image'
-import map_pin from '@/public/map-pin.svg'
+// import map_pin from '@/public/map-pin.svg'
 
 // Hooks
 import { useEffect, useState } from "react";
@@ -78,7 +78,7 @@ const Mapbox = () => {
 									latitude={latitude}
 									longitude={longitude}
 									color="red">
-									<Image src={map_pin} height={32} width={32} alt="map pin" />
+									<Image src={`/chas-challenge/map-pin.svg`} height={32} width={32} alt="map pin" />
 								</Marker>
 							)
 						})
