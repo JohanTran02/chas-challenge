@@ -41,7 +41,7 @@ const GetStarted = () => {
             <div className="bg-darkGray w-full h-4 rounded-md" />
           </div>
           <div className="w-full ">
-            <Image src={'/chas-challenge/Vector-1.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
+            <Image src={'/chas-challenge/Images/Vector-1.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
           </div>
         </div>
         <div id="container2" className="flex-none flex flex-col-reverse gap-6 h-full w-full snap-center" >
@@ -50,7 +50,7 @@ const GetStarted = () => {
             <div className="bg-darkGray w-full h-4 rounded-md" />
           </div>
           <div className="w-full ">
-            <Image src={'/chas-challenge/Vector-2.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
+            <Image src={'/chas-challenge/Images/Vector-2.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
           </div>
         </div>
         <div id="container3" className="flex-none h-full w-full snap-center space-y-6" >
@@ -59,7 +59,7 @@ const GetStarted = () => {
             <div className="bg-darkGray w-full h-4 rounded-md" />
           </div>
           <div className="w-full ">
-            <Image src={'/chas-challenge/Vector-3.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
+            <Image src={'/chas-challenge/Images/Vector-3.svg'} width={100} height={100} className="w-full h-auto p-10" alt="" />
           </div>
         </div>
 

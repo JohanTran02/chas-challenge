@@ -1,6 +1,6 @@
 'use client'
 
-import { poppins } from './ui/fonts';
+import { poppins } from '../public/Fonts/fonts';
 // import logo from '/chas-challenge/Logo.svg';
 import Image from 'next/image'
 import { redirect } from 'next/navigation';
@@ -13,7 +13,7 @@ export default function Home() {
     const handler = setTimeout(() => redirect('/signin'), 2000);
     return () => clearTimeout(handler)
   });
-  const logo = '/chas-challenge/Logo.svg';
+  const logo = '/chas-challenge/Images/Logo.svg';
 
   return (
     <div className='h-full w-full py-4'>

@@ -15,10 +15,10 @@ import { useEffect } from 'react';
 export default function SideNav() {
   const path: string = usePathname();
   const links = [
-    { name: 'Home', href: '/dashboard', src: '/chas-challenge/home-Icon.svg', alt: 'Home icon' },
-    { name: 'Achievements', href: '/dashboard/achievements', src: '/chas-challenge/map-Icon.svg', alt: 'Stamps Icon' },
-    { name: 'Map', href: '/dashboard/map', src: '/chas-challenge/achievements-Icon.svg', alt: 'Map icon' },
-    { name: 'Profile', href: '/dashboard/profile', src: '/chas-challenge/profile-Icon.svg', alt: 'Profile icon' }
+    { name: 'Home', href: '/dashboard', src: '/chas-challenge/Images/home-Icon.svg', alt: 'Home icon' },
+    { name: 'Achievements', href: '/dashboard/achievements', src: '/chas-challenge/Images/map-Icon.svg', alt: 'Stamps Icon' },
+    { name: 'Map', href: '/dashboard/map', src: '/chas-challenge/Images/achievements-Icon.svg', alt: 'Map icon' },
+    { name: 'Profile', href: '/dashboard/profile', src: '/chas-challenge/Images/profile-Icon.svg', alt: 'Profile icon' }
   ]
 
   useEffect(() => {

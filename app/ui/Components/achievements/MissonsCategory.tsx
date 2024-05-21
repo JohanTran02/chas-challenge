@@ -8,10 +8,10 @@ import NextStep from './NextStep';
 
 const stamps: string[] =
   [
-    '/chas-challenge/hotdog-stamp.svg',
-    '/chas-challenge/banana-stamp.svg',
-    '/chas-challenge/bear-stamp.svg',
-    '/chas-challenge/flower-stamp.svg'
+    '/chas-challenge/Images/hotdog-stamp.svg',
+    '/chas-challenge/Images/banana-stamp.svg',
+    '/chas-challenge/Images/bear-stamp.svg',
+    '/chas-challenge/Images/flower-stamp.svg'
   ]
 
 const MissonsCategory = () => {
