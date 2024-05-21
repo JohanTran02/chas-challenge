@@ -16,9 +16,9 @@ export const differentPatterns = (property: string) => {
     errorMessage = 'Ogiltig inmatning.' 
   } 
 
-  if(property === 'userName'){
+  if(property === 'displayName'){
     pattern = /^[a-zA-ZåäöÅÄÖ\s]{2,}$/;
-    errorMessage = 'Vänligen ange en giltig sträng med minst två bokstäver.' 
+    errorMessage = 'Vänligen ange en giltig användarnamn med minst två bokstäver.' 
   }
 
   return {pattern, errorMessage};

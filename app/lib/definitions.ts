@@ -3,14 +3,15 @@ import { FieldErrors } from "react-hook-form";
 export type Input = {
   type: string; 
   required: boolean; 
-  property: 'email' | 'password' | 'validate'; 
+  property: 'email' | 'password' | 'confirmPassword' | 'displayName'; 
   error: Partial<FieldErrors<UserInputValues>> 
 }
 
 export type UserInputValues = {
+  displayName: string;
   email: string; 
   password: string; 
-  validate?: string; 
+  confirmPassword?: string; 
 }
 
 // geolocation

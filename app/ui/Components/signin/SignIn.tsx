@@ -5,15 +5,21 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
 // Hooks
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 //TS 
 import { UserInputValues } from "@/app/lib/definitions";
 import Update from "./Update";
 import GetStarted from "./GetStarted";
 
+// Redux
+import { RootState } from "@/app/lib/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function SignIn(){
+  const userStatus = useSelector((state: RootState) => state.user.isOnline);
+  const dispatch = useDispatch(); 
   const [createAccount, setCreateAccount] = useState<boolean>(false);
   const [user, setUser] = useState<UserInputValues | null>(null)
 
@@ -21,11 +27,23 @@ export default function SignIn(){
   
   const onSubmit: SubmitHandler<UserInputValues> = (data): void =>{
     console.log(data);
-    if(!createAccount) setUser(data);
-    if(createAccount && data.password === data.validate) setUser(data); 
-    if(createAccount && data.password !== data.validate) alert('Lösenordet stämmer inte, försök igen.'); 
+    if(!createAccount){
+      dispatch({type: 'user/onlineState', payload: true});
+      setUser(data);
+    } 
+    if(createAccount && data.password === data.confirmPassword){
+      dispatch({type: 'User/onlineState', payload: true});
+      setUser(data);
+    } 
+    if(createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.'); 
     return 
   } 
+
+  useEffect(() => {
+    if(userStatus === null) console.log('User status is:', 'offline'); 
+    if(userStatus) console.log('User status is:', 'online'); 
+    return
+  }, [userStatus])
 
   const handleUserState = (state: boolean ): ReactNode => {
     if(state === true) return <GetStarted />
@@ -55,6 +73,12 @@ export default function SignIn(){
                 {createAccount ? 'Skapa konto' : 'Logga in'}
               </p>
               <div className="flex flex-col gap-4">
+                {createAccount && <Inputfield 
+                  type="text"
+                  required={true}
+                  property="displayName"
+                  error={methods.formState.errors}
+                />}
                 <Inputfield 
                   type={"text"}
                   required={true}
@@ -71,7 +95,7 @@ export default function SignIn(){
                   <Inputfield 
                   type={"password"} 
                   required={true} 
-                  property={"validate"} 
+                  property={"confirmPassword"} 
                   error={methods.formState.errors}
                   />}
               </div>

@@ -26,7 +26,7 @@ const Mapbox = () => {
 	const activities: Activity[] = data.activities; 
 	
 	useEffect(() => {
-		getUserLocation("watch", setCoords);
+		getUserLocation("get", setCoords);
 		console.log(activities)
 	}, [])
 

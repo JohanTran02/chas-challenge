@@ -78,7 +78,9 @@ const GetStarted = () => {
     </ul>
 
     <Link href={'/dashboard/'}>
-      <p className="text-end font-bold pt-8 underline">Hoppa över</p>
+      <p className={`text-end font-bold pt-8 underline`}>
+        {activeContainer === 2 ? 'Kom igång' : 'Hoppa över'}
+      </p>
     </Link>
   </div>
   )
