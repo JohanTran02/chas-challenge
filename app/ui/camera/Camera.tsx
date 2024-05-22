@@ -1,42 +1,20 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import Image from "next/image";
-import { Buffer } from "buffer";
-import { Base64 } from "app/lib/definitions";
 import styles from "@/app/ui/camera/camera.module.css"
+import { camera } from "@/app/lib/CC_Backend/camera";
 
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
-function base64ToBytes(base64: string) {
-    const binString = Buffer.from(base64);
-    console.log(binString.toString("utf-8"))
-
-    // const test = binString.toString("base64");
-    // console.log(test);
-    // console.log(binString);
-    // console.log(binString.toString("utf-8"));
-    // console.log(Buffer.from(test, "base64").toString("utf-8"));
-
-    // console.log(binString.toString("utf-8"));
-
-    // console.log(binString.toString("base64url"));
-    // const uInt8Array = new Uint8Array(
-    //     binString.buffer,
-    //     binString.byteOffset,
-    //     binString.length / Uint8Array.BYTES_PER_ELEMENT);
-    // console.log(binString.toString("base64"));
-    // const blob = new Blob([binString], { type: "image/jpeg" })
-    // console.log(blob);
-    // test(blob)
-}
-
-async function test(blob: Blob) {
-    const test = new Uint8Array(await blob.arrayBuffer());
-    console.log(test);
-
+async function sendImage(base64: string) {
+    const { code, json } = await camera("/ai/readimage", base64);
+    if (code === 200) {
+        console.log(json);
+    }
+    return;
 }
 
 export default function WebcamCapture() {
@@ -50,8 +28,8 @@ export default function WebcamCapture() {
         if (webcamRef.current) {
             const imageSrc = webcamRef.current.getScreenshot();
             setImage(imageSrc);
-            // base64ToBytes(imageSrc?.replace("data:image/jpeg;base64,", "") as string);
-            base64ToBytes(imageSrc as string);
+            sendImage(imageSrc?.replace("data:image/jpeg;base64,", "") as string);
+            // base64ToBytes(imageSrc as string);
         }
         setEnableWebcam((prev) => !prev);
     }, [webcamRef, setImage]);
