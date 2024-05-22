@@ -10,7 +10,7 @@ const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
 async function sendImage(base64: string) {
-    const { code, json } = await camera("/ai/readimage", base64);
+    const { code, json } = await camera("ai/readimage", base64);
     if (code === 200) {
         console.log(json);
     }
@@ -28,7 +28,7 @@ export default function WebcamCapture() {
         if (webcamRef.current) {
             const imageSrc = webcamRef.current.getScreenshot();
             setImage(imageSrc);
-            sendImage(imageSrc?.replace("data:image/jpeg;base64,", "") as string);
+
             // base64ToBytes(imageSrc as string);
         }
         setEnableWebcam((prev) => !prev);
@@ -82,13 +82,13 @@ export default function WebcamCapture() {
                                     className="object-cover h-[500px] w-full"
                                 />
                                 <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
-                                    <button className="rounded-xl bg-black text-white p-1">Ladda upp foto</button>
+                                    <button className="rounded-xl bg-black text-white p-1" onClick={() => sendImage(image.replace("data:image/jpeg;base64,", "") as string)}>Ladda upp foto</button>
                                     <button className="rounded-xl bg-white text-black border-2 border-black p-1" onClick={enableCamera}>Ta nytt foto</button>
                                 </div>
                             </>
                         )
                 }
-            </div>
+            </div >
         </>
     );
 }

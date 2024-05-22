@@ -4,10 +4,12 @@ export const camera = async (endpoint: CameraEndpoint, base64: string) => {
     let json;
     let code;
 
+
     try {
         const response = await fetch('https://natureai.azurewebsites.net/' + endpoint, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer `
             },
             method: "POST",
             body: JSON.stringify({ prompt: "tree", picture: base64 })

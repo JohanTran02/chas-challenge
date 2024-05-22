@@ -38,7 +38,7 @@ export type Base64<imageType extends ImageType> = `data:image/${imageType};base6
 
 // CC_Backend
 export type AccountEndpoint = 'account/register' | 'account/logout' | 'account/login';
-export type CameraEndpoint = '/ai/readimage';
+export type CameraEndpoint = 'ai/readimage';
 
 // cookies
 export type cookiesForUser = {
