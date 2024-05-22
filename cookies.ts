@@ -2,6 +2,7 @@
 
 import { cookies } from 'next/headers'
 import { cookiesForUser } from './app/lib/definitions';
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 export const createCookie = async ({user}: {user: cookiesForUser}) => { 
   cookies().set({
@@ -10,4 +11,27 @@ export const createCookie = async ({user}: {user: cookiesForUser}) => {
     httpOnly: true,
     path: '/',
   })
+}
+
+export const getCookie = (name: string) => {
+  const cookie = cookies().get(name);
+  
+  if(cookie){
+    const value = cookie.value;
+    console.log(JSON.parse(value))
+    return JSON.parse(value); 
+  }
+
+  return; 
+}
+
+export const getCookieToken = (name: 'Session') => {
+  const cookie = cookies().get(name);
+
+  if(cookie){
+    const value = cookie.value; 
+    return value;
+  }
+
+  return // undefined
 }
