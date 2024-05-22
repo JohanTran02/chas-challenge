@@ -10,7 +10,7 @@ import MissionsCategory from '@/app/ui/Components/achievements/MissonsCategory'
 const Page = () => {
   const [modal, setModal] = useState<boolean>(false)
 
-  const modalTransform = modal ? "transition-all h-full" : "transition-all h-[0px]";
+  const modalTransform = modal ? "transition-all h-[80vh]" : "transition-all h-[0px]";
 
   return (
     <>
@@ -23,7 +23,7 @@ const Page = () => {
         </div>
 
       </div>
-      <div className="bg-white h-3/5 w-full px-4 pt-6 pb-16 rounded-t-3xl">
+      <div className="bg-white w-full px-4 pt-6 pb-16 rounded-t-3xl">
         <div>
           <div className='flex justify-between'>
             <h1 className="text-black text-base font-bold ">DINA STAMPS</h1>
@@ -65,14 +65,97 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className={` bg-red-200 fixed h-[80vh] bottom-0 w-full left-0 ${modalTransform} duration-300 rounded-t-2xl`}>
-          <div className={`w-full h-full relative`}>
-            <XMarkIcon className='absolute top-0 right-0 w-8 cursor-pointer' onClick={() => setModal(false)} />
-            <h1>Dina Stamps</h1>
+        <div className={` bg-red-200 fixed bottom-0 w-full left-0 ${modalTransform} duration-300 rounded-t-2xl `}>
+          <div className={`w-full relative`}>
+            <XMarkIcon className='absolute top-1 right-1 w-8 cursor-pointer' onClick={() => setModal(false)} />
+            <div className='flex flex-col gap-5 p-4 h-[80vh]'>
+              <h1>Dina Stamps</h1>
+              <div className='grid gap-4 overflow-scroll no-scrollbar'>
+                <div className='grid gap-2'>
+                  <h2>KATEGORI</h2>
+                  <div className='grid grid-cols-2 gap-5'>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='grid gap-2'>
+                  <h2>KATEGORI</h2>
+                  <div className='grid grid-cols-2 gap-5'>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+                      <div>
+                        <h1>Namn</h1>
+                        <h1>Förklaring</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div >
       </div >
-
     </>
   );
 };
