@@ -5,13 +5,11 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 type User ={
   isOnline: null | false | true;
   currentUser: null | UserValues; 
-  userCookie: undefined | cookiesForUser; 
 }
 
 const initialState: User = {
   isOnline: null,
   currentUser: null, 
-  userCookie: undefined,
 }
 
 export const userSlice = createSlice({
@@ -21,11 +19,6 @@ export const userSlice = createSlice({
     onlineState: (state, action: PayloadAction<false | true>) => {
       state.isOnline = action.payload; 
     }, 
-
-    getUserCookie: (state, action: PayloadAction<undefined | cookiesForUser>) => {
-      state.userCookie = action.payload; 
-      console.log(action.payload)
-    }
   },
 
 }); 
