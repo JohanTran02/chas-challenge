@@ -129,7 +129,7 @@ export default  function SignIn(){
                 <button 
                   type="submit"
                   className="text-darkGreen text-nowrap px-8 py-3 w-3/6 max-w-44 rounded-3xl border-[1px] border-darkGreen text-l font-semibold">
-                  Logga in
+                  {!createAccount ? 'Logga in' : 'Skapa konto'}
                 </button>
               </div>
             </form>

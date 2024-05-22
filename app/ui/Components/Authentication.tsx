@@ -1,22 +1,16 @@
-// 'use server'
+'use server'
 
-// import { getCookie } from "@/app/lib/cookies"
-// import { ReactNode } from "react"
-// import { redirect } from "next/navigation";
+import { ReactNode } from "react"
+import { getCookie } from "@/cookies";
 
-// const Authentication = async ({children}: {children: ReactNode}) => {
-//   const data = await getCookie('Session');
-     
-//   if(data){
-//     // console.log(data);
-//     redirect('/dashboard');
-//   }
+const Authentication = ({children}: {children: ReactNode}) => {
+  const session = getCookie('Session'); 
 
-//   return (
-//     <>
-//       {children}
-//     </>
-//   )
-// }
+  return (
+    <>
+      {children}
+    </>
+  )
+}
 
-// export default Authentication
+export default Authentication;
