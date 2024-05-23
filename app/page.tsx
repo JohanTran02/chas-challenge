@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
 
-  const logo = "../public/Images/Logo_Dark_2D.svg";
+  const logo = "/chas-challenge/Images/Logo_Dark_2D.svg";
 
   return (
     <div className='h-full w-full py-4'>

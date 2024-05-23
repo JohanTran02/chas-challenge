@@ -7,9 +7,6 @@ const nextConfig = {
     images: {
         unoptimized: true,
     },
-    env: {
-        NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN
-    },
     optimizeFonts: false
 };
 
