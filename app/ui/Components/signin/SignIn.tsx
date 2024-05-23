@@ -16,7 +16,7 @@ import GetStarted from "./GetStarted";
 import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 // import { account } from "@/app/lib/CC_Backend/account";
-import { createCookie } from "@/cookies";
+// import { createCookie } from "@/cookies";
 
 
 export default function SignIn() {
