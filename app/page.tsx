@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 export default function Home() {
   const router = useRouter();
-  useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, []);
+  useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
 
   return (
     <div className='h-full w-full py-4'>
