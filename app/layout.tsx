@@ -1,7 +1,7 @@
 import './ui/globals.css';
 import StoreProvider from "./StoreProvider";
 import Header from "@/app/ui/Components/header/Header";
-import { inter } from '../public/Fonts/fonts';
+import { inter } from './ui/fonts';
 import Authentication from "./ui/Components/Authentication";
 
 export default function RootLayout({

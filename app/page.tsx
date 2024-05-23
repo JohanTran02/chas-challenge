@@ -1,6 +1,6 @@
 'use client'
 
-import { poppins } from '../public/Fonts/fonts';
+import { poppins } from './ui/fonts';
 // import logo from '/chas-challenge/Logo.svg';
 import Image from 'next/image'
 import { redirect } from 'next/navigation';
