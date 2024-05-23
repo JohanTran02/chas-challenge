@@ -1,22 +1,22 @@
-// import { getCookie } from "@/cookies";
+import { getCookie } from "../../../cookies";
 import { CameraEndpoint } from "../definitions";
 
 export const camera = async (endpoint: CameraEndpoint, base64: string) => {
     let json;
     let code;
 
-    // const session = await getCookie("Session");
-    // let token;
+    const session = await getCookie("Session");
+    let token;
 
-    // if (session) {
-    //     token = session.accessToken;
-    // }
+    if (session) {
+        token = session.accessToken;
+    }
 
     try {
         const response = await fetch('https://natureai.azurewebsites.net/' + endpoint, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             },
             method: "POST",
             body: JSON.stringify({ prompt: "tree", picture: base64 })
