@@ -3,7 +3,7 @@
 const nextConfig = {
     reactStrictMode: true,
     basePath: process.env.NODE_ENV === 'production' ? '/chas-challenge' : '',
-    // output: "export",
+    output: "export",
     images: {
         unoptimized: true,
     },

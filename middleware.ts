@@ -6,16 +6,16 @@ export async function middleware(request: NextRequest) {
 
   // Get a cookie
   const session = request.cookies.get('Session');
-  if (!session && (path !== '/signin') || path === '/') return NextResponse.redirect(new URL('/signin', request.url));
-  if (session && (path === '/signin' || path === '/')) return NextResponse.redirect(new URL('/dashboard', request.url));
+  if (!session && (path !== '/chas-challenge/signin') || path === '/') return NextResponse.redirect(new URL('/chas-challenge/signin', request.url));
+  if (session && (path === '/chas-challenge/signin' || path === '/')) return NextResponse.redirect(new URL('/chas-challenge/dashboard', request.url));
 
   NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    '/',
-    '/signin',
-    '/dashboard/:path*',
+    '/chas-challenge',
+    '/chas-challenge/signin',
+    '/chas-challenge/dashboard/:path*',
   ]
 }
