@@ -15,8 +15,8 @@ import GetStarted from "./GetStarted";
 // Redux
 import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-// import { account } from "@/app/lib/CC_Backend/account";
-// import { createCookie } from "@/cookies";
+import { account } from "@/app/lib/CC_Backend/account";
+import { createCookie } from "@/cookies";
 
 
 export default function SignIn() {
@@ -29,32 +29,32 @@ export default function SignIn() {
 
   const onSubmit: SubmitHandler<UserValues> = async (data) => {
 
-    // // log in
-    // if(!createAccount){
-    //   console.log(data);
+    // log in
+    if (!createAccount) {
+      console.log(data);
 
-    //   const {code, json} = await account("account/login", data);
-    //   if(code === 200){
-    //     dispatch({type: 'user/onlineState', payload: true});
-    //     setUser(data);
-    //     createCookie(json);
-    //   } 
-    // } 
+      const { code, json } = await account("account/login", data);
+      if (code === 200) {
+        dispatch({ type: 'user/onlineState', payload: true });
+        setUser(data);
+        createCookie(json);
+      }
+    }
 
-    // // create account
-    // if(createAccount && data.password === data.confirmPassword){
-    //   console.log(data);
-    //   // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
-    //   const {code} = await account("account/register", data);
-    //   if(code === 200){
-    //     dispatch({type: 'user/onlineState', payload: true});
-    //     setUser(data);
-    //   } 
-    //   return 
-    // } 
+    // create account
+    if (createAccount && data.password === data.confirmPassword) {
+      console.log(data);
+      // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
+      const { code } = await account("account/register", data);
+      if (code === 200) {
+        dispatch({ type: 'user/onlineState', payload: true });
+        setUser(data);
+      }
+      return
+    }
 
-    // if(createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.'); 
-    // return 
+    if (createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.');
+    return
   }
 
   useEffect(() => {

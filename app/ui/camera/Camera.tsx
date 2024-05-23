@@ -4,17 +4,17 @@ import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import Image from "next/image";
 import styles from "@/app/ui/camera/camera.module.css"
-// import { camera } from "@/app/lib/CC_Backend/camera";
+import { camera } from "@/app/lib/CC_Backend/camera";
 
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
 async function sendImage(base64: string) {
-    // const { code, json } = await camera("ai/readimage", base64);
-    // if (code === 200) {
-    //     console.log(json);
-    // }
-    // return;
+    const { code, json } = await camera("ai/readimage", base64);
+    if (code === 200) {
+        console.log(json);
+    }
+    return;
 }
 
 export default function WebcamCapture() {
