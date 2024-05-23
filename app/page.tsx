@@ -1,19 +1,14 @@
 'use client'
 
-import { poppins } from './ui/fonts';
-// import logo from '/chas-challenge/Logo.svg';
+import { poppins } from '../public/fonts';
+import logo from '@/public/Logo_Dark_2D.svg';
 import Image from 'next/image'
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-//Error i prod pga fonts fixa skiten  https://stackoverflow.com/questions/67990923/how-to-load-custom-fonts-in-a-next-js-app-when-its-in-production
-
 export default function Home() {
-  useEffect(() => {
-    const handler = setTimeout(() => redirect('/signin'), 2000);
-    return () => clearTimeout(handler)
-  });
-  const logo = '/chas-challenge/Images/Logo.svg';
+  const router = useRouter();
+  useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, []);
 
   return (
     <div className='h-full w-full py-4'>
