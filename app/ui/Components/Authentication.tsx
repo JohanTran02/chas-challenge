@@ -1,16 +1,16 @@
-'use server'
+// 'use server'
 
-import { ReactNode } from "react"
-// import { getCookie } from "@/cookies";
+// import { ReactNode } from "react"
+// // import { getCookie } from "@/cookies";
 
-const Authentication = ({ children }: { children: ReactNode }) => {
-  // const session = getCookie('Session');
+// const Authentication = ({ children }: { children: ReactNode }) => {
+//   // const session = getCookie('Session');
 
-  return (
-    <>
-      {children}
-    </>
-  )
-}
+//   return (
+//     <>
+//       {children}
+//     </>
+//   )
+// }
 
-export default Authentication;
+// export default Authentication;
