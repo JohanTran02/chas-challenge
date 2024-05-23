@@ -11,7 +11,7 @@ const Inputfield = ({type, property, required, error}: Input) => {
   
   const setLabel = (property: string) => {
     if(property === 'displayName') return 'Användarnam';
-    if(property === 'email') return 'Mejadress';
+    if(property === 'email') return 'Mailadress';
     if(property === 'password') return 'Lösenord';
     if(property === 'confirmPassword') return 'Bekfräfta lösenord';
   }

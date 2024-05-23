@@ -1,22 +1,22 @@
 import { FieldErrors } from "react-hook-form";
 
 export type Input = {
-  type: string; 
-  required: boolean; 
-  property: 'email' | 'password' | 'confirmPassword' | 'displayName'; 
-  error: Partial<FieldErrors<UserInputValues>> 
+  type: string;
+  required: boolean;
+  property: 'email' | 'password' | 'confirmPassword' | 'displayName';
+  error: Partial<FieldErrors<UserValues>>
 }
 
-export type UserInputValues = {
-  displayName: string;
-  email: string; 
-  password: string; 
-  confirmPassword?: string; 
+export type UserValues = {
+  displayName?: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
 }
 
 // geolocation
 export type GeoLocationProps = {
-  cords: {latitude: number, longitude: number}
+  cords: { latitude: number, longitude: number }
 }
 
 type Coordinates = {
@@ -25,7 +25,7 @@ type Coordinates = {
 }
 
 export type Activity = {
-  id: number; 
+  id: number;
   name: string;
   description: string;
   coordinates: Coordinates;
@@ -34,3 +34,16 @@ export type Activity = {
 type ImageType = 'png' | 'jpeg';
 
 export type Base64<imageType extends ImageType> = `data:image/${imageType};base64,${string}`
+
+
+// CC_Backend
+export type AccountEndpoint = 'account/register' | 'account/logout' | 'account/login';
+export type CameraEndpoint = 'ai/readimage';
+
+// cookies
+export type cookiesForUser = {
+  email: string;
+  accessToken: string;
+  displayName: string;
+  userId: string;
+}
