@@ -21,7 +21,7 @@ import { Activity } from "@/app/lib/definitions";
 import Searchbar from "./Searchbar";
 
 const Mapbox = () => {
-	// const mapboxToken = ;
+	const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 	const [coords, setCoords] = useState<GeolocationCoordinates | undefined>()
 	const [popup, setPopup] = useState<{ showPopup: 'open' | 'close', index: number }>({ showPopup: 'close', index: 0 })
 	const activities: Activity[] = data.activities;
@@ -46,7 +46,7 @@ const Mapbox = () => {
 			{
 				(coords !== undefined) &&
 				<ReactMapGL
-					mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+					mapboxAccessToken={mapboxToken}
 					mapStyle="mapbox://styles/mapbox/streets-v12"
 					style={
 						{
