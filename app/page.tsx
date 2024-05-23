@@ -1,14 +1,14 @@
-// 'use client'
+'use client'
 
 // import logo from '../public/Images/Logo_Dark_2D.svg';
 import Image from 'next/image'
 import { poppins } from '../public/fonts';
-// import { useRouter } from 'next/navigation';
-// import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
-  // const router = useRouter();
-  // useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
+  const router = useRouter();
+  useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
 
   const logo = "../public/Images/Logo_Dark_2D.svg";
 
