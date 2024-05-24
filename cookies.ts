@@ -1,3 +1,5 @@
+"use server"
+
 import { cookies } from 'next/headers'
 import { cookiesForUser } from './app/lib/definitions';
 // import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
