@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   if (!session && (path !== '/chas-challenge/signin') || path === '/chas-challenge') return NextResponse.redirect(new URL('/chas-challenge/signin', request.url));
   if (session && (path === '/chas-challenge/signin' || path === '/chas-challenge')) return NextResponse.redirect(new URL('/chas-challenge/dashboard', request.url));
 
-  NextResponse.next();
+  return NextResponse.next();
 }
 
 export const config = {

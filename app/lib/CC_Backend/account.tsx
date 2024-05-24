@@ -1,4 +1,5 @@
-import { createCookie } from "../../cookies";
+// import { createCookie } from "../cookies";
+import { cookies } from "next/headers";
 import { AccountEndpoint, UserValues } from "../definitions";
 
 export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) => {
@@ -18,7 +19,12 @@ export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) =
     if (response.status === 200) {
       code = response.status;
       json = await response.json();
-      createCookie(json);
+      cookies().set({
+        name: 'Session',
+        value: JSON.stringify(userInfo),
+        httpOnly: true,
+        path: '/chas-challenge',
+      })
       console.log('Status code is 200 and the fetching proccess has been successfully completed!', json)
     }
 
