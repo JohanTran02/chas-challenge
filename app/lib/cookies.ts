@@ -1,12 +1,14 @@
 import { cookies } from 'next/headers'
 import { cookiesForUser } from './definitions';
+
 // import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 export const createCookie = async ({ user }: { user: cookiesForUser }) => {
     cookies().set({
         name: 'Session',
         value: JSON.stringify(user),
-        httpOnly: true,
+        // httpOnly: true,
+        secure: true,
         path: '/chas-challenge',
     })
 }

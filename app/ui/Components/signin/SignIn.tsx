@@ -16,7 +16,6 @@ import GetStarted from "./GetStarted";
 import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
-import { cookies } from "next/headers";
 
 
 export default function SignIn() {
@@ -28,8 +27,6 @@ export default function SignIn() {
   const methods = useForm<UserValues>();
 
   const onSubmit: SubmitHandler<UserValues> = async (data) => {
-    "use server"
-
     // log in
     if (!createAccount) {
       console.log(data);
@@ -37,12 +34,6 @@ export default function SignIn() {
 
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
-        cookies().set({
-          name: 'Session',
-          value: JSON.stringify(data),
-          httpOnly: true,
-          path: '/chas-challenge',
-        })
       } else if (code !== 200 && error) {
         alert(error.description);
       }
