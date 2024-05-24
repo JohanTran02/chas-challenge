@@ -6,11 +6,12 @@ const ClickedCategory = () => {
   const missions: ReactNode[] = [<SpecificMission />, <SpecificMission />, <SpecificMission />, <SpecificMission />] 
   return (
     <div>
-      <div className="flex items-center justify-end gap-2 px-1">
-        <div className="bg-white h-2 w-2/6 border-[1px] border-darkGreen rounded-xl"> 
-          <div className="h-full w-[70%] bg-[#598f7d] rounded-sm" />
-        </div>
-        <div className="flex-grow-0 flex-shrink-0">
+      <div className="flex items-center gap-2 px-1 w-full">
+        <p className="flex-1 font-bold">SAMLADE STAMPS</p>
+        <div className="flex-1 flex items-center gap-4">
+          <div className="flex-1 bg-white h-2 w-full border-[1px] border-darkGreen rounded-xl"> 
+            <div className="h-full w-[70%] bg-[#598f7d] rounded-sm" />
+          </div>
           <p className="text-sm font-bold">7 / 10</p>
         </div>
       </div>
