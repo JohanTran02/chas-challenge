@@ -5,7 +5,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
 // Hooks
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 
 //TS 
 import { UserValues } from "@/app/lib/definitions";
@@ -35,7 +35,6 @@ export default function SignIn(){
 
       if(code === 200){
         dispatch({type: 'user/onlineState', payload: data});
-        createCookie(json);
       } else if(code !== 200 && error) {
         alert(error.description);
       }

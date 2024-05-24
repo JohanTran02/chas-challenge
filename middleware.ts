@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname; //Current pathname
-  console.log(path)
   
 	// Get a cookie
 	const session = request.cookies.get('Session'); 
