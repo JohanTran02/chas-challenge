@@ -1,4 +1,4 @@
-import { createCookie } from "@/cookies";
+import { createCookie } from "../../cookies";
 import { AccountEndpoint, UserValues } from "../definitions";
 
 export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) => {
