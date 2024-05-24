@@ -1,8 +1,8 @@
 'use client'
 
 // Mapbox 
-import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup, Layer } from "react-map-gl";
-import type { FillLayer } from 'react-map-gl';
+import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup, Layer, Source } from "react-map-gl";
+import type { CircleLayer, FillLayer } from 'react-map-gl';
 import "mapbox-gl/dist/mapbox-gl.css";
 import style from "@/app/ui/style/map/mapbox.module.css";
 import { getUserLocation } from "@/app/lib/map/geolocation";
@@ -21,26 +21,29 @@ import { Activity } from "@/app/lib/definitions";
 import Searchbar from "./Searchbar";
 
 const Mapbox = () => {
+	const activities: Activity[] = data.activities;
 	const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
 	const [coords, setCoords] = useState<GeolocationCoordinates | undefined>()
 	const [popup, setPopup] = useState<{ showPopup: 'open' | 'close', index: number }>({ showPopup: 'close', index: 0 })
-	const activities: Activity[] = data.activities;
 
 	useEffect(() => {
 		getUserLocation("get", setCoords);
 	}, [])
 
-	const parkLayer: FillLayer = {
-		id: 'landuse_park',
-		type: 'fill',
-		source: 'mapbox',
-		'source-layer': 'landuse',
-		filter: ['==', 'class', 'park'],
-		paint: {
-			'fill-color': '#4E3FC8'
-		}
-	};
+	// const parkLayer: CircleLayer = {
+	// 	id: 'landuse',
+	// 	type: 'circle',
+	// 	source: 'mapbox',
+	// 	'source-layer': 'landuse',
+	// 	filter: ['==', 'class', 'park'],
+	// 	paint: {
+	// 		'circle-color': '#4E3FC8'
+	// 	}
+	// };
+
 	// console.log(coords, popup)
+
 	return (
 		<div className={style.mainStyle}>
 			{
@@ -66,7 +69,6 @@ const Mapbox = () => {
 					maxZoom={20}
 					minZoom={0}
 				>
-					<Layer {...parkLayer} />
 
 					<GeolocateControl
 						style={{ borderRadius: '50%' }}

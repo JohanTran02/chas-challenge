@@ -5,7 +5,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
 // Hooks
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 
 //TS 
 import { UserValues } from "@/app/lib/definitions";
@@ -20,24 +20,23 @@ import { account } from "@/app/lib/CC_Backend/account";
 
 
 export default function SignIn() {
-  const userStatus = useSelector((state: RootState) => state.user.isOnline);
+  const { currentUser } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [user, setUser] = useState<UserValues | null>(null)
 
+  // hook use form
   const methods = useForm<UserValues>();
 
   const onSubmit: SubmitHandler<UserValues> = async (data) => {
-
     // log in
     if (!createAccount) {
       console.log(data);
+      const { code, json, error } = await account("account/login", data);
 
-      const { code, json } = await account("account/login", data);
       if (code === 200) {
-        dispatch({ type: 'user/onlineState', payload: true });
-        setUser(data);
-        // createCookie(json);
+        dispatch({ type: 'user/onlineState', payload: data });
+      } else if (code !== 200 && error) {
+        alert(error.description);
       }
     }
 
@@ -47,21 +46,15 @@ export default function SignIn() {
       // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
       const { code } = await account("account/register", data);
       if (code === 200) {
-        dispatch({ type: 'user/onlineState', payload: true });
-        setUser(data);
+        dispatch({ type: 'user/onlineState', payload: data });
       }
       return
     }
 
-    if (createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.');
+    if (createAccount && data.password !== data.confirmPassword)
+      alert('Lösenordet stämmer inte, försök igen.');
     return
   }
-
-  useEffect(() => {
-    if (userStatus === null) console.log('User status is:', 'offline');
-    if (userStatus) console.log('User status is:', 'online');
-    return
-  }, [userStatus])
 
   const handleUserState = (state: boolean): ReactNode => {
     if (state === true) return <GetStarted />
@@ -70,7 +63,7 @@ export default function SignIn() {
 
   return (
     <>
-      {user === null ?
+      {currentUser === null ?
         <div className="h-11/12 w-full max-w-[600px] ">
           <div className="flex flex-col justify-between h-48 w-full max-w-[456px] mx-auto text-center my-12 text-darkGreen">
             <div className="flex-1">
