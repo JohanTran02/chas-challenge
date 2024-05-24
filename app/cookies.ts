@@ -1,5 +1,7 @@
+"use server"
+
 import { cookies } from 'next/headers'
-import { cookiesForUser } from './app/lib/definitions';
+import { cookiesForUser } from './lib/definitions';
 // import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 export const createCookie = async ({ user }: { user: cookiesForUser }) => {
