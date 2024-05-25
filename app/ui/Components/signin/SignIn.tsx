@@ -46,7 +46,6 @@ export default function SignIn() {
       const { code } = await account("account/register", data);
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
-        await createCookie();
       }
       return
     }
