@@ -17,11 +17,11 @@ export async function POST(request: NextRequest) {
         //     path: '/',
         // })
 
-        request.cookies.set('Session', JSON.stringify(request.body));
+        // request.cookies.set('Session', JSON.stringify(request.body));
         return new NextResponse('Hello, Next.js!', {
             status: 200,
             headers: {
-                "Content-Type": "application/json",
+                'Set-Cookie': `Session=test`
             }
         })
         // return new NextResponse('Hello, Next.js!', {
