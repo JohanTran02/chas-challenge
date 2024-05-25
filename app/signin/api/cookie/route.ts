@@ -4,11 +4,11 @@ import { cookiesForUser } from '@/app/lib/definitions';
 import { NextRequest, NextResponse } from 'next/server';
 // import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
-export async function POST({ request }: { request: Request }) {
+export async function POST({ request }: { request: NextRequest }) {
     const test = await request.json();
     console.log(test);
     try {
-        return new Response('Hello, Next.js!', {
+        return new NextResponse('Hello, Next.js!', {
             status: 200,
             headers: {
                 'Access-Control-Allow-Origin': '*',
