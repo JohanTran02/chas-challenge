@@ -4,21 +4,30 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
     const cookieStore = cookies();
-    cookieStore.set("test", "testing if the cookie works");
+    cookieStore.set({
+        name: 'Session',
+        value: "test",
+        httpOnly: process.env.NODE_ENV !== 'development',
+        secure: true,
+        domain: "https://johantran02.github.io",
+        maxAge: 60 * 60 * 24 * 365 * 1000,
+        sameSite: "none",
+        path: '/',
+    })
 }
 
 export async function POST(request: NextRequest) {
     try {
-        // cookies().set({
-        //     name: 'Session',
-        //     value: JSON.stringify(request.body),
-        //     httpOnly: process.env.NODE_ENV !== 'development',
-        //     secure: true,
-        //     // domain: "https://johantran02.github.io/chas-challenge",
-        //     maxAge: 60 * 60 * 24 * 365 * 1000,
-        //     sameSite: "none",
-        //     path: '/',
-        // })
+        cookies().set({
+            name: 'Session',
+            value: "test",
+            httpOnly: process.env.NODE_ENV !== 'development',
+            secure: true,
+            domain: "https://johantran02.github.io",
+            maxAge: 60 * 60 * 24 * 365 * 1000,
+            sameSite: "none",
+            path: '/',
+        })
 
         // request.cookies.set('Session', JSON.stringify(request.body));
         return new NextResponse('Hello, Next.js!', {

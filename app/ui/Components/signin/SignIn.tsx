@@ -35,15 +35,15 @@ export default function SignIn() {
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
 
-        const res = await fetch("https://johantran02.github.io/chas-challenge/signin/api/cookie", {
-          method: "POST",
+        const res = await fetch("https://johantran02.github.io/chas-challenge/signin/api/cookie/route.ts", {
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
           },
-          body: JSON.stringify(json)
+          // body: JSON.stringify(json)
         })
       } else if (code !== 200 && error) {
         alert(error.description);
