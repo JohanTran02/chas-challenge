@@ -17,7 +17,7 @@ import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
 
-export default function SignIn({ createCookie }: { createCookie: () => Promise<void> }) {
+export default function SignIn() {
   const { currentUser } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const [createAccount, setCreateAccount] = useState<boolean>(false);
