@@ -4,9 +4,7 @@ import { cookiesForUser } from '@/app/lib/definitions';
 import { NextRequest, NextResponse } from 'next/server';
 // import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
-export async function POST({ request }: { request: NextRequest }) {
-    const test = await request.json();
-    console.log(test);
+export async function POST(request: NextRequest) {
     try {
         return new NextResponse('Hello, Next.js!', {
             status: 200,
@@ -15,7 +13,7 @@ export async function POST({ request }: { request: NextRequest }) {
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                 "Content-Type": "application/json",
-                'Set-Cookie': `Session=${test}`
+                'Set-Cookie': `Session=${request.body}`
             },
         })
     }
