@@ -26,6 +26,7 @@ export async function middleware(request: NextRequest) {
 
   // Handle simple requests
   const response = NextResponse.next()
+  response.cookies.set('myCookieName', 'some-value')
 
   if (isAllowedOrigin) {
     response.headers.set('Access-Control-Allow-Origin', origin)
@@ -37,7 +38,7 @@ export async function middleware(request: NextRequest) {
 
   // Get a cookie
   const session = request.cookies.get('Session');
-  if (!session && (path !== '/chas-challenge/signin') || path === '/chas-challenge') return NextResponse.redirect(new URL('/chas-challenge/signin', request.url));
+  if (!session && (path !== '/chas-challenge/signin') || path === '/chas-challenge') return NextResponse.redirect(new URL('/chas-challenge/camera', request.url));
   if (session && (path === '/chas-challenge/signin' || path === '/chas-challenge')) return NextResponse.redirect(new URL('/chas-challenge/dashboard', request.url));
 
   return response
