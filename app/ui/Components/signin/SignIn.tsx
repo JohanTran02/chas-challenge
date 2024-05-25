@@ -16,9 +16,8 @@ import GetStarted from "./GetStarted";
 import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
-import { cookies } from "next/headers"
 
-export default function SignIn() {
+export default function SignIn({ createCookie }: { createCookie: () => Promise<void> }) {
   const { currentUser } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const [createAccount, setCreateAccount] = useState<boolean>(false);
@@ -35,19 +34,6 @@ export default function SignIn() {
 
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
-
-        (async function () {
-          "use server"
-          cookies().set({
-            name: "Session",
-            value: "test",
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "none",
-            path: "/"
-          })
-        })();
-
       } else if (code !== 200 && error) {
         alert(error.description);
       }
@@ -60,6 +46,7 @@ export default function SignIn() {
       const { code } = await account("account/register", data);
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
+        await createCookie();
       }
       return
     }
