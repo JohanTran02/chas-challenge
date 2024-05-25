@@ -38,6 +38,7 @@ export async function middleware(request: NextRequest) {
 
   // Get a cookie
   const session = request.cookies.get('Session');
+  console.log(session);
   if (!session && (path !== '/chas-challenge/signin') || path === '/chas-challenge') return NextResponse.redirect(new URL('/chas-challenge/signin', request.url));
   if (session && (path === '/chas-challenge/signin' || path === '/chas-challenge')) return NextResponse.redirect(new URL('/chas-challenge/dashboard', request.url));
 

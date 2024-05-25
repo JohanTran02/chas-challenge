@@ -4,7 +4,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 
 export async function OPTIONS() { }
-export async function GET() { }
+export async function GET() {
+    console.log("TTESTSTE ETSETEST SETESTSETSET")
+}
 // export async function GET() {
 //     const cookieStore = cookies();
 //     cookieStore.set({
