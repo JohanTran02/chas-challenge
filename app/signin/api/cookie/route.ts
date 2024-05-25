@@ -8,9 +8,12 @@ export async function POST(request: NextRequest) {
         cookies().set({
             name: 'Session',
             value: JSON.stringify(request.body),
-            httpOnly: false,
+            httpOnly: process.env.NODE_ENV !== 'development',
             secure: true,
-            path: '/chas-challenge',
+            domain: "https://johantran02.github.io/chas-challenge",
+            maxAge: 60 * 60 * 24 * 365 * 1000,
+            sameSite: "none",
+            path: '/',
         })
         return new NextResponse('Hello, Next.js!', {
             status: 200,
