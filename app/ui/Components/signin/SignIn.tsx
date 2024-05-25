@@ -17,8 +17,6 @@ import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
 
-import { createCookie } from "@/app/lib/action";
-
 export default function SignIn() {
   const { currentUser } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
@@ -33,10 +31,19 @@ export default function SignIn() {
     if (!createAccount) {
       console.log(data);
       const { code, json, error } = await account("account/login", data);
+      const { accessToken } = json;
 
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
-        createCookie(json);
+
+        const res = await fetch("/chas-challenge/signin/api/cookie", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ accessToken })
+        })
+
       } else if (code !== 200 && error) {
         alert(error.description);
       }
