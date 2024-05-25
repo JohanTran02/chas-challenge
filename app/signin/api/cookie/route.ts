@@ -36,16 +36,16 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         console.log(body);
 
-        const response = NextResponse.next();
+        const response = NextResponse.json({ message: 'Cookie set successfully' });
 
         response.cookies.set({
             name: 'Session',
             value: "test",
-            httpOnly: process.env.NODE_ENV !== 'development',
-            secure: true,
-            domain: "https://johantran02.github.io",
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            domain: "https://johantran02.github.io/chas-challenge",
             maxAge: 60 * 60 * 24 * 365 * 1000,
-            sameSite: "none",
+            sameSite: "lax",
             path: '/',
         })
 
