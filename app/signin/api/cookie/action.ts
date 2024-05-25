@@ -7,7 +7,12 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST({ request }: { request: NextRequest }) {
     return new NextResponse('Hello, Next.js!', {
         status: 200,
-        headers: { 'Set-Cookie': `token=${request.body}` },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Set-Cookie': `token=${request.body}`
+        },
     })
 }
 
