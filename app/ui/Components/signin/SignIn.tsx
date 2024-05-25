@@ -35,7 +35,7 @@ export default function SignIn() {
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
 
-        const res = await fetch("https://johantran02.github.io/chas-challenge/signin/api/cookie", {
+        const res = await fetch("/api/cookie", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
