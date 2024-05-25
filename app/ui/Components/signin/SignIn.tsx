@@ -16,6 +16,7 @@ import GetStarted from "./GetStarted";
 import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
+import { createCookie } from "@/app/action";
 
 export default function SignIn() {
   const { currentUser } = useSelector((state: RootState) => state.user);
@@ -34,19 +35,7 @@ export default function SignIn() {
 
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
-
-        const res = await fetch("https://johantran02.github.io/chas-challenge/signin/api/cookie", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          },
-          body: JSON.stringify(json)
-        })
-
-        console.log(res);
+        await createCookie();
       } else if (code !== 200 && error) {
         alert(error.description);
       }
