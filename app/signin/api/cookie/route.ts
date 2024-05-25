@@ -1,20 +1,10 @@
 // import { cookiesForUser } from '@/app/lib/definitions';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-// import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
-export async function GET(request: NextRequest) {
-    // 1. Request from the server component
-    cookies().set("handler", "true");
-    // 2. Request from the client component
-    return NextResponse.json('Hello, Next.js!', {
-        status: 200,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        }
-    })
+export async function GET() {
+    const cookieStore = cookies();
+    cookieStore.set("test", "testing if the cookie works");
 }
 
 export async function POST(request: NextRequest) {
@@ -31,7 +21,7 @@ export async function POST(request: NextRequest) {
         // })
 
         // request.cookies.set('Session', JSON.stringify(request.body));
-        return NextResponse.json('Hello, Next.js!', {
+        return new NextResponse('Hello, Next.js!', {
             status: 200,
             headers: {
                 'Set-Cookie': `Session=test`,
