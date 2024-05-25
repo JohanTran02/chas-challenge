@@ -13,7 +13,7 @@ export const createCookie = async ({user}: {user: cookiesForUser}) => {
   })
 }
 
-export const getCookie = (name: string) => {
+export const getCookie = (name: string): cookiesForUser | undefined => {
   const cookie = cookies().get(name);
   
   if(cookie){

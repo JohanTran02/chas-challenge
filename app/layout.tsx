@@ -1,4 +1,4 @@
-import StoreProvider from "./StoreProvider";
+// import StoreProvider from "./StoreProvider";
 import Header from "@/app/ui/Components/header/Header";
 import { inter } from './ui/fonts';
 import './ui/globals.css';
@@ -10,7 +10,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-      <StoreProvider>
+      // <StoreProvider>
         <Authentication>
           <html lang="en">
             <body className={`bg-[#f6f5ef] w-screen min-h-screen mx-auto flex flex-col justify-center h-auto overflow-x-hidden max-w-[600px] pb-[34px] relative ${inter.className}`}>
@@ -19,6 +19,6 @@ export default function RootLayout({
             </body>
           </html>
         </Authentication>
-      </StoreProvider>
+      // </StoreProvider>
   );
 }

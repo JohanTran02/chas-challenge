@@ -1,9 +1,40 @@
 import { ReactNode } from "react";
 import SpecificMission from "./SpecificMission";
+import { getCookie } from "@/cookies";
+import { stampinfo } from "@/app/lib/definitions";
 
 
-const ClickedCategory = () => {
-  const missions: ReactNode[] = [<SpecificMission />, <SpecificMission />, <SpecificMission />, <SpecificMission />] 
+
+
+const ClickedCategory = async() => {
+  const stampInfo = async() => {
+    const cookie = await getCookie('Session'); 
+
+    if(cookie){
+      try {
+        const response = await fetch('https://natureai.azurewebsites.net/stamps/getstampinfo?stampId=1', {
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${cookie.accessToken}`
+            }
+        }); 
+        
+        if(!response.ok){
+            console.log(response.status, response.statusText);
+        }
+        
+        const data = await response.json() as stampinfo; 
+        console.log(data)
+        return data 
+      } catch (error) {
+          console.log(error)
+      }
+    }
+  }
+
+  const data = await stampInfo(); 
+  const missions = [<SpecificMission prop={data}/>, <SpecificMission prop={data}/>, <SpecificMission prop={data}/>, <SpecificMission prop={data}/>] 
+  
   return (
     <div>
       <div className="flex items-center gap-2 px-1 w-full">
@@ -16,7 +47,7 @@ const ClickedCategory = () => {
         </div>
       </div>
       <ul className="pt-6 space-y-4">
-        {missions.map((reactNode, index) => <li key={index}>{reactNode}</li>)}
+        {missions && missions.map((reactNode, index) => <li key={index}>{reactNode}</li>)}
       </ul>
     </div>
   )

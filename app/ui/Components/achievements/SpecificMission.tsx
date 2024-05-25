@@ -1,9 +1,9 @@
 'use client'
 
+import { stampinfo } from '@/app/lib/definitions';
 import Image from 'next/image'
-import svg from '@/public/dollar.svg'
 
-const SpecificMission = () => {
+const SpecificMission = ({prop}: {prop:stampinfo | undefined}) => {
   const openModal = (): void => {
     const information = document.getElementById('missionsModal') as HTMLDialogElement; 
     information.showModal();
@@ -20,7 +20,7 @@ const SpecificMission = () => {
         className="bg-neturalWhite flex justify-between h-[125px] border-2 border-darkGreen p-2 rounded-xl">
         <div className="space-y-3 w-4/6 h-max font-bold">
           <p className="text-sm">Uppdrag</p>
-          <p className="text-darkGreen text-xl">IGELKOTT</p>
+          <p className="text-darkGreen text-xl">{prop && prop.name}</p>
           <div className="flex mb-2">
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
               <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4'/>
@@ -28,11 +28,11 @@ const SpecificMission = () => {
             </div>
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
               <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4'/>
-              <p className='text-[12px] text-darkGreen'>GULD</p>
+              <p className='text-[12px] text-darkGreen'>0,5</p>
             </div>
             <div className="flex-1  flex flex-col items-center gap-1">
               <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4'/>
-              <p className='text-[12px] text-darkGreen'>GULD</p>
+              <p className='text-[12px] text-darkGreen'>PLATS</p>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@ const SpecificMission = () => {
             </button>
           <div className="w-full mt-10 space-y-6">
             <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
-            <h1 className='font-bold text-black text-center'>Uppdrag: IGELKOTT</h1>  
+            <h1 className='font-bold text-black text-center'>Uppdrag: {prop && prop.name}</h1>  
             <div className="flex font-extrabold">
               <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
                 <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4'/>
@@ -61,20 +61,20 @@ const SpecificMission = () => {
               </div>
               <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
                 <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4'/>
-                <p className='text-[12px] text-darkGreen'>GULD</p>
+                <p className='text-[12px] text-darkGreen'>0,5</p>
               </div>
               <div className="flex-1  flex flex-col items-center gap-1">
                 <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4'/>
-                <p className='text-[12px] text-darkGreen'>GULD</p>
+                <p className='text-[12px] text-darkGreen'>PLATS</p>
               </div>
             </div>
-            <div className="flex gap-3 h-[120px]">
+            <div className="flex gap-3 h-[140px]">
               <div className="w-32 border-2 border-black p-2 h-full line-clamp-4 text-[13px]">
                 Ai-genererad bild på objektet man ska fota som hjälp
               </div>
               <article className='flex-1 space-y-2 h-full '>
                 <h2 className='font-bold'>Beskrivning:</h2>
-                <p className='text-[12px] line-clamp-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident similique excepturi praesentium expedita quae perspiciatis.</p>
+                <p className='text-[12px] line-clamp-6'>{prop && prop.facts}</p>
               </article>
             </div>
 

@@ -45,4 +45,16 @@ export type cookiesForUser = {
   accessToken: string;
   displayName: string;
   userId: string;
-  }
+}
+
+// getstampinfo
+export type stampinfo = {
+  stampId: number,
+  name: string,
+  facts: string,
+  rarity: number,
+  icon: string,
+  latitude: string,
+  longitude: string,
+  category: { title: string }
+}

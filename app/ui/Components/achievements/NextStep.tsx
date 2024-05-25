@@ -9,8 +9,11 @@ const NextStep = ({children}: {children: ReactNode}) => {
   return (
     <div
       className="flex-1 flex flex-col justify-around w-full border-[3px] border-darkGreen rounded-xl" 
-      onClick={goToMission}>
+      onClick={goToMission}
+      >
+      
       {children}
+      
     </div>
   )
 }

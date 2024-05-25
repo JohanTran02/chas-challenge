@@ -8,7 +8,7 @@ import NextStep from './NextStep';
 
 const stamps: string[] = [hotdog_stamp, banana_stamp, bear_stamp, flower_stamp]
 
-const MissonsCategory = () => {
+const AllCategories = () => {
 
   return (
     <div className='flex flex-wrap justify-around gap-8'>
@@ -35,4 +35,4 @@ const MissonsCategory = () => {
   )
 }
 
-export default MissonsCategory;
+export default AllCategories;
