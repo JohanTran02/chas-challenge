@@ -35,7 +35,7 @@ export default function SignIn() {
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
 
-        const res = await fetch("https://johantran02.github.io/chas-challenge/signin/api/cookie/route.ts", {
+        const res = await fetch("https://johantran02.github.io/chas-challenge/signin/api/cookie", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -45,6 +45,8 @@ export default function SignIn() {
           },
           body: JSON.stringify(json)
         })
+
+        console.log(res);
       } else if (code !== 200 && error) {
         alert(error.description);
       }

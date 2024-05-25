@@ -8,6 +8,7 @@ const corsOptions = {
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname; //Current pathname
+  console.log(path);
 
   // Check the origin from the request
   const origin = request.headers.get('origin') ?? ''

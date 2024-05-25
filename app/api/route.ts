@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET() { }
+
+export async function POST() { }
+
 export async function OPTIONS(request: NextRequest) {
     const allowedOrigin = request.headers.get("origin");
     const response = new NextResponse("header header", {

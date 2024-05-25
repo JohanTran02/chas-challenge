@@ -2,6 +2,9 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
+
+export async function OPTIONS() { }
+export async function GET() { }
 // export async function GET() {
 //     const cookieStore = cookies();
 //     cookieStore.set({
