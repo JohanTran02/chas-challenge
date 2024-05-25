@@ -43,7 +43,7 @@ export default function SignIn() {
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
           },
-          // body: JSON.stringify(json)
+          body: JSON.stringify(json)
         })
       } else if (code !== 200 && error) {
         alert(error.description);

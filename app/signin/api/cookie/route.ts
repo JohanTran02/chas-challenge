@@ -2,23 +2,38 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
-    const cookieStore = cookies();
-    cookieStore.set({
-        name: 'Session',
-        value: "test",
-        httpOnly: process.env.NODE_ENV !== 'development',
-        secure: true,
-        domain: "https://johantran02.github.io",
-        maxAge: 60 * 60 * 24 * 365 * 1000,
-        sameSite: "none",
-        path: '/',
-    })
-}
+// export async function GET() {
+//     const cookieStore = cookies();
+//     cookieStore.set({
+//         name: 'Session',
+//         value: "test",
+//         httpOnly: process.env.NODE_ENV !== 'development',
+//         secure: true,
+//         domain: "https://johantran02.github.io",
+//         maxAge: 60 * 60 * 24 * 365 * 1000,
+//         sameSite: "none",
+//         path: '/',
+//     })
+
+//     return new NextResponse('Hello, Next.js!', {
+//         status: 200,
+//         headers: {
+//             'Set-Cookie': `Session=test`,
+//             'Access-Control-Allow-Origin': '*',
+//             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+//             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+//         }
+//     })
+// }
 
 export async function POST(request: NextRequest) {
     try {
-        cookies().set({
+        const body = await request.json();
+        console.log(body);
+
+        const response = NextResponse.next();
+
+        response.cookies.set({
             name: 'Session',
             value: "test",
             httpOnly: process.env.NODE_ENV !== 'development',
@@ -29,16 +44,28 @@ export async function POST(request: NextRequest) {
             path: '/',
         })
 
+        // cookies().set({
+        //     name: 'Session',
+        //     value: "test",
+        //     httpOnly: process.env.NODE_ENV !== 'development',
+        //     secure: true,
+        //     domain: "https://johantran02.github.io",
+        //     maxAge: 60 * 60 * 24 * 365 * 1000,
+        //     sameSite: "none",
+        //     path: '/',
+        // })
+
         // request.cookies.set('Session', JSON.stringify(request.body));
-        return new NextResponse('Hello, Next.js!', {
-            status: 200,
-            headers: {
-                'Set-Cookie': `Session=test`,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-            }
-        })
+        // return new NextResponse('Hello, Next.js!', {
+        //     status: 200,
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         'Set-Cookie': `Session=test`,
+        //         'Access-Control-Allow-Origin': '*',
+        //         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        //         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        //     }
+        // })
         // return new NextResponse('Hello, Next.js!', {
         //     status: 200,
         //     headers: {
@@ -46,6 +73,7 @@ export async function POST(request: NextRequest) {
         //         'Set-Cookie': `Session=${request.body}`
         //     },
         // })
+        return response;
     }
     catch (error) {
         if (error instanceof Error) {
