@@ -31,19 +31,17 @@ export default function SignIn() {
     if (!createAccount) {
       console.log(data);
       const { code, json, error } = await account("account/login", data);
-      const { accessToken } = json;
 
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
 
-        const res = await fetch("/chas-challenge/signin/api/cookie", {
+        const res = await fetch("https://johantran02.github.io/chas-challenge/signin/api/cookie", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ accessToken })
+          body: JSON.stringify(json)
         })
-
       } else if (code !== 200 && error) {
         alert(error.description);
       }
