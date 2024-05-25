@@ -3,6 +3,8 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 // import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
+export async function GET(request: Request) { }
+
 export async function POST(request: NextRequest) {
 
     try {
