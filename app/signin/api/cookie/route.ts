@@ -1,6 +1,7 @@
 "use server";
 
-import { cookiesForUser } from '@/app/lib/definitions';
+// import { cookiesForUser } from '@/app/lib/definitions';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 // import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
@@ -22,12 +23,15 @@ export async function OPTIONS(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
     try {
+        cookies().set({
+            name: 'Session',
+            value: JSON.stringify(request.body),
+            httpOnly: false,
+            secure: true,
+            path: '/chas-challenge',
+        })
         return new NextResponse('Hello, Next.js!', {
             status: 200,
-            headers: {
-                "Content-Type": "application/json",
-                'Set-Cookie': `Session=${request.body}`
-            },
         })
     }
     catch (error) {
