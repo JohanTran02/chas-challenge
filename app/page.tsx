@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 export default function Home() {
   const router = useRouter();
-  useEffect(() => { setTimeout(() => router.push('/chas-challenge/signin'), 2000) }, [router]);
+  useEffect(() => { setTimeout(() => router.push('/signin'), 2000) }, [router]);
 
   const logo = "/chas-challenge/Images/Logo_Dark_2D.svg";
 
