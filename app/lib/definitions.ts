@@ -41,7 +41,7 @@ export type AccountEndpoint = 'account/register' | 'account/logout' | 'account/l
 export type CameraEndpoint = 'ai/readimage';
 
 // cookies
-export type cookiesForUser = {
+export type CookiesForUser = {
   email: string;
   accessToken: string;
   displayName: string;

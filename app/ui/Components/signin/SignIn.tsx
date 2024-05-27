@@ -16,21 +16,22 @@ import GetStarted from "./GetStarted";
 import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
+import { useCookies } from "react-cookie";
 
 export default function SignIn() {
-  const { currentUser } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
+  const { currentUser } = useSelector((state: RootState) => state.user);
   const [createAccount, setCreateAccount] = useState<boolean>(false);
+  const [cookies, setCookie] = useCookies(['accessToken']);
 
-  useEffect(() => {
-    document.cookie = "username=John Doe";
-  }, [])
+  function onChange(newAccessToken: string) {
+    setCookie('accessToken', newAccessToken);
+  }
 
   // hook use form
   const methods = useForm<UserValues>();
 
   const onSubmit: SubmitHandler<UserValues> = async (data) => {
-    console.log("hej Hej");
     // log in
     if (!createAccount) {
       console.log(data);
@@ -38,6 +39,7 @@ export default function SignIn() {
 
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
+        onChange(json.accessToken);
       } else if (code !== 200 && error) {
         alert(error.description);
       }
