@@ -24,12 +24,6 @@ export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
-  function onChange(newAccessToken: string) {
-
-    setCookie('accessToken', newAccessToken);
-    console.log(cookies.accessToken)
-  }
-
   // hook use form
   const methods = useForm<UserValues>();
 
@@ -41,7 +35,8 @@ export default function SignIn() {
 
       if (code === 200) {
         dispatch({ type: 'user/onlineState', payload: data });
-        onChange(json.accessToken);
+        setCookie('accessToken', json.user.accessToken, { path: "/" });
+
       } else if (code !== 200 && error) {
         alert(error.description);
       }
