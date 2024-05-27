@@ -5,7 +5,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
 // Hooks
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 //TS 
 import { UserValues } from "@/app/lib/definitions";
@@ -21,6 +21,10 @@ export default function SignIn() {
   const { currentUser } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const [createAccount, setCreateAccount] = useState<boolean>(false);
+
+  useEffect(() => {
+    document.cookie = "username=John Doe";
+  }, [])
 
   // hook use form
   const methods = useForm<UserValues>();
