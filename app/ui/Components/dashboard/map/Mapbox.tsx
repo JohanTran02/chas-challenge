@@ -1,7 +1,8 @@
 'use client'
 
 // Mapbox 
-import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup} from "react-map-gl";
+import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup, Layer} from "react-map-gl";
+import type {FillLayer} from 'react-map-gl';
 import "mapbox-gl/dist/mapbox-gl.css";
 import style from "@/app/ui/style/map/mapbox.module.css";
 import { getUserLocation } from "@/app/lib/map/geolocation";
@@ -30,6 +31,16 @@ const Mapbox = () => {
 		console.log(activities)
 	}, [])
 
+	const parkLayer: FillLayer = {
+		id: 'landuse_park',
+		type: 'fill',
+		source: 'mapbox',
+		'source-layer': 'landuse',
+		filter: ['==', 'class', 'park'],
+		paint: {
+			'fill-color': '#4E3FC8'
+		}
+	};
 	// console.log(coords, popup)
   return (
 		<div className={style.mainStyle}>
@@ -43,7 +54,7 @@ const Mapbox = () => {
 						height: '100vh', 
 						width: '100vw', 
 						position: 'absolute', 
-						inset:'-133px 0 0 0', 
+						inset:'-100px 0 0 0', 
 						zIndex: '2', 
 						cursor: 'auto', 
 						}
@@ -55,6 +66,8 @@ const Mapbox = () => {
 					maxZoom={20}
 					minZoom={0}
 					>
+					<Layer {...parkLayer} />
+
 					<GeolocateControl
 						style={{borderRadius: '50%'}}
 						position="bottom-right" 

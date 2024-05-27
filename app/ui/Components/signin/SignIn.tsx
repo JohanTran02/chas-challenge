@@ -8,33 +8,51 @@ import Inputfield from "./Inputfield";
 import { ReactNode, useEffect, useState } from "react";
 
 //TS 
-import { UserInputValues } from "@/app/lib/definitions";
+import { UserValues } from "@/app/lib/definitions";
 import Update from "./Update";
 import GetStarted from "./GetStarted";
 
 // Redux
-import { RootState } from "@/app/lib/redux/store";
+import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { account } from "@/app/lib/CC_Backend/account";
+import { createCookie } from "@/cookies";
 
 
-export default function SignIn(){
+export default  function SignIn(){
   const userStatus = useSelector((state: RootState) => state.user.isOnline);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch<AppDispatch>(); 
   const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [user, setUser] = useState<UserInputValues | null>(null)
+  const [user, setUser] = useState<UserValues | null>(null)
 
-  const methods = useForm<UserInputValues>();
+  const methods = useForm<UserValues>();
   
-  const onSubmit: SubmitHandler<UserInputValues> = (data): void =>{
-    console.log(data);
+  const onSubmit: SubmitHandler<UserValues> = async (data) =>{
+    
+    // log in
     if(!createAccount){
-      dispatch({type: 'user/onlineState', payload: true});
-      setUser(data);
+      console.log(data);
+
+      const {code, json} = await account("account/login", data);
+      if(code === 200){
+        dispatch({type: 'user/onlineState', payload: true});
+        setUser(data);
+        createCookie(json);
+      } 
     } 
+
+    // create account
     if(createAccount && data.password === data.confirmPassword){
-      dispatch({type: 'User/onlineState', payload: true});
-      setUser(data);
+      console.log(data);
+      // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
+      const {code} = await account("account/register", data);
+      if(code === 200){
+        dispatch({type: 'user/onlineState', payload: true});
+        setUser(data);
+      } 
+      return 
     } 
+    
     if(createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.'); 
     return 
   } 
@@ -111,14 +129,14 @@ export default function SignIn(){
                 <button 
                   type="submit"
                   className="text-darkGreen text-nowrap px-8 py-3 w-3/6 max-w-44 rounded-3xl border-[1px] border-darkGreen text-l font-semibold">
-                  Logga in
+                  {!createAccount ? 'Logga in' : 'Skapa konto'}
                 </button>
               </div>
             </form>
           </FormProvider>
         </div> : 
         handleUserState(createAccount)
-        }
+      }
     </>
   )
 }
