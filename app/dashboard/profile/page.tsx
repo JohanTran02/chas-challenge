@@ -1,20 +1,28 @@
 // Import components with useState dynamically
 "use client"
-import dynamic from 'next/dynamic';
 
-
-import React from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-const DynamicStampModalContent = dynamic(() => import('app/ui/Components/profile/StampModalContent'));
-const DynamicFriendsModalContent = dynamic(() => import('app/ui/Components/profile/FriendsModalContent'));
-const DynamicAddFriendsModalContent = dynamic(() => import('app/ui/Components/profile/AddFriendsModalContent'));
+import StampModalContent from '@/app/ui/Components/profile/StampModalContent';
+import AddFriendsModalContent from '@/app/ui/Components/profile/AddFriendsModalContent';
+import FriendsModalContent from '@/app/ui/Components/profile/FriendsModalContent';
+import FriendContainer from '@/app/ui/Components/profile/FriendContainer';
 
-const Page: React.FC = () => {
-  const [modalStamps, setModalStamps] = React.useState<boolean>(false);
-  const [modalFriends, setModalFriends] = React.useState<boolean>(false);
-  const [modalAddFriends, setModalAddFriends] = React.useState<boolean>(false);
+export default function Page() {
+  const [modalStamps, setModalStamps] = useState<boolean>(false);
+  const [modalFriends, setModalFriends] = useState<boolean>(false);
+  const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
+  const images = [
+    { src: "/flower-stamp.svg" },
+    { src: "/banana-stamp.svg" },
+    { src: "/bear-stamp.svg" },
+    { src: "/hotdog-stamp.svg" },
+  ];
+
+  let stampImages = images.map((image, index) => {
+    return <Image width={20} height={20} key={index} className="w-20 h-20 object-cover" src={`${image.src}`} alt="" />
+  })
 
   const modalTransformStamps = modalStamps ? "transition-all h-[80vh]" : "transition-all h-[0px]";
   const modalTransformFriends = modalFriends ? "transition-all h-[80vh]" : "transition-all h-[0px]";
@@ -22,7 +30,7 @@ const Page: React.FC = () => {
 
   const closeModalStamps = () => setModalStamps(false);
   const closeModalFriends = () => setModalFriends(false);
-  const openAddFriendsModal = () => setModalAddFriends(true); 
+  const openAddFriendsModal = () => setModalAddFriends(true);
   const closeModalAddFriends = () => setModalAddFriends(false);
 
   return (
@@ -44,10 +52,7 @@ const Page: React.FC = () => {
             </h6>
           </div>
           <div className="flex justify-evenly mt-4">
-          <Image width={20} height={20} className="w-20 h-20 object-cover" src="/flower-stamp.svg" alt="" />
-            <Image width={20} height={20} className="w-20 h-20 object-cover" src="/banana-stamp.svg" alt="" />
-            <Image width={20} height={20} className="w-20 h-20 object-cover" src="/bear-stamp.svg" alt="" />
-            <Image width={20} height={20} className="w-20 h-20 object-cover" src="/hotdog-stamp.svg" alt="" />
+            {stampImages}
           </div>
         </div>
         <div>
@@ -57,46 +62,26 @@ const Page: React.FC = () => {
               SE ALLA
             </h6>
           </div>
-          <div className='flex justify-evenly pt-6 items-center'>
-            <div>
-              <div className='flex items-center justify-between'>
-                <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-dog.svg" alt="" />
-                <h6 className='pl-4'> Polare</h6>
-              </div>
-              <div className='flex items-center justify-between pt-4'>
-                <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-beaver.svg" alt="" />
-                <h6 className='pl-4'> Homie</h6>
-              </div>
-            </div>
-            <div>
-              <div className='flex items-center justify-between'>
-                <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-dog2.svg" alt="" />
-                <h6 className='pl-4'> Kompis</h6>
-              </div>
-              <div className='flex items-center pt-4'>
-                <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
-                <h6 className='pl-4'> Bror</h6>
-              </div>
-            </div>
+          <div className='grid grid-cols-2 gap-2 pt-6'>
+            <FriendContainer showStamps={false} />
           </div>
         </div>
       </div>
-          {/* Stamp Modal */}
-          <div className={`bg-red-200 fixed bottom-0 w-full transition-all left-0 ${modalTransformStamps} duration-300 rounded-t-2xl`}>
-        {modalStamps && <DynamicStampModalContent onClose={closeModalStamps} />}
+      {/* Stamp Modal */}
+
+      <div className={`bg-red-200 fixed bottom-0 w-full transition-all left-0 ${modalTransformStamps} duration-300 rounded-t-2xl`}>
+        <StampModalContent onClose={closeModalStamps} />
       </div>
 
       {/* Friends Modal */}
       <div className={`bg-blue-500 fixed bottom-0 w-full left-0 ${modalTransformFriends} duration-300 rounded-t-2xl`}>
-        {modalFriends && <DynamicFriendsModalContent onClose={closeModalFriends} openAddFriendsModal={openAddFriendsModal} />}
+        <FriendsModalContent onClose={closeModalFriends} openAddFriendsModal={openAddFriendsModal} />
       </div>
 
       {/* Add Friends Modal */}
       <div className={`bg-green-200 fixed bottom-0 w-full left-0 ${modalTransformAddFriends} duration-300 rounded-t-2xl`}>
-        {modalAddFriends && <DynamicAddFriendsModalContent onClose={closeModalAddFriends} />}
+        <AddFriendsModalContent onClose={closeModalAddFriends} />
       </div>
     </>
   );
 };
-
-export default Page;
