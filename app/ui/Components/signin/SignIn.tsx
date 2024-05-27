@@ -22,10 +22,12 @@ export default function SignIn() {
   const dispatch = useDispatch<AppDispatch>();
   const { currentUser } = useSelector((state: RootState) => state.user);
   const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [cookies, setCookie] = useCookies(['accessToken']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
   function onChange(newAccessToken: string) {
+
     setCookie('accessToken', newAccessToken);
+    console.log(cookies.accessToken)
   }
 
   // hook use form
