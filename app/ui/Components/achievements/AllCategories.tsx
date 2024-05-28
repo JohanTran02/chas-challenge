@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import NextStep from './NextStep';
 import { getStampsInfo } from "@/app/lib/CC_Backend/stamps";
+import { useCookies } from 'react-cookie';
 
 const AllCategories = async () => {
+  const [cookies] = useCookies(["accessToken"]);
   // AKTIVA queries
   // categoryId = 1 --> 'Fruits'
   // categoryId = 4 --> 'Furniture'
@@ -12,10 +14,10 @@ const AllCategories = async () => {
   // categoryId = 3 --> 'Fruits'
 
   const response = [
-    getStampsInfo('getcategorywithstamps', 'categoryId', 1),
-    getStampsInfo('getcategorywithstamps', 'categoryId', 2),
-    getStampsInfo('getcategorywithstamps', 'categoryId', 3),
-    getStampsInfo('getcategorywithstamps', 'categoryId', 4),
+    getStampsInfo('getcategorywithstamps', 'categoryId', 1, cookies.accessToken),
+    getStampsInfo('getcategorywithstamps', 'categoryId', 2, cookies.accessToken),
+    getStampsInfo('getcategorywithstamps', 'categoryId', 3, cookies.accessToken),
+    getStampsInfo('getcategorywithstamps', 'categoryId', 4, cookies.accessToken),
   ];
   // response.map(categoryId => stampCategories('getcategorywithstamps', 'categoryId', categoryId)); 
 
