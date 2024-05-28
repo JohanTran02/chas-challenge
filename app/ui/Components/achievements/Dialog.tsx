@@ -34,22 +34,22 @@ const Dialog = ({ prop }: { prop: Stampinfo }) => {
           aria-label='Close button'
           onClick={closeModal}
           className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
-          <Image src='/close-button.svg' width={35} height={35} className='size-4' alt='close-button' />
+          <Image src='/chas-challenge/Images/close-button.svg' width={35} height={35} className='size-4' alt='close-button' />
         </button>
         <div className="w-full mt-10 space-y-6">
           <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
           <h1 className='font-bold text-black text-center'>Uppdrag: {name}</h1>
           <div className="flex font-extrabold">
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4' />
+              <Image src='/chas-challenge/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'>GULD</p>
             </div>
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4' />
+              <Image src='/chas-challenge/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'>0,5</p>
             </div>
             <div className="flex-1  flex flex-col items-center gap-1">
-              <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4' />
+              <Image src='/chas-challenge/Images/map-mission.svg' height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'
                 onClick={goToMap}>
                 PLATS

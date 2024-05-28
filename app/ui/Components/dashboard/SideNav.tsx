@@ -13,6 +13,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function SideNav() {
+
   const path: string = usePathname();
   const links = [
     { name: 'Home', href: '/dashboard', src: '/chas-challenge/Images/home-Icon.svg', alt: 'Home icon' },
@@ -33,7 +34,7 @@ export default function SideNav() {
   }, [path])
 
   return (
-    <div className={`h-[80px] w-full max-w-[600px] flex items-start justify-center ${path !== '/dashboard/map' && 'bg-neturalWhite'}`}>
+    <div className={`h-[80px] w-full max-w-[600px] flex items-start justify-center ${path !== '/dashboard/map' ? 'bg-neturalWhite' : "hidden"}`}>
       <ul className='bg-white h-max w-[80%] border-[2px] border-darkGreen rounded-3xl flex items-center px-4 py-[4px] mt-4'>
         {links.map((link) => {
           return (

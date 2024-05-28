@@ -7,7 +7,7 @@ export default function ClearedMission() {
             className="bg-darkGreen w-5/6 max-w-[500px] h-[600px] m-auto relative rounded-3xl border-darkGreen border-2 overflow-scroll no-scrollbar">
             <div>
                 <Image
-                    src={"/Images/Pressbyran.svg"}
+                    src={"/chas-challenge/Images/Pressbyran.svg"}
                     height={128}
                     width={128}
                     alt=''
@@ -20,15 +20,15 @@ export default function ClearedMission() {
                             <h1 className='font-bold text-black text-center'>Du har hittat en STAMPTITEL</h1>
                             <div className="flex font-extrabold">
                                 <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-                                    <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4' />
+                                    <Image src='/chas-challenge/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
                                     <p className='text-[12px] text-darkGreen'>GULD</p>
                                 </div>
                                 <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-                                    <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4' />
+                                    <Image src='/chas-challenge/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
                                     <p className='text-[12px] text-darkGreen'>0,5</p>
                                 </div>
                                 <div className="flex-1  flex flex-col items-center gap-1">
-                                    <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4' />
+                                    <Image src='/chas-challenge/Images/map-mission.svg' height={35} width={35} alt='' className='size-4' />
                                     <p className='text-[12px] text-darkGreen'>PLATS</p>
                                 </div>
                             </div>

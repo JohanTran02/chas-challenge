@@ -14,10 +14,10 @@ export default function Page() {
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
   const images = [
-    { src: "/flower-stamp.svg" },
-    { src: "/banana-stamp.svg" },
-    { src: "/bear-stamp.svg" },
-    { src: "/hotdog-stamp.svg" },
+    { src: "/chas-challenge/Images/flower-stamp.svg" },
+    { src: "/chas-challenge/Images/banana-stamp.svg" },
+    { src: "/chas-challenge/Images/bear-stamp.svg" },
+    { src: "/chas-challenge/Images/hotdog-stamp.svg" },
   ];
 
   let stampImages = images.map((image, index) => {
