@@ -1,6 +1,6 @@
 import { CameraEndpoint } from "../definitions";
 
-export const camera = async (endpoint: CameraEndpoint, base64: string) => {
+export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string) => {
     let json;
     let code;
 
@@ -8,10 +8,10 @@ export const camera = async (endpoint: CameraEndpoint, base64: string) => {
         const response = await fetch('https://natureai.azurewebsites.net/' + endpoint, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${accessToken}`
             },
             method: "POST",
-            body: JSON.stringify({ prompt: "tree", picture: base64 })
+            body: JSON.stringify({ prompt: "banana", picture: base64 })
         });
 
         if (response.status === 200) {

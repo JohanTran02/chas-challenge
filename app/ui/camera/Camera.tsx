@@ -3,14 +3,16 @@
 import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { camera } from "@/app/lib/CC_Backend/camera";
+import Image from "next/image";
 import CameraButtons from "./CameraButtons";
 import styles from "./camera.module.css"
+import { useCookies } from "react-cookie";
 
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
-async function sendImage(base64: string) {
-    const { code, json } = await camera("ai/readimage", base64);
+async function sendImage(base64: string, accessToken: string) {
+    const { code, json } = await camera("ai/readimage", base64, accessToken);
     if (code === 200) {
         console.log(json);
     }
@@ -18,6 +20,7 @@ async function sendImage(base64: string) {
 }
 
 export default function WebcamCapture() {
+    const [cookies] = useCookies(["accessToken"]);
     const webcamRef = useRef<Webcam>(null);
     const [image, setImage] = useState<string | null>("");
     // const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
@@ -71,7 +74,7 @@ export default function WebcamCapture() {
                     <CameraButtons />
                 </div> */}
 
-                {/* {
+                {
                     enableWebcam ? (
                         <>
                             <Webcam
@@ -96,12 +99,12 @@ export default function WebcamCapture() {
                                     className="object-cover h-[600px] w-full"
                                 />
                                 <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
-                                    <button className="rounded-xl bg-black text-white p-1" onClick={() => sendImage(image.replace("data:image/jpeg;base64,", "") as string)}>Ladda upp foto</button>
+                                    <button className="rounded-xl bg-black text-white p-1" onClick={() => sendImage(image.replace("data:image/jpeg;base64,", "") as string, cookies.accessToken)}>Ladda upp foto</button>
                                     <button className="rounded-xl bg-white text-black border-2 border-black p-1" onClick={enableCamera}>Ta nytt foto</button>
                                 </div>
                             </>
                         )
-                } */}
+                }
             </div >
         </>
     );
