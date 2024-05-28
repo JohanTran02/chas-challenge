@@ -48,7 +48,7 @@ export type cookiesForUser = {
 }
 
 // getstampinfo
-export type stampinfo = {
+export type Stampinfo = {
   stampId: number,
   name: string,
   facts: string,
@@ -57,4 +57,9 @@ export type stampinfo = {
   latitude: string,
   longitude: string,
   category: { title: string }
+}
+
+export type StampCategories = {
+  title: string;
+  stamps: Stampinfo[];
 }

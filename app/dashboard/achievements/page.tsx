@@ -1,5 +1,4 @@
 import AllCategories from '@/app/ui/Components/achievements/AllCategories'
-import { getCookie } from '@/cookies';
 
 export default async function Page() {
     
