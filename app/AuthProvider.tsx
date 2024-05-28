@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import { CookiesProvider, useCookies } from 'react-cookie'
 
@@ -33,8 +33,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
             router.push("/signin/")
             console.log("finns ingen cookie for accesstoken", undefined)
         }
-        console.log(isLoading)
-    }, [router, cookies, isLoading])
+    }, [router, cookies])
 
     return (
         <>

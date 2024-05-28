@@ -1,6 +1,7 @@
+import { Dispatch, SetStateAction } from "react";
 import { CameraEndpoint } from "../definitions";
 
-export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string) => {
+export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, setLoading: Dispatch<SetStateAction<boolean>>) => {
     let json;
     let code;
 
@@ -14,10 +15,11 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
             body: JSON.stringify({ prompt: "banana", picture: base64 })
         });
 
-        if (response.status === 200) {
+        if (response.ok) {
             json = await response.json();
             code = response.status;
             console.log('Status code is 200 and the fetching proccess has been successfully completed!', json)
+            setLoading(false);
         }
 
         if (!response.ok) {
@@ -26,6 +28,7 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
 
             console.log(response.status, response.statusText, '- json response:', json) // on error
             alert(errorMessage.description);
+            setLoading(false);
         }
 
     } catch (error) {
