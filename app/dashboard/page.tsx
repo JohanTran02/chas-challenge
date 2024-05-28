@@ -1,6 +1,7 @@
 import Posts from '@/app/ui/Components/home/Posts'
 
-export default function Page() {
+export default async function Page() {
+
     return (
         <>
             <p className='text-white font-bold p-6'>NYA HÄNDELSER</p>

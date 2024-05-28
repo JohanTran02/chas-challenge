@@ -1,8 +1,9 @@
-import StoreProvider from "./StoreProvider";
+// import StoreProvider from "./StoreProvider";
 import Header from "@/app/ui/Components/header/Header";
 import { inter } from './ui/fonts';
 import './ui/globals.css';
 import Authentication from "./ui/Components/Authentication";
+import StoreProvider from "./lib/redux/StoreProvider";
 
 export default function RootLayout({
   children,
@@ -13,7 +14,7 @@ export default function RootLayout({
       <StoreProvider>
         <Authentication>
           <html lang="en">
-            <body className={`bg-[#f6f5ef] w-screen min-h-screen mx-auto flex flex-col justify-center h-auto overflow-x-hidden max-w-[600px] pb-[34px] relative ${inter.className}`}>
+            <body className={`bg-[#f6f5ef] w-screen min-h-screen mx-auto flex flex-col justify-center h-auto overflow-x-hidden max-w-[600px] pb-[34px] relative ${inter.className} `}>
               <Header />
               <main>{children}</main>
             </body>

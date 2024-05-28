@@ -1,22 +1,12 @@
-// Stamps
-import hotdog_stamp from '@/public/hotdog-stamp.svg'
-import banana_stamp from '@/public/banana-stamp.svg'
-import bear_stamp from '@/public/bear-stamp.svg'
-// profile pics
-import dog1 from '@/public/profile-dog.svg'
-import dog2 from '@/public/profile-dog2.svg'
-import cat from '@/public/profile-cat.svg'
-import beaver from '@/public/profile-beaver.svg'
-
 import Image from 'next/image'
 
 const Posts = () => {
   const userNames: {name: string; profilePic: string; stamp: {src: string; category: string};}[] = [
-    {name: 'Lucas Lawson', profilePic: dog2, stamp: {src: hotdog_stamp, category: 'KORV'}}, 
-    {name: 'Hallie Cortez', profilePic: cat, stamp: {src: bear_stamp, category: 'BJÖRN'}}, 
-    {name: 'Dale Simmons', profilePic: dog1, stamp: {src: hotdog_stamp, category: 'KORV'}}, 
-    {name: 'Gertrude Barnett', profilePic: beaver, stamp: {src: banana_stamp, category: 'BANAN'}},
-    {name: 'Gertrude Barnett', profilePic: beaver, stamp: {src: bear_stamp, category: 'BJÖRN'}},
+    {name: 'Lucas Lawson', profilePic: '/profile-dog.svg', stamp: {src: '/hotdog-stamp.svg', category: 'KORV'}}, 
+    {name: 'Hallie Cortez', profilePic: '/profile-dog2.svg', stamp: {src: '/bear-stamp.svg', category: 'BJÖRN'}}, 
+    {name: 'Dale Simmons', profilePic: '/profile-cat.svg', stamp: {src: '/hotdog-stamp.svg', category: 'KORV'}}, 
+    {name: 'Gertrude Barnett', profilePic: '/profile-beaver.svg', stamp: {src: '/banana-stamp.svg', category: 'BANAN'}},
+    {name: 'Gertrude Barnett', profilePic: '/profile-beaver.svg', stamp: {src: '/bear-stamp.svg', category: 'BJÖRN'}},
   ]
   
   return (
@@ -25,7 +15,7 @@ const Posts = () => {
 
         return (
           <li key={index}
-            className="flex w-full h-36 border-darkGreen border-[3px] mb-4 p-[8px] rounded-md">
+            className={`flex w-full h-36 border-darkGreen border-[3px]  p-[8px] rounded-md ${index !== userNames.length - 1 && 'mb-4'}`}>
             <div className=" flex flex-col justify-between h-full flex-grow flex-shrink-0">
               <div className="flex gap-3 items-center w-full h-[49px]">
                 <div className="h-[45px] w-[45px]"> 

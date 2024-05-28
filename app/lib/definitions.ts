@@ -47,3 +47,20 @@ export type cookiesForUser = {
   displayName: string;
   userId: string;
 }
+
+// getstampinfo
+export type Stampinfo = {
+  stampId: number,
+  name: string,
+  facts: string,
+  rarity: number,
+  icon: string,
+  latitude: string,
+  longitude: string,
+  category: { title: string }
+}
+
+export type StampCategories = {
+  title: string;
+  stamps: Stampinfo[];
+}

@@ -5,7 +5,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
 // Hooks
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 
 //TS 
 import { UserValues } from "@/app/lib/definitions";
@@ -13,64 +13,59 @@ import Update from "./Update";
 import GetStarted from "./GetStarted";
 
 // Redux
-import { AppDispatch, RootState } from "@/app/lib/redux/store";
+// import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
-import { createCookie } from "@/cookies";
 
+// const { currentUser } = useSelector((state: RootState) => state.user);
+// const dispatch = useDispatch<AppDispatch>(); 
 
-export default  function SignIn(){
-  const userStatus = useSelector((state: RootState) => state.user.isOnline);
-  const dispatch = useDispatch<AppDispatch>(); 
+export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [user, setUser] = useState<UserValues | null>(null)
+  const [user, setUser] = useState<UserValues | null>(null);
 
+  // hook use form
   const methods = useForm<UserValues>();
-  
-  const onSubmit: SubmitHandler<UserValues> = async (data) =>{
-    
-    // log in
-    if(!createAccount){
-      console.log(data);
 
-      const {code, json} = await account("account/login", data);
-      if(code === 200){
-        dispatch({type: 'user/onlineState', payload: true});
-        setUser(data);
-        createCookie(json);
-      } 
-    } 
+  const onSubmit: SubmitHandler<UserValues> = async (data) => {
+    // log in
+    if (!createAccount) {
+      console.log(data);
+      const { code, json, error } = await account("account/login", data);
+
+      if (code === 200) {
+        // dispatch({type: 'user/onlineState', payload: data});
+        setUser(data)
+      } else if (code !== 200 && error) {
+        alert(error.description);
+      }
+    }
 
     // create account
-    if(createAccount && data.password === data.confirmPassword){
+    if (createAccount && data.password === data.confirmPassword) {
       console.log(data);
       // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
-      const {code} = await account("account/register", data);
-      if(code === 200){
-        dispatch({type: 'user/onlineState', payload: true});
-        setUser(data);
-      } 
-      return 
-    } 
-    
-    if(createAccount && data.password !== data.confirmPassword) alert('Lösenordet stämmer inte, försök igen.'); 
-    return 
-  } 
+      const { code } = await account("account/register", data);
+      if (code === 200) {
+        // dispatch({type: 'user/onlineState', payload: data});
+        setUser(data)
+      }
+      return
+    }
 
-  useEffect(() => {
-    if(userStatus === null) console.log('User status is:', 'offline'); 
-    if(userStatus) console.log('User status is:', 'online'); 
+    if (createAccount && data.password !== data.confirmPassword)
+      alert('Lösenordet stämmer inte, försök igen.');
     return
-  }, [userStatus])
+  }
 
-  const handleUserState = (state: boolean ): ReactNode => {
-    if(state === true) return <GetStarted />
-    if(state === false) return <Update />
-  } 
+  const handleUserState = (state: boolean): ReactNode => {
+    if (state === true) return <GetStarted />
+    if (state === false) return <Update />
+  }
 
   return (
     <>
-      {user === null ? 
+      {user === null ?
         <div className="h-11/12 w-full max-w-[600px] ">
           <div className="flex flex-col justify-between h-48 w-full max-w-[456px] mx-auto text-center my-12 text-darkGreen">
             <div className="flex-1">
@@ -81,52 +76,52 @@ export default  function SignIn(){
                 Gå i grupp eller själv, fota, samla och lär dig mer om saker utanför din dörr.
               </p>
             </div>
-            
+
           </div>
           <FormProvider {...methods}>
-            <form 
+            <form
               onSubmit={methods.handleSubmit(onSubmit)}
               className="w-full font-medium">
               <p className="text-2xl font-semibold my-4">
                 {createAccount ? 'Skapa konto' : 'Logga in'}
               </p>
               <div className="flex flex-col gap-4">
-                {createAccount && <Inputfield 
+                {createAccount && <Inputfield
                   type="text"
                   required={true}
                   property="displayName"
                   error={methods.formState.errors}
                 />}
-                <Inputfield 
+                <Inputfield
                   type={"text"}
                   required={true}
                   property={"email"}
-                  error={methods.formState.errors} 
+                  error={methods.formState.errors}
                 />
-                <Inputfield 
-                  type={"password"} 
-                  required={true} 
-                  property={"password"} 
+                <Inputfield
+                  type={"password"}
+                  required={true}
+                  property={"password"}
                   error={methods.formState.errors}
-                  />
+                />
                 {createAccount &&
-                  <Inputfield 
-                  type={"password"} 
-                  required={true} 
-                  property={"confirmPassword"} 
-                  error={methods.formState.errors}
+                  <Inputfield
+                    type={"password"}
+                    required={true}
+                    property={"confirmPassword"}
+                    error={methods.formState.errors}
                   />}
               </div>
               <div className="flex justify-between mt-2">
-                <p 
+                <p
                   onClick={() => setCreateAccount((prev => !prev))}
                   className="underline">
-                    {!createAccount ? 'Skapa konto' : 'Logga in'}
+                  {!createAccount ? 'Skapa konto' : 'Logga in'}
                 </p>
                 <p className="">Glömt lösenord?</p>
               </div>
               <div className="flex justify-center mt-8">
-                <button 
+                <button
                   type="submit"
                   className="text-darkGreen text-nowrap px-8 py-3 w-3/6 max-w-44 rounded-3xl border-[1px] border-darkGreen text-l font-semibold">
                   {!createAccount ? 'Logga in' : 'Skapa konto'}
@@ -134,7 +129,7 @@ export default  function SignIn(){
               </div>
             </form>
           </FormProvider>
-        </div> : 
+        </div> :
         handleUserState(createAccount)
       }
     </>

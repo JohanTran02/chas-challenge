@@ -1,9 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userSlice from '@/app/lib/redux/features/user/userSlice'; 
+import { configureStore } from '@reduxjs/toolkit'
+import mapReducer from './features/map/mapSlice'
+import stampReducer from './features/achievements/stampsSlice'
 
 export const store = configureStore({
   reducer: {
-    user: userSlice,
+    map: mapReducer,
+    stamp: stampReducer, 
   },
 })
 
