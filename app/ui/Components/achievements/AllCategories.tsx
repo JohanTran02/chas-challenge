@@ -16,10 +16,10 @@ async function getStamps(accessToken: string) {
 
   const [fruits, noName, noName2, furniture] = await Promise.all(response);
   const stamps: { img: string; category: any }[] = [
-    { img: '/chas-challenge/hotdog-stamp.svg', category: fruits },
-    { img: '/chas-challenge/banana-stamp.svg', category: noName },
-    { img: '/chas-challenge/bear-stamp.svg', category: noName2 },
-    { img: '/chas-challenge/flower-stamp.svg', category: furniture }
+    { img: '/chas-challenge/Images/hotdog-stamp.svg', category: fruits },
+    { img: '/chas-challenge/Images/banana-stamp.svg', category: noName },
+    { img: '/chas-challenge/Images/bear-stamp.svg', category: noName2 },
+    { img: '/chas-challenge/Images/flower-stamp.svg', category: furniture }
   ]
 
   return stamps;
