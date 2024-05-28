@@ -14,7 +14,7 @@ const Dialog = ({ prop }: { prop: Stampinfo }) => {
   const goToMap = () => {
     if (prop) dispatch(setCoords(prop));
     console.log('Pushin to map component ' + prop)
-    router.push('/chas-challenge/dashboard/map');
+    router.push('/dashboard/map');
   }
 
   const closeModal = (): void => {

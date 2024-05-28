@@ -11,7 +11,7 @@ const NextStep = ({ children, category, title }: { children: ReactNode; category
   const goToMission = () => {
     dispatch({ type: 'stamp/setTitle', payload: title });
     dispatch({ type: 'stamp/setSpecificStampInfo', payload: category });
-    router.push('/chas-challenge/dashboard/achievements/mission')
+    router.push('/dashboard/achievements/mission')
   };
 
   return (
