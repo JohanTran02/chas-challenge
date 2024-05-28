@@ -7,9 +7,7 @@ import Image from "next/image";
 import CameraButtons from "./CameraButtons";
 import styles from "./camera.module.css"
 import { useCookies } from "react-cookie";
-
-const FACING_MODE_USER = "user";
-const FACING_MODE_ENVIRONMENT = "environment";
+import CameraError from "./CameraError";
 
 async function sendImage(base64: string, accessToken: string) {
     const { code, json } = await camera("ai/readimage", base64, accessToken);
@@ -37,44 +35,61 @@ export default function WebcamCapture() {
     }, [webcamRef, setImage]);
 
     let videoConstraints: MediaTrackConstraints = {
-        facingMode: FACING_MODE_ENVIRONMENT,
+        facingMode: "environment",
         frameRate: 30
     };
-
-    // const handleClick = useCallback(() => {
-    //     setFacingMode((prevState) =>
-    //         prevState === FACING_MODE_USER
-    //             ? FACING_MODE_ENVIRONMENT
-    //             : FACING_MODE_USER
-    //     );
-    // }, []);
 
     const enableCamera = () => {
         setEnableWebcam((prev) => !prev);
     }
 
-    console.log({ videoConstraints });
-
     return (
         <>
             <div className="relative w-full h-full p-8">
-                {/* <p className="text-white">Tillbaka</p>
+                <p className="text-white">Tillbaka</p>
                 <div className="grid place-content-center bg-white h-[600px] w-full">
-                    <div className={`${styles.loader}`}></div>
-                    <section className="flex flex-col px-12">
-                        <h1 className="font-bold text-6xl">Ojdå!</h1>
-                        <div className="text-lg">
-                            <p className="my-8">Det ser ut som att ditt foto inte fångade rätt objekt. Försök igen och se till att fokusera på rätt mål.</p>
-                            <h2 className="font-bold">Tips:</h2>
-                            <p>Var noga med detaljerna på objektet du försöker fotografera.</p>
-                        </div>
-                    </section>
+                    {
+                        enableWebcam ? (
+                            <>
+                                <Webcam
+                                    className="webcam object-cover h-[600px]"
+                                    audio={false}
+                                    ref={webcamRef}
+                                    screenshotFormat="image/jpeg"
+                                    videoConstraints={videoConstraints}
+                                    screenshotQuality={1}
+                                />
+                                <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
+                                    <button className="rounded-xl bg-black text-white p-1" onClick={capture}>Ta bild</button>
+                                </div>
+                            </>)
+                            : <>
+                                <Image
+                                    src={"https://images.unsplash.com/photo-1624976172336-54d765427b6b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FyJTIwcG9ydHJhaXR8ZW58MHx8MHx8fDA%3D"}
+                                    alt="Scan"
+                                    width={0}
+                                    height={0}
+                                    className="object-cover h-[600px] w-full"
+                                />
+                                <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
+                                    <button className="rounded-xl bg-black text-white p-1">Ladda upp foto</button>
+                                    <button className="rounded-xl bg-white text-black border-2 border-black p-1" onClick={enableCamera}>Ta nytt foto</button>
+                                </div>
+                            </>
+                    }
                 </div>
-                <div className="grid place-items-center mt-4">
-                    <CameraButtons />
-                </div> */}
+            </div >
+        </>
+    );
+}
 
-                {
+
+{/* {
+                        <div className={`${styles.loader}`}></div>
+                    <CameraError />
+                    <div className="grid place-items-center mt-4">
+                    <CameraButtons enableWebcam={enableWebcam} />
+                </div>
                     enableWebcam ? (
                         <>
                             <Webcam
@@ -99,14 +114,11 @@ export default function WebcamCapture() {
                                     className="object-cover h-[600px] w-full"
                                 />
                                 <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
-                                    <button className="rounded-xl bg-black text-white p-1" onClick={() => sendImage(image.replace("data:image/jpeg;base64,", "") as string, cookies.accessToken)}>Ladda upp foto</button>
+                                    <button className="rounded-xl bg-black text-white p-1"
+                                        onClick={() => sendImage(image.replace("data:image/jpeg;base64,", "") as string, cookies.accessToken)}>Ladda upp foto
+                                    </button>
                                     <button className="rounded-xl bg-white text-black border-2 border-black p-1" onClick={enableCamera}>Ta nytt foto</button>
                                 </div>
                             </>
                         )
-                }
-            </div >
-        </>
-    );
-}
-
+                } */}
