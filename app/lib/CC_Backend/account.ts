@@ -1,4 +1,3 @@
-// import { createCookie } from "../action";
 import { AccountEndpoint, CookiesForUser, UserValues } from "../definitions";
 
 export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) => {
@@ -18,7 +17,6 @@ export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) =
     if (response.status === 200) {
       code = response.status;
       json = await response.json() as CookiesForUser;
-      // createCookie(json);
       console.log('Status code is 200 and the fetching proccess has been successfully completed!', json)
     }
 

@@ -13,16 +13,18 @@ import Update from "./Update";
 import GetStarted from "./GetStarted";
 
 // Redux
-import { AppDispatch, RootState } from "@/app/lib/redux/store";
+// import { AppDispatch, RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
 import { useCookies } from "react-cookie";
 
+// const { currentUser } = useSelector((state: RootState) => state.user);
+// const dispatch = useDispatch<AppDispatch>(); 
+
 export default function SignIn() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { currentUser } = useSelector((state: RootState) => state.user);
   const [createAccount, setCreateAccount] = useState<boolean>(false);
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
+  const [user, setUser] = useState<UserValues | null>(null);
 
   // hook use form
   const methods = useForm<UserValues>();
@@ -34,7 +36,8 @@ export default function SignIn() {
       const { code, json, error } = await account("account/login", data);
 
       if (code === 200) {
-        dispatch({ type: 'user/onlineState', payload: data });
+        // dispatch({ type: 'user/onlineState', payload: data });
+        setUser(data)
         setCookie('accessToken', json.user.accessToken, { path: "/" });
 
       } else if (code !== 200 && error) {
@@ -48,7 +51,8 @@ export default function SignIn() {
       // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
       const { code } = await account("account/register", data);
       if (code === 200) {
-        dispatch({ type: 'user/onlineState', payload: data });
+        // dispatch({type: 'user/onlineState', payload: data});
+        setUser(data)
       }
       return
     }
@@ -65,7 +69,7 @@ export default function SignIn() {
 
   return (
     <>
-      {currentUser === null ?
+      {user === null ?
         <div className="h-11/12 w-full max-w-[600px] ">
           <div className="flex flex-col justify-between h-48 w-full max-w-[456px] mx-auto text-center my-12 text-darkGreen">
             <div className="flex-1">

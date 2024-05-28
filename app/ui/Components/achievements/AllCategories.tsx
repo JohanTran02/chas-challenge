@@ -14,7 +14,7 @@ const stamps: string[] =
     '/chas-challenge/Images/flower-stamp.svg'
   ]
 
-const MissonsCategory = () => {
+const AllCategories = () => {
 
   return (
     <div className='flex flex-wrap justify-around gap-8'>
@@ -42,4 +42,4 @@ const MissonsCategory = () => {
   )
 }
 
-export default MissonsCategory;
+export default AllCategories;

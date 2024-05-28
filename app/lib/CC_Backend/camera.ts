@@ -1,16 +1,8 @@
-// import { getCookie } from "../../../cookies";
 import { CameraEndpoint } from "../definitions";
 
 export const camera = async (endpoint: CameraEndpoint, base64: string) => {
     let json;
     let code;
-
-    // const session = await getCookie("Session");
-    // let token;
-
-    // if (session) {
-    //     token = session.accessToken;
-    // }
 
     try {
         const response = await fetch('https://natureai.azurewebsites.net/' + endpoint, {
