@@ -1,25 +1,18 @@
+"use client"
+
 import Image from 'next/image';
 import NextStep from './NextStep';
 import { getStampsInfo } from "@/app/lib/CC_Backend/stamps";
 import { useCookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
 
-const AllCategories = async () => {
-  const [cookies] = useCookies(["accessToken"]);
-  // AKTIVA queries
-  // categoryId = 1 --> 'Fruits'
-  // categoryId = 4 --> 'Furniture'
-
-  // ICKE AKTIVA queries
-  // categoryId = 2 --> 'Fruits'
-  // categoryId = 3 --> 'Fruits'
-
+async function getStamps(accessToken: string) {
   const response = [
-    getStampsInfo('getcategorywithstamps', 'categoryId', 1, cookies.accessToken),
-    getStampsInfo('getcategorywithstamps', 'categoryId', 2, cookies.accessToken),
-    getStampsInfo('getcategorywithstamps', 'categoryId', 3, cookies.accessToken),
-    getStampsInfo('getcategorywithstamps', 'categoryId', 4, cookies.accessToken),
+    await getStampsInfo('getcategorywithstamps', 'categoryId', 1, accessToken),
+    await getStampsInfo('getcategorywithstamps', 'categoryId', 2, accessToken),
+    await getStampsInfo('getcategorywithstamps', 'categoryId', 3, accessToken),
+    await getStampsInfo('getcategorywithstamps', 'categoryId', 4, accessToken),
   ];
-  // response.map(categoryId => stampCategories('getcategorywithstamps', 'categoryId', categoryId)); 
 
   const [fruits, noName, noName2, furniture] = await Promise.all(response);
   const stamps: { img: string; category: any }[] = [
@@ -29,10 +22,33 @@ const AllCategories = async () => {
     { img: '/chas-challenge/flower-stamp.svg', category: furniture }
   ]
 
+  return stamps;
+}
+
+const AllCategories = () => {
+  const [cookies] = useCookies(["accessToken"]);
+  const [stamps, setStamps] = useState<{ img: string; category: any }[]>({} as { img: string; category: any }[])
+  useEffect(() => {
+    const updateStamps = async () => {
+      const updatedStamps = await getStamps(cookies.accessToken);
+      setStamps(updatedStamps);
+    }
+    updateStamps();
+  }, [cookies])
+  // AKTIVA queries
+  // categoryId = 1 --> 'Fruits'
+  // categoryId = 4 --> 'Furniture'
+
+  // ICKE AKTIVA queries
+  // categoryId = 2 --> 'Fruits'
+  // categoryId = 3 --> 'Fruits'
+
+
+  // response.map(categoryId => stampCategories('getcategorywithstamps', 'categoryId', categoryId)); 
 
   return (
     <div className='flex flex-wrap justify-around gap-8'>
-      {stamps.map((stamp) => {
+      {stamps.length > 1 && stamps.map((stamp) => {
         return (
           <>
             {(stamp.category !== undefined) &&
