@@ -10,13 +10,13 @@ const Update = () => {
         <h1 className="text-2xl text-nowrap text-center text-neturalWhite font-semibold">NYA UPDATERINGAR</h1>
         <ul className="h-full w-full space-y-8 list-outside list-disc">
           <li className="pt-8 text-neturalWhite font-semibold">
-            <p>3 nya stamps har lagts till i "Träd"-kategorin</p>
+            <p>{'3 nya stamps har lagts till i "Träd"-kategorin'}</p>
           </li>
           <li className="text-neturalWhite font-semibold">
-            <p>3 nya stamps har lagts till i "Träd"-kategorin</p>
+            <p>{'3 nya stamps har lagts till i "Träd"-kategorin'}</p>
           </li>
           <li className="text-neturalWhite font-semibold">
-            <p>3 nya stamps har lagts till i "Träd"-kategorin</p>
+            <p>{'3 nya stamps har lagts till i "Träd"-kategorin'}</p>
           </li>
         </ul>
       </article>

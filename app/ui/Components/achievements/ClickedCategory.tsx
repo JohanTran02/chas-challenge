@@ -22,7 +22,7 @@ const ClickedCategory = () => {
     }
     
     return () => {}
-  }, [])
+  }, [dispatch, stamps])
 
   const saveToLocalStorage = (name: string, value: StampCategories) => {
     return localStorage.setItem(name, JSON.stringify(value)); 

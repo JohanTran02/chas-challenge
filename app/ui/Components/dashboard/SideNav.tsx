@@ -33,7 +33,7 @@ export default function SideNav(){
   }, [path])
 
   return (
-    <div className={`h-[100px] w-full max-w-[600px] flex items-start justify-center ${path !== '/dashboard/map' && 'bg-neturalWhite'}`}>
+    <div className={`h-[80px] w-full max-w-[600px] flex items-start justify-center ${path !== '/dashboard/map' && 'bg-neturalWhite'}`}>
       <ul className='bg-white h-max w-[80%] border-[2px] border-darkGreen rounded-3xl flex items-center px-4 py-[4px] mt-4'>
         {links.map((link) => {
           return (

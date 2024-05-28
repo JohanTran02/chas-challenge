@@ -32,11 +32,8 @@ const Mapbox = () => {
 	const [coords, setCoords] = useState<GeolocationCoordinates | undefined>();
 	const [popup, setPopup] = useState<'open' | 'close'>('close')
 	
-	useEffect(() => {
-		getUserLocation("get", setCoords);
-		console.log(markerInfo)
-	}, [])
-
+	getUserLocation("get", setCoords);
+	
 	const intitialView = (markerInfo: Stampinfo | null, coords: GeolocationCoordinates | undefined) => {
 		if(markerInfo) return {latitude: Number(markerInfo.latitude), longitude: Number(markerInfo.longitude), zoom: 11}
 		return coords ? {latitude: coords.latitude, longitude: coords.longitude, zoom: 11} : 

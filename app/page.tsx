@@ -1,15 +1,9 @@
-'use client'
-
 import { poppins } from './ui/fonts';
 import logo from '@/public/Logo_Dark_2D.svg'; 
 import Image from 'next/image'
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+
 
 export default function Home() {
-  const router = useRouter(); 
-  useEffect(() => {setTimeout(() => router.push('/signin'), 2000)}, []);
-
   return (
     <div className='h-full w-full py-4'>
       <div className="">
