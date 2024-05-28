@@ -1,40 +1,33 @@
 "use client"
 
 import { ReactNode } from "react";
+import { StampCategories } from "@/app/lib/definitions";
 import SpecificMission from "./SpecificMission";
-import { stampinfo } from "@/app/lib/definitions";
-import { useCookies } from "react-cookie";
+
+// Redux
+import { RootState } from "@/app/lib/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const ClickedCategory = () => {
-  const [cookies] = useCookies(["accessToken"])
-  let data;
-  const stampInfo = async () => {
+  const { stamps, clickedCategory } = useSelector((state: RootState) => state.stamp);
+  const dispatch = useDispatch();
 
-    if (cookies.accessToken) {
-      try {
-        const response = await fetch('https://natureai.azurewebsites.net/stamps/getstampinfo?stampId=1', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${cookies.accessToken}`
-          }
-        });
-
-        if (!response.ok) {
-          console.log(response.status, response.statusText);
-        }
-
-        const data = await response.json() as stampinfo;
-        console.log(data)
-        return data
-      } catch (error) {
-        console.log(error)
-      }
+  // If the user reloads the site while on this component, it will get items from localStorage. 
+  useEffect(() => {
+    if (!stamps) {
+      const allStamps = JSON.parse(localStorage.getItem('stamps') || '') as StampCategories;
+      dispatch({ type: 'stamp/setSpecificStampInfo', payload: allStamps });
+      dispatch({ type: 'stamp/setTitle', payload: allStamps.title });
+      return
     }
-    data = await stampInfo();
+
+    return () => { }
+  }, [dispatch, stamps])
+
+  const saveToLocalStorage = (name: string, value: StampCategories) => {
+    return localStorage.setItem(name, JSON.stringify(value));
   }
-
-  const missions = [<SpecificMission prop={data} key={"first"} />, <SpecificMission prop={data} key={"second"} />, <SpecificMission prop={data} key={"third"} />, <SpecificMission prop={data} key={"fourth"} />]
-
   return (
     <div>
       <div className="flex items-center gap-2 px-1 w-full">
@@ -47,7 +40,13 @@ const ClickedCategory = () => {
         </div>
       </div>
       <ul className="pt-6 space-y-4">
-        {missions && missions.map((reactNode, index) => <li key={index}>{reactNode}</li>)}
+        {stamps !== null && stamps.map((stamp) => {
+          if (stamp.title === clickedCategory) {
+            saveToLocalStorage('stamps', stamp);
+            return stamp.stamps.map((stamp, index) => <li key={index}><SpecificMission prop={stamp} /></li>)
+          }
+          return null;
+        })}
       </ul>
     </div>
   )

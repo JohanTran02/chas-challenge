@@ -1,13 +1,3 @@
-// Stamps
-// import hotdog_stamp from '/chas-challenge/hotdog-stamp.svg',
-// import banana_stamp from '/chas-challenge/banana-stamp.svg',
-// import bear_stamp from '/chas-challenge/bear-stamp.svg',
-// profile pics
-// import dog1 from '/chas-challenge/profile-dog.svg',
-// import dog2 from '/chas-challenge/profile-dog2.svg',
-// import cat from '/chas-challenge/profile-cat.svg',
-// import beaver from '/chas-challenge/profile-beaver.svg',
-
 import Image from 'next/image'
 
 const Posts = () => {
@@ -25,7 +15,7 @@ const Posts = () => {
 
         return (
           <li key={index}
-            className="flex w-full h-36 border-darkGreen border-[3px] mb-4 p-[8px] rounded-md">
+            className={`flex w-full h-36 border-darkGreen border-[3px]  p-[8px] rounded-md ${index !== userNames.length - 1 && 'mb-4'}`}>
             <div className=" flex flex-col justify-between h-full flex-grow flex-shrink-0">
               <div className="flex gap-3 items-center w-full h-[49px]">
                 <div className="h-[45px] w-[45px]">

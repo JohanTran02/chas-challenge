@@ -26,11 +26,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         if (cookies.accessToken) {
-            router.push("/dashboard")
+            router.push("/chas-challenge/dashboard")
             console.log("cookie finns", cookies.accessToken)
         }
         else {
-            router.push("/signin/")
+            router.push("/chas-challenge/signin")
             console.log("finns ingen cookie for accesstoken", undefined)
         }
     }, [router, cookies])

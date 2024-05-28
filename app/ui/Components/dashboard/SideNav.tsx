@@ -15,25 +15,25 @@ import { useEffect } from 'react';
 export default function SideNav() {
   const path: string = usePathname();
   const links = [
-    { name: 'Home', href: '/dashboard', src: '/chas-challenge/Images/home-Icon.svg', alt: 'Home icon' },
-    { name: 'Achievements', href: '/dashboard/achievements', src: '/chas-challenge/Images/achievements-Icon.svg', alt: 'Stamps Icon' },
-    { name: 'Map', href: '/dashboard/map', src: '/chas-challenge/Images/map-Icon.svg', alt: 'Map icon' },
-    { name: 'Profile', href: '/dashboard/profile', src: '/chas-challenge/Images/profile-Icon.svg', alt: 'Profile icon' }
+    { name: 'Home', href: '/chas-challenge/dashboard', src: '/chas-challenge/Images/home-Icon.svg', alt: 'Home icon' },
+    { name: 'Achievements', href: '/chas-challenge/dashboard/achievements', src: '/chas-challenge/Images/achievements-Icon.svg', alt: 'Stamps Icon' },
+    { name: 'Map', href: '/chas-challenge/dashboard/map', src: '/chas-challenge/Images/map-Icon.svg', alt: 'Map icon' },
+    { name: 'Profile', href: '/chas-challenge/dashboard/profile', src: '/chas-challenge/Images/profile-Icon.svg', alt: 'Profile icon' }
   ]
 
   useEffect(() => {
     const body = document.body as HTMLBodyElement;
-    if (path === '/dashboard/map') {
+    if (path === '/chas-challenge/dashboard/map') {
       // This line makes sure that the map covers the whole screen and disables the scrollbar.
       body.scrollIntoView({ behavior: 'instant', inline: 'start', block: 'start' });
       body.style.overflowY = 'hidden';
     }
-    if (path !== '/dashboard/map') document.body.style.overflowY = 'auto';
+    if (path !== '/chas-challenge/dashboard/map') document.body.style.overflowY = 'auto';
     return
   }, [path])
 
   return (
-    <div className={`h-[100px] w-full max-w-[600px] flex items-start justify-center ${path !== '/dashboard/map' && 'bg-neturalWhite'}`}>
+    <div className={`h-[80px] w-full max-w-[600px] flex items-start justify-center ${path !== '/chas-challenge/dashboard/map' && 'bg-neturalWhite'}`}>
       <ul className='bg-white h-max w-[80%] border-[2px] border-darkGreen rounded-3xl flex items-center px-4 py-[4px] mt-4'>
         {links.map((link) => {
           return (

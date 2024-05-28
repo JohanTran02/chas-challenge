@@ -1,4 +1,3 @@
-// import logo from '../public/Images/Logo_Dark_2D.svg';
 import Image from 'next/image'
 import { poppins } from '../public/fonts';
 

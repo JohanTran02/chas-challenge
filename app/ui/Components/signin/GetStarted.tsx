@@ -77,7 +77,7 @@ const GetStarted = () => {
         })}
       </ul>
 
-      <Link href={'/dashboard/'}>
+      <Link href={'/chas-challenge/dashboard'}>
         <p className={`text-end font-bold pt-8 underline`}>
           {activeContainer === 2 ? 'Kom igång' : 'Hoppa över'}
         </p>

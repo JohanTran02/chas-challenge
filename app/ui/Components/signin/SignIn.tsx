@@ -31,6 +31,7 @@ export default function SignIn() {
       const { code, json, error } = await account("account/login", data);
 
       if (code === 200) {
+        // dispatch({type: 'user/onlineState', payload: data});
         setUser(data)
         setCookie('accessToken', json.user.accessToken, { path: "/" });
 

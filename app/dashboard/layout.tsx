@@ -6,8 +6,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="w-full fixed bottom-0 z-10">
                 <SideNav />
             </div>  
-            <div className="bg-darkGreen pb-[100px]"
-                style={{height: 'calc(100vh - (100px + 53px))'}}>
+            <div className="bg-darkGreen pb-[80px]"
+                style={{height: 'calc(100vh - (80px + 53px))'}}>
                 {children}
             </div>
         </div>
