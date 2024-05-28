@@ -1,37 +1,40 @@
 'use client'
 
 import { stampinfo } from '@/app/lib/definitions';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 
-const SpecificMission = ({prop}: {prop:stampinfo | undefined}) => {
+const SpecificMission = ({ prop }: { prop: stampinfo | undefined }) => {
   const openModal = (): void => {
-    const information = document.getElementById('missionsModal') as HTMLDialogElement; 
+    const information = document.getElementById('missionsModal') as HTMLDialogElement;
     information.showModal();
   }
 
   const closeModal = (): void => {
-    const information = document.getElementById('missionsModal') as HTMLDialogElement; 
+    const information = document.getElementById('missionsModal') as HTMLDialogElement;
     information.close();
   }
+
+  const router = useRouter();
   return (
     <>
       <div
-        onClick={openModal} 
+        onClick={openModal}
         className="bg-neturalWhite flex justify-between h-[125px] border-2 border-darkGreen p-2 rounded-xl">
         <div className="space-y-3 w-4/6 h-max font-bold">
           <p className="text-sm">Uppdrag</p>
           <p className="text-darkGreen text-xl">{prop && prop.name}</p>
           <div className="flex mb-2">
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4'/>
+              <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'>GULD</p>
             </div>
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4'/>
+              <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'>0,5</p>
             </div>
             <div className="flex-1  flex flex-col items-center gap-1">
-              <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4'/>
+              <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'>PLATS</p>
             </div>
           </div>
@@ -39,32 +42,32 @@ const SpecificMission = ({prop}: {prop:stampinfo | undefined}) => {
         <div className="bg-green-800 size-24 rounded-full self-center" />
       </div>
 
-      <dialog 
+      <dialog
         id="missionsModal"
         className="bg-neutralWhite h-4/6 w-5/6 max-w-[500px] max-h-[600px] m-auto relative rounded-3xl border-darkGreen border-2 overflow-y-hidden"
-        >
+      >
         <div className="absolute bg-white inset-0 h-full translate-y-[20%] rounded-3xl z-[-1]"></div>
         <div className="flex flex-col w-full h-full px-4 pb-12 pt-2">
-          <button 
+          <button
             aria-label='Close button'
             onClick={closeModal}
             className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
-              <Image src='/close-button.svg' width={35} height={35} className='size-4' alt='close-button' />
-            </button>
+            <Image src='/close-button.svg' width={35} height={35} className='size-4' alt='close-button' />
+          </button>
           <div className="w-full mt-10 space-y-6">
             <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
-            <h1 className='font-bold text-black text-center'>Uppdrag: {prop && prop.name}</h1>  
+            <h1 className='font-bold text-black text-center'>Uppdrag: {prop && prop.name}</h1>
             <div className="flex font-extrabold">
               <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-                <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4'/>
+                <Image src='/dollar.svg' height={35} width={35} alt='' className='size-4' />
                 <p className='text-[12px] text-darkGreen'>GULD</p>
               </div>
               <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-                <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4'/>
+                <Image src='/Percentage.svg' height={35} width={35} alt='' className='size-4' />
                 <p className='text-[12px] text-darkGreen'>0,5</p>
               </div>
               <div className="flex-1  flex flex-col items-center gap-1">
-                <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4'/>
+                <Image src='/map-mission.svg' height={35} width={35} alt='' className='size-4' />
                 <p className='text-[12px] text-darkGreen'>PLATS</p>
               </div>
             </div>
@@ -79,10 +82,12 @@ const SpecificMission = ({prop}: {prop:stampinfo | undefined}) => {
             </div>
 
             <div className="w-full h-[75px] flex justify-center items-end pb-[10px]">
-              <button className='py-3 px-8 size-max bg-darkGreen text-[12px] text-white font-bold rounded-full'>Starta uppdrag
+              <button
+                className='py-3 px-8 size-max bg-darkGreen text-[12px] text-white font-bold rounded-full'
+                onClick={() => router.push("/camera")}>
+                Starta uppdrag
               </button>
             </div>
-          
           </div>
         </div>
       </dialog>
