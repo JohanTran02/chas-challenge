@@ -4,6 +4,22 @@ import { useRouter } from 'next/navigation';
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import { CookiesProvider, useCookies } from 'react-cookie'
 
+// export function useDebounceJob(value: Job, seconds: number): JSX.Element {
+//     const { jobModalStatus } = useSelector((state: RootState) => state.jobs)
+
+//     const [debouncedJob, setDebouncedValue] = useState<JSX.Element>(<SkeletonDescription />);
+
+//     useEffect(() => {
+//         setDebouncedValue(<SkeletonDescription />)
+//         const handler = setTimeout(() => {
+//             if (jobModalStatus.includes("open")) setDebouncedValue(<JobDescription currentJob={value} />);
+//         }, seconds * 1000);
+
+//         return () => clearTimeout(handler)
+//     }, [value, seconds, jobModalStatus]);
+
+//     return debouncedJob;
+// }
 
 export function useDebounce(setLoading: Dispatch<SetStateAction<boolean>>, seconds: number): ReactNode {
 
