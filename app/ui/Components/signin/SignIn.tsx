@@ -123,7 +123,7 @@ export default function SignIn() {
               <div className="flex justify-center mt-8">
                 <button
                   type="submit"
-                  className="text-darkGreen text-nowrap px-8 py-3 w-3/6 max-w-44 rounded-3xl border-[1px] border-darkGreen text-l font-semibold">
+                  className="text-neutral-100 bg-darkGreen text-nowrap px-8 py-3 w-3/6 max-w-44 rounded-3xl border-[1px] border-darkGreen text-l font-semibold">
                   {!createAccount ? 'Logga in' : 'Skapa konto'}
                 </button>
               </div>

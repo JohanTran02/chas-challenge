@@ -35,15 +35,15 @@ export default function Page() {
 
   return (
     <>
-      <div className="h-2/5 w-full pb-6 flex flex-col justify-end items-center">
-        <Image width={20} height={20} className="w-20 h-20 object-cover" src="/profile-cat.svg" alt="" />
+      <div className="h-2/5 w-full pb-6 flex flex-col justify-end items-center ">
+        <Image width={20} height={20} className="w-28 h-28 object-cover" src="/profile-cat.svg" alt="" />
         <h1 className="text-white text-base font-bold pt-6">Användarnamn</h1>
         <div className="flex">
           <h6 className="text-white text-base font-bold mr-2">23 stamps</h6>
-          <h6 className="text-white text-base font-bold">8 vänner</h6>
+          <h6 className="text-white text-base font-bold">4 vänner</h6>
         </div>
       </div>
-      <div className="bg-white w-full px-4 pt-6 pb-16 rounded-t-3xl">
+      <div className="bg-white w-full h-fit  px-4 pt-6 pb-32 rounded-t-3xl overflow-hidden ">
         <div>
           <div className="flex justify-between">
             <h1 className="text-black text-base font-bold">DINA STAMPS</h1>
