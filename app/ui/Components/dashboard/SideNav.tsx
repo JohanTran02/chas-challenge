@@ -1,11 +1,5 @@
 'use client';
 
-// Icons
-// import HomeIcon from '/chas-challenge/home-icon.svg',
-// import MapIcon from '/chas-challenge/map-icon.svg',
-// import StampsIcon from '/chas-challenge/achievements-icon.svg',
-// import ProfileIcon from '/chas-challenge/profile-icon.svg',
-
 // Components
 import Link from 'next/link'
 import Image from 'next/image'
@@ -16,10 +10,10 @@ export default function SideNav() {
 
   const path: string = usePathname();
   const links = [
-    { name: 'Home', href: '/dashboard', src: '/chas-challenge/Images/home-Icon.svg', alt: 'Home icon' },
-    { name: 'Achievements', href: '/dashboard/achievements', src: '/chas-challenge/Images/achievements-Icon.svg', alt: 'Stamps Icon' },
-    { name: 'Map', href: '/dashboard/map', src: '/chas-challenge/Images/map-Icon.svg', alt: 'Map icon' },
-    { name: 'Profile', href: '/dashboard/profile', src: '/chas-challenge/Images/profile-Icon.svg', alt: 'Profile icon' }
+    { name: 'Home', href: '/dashboard', src: '/Images/home-Icon.svg', alt: 'Home icon' },
+    { name: 'Achievements', href: '/dashboard/achievements', src: '/Images/achievements-Icon.svg', alt: 'Stamps Icon' },
+    { name: 'Map', href: '/dashboard/map', src: '/Images/map-Icon.svg', alt: 'Map icon' },
+    { name: 'Profile', href: '/dashboard/profile', src: '/Images/profile-Icon.svg', alt: 'Profile icon' }
   ]
 
   useEffect(() => {

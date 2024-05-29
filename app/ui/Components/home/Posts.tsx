@@ -2,11 +2,11 @@ import Image from 'next/image'
 
 const Posts = () => {
   const userNames: { name: string; profilePic: string; stamp: { src: string; category: string }; }[] = [
-    { name: 'Lucas Lawson', profilePic: '/chas-challenge/Images/profile-dog2.svg', stamp: { src: '/chas-challenge/Images/hotdog-stamp.svg', category: 'KORV' } },
-    { name: 'Hallie Cortez', profilePic: '/chas-challenge/Images/profile-cat.svg', stamp: { src: '/chas-challenge/Images/bear-stamp.svg', category: 'BJÖRN' } },
-    { name: 'Dale Simmons', profilePic: '/chas-challenge/Images/profile-dog.svg', stamp: { src: '/chas-challenge/Images/hotdog-stamp.svg', category: 'KORV' } },
-    { name: 'Gertrude Barnett', profilePic: '/chas-challenge/Images/profile-beaver.svg', stamp: { src: '/chas-challenge/Images/banana-stamp.svg', category: 'BANAN' } },
-    { name: 'Gertrude Barnett', profilePic: '/chas-challenge/Images/profile-beaver.svg', stamp: { src: '/chas-challenge/Images/bear-stamp.svg', category: 'BJÖRN' } },
+    { name: 'Lucas Lawson', profilePic: '/Images/profile-dog2.svg', stamp: { src: '/Images/hotdog-stamp.svg', category: 'KORV' } },
+    { name: 'Hallie Cortez', profilePic: '/Images/profile-cat.svg', stamp: { src: '/Images/bear-stamp.svg', category: 'BJÖRN' } },
+    { name: 'Dale Simmons', profilePic: '/Images/profile-dog.svg', stamp: { src: '/Images/hotdog-stamp.svg', category: 'KORV' } },
+    { name: 'Gertrude Barnett', profilePic: '/Images/profile-beaver.svg', stamp: { src: '/Images/banana-stamp.svg', category: 'BANAN' } },
+    { name: 'Gertrude Barnett', profilePic: '/Images/profile-beaver.svg', stamp: { src: '/Images/bear-stamp.svg', category: 'BJÖRN' } },
   ]
 
   return (

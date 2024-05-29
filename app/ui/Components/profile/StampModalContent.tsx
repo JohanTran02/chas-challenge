@@ -20,21 +20,21 @@ export default function StampModalContent({ onClose }: { onClose: () => void }) 
     {
       category: "string",
       stamps: [
-        { src: "/chas-challenge/Images/flower-stamp.svg", name: "flower", "description": "flower" },
-        { src: "/chas-challenge/Images/banana-stamp.svg", name: "banana", "description": "banana" },
-        { src: "/chas-challenge/Images/bear-stamp.svg", name: "bear", "description": "bear" },
-        { src: "/chas-challenge/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-        { src: "/chas-challenge/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-        { src: "/chas-challenge/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "/Images/flower-stamp.svg", name: "flower", "description": "flower" },
+        { src: "/Images/banana-stamp.svg", name: "banana", "description": "banana" },
+        { src: "/Images/bear-stamp.svg", name: "bear", "description": "bear" },
+        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
       ]
     },
     {
       category: "test",
       stamps: [
-        { src: "/chas-challenge/Images/flower-stamp.svg", name: "flower", "description": "flower" },
-        { src: "/chas-challenge/Images/banana-stamp.svg", name: "banana", "description": "banana" },
-        { src: "/chas-challenge/Images/bear-stamp.svg", name: "bear", "description": "bear" },
-        { src: "/chas-challenge/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "/Images/flower-stamp.svg", name: "flower", "description": "flower" },
+        { src: "/Images/banana-stamp.svg", name: "banana", "description": "banana" },
+        { src: "/Images/bear-stamp.svg", name: "bear", "description": "bear" },
+        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
       ]
     },
   ]

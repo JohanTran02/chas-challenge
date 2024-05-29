@@ -12,22 +12,22 @@ export default function FriendContainer({ showStamps }: { showStamps: boolean })
     const friends: Friend[] = [
         {
             name: "johan",
-            src: "/chas-challenge/Images/profile-dog.svg",
+            src: "/Images/profile-dog.svg",
             stampsAmount: 3
         },
         {
             name: "gabriel",
-            src: "/chas-challenge/Images/profile-beaver.svg",
+            src: "/Images/profile-beaver.svg",
             stampsAmount: 2
         },
         {
             name: "bengt",
-            src: "/chas-challenge/Images/profile-dog2.svg",
+            src: "/Images/profile-dog2.svg",
             stampsAmount: 36
         },
         {
             name: "poppy",
-            src: "/chas-challenge/Images/profile-cat.svg",
+            src: "/Images/profile-cat.svg",
             stampsAmount: 31
         }
     ]

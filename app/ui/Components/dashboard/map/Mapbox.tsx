@@ -78,7 +78,7 @@ const Mapbox = () => {
 								latitude={Number(markerInfo.latitude)}
 								longitude={Number(markerInfo.longitude)}
 								color="red">
-								<Image src={"/chas-challenge/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
+								<Image src={"/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
 							</Marker>
 
 							{popup === "open" && <Popup

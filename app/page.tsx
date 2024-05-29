@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { poppins } from '../public/fonts';
 
 export default function Home() {
-  const logo = "/chas-challenge/Images/Logo_Dark_2D.svg";
+  const logo = "/Images/Logo_Dark_2D.svg";
 
   return (
     <div className='h-full w-full py-4'>

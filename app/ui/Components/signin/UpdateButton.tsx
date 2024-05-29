@@ -3,7 +3,7 @@ import Link from 'next/link'
 const UpdateButton = () => {
   return (
     <Link
-      href={'/chas-challenge/dashboard'}
+      href={'/dashboard'}
       className='mx-auto w-4/6 max-w-[300px]'
     >
       <button

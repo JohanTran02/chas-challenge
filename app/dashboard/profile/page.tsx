@@ -14,10 +14,10 @@ export default function Page() {
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
   const images = [
-    { src: "/chas-challenge/Images/flower-stamp.svg" },
-    { src: "/chas-challenge/Images/banana-stamp.svg" },
-    { src: "/chas-challenge/Images/bear-stamp.svg" },
-    { src: "/chas-challenge/Images/hotdog-stamp.svg" },
+    { src: "/Images/flower-stamp.svg" },
+    { src: "/Images/banana-stamp.svg" },
+    { src: "/Images/bear-stamp.svg" },
+    { src: "/Images/hotdog-stamp.svg" },
   ];
 
   let stampImages = images.map((image, index) => {
@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <>
       <div className="h-2/5 w-full pb-6 flex flex-col justify-end items-center">
-        <Image width={20} height={20} className="w-20 h-20 object-cover" src="/chas-challenge/Images/profile-cat.svg" alt="" />
+        <Image width={20} height={20} className="w-20 h-20 object-cover" src="/Images/profile-cat.svg" alt="" />
         <h1 className="text-white text-base font-bold pt-6">Användarnamn</h1>
         <div className="flex">
           <h6 className="text-white text-base font-bold mr-2">23 stamps</h6>
