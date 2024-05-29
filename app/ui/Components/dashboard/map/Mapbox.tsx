@@ -7,9 +7,6 @@ import style from "@/app/ui/style/map/mapbox.module.css";
 import { getUserLocation } from "@/app/lib/map/geolocation";
 import Geocoder from "./Geocoder";
 
-// Json - Tillfällig test data till nålarna på kartan. 
-import data from '@/json/map-activities.json';
-
 // Hooks
 import { useEffect, useState } from "react";
 import { Stampinfo } from "@/app/lib/definitions";
@@ -17,7 +14,6 @@ import Searchbar from "./Searchbar";
 
 // Image
 import Image from 'next/image'
-import map_pin from '@/public/map-pin.svg'
 
 // Redux
 import { RootState } from "@/app/lib/redux/store";
@@ -26,13 +22,14 @@ import { useSelector } from "react-redux";
 const Mapbox = () => {
 	const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
 
-	// const activities: Activity[] = data.activities; 
 	const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 	const [coords, setCoords] = useState<GeolocationCoordinates | undefined>();
 	const [popup, setPopup] = useState<'open' | 'close'>('close')
 
-	getUserLocation("get", setCoords);
+	useEffect(() => {
+		getUserLocation("get", setCoords);
+	}, [setCoords])
 
 	const intitialView = (markerInfo: Stampinfo | null, coords: GeolocationCoordinates | undefined) => {
 		if (markerInfo) return { latitude: Number(markerInfo.latitude), longitude: Number(markerInfo.longitude), zoom: 11 }
@@ -81,7 +78,7 @@ const Mapbox = () => {
 								latitude={Number(markerInfo.latitude)}
 								longitude={Number(markerInfo.longitude)}
 								color="red">
-								<Image src={map_pin} height={32} width={32} alt="map pin" />
+								<Image src={"/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
 							</Marker>
 
 							{popup === "open" && <Popup

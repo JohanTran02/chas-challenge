@@ -1,5 +1,6 @@
-'use client'
+"use client"
 
+import { ReactNode } from "react";
 import { StampCategories } from "@/app/lib/definitions";
 import SpecificMission from "./SpecificMission";
 
@@ -8,24 +9,24 @@ import { RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-const ClickedCategory = () => {  
-  const {stamps, clickedCategory} = useSelector((state: RootState) => state.stamp); 
-  const dispatch = useDispatch(); 
+const ClickedCategory = () => {
+  const { stamps, clickedCategory } = useSelector((state: RootState) => state.stamp);
+  const dispatch = useDispatch();
 
   // If the user reloads the site while on this component, it will get items from localStorage. 
   useEffect(() => {
-    if(!stamps){
+    if (!stamps) {
       const allStamps = JSON.parse(localStorage.getItem('stamps') || '') as StampCategories;
-      dispatch({type: 'stamp/setSpecificStampInfo', payload: allStamps});
-      dispatch({type: 'stamp/setTitle', payload: allStamps.title});
+      dispatch({ type: 'stamp/setSpecificStampInfo', payload: allStamps });
+      dispatch({ type: 'stamp/setTitle', payload: allStamps.title });
       return
     }
-    
-    return () => {}
+
+    return () => { }
   }, [dispatch, stamps])
 
   const saveToLocalStorage = (name: string, value: StampCategories) => {
-    return localStorage.setItem(name, JSON.stringify(value)); 
+    return localStorage.setItem(name, JSON.stringify(value));
   }
   return (
     <div>
@@ -39,10 +40,10 @@ const ClickedCategory = () => {
         </div>
       </div>
       <ul className="pt-6 space-y-4">
-        {stamps !== null && stamps.map((stamp) => { 
-          if(stamp.title === clickedCategory) {
+        {stamps !== null && stamps.map((stamp) => {
+          if (stamp.title === clickedCategory) {
             saveToLocalStorage('stamps', stamp);
-            return stamp.stamps.map((stamp, index) => <li key={index}><SpecificMission prop={stamp}/></li>)
+            return stamp.stamps.map((stamp, index) => <li key={index}><SpecificMission prop={stamp} /></li>)
           }
           return null;
         })}

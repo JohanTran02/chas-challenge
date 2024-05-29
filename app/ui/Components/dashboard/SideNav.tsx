@@ -1,10 +1,4 @@
-'use client'; 
-
-// Icons
-import HomeIcon from '@/public/home-icon.svg'; 
-import MapIcon from '@/public/map-icon.svg'; 
-import StampsIcon from '@/public/achievements-icon.svg'; 
-import ProfileIcon from '@/public/profile-icon.svg'; 
+'use client';
 
 // Components
 import Link from 'next/link'
@@ -12,23 +6,24 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
-export default function SideNav(){
+export default function SideNav() {
+
   const path: string = usePathname();
   const links = [
-    {name: 'Home', href: '/dashboard', src: HomeIcon, alt: 'Home icon'},
-    {name: 'Achievements', href: '/dashboard/achievements', src: StampsIcon, alt: 'Stamps Icon'},
-    {name: 'Map', href: '/dashboard/map', src: MapIcon, alt: 'Map icon'}, 
-    {name: 'Profile', href: '/dashboard/profile', src: ProfileIcon, alt: 'Profile icon'}
+    { name: 'Home', href: '/dashboard', src: '/Images/home-Icon.svg', alt: 'Home icon' },
+    { name: 'Achievements', href: '/dashboard/achievements', src: '/Images/achievements-Icon.svg', alt: 'Stamps Icon' },
+    { name: 'Map', href: '/dashboard/map', src: '/Images/map-Icon.svg', alt: 'Map icon' },
+    { name: 'Profile', href: '/dashboard/profile', src: '/Images/profile-Icon.svg', alt: 'Profile icon' }
   ]
 
   useEffect(() => {
-    const body = document.body as HTMLBodyElement; 
-    if(path === '/dashboard/map'){
+    const body = document.body as HTMLBodyElement;
+    if (path === '/dashboard/map') {
       // This line makes sure that the map covers the whole screen and disables the scrollbar.
-      body.scrollIntoView({behavior: 'instant', inline: 'start', block: 'start'});
+      body.scrollIntoView({ behavior: 'instant', inline: 'start', block: 'start' });
       body.style.overflowY = 'hidden';
-    } 
-    if(path !== '/dashboard/map') document.body.style.overflowY = 'auto'; 
+    }
+    if (path !== '/dashboard/map') document.body.style.overflowY = 'auto';
     return
   }, [path])
 
@@ -41,14 +36,14 @@ export default function SideNav(){
               key={link.name}
               href={link.href}
               className={`flex-grow h-10 rounded-md grid place-items-center`}
-              >
+            >
               <li>
                 <Image
                   rel='icon'
                   height={32}
                   width={32}
                   src={link.src} alt={link.alt}
-                  style={{width: '32px', height: '32px'}}
+                  style={{ width: '32px', height: '32px' }}
                   className={`object-cover object-center ${path !== link.href && 'brightness-[250%] grayscale-[60%]'}`}
                 />
               </li>

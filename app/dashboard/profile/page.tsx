@@ -14,10 +14,10 @@ export default function Page() {
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
   const images = [
-    { src: "/flower-stamp.svg" },
-    { src: "/banana-stamp.svg" },
-    { src: "/bear-stamp.svg" },
-    { src: "/hotdog-stamp.svg" },
+    { src: "/Images/flower-stamp.svg" },
+    { src: "/Images/banana-stamp.svg" },
+    { src: "/Images/bear-stamp.svg" },
+    { src: "/Images/hotdog-stamp.svg" },
   ];
 
   let stampImages = images.map((image, index) => {

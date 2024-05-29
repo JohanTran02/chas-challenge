@@ -5,7 +5,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import Inputfield from "./Inputfield";
 
 // Hooks
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 //TS 
 import { UserValues } from "@/app/lib/definitions";
@@ -13,15 +13,12 @@ import Update from "./Update";
 import GetStarted from "./GetStarted";
 
 // Redux
-// import { AppDispatch, RootState } from "@/app/lib/redux/store";
-import { useDispatch, useSelector } from "react-redux";
 import { account } from "@/app/lib/CC_Backend/account";
-
-// const { currentUser } = useSelector((state: RootState) => state.user);
-// const dispatch = useDispatch<AppDispatch>(); 
+import { useCookies } from "react-cookie";
 
 export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
   const [user, setUser] = useState<UserValues | null>(null);
 
   // hook use form
@@ -36,6 +33,8 @@ export default function SignIn() {
       if (code === 200) {
         // dispatch({type: 'user/onlineState', payload: data});
         setUser(data)
+        setCookie('accessToken', json.user.accessToken, { path: "/" });
+
       } else if (code !== 200 && error) {
         alert(error.description);
       }
@@ -44,10 +43,8 @@ export default function SignIn() {
     // create account
     if (createAccount && data.password === data.confirmPassword) {
       console.log(data);
-      // dispatch({type: 'user/userFetch', payload: {endpoint: 'registeraccount', userInfo: data}});
       const { code } = await account("account/register", data);
       if (code === 200) {
-        // dispatch({type: 'user/onlineState', payload: data});
         setUser(data)
       }
       return

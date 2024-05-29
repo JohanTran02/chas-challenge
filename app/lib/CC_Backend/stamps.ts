@@ -1,13 +1,14 @@
 import { StampCategories, Stampinfo } from "../definitions";
 
-export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithstamps', query: 'stampId' | 'categoryId', value: number) => {
+export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithstamps', query: 'stampId' | 'categoryId', value: number, accessToken : string) => {
   
-  // if(cookie){
+  if(!accessToken) return;
+
     try {
       const response = await fetch(`https://natureai.azurewebsites.net/stamps/${endpoint}?${query}=${value}`, {
         headers:{
           'Content-Type': 'application/json',
-          // 'Authorization': `Bearer ${cookie.accessToken}`
+          'Authorization': `Bearer ${accessToken}`
         }
       }); 
       
@@ -22,7 +23,7 @@ export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithst
     } catch (error) {
       console.log(error)
     }
-  // }
+  
 }
 
 // export const stampCategories = async(endpoint: 'getcategorywithstamps', query: 'categoryId', value: number) => {

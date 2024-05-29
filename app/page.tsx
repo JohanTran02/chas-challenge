@@ -1,9 +1,9 @@
-import { poppins } from './ui/fonts';
-import logo from '@/public/Logo_Dark_2D.svg';
 import Image from 'next/image'
-
+import { poppins } from '../public/fonts';
 
 export default function Home() {
+  const logo = "/Images/Logo_Dark_2D.svg";
+
   return (
     <div className='h-full w-full py-4'>
       <div className="">

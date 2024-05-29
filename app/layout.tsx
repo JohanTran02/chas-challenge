@@ -1,8 +1,7 @@
-// import StoreProvider from "./StoreProvider";
-import Header from "@/app/ui/Components/header/Header";
-import { inter } from './ui/fonts';
 import './ui/globals.css';
-/* import Authentication from "./ui/Components/Authentication"; */
+import Header from "@/app/ui/Components/header/Header";
+import { inter } from '../public/fonts';
+import AuthProvider from './AuthProvider';
 import StoreProvider from "./lib/redux/StoreProvider";
 
 export default function RootLayout({
@@ -11,15 +10,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-      <StoreProvider>
-      {/*   <Authentication> */}
-          <html lang="en">
-            <body className={`bg-[#f6f5ef] w-screen min-h-screen mx-auto flex flex-col justify-center h-auto overflow-x-hidden max-w-[600px] pb-[34px] relative ${inter.className} `}>
-              <Header />
-              <main>{children}</main>
-            </body>
-          </html>
-{/*         </Authentication> */}
-      </StoreProvider>
+    <StoreProvider>
+      <html lang="en">
+        <body className={`bg-[#f6f5ef] w-screen min-h-screen mx-auto flex flex-col justify-center h-auto overflow-x-hidden max-w-[600px] pb-[34px] relative ${inter.className}`}>
+          <AuthProvider>
+            <Header />
+            <main>{children}</main>
+          </AuthProvider>
+        </body>
+      </html>
+    </StoreProvider>
   );
 }
