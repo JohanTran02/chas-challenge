@@ -33,7 +33,7 @@ export default function SignIn() {
       if (code === 200) {
         // dispatch({type: 'user/onlineState', payload: data});
         setUser(data)
-        setCookie('accessToken', json.user.accessToken, { path: "/" });
+        setCookie('accessToken', json.user.accessToken, { path: "/", httpOnly: false, secure: true });
 
       } else if (code !== 200 && error) {
         alert(error.description);

@@ -1,28 +1,28 @@
 "use client"
 
-import { Dispatch, SetStateAction, useCallback, useRef, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { camera } from "@/app/lib/CC_Backend/camera";
 import Image from "next/image";
-// import CameraButtons from "./CameraButtons";
-// import CameraLoader from "./CameraLoader";
-// import CameraError from "./CameraError";
+import CameraButtons from "./CameraButtons";
+import CameraLoader from "./CameraLoader";
+import CameraError from "./CameraError";
 import { useCookies } from "react-cookie";
 
 // , setLoading: Dispatch<SetStateAction<boolean>>
 async function sendImage(base64: string, accessToken: string) {
+    console.log("tests");
     const { code, json } = await camera("ai/readimage", base64, accessToken);
     if (code === 200) {
         console.log(json);
     }
-    return;
 }
 
 export default function Camera() {
     const [cookies] = useCookies(["accessToken"]);
     const webcamRef = useRef<Webcam>(null);
     const [image, setImage] = useState<string | null>("");
-    // const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
     const [enableWebcam, setEnableWebcam] = useState<boolean>(true);
 
     const capture = useCallback(() => {
@@ -79,12 +79,11 @@ export default function Camera() {
                                 className="object-cover h-[600px] w-full"
                             />
                             <div className="flex flex-col gap-3 max-w-48 m-auto mt-5">
-                                <button className="rounded-xl bg-black text-white p-1" onClick={() => sendImage}>Ladda upp foto</button>
+                                <button className="rounded-xl bg-black text-white p-1" onClick={() => sendImage(image.replace("data:image/jpeg;base64,", ""), cookies.accessToken)}>Ladda upp foto</button>
                                 <button className="rounded-xl bg-white text-black border-2 border-black p-1" onClick={enableCamera}>Ta nytt foto</button>
                             </div>
                         </>}
                     </>)
-
             }
         </>
     );

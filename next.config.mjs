@@ -9,6 +9,9 @@ const nextConfig = {
         unoptimized: true,
     },
     optimizeFonts: false,
+    env: {
+        NODE_ENV: process.node.NODE_ENV
+    }
 };
 
 // module.exports = {

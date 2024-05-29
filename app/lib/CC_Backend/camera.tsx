@@ -16,7 +16,7 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
             body: JSON.stringify({ prompt: "banana", picture: base64 })
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
             json = await response.json();
             code = response.status;
             console.log('Status code is 200 and the fetching proccess has been successfully completed!', json)

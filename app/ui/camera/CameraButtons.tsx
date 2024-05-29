@@ -1,7 +1,22 @@
 "use client"
 
 import { CameraIcon } from "@heroicons/react/24/solid";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
+import CameraLoader from "./CameraLoader";
+
+export function useDebounce(seconds: number): ReactNode {
+    const [debouncedLoader, setDebouncedValue] = useState<ReactNode>(<CameraLoader />);
+
+    useEffect(() => {
+        setDebouncedValue(<CameraLoader />)
+        const handler = setTimeout(() => {
+        }, seconds * 1000);
+
+        return () => clearTimeout(handler)
+    }, [seconds]);
+
+    return debouncedLoader;
+}
 
 export default function CameraButtons({ enableWebcam, setEnableWebcam, setLoading }: { enableWebcam: boolean, setEnableWebcam: Dispatch<SetStateAction<boolean>>, setLoading: Dispatch<SetStateAction<boolean>> }) {
     let content;
