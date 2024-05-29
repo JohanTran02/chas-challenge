@@ -3,7 +3,6 @@
 // Mapbox 
 import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup, Layer, Source, MapboxStyle } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import style from "@/app/ui/style/map/mapbox.module.css";
 import { getUserLocation } from "@/app/lib/map/geolocation";
 import Geocoder from "./Geocoder";
 
@@ -92,16 +91,18 @@ const Mapbox = ({styleProp, geocontrol, navcontrol, interactive, latitude, longi
 						style={{ borderRadius: '10px' }}
 					/>}
 
-					{(markerInfo || (latitude || longitude))&&
+					{(markerInfo || (latitude || longitude)) &&
 						<>
-							<Marker
+
+							{
+								<Marker
 								// onClick = få upp popup
 								onClick={() => setPopup('open')}
 								latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}
 								longitude={markerInfo ? Number(markerInfo.longitude) : Number(longitude)}
 								color="red">
 								<Image src={"/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
-							</Marker>
+							</Marker>}
 
 							{(popup === "open" && !longitude) && <Popup
 								latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}

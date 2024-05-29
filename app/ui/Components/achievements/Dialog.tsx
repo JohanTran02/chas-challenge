@@ -13,9 +13,9 @@ const Dialog = ({ prop }: { prop: Stampinfo }) => {
   const dispatch = useDispatch();
 
   const goToMap = () => {
-    if (prop) dispatch(setCoords(prop));
+    dispatch(setCoords(prop));
     console.log('Pushin to map component ' + prop)
-    router.push('/dashboard/map');
+    router.push('/dashboard/map/');
   }
 
   const closeModal = (): void => {
@@ -70,7 +70,8 @@ const Dialog = ({ prop }: { prop: Stampinfo }) => {
             </article>
           </div>
 
-          <div className="relative h-[128px] w-[265px] mx-auto overflow-hidden">
+          <div className="relative h-[128px] w-[265px] mx-auto overflow-hidden"
+            onClick={goToMap}>
             <Mapbox 
               styleProp={styleProp} 
               longitude={longitude} 
