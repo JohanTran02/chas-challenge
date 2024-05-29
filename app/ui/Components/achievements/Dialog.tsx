@@ -19,6 +19,7 @@ const Dialog = ({ prop }: { prop: Stampinfo }) => {
   }
 
   const closeModal = (): void => {
+    document.body.style.overflowY = '';
     const information = document.getElementById(`missionsModal-${name}`) as HTMLDialogElement;
     information.close();
   }

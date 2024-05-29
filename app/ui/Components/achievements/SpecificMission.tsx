@@ -6,6 +6,7 @@ import Dialog from './Dialog';
 
 const SpecificMission = ({ prop }: { prop: Stampinfo }) => {
   const openModal = (): void => {
+    document.body.style.overflowY = 'hidden';
     const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
     information.showModal();
     return;

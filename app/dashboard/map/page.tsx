@@ -6,7 +6,7 @@ export default function Page() {
         background: '#f6f5ef',
         height: '100vh',
         width: '100vw',
-        inset: `-50px 0 0 0`,
+        inset: `-100 0 0 0`,
         zIndex: '2',
         cursor: 'auto',
     }

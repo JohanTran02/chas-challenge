@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  column-gap: 16px;
+  row-gap: 2rem;
+  margin-inline: "auto";
+}
+
+@media (width < 328px) {
+  .grid {
+    place-items: center;
+    row-gap: 1rem;
+  }
+}
