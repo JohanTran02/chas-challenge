@@ -5,9 +5,9 @@ import { usePathname } from 'next/navigation'
 
 const Header = () => {
   const currentPath = usePathname();
-  const logo = '/chas-challenge/Images/Logo.svg';
+  const logo = '/Images/Logo.svg';
   return (
-    <header className={`w-full h-24 ${currentPath === '/chas-challenge' || currentPath === "/camera" || currentPath === "/dashboard/map" && 'hidden'}`}>
+    <header className={`w-full h-24 ${(currentPath === '/chas-challenge' || currentPath === "/camera/" || currentPath === "/dashboard/map/") && 'hidden'}`}>
       <div className={`bg-neturalWhite w-full h-20 flex justify-between items-center px-4 relative z-20 ${currentPath === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
         <Image
           priority

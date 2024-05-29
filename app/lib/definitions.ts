@@ -64,3 +64,15 @@ export type StampCategories = {
   title: string;
   stamps: Stampinfo[];
 }
+
+// Mapbox style prop
+export type MapboxStyleProp = {
+  borderRadius: string; 
+  background: string;
+  translate: string;
+  zIndex: string;
+  height: string;
+  cursor: string;
+  width: string;
+  inset: string;
+}

@@ -16,10 +16,10 @@ async function getStamps(accessToken: string) {
 
   const [fruits, noName, noName2, furniture] = await Promise.all(response);
   const stamps: { img: string; category: any }[] = [
-    { img: '/chas-challenge/Images/hotdog-stamp.svg', category: fruits },
-    { img: '/chas-challenge/Images/banana-stamp.svg', category: noName },
-    { img: '/chas-challenge/Images/bear-stamp.svg', category: noName2 },
-    { img: '/chas-challenge/Images/flower-stamp.svg', category: furniture }
+    { img: '/Images/hotdog-stamp.svg', category: fruits },
+    { img: '/Images/banana-stamp.svg', category: noName },
+    { img: '/Images/bear-stamp.svg', category: noName2 },
+    { img: '/Images/flower-stamp.svg', category: furniture }
   ]
 
   return stamps;
@@ -47,12 +47,12 @@ const AllCategories = () => {
   // response.map(categoryId => stampCategories('getcategorywithstamps', 'categoryId', categoryId)); 
 
   return (
-    <div className='flex flex-wrap justify-around gap-8'>
-      {stamps.length > 1 && stamps.map((stamp) => {
+    <ul className='flex flex-wrap justify-around gap-8'>
+      {stamps.length > 0 && stamps.map((stamp, index) => {
         return (
           <>
             {(stamp.category !== undefined) &&
-              <div className="flex flex-col items-center font-bold h-56 w-36">
+              <li key={index} className="flex flex-col items-center font-bold h-56 w-36">
                 <p className="pb-1 text-lg self-start">
                   {stamp.category.title}
                 </p>
@@ -69,11 +69,11 @@ const AllCategories = () => {
                     </div>
                   </div>
                 </NextStep>
-              </div>}
+              </li>}
           </>
         )
       })}
-    </div>
+    </ul>
   )
 }
 

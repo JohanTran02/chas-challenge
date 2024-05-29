@@ -1,7 +1,7 @@
 'use client'
 
 // Mapbox 
-import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup, Layer, Source } from "react-map-gl";
+import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup, Layer, Source, MapboxStyle } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import style from "@/app/ui/style/map/mapbox.module.css";
 import { getUserLocation } from "@/app/lib/map/geolocation";
@@ -9,7 +9,7 @@ import Geocoder from "./Geocoder";
 
 // Hooks
 import { useEffect, useState } from "react";
-import { Stampinfo } from "@/app/lib/definitions";
+import { MapboxStyleProp, Stampinfo } from "@/app/lib/definitions";
 import Searchbar from "./Searchbar";
 
 // Image
@@ -19,71 +19,93 @@ import Image from 'next/image'
 import { RootState } from "@/app/lib/redux/store";
 import { useSelector } from "react-redux";
 
-const Mapbox = () => {
-	const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
 
+// TS definition for props
+type props = {
+	styleProp: Partial<MapboxStyleProp>; 
+	geocontrol: boolean, 
+	navcontrol: boolean; 
+	interactive: boolean; 
+	absolute: boolean;
+	latitude?: string; 
+	longitude?: string;
+	name?: string;
+	facts?: string;  
+}
+
+const Mapbox = ({styleProp, geocontrol, navcontrol, interactive, latitude, longitude, name, facts}: props) => {
 	const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+	const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
 
 	const [coords, setCoords] = useState<GeolocationCoordinates | undefined>();
 	const [popup, setPopup] = useState<'open' | 'close'>('close')
 
 	useEffect(() => {
-		getUserLocation("get", setCoords);
+		getUserLocation("watch", setCoords);
 	}, [setCoords])
 
 	const intitialView = (markerInfo: Stampinfo | null, coords: GeolocationCoordinates | undefined) => {
-		if (markerInfo) return { latitude: Number(markerInfo.latitude), longitude: Number(markerInfo.longitude), zoom: 11 }
+		if(latitude && longitude) return { latitude: Number(latitude), longitude: Number(longitude), zoom: 15 }
+		if (markerInfo) return { latitude: Number(markerInfo.latitude), longitude: Number(markerInfo.longitude), zoom: 15 }
 		return coords ? { latitude: coords.latitude, longitude: coords.longitude, zoom: 11 } :
 			{ latitude: 59.20, longitude: 18.03, zoom: 5 }
 	}
 	return (
-		<div className={style.mainStyle}>
+		<div /* className={style.mainStyle} */>
 			{
 				(coords !== undefined) &&
 				<ReactMapGL
 					mapboxAccessToken={mapboxToken}
 					mapStyle="mapbox://styles/mapbox/streets-v12"
-					style={
-						{
-							background: '#f6f5ef',
-							height: '100vh',
-							width: '100vw',
-							position: 'absolute',
-							inset: '-100px 0 0 0',
-							zIndex: '2',
-							cursor: 'auto',
-						}
-					}
+					style={{
+						background: styleProp.background,
+						height: styleProp.height,
+						width: styleProp.width,
+						position: 'absolute',
+						borderRadius: styleProp.borderRadius ? styleProp.borderRadius : undefined,
+						inset: styleProp.inset,
+						zIndex: styleProp.zIndex,
+						cursor: styleProp.cursor,
+						translate: styleProp.translate ? styleProp.translate : undefined,
+					}}
+					interactive={interactive}
 					initialViewState={intitialView(markerInfo, coords)}
 					maxZoom={20}
 					minZoom={0}
+					
 				>
 
-					<GeolocateControl
-						style={{ borderRadius: '50%' }}
-						position="bottom-right"
-						trackUserLocation
-					/>
+					{geocontrol && 
+						<>
+							<GeolocateControl
+								style={{ borderRadius: '50%' }}
+								position="bottom-right"
+								trackUserLocation
+							/>
+							<Geocoder />
+							<Searchbar />
+						</>
+						}
 
-					<NavigationControl
+					{navcontrol && <NavigationControl
 						position="bottom-right"
 						style={{ borderRadius: '10px' }}
-					/>
+					/>}
 
-					{markerInfo &&
+					{(markerInfo || (latitude || longitude))&&
 						<>
 							<Marker
 								// onClick = få upp popup
 								onClick={() => setPopup('open')}
-								latitude={Number(markerInfo.latitude)}
-								longitude={Number(markerInfo.longitude)}
+								latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}
+								longitude={markerInfo ? Number(markerInfo.longitude) : Number(longitude)}
 								color="red">
-								<Image src={"/chas-challenge/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
+								<Image src={"/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
 							</Marker>
 
-							{popup === "open" && <Popup
-								latitude={Number(markerInfo.latitude)}
-								longitude={Number(markerInfo.longitude)}
+							{(popup === "open" && !longitude) && <Popup
+								latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}
+								longitude={markerInfo ? Number(markerInfo.longitude) : Number(longitude)}
 								closeButton={true}
 								closeOnClick={false}
 								focusAfterOpen={true}
@@ -91,14 +113,12 @@ const Mapbox = () => {
 								onClose={() => setPopup('close')}
 								style={{ paddingBottom: '20px' }}>
 								<article className="py-4 px-5">
-									<h1 className="font-semibold text-xl pb-2">{markerInfo.name}</h1>
-									<p className="leading-relaxed">{markerInfo.facts}</p>
+									<h1 className="font-semibold text-xl pb-2">{markerInfo ? markerInfo.name : name}</h1>
+									<p className="leading-relaxed">{markerInfo ? markerInfo.facts : facts}</p>
 								</article>
 							</Popup>}
 						</>
 					}
-					<Geocoder />
-					<Searchbar />
 				</ReactMapGL>
 			}
 		</div>
