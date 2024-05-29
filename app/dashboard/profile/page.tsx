@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <>
       <div className="h-2/5 w-full pb-6 flex flex-col justify-end items-center ">
-        <Image width={20} height={20} className="w-28 h-28 object-cover" src="/profile-cat.svg" alt="" />
+        <Image width={20} height={20} className="w-28 h-28 object-cover" src="/Images/profile-dog.svg" alt="" />
         <h1 className="text-white text-base font-bold pt-6">Användarnamn</h1>
         <div className="flex">
           <h6 className="text-white text-base font-bold mr-2">23 stamps</h6>
@@ -69,17 +69,17 @@ export default function Page() {
       </div>
       {/* Stamp Modal */}
 
-      <div className={`bg-red-200 fixed bottom-0 w-full transition-all left-0 ${modalTransformStamps} duration-300 rounded-t-2xl`}>
+      <div className={`bg-neutral-100 fixed bottom-0 w-full transition-all left-0 ${modalTransformStamps} duration-300 rounded-t-2xl`}>
         <StampModalContent onClose={closeModalStamps} />
       </div>
 
       {/* Friends Modal */}
-      <div className={`bg-blue-500 fixed bottom-0 w-full left-0 ${modalTransformFriends} duration-300 rounded-t-2xl`}>
+      <div className={`bg-neutral-100 fixed bottom-0 w-full left-0 ${modalTransformFriends} duration-300 rounded-t-2xl`}>
         <FriendsModalContent onClose={closeModalFriends} openAddFriendsModal={openAddFriendsModal} />
       </div>
 
       {/* Add Friends Modal */}
-      <div className={`bg-green-200 fixed bottom-0 w-full left-0 ${modalTransformAddFriends} duration-300 rounded-t-2xl`}>
+      <div className={`bg-neutral-100 fixed bottom-0 w-full left-0 ${modalTransformAddFriends} duration-300 rounded-t-2xl`}>
         <AddFriendsModalContent onClose={closeModalAddFriends} />
       </div>
     </>
