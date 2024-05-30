@@ -54,8 +54,8 @@ const AllCategories = () => {
           <>
             {(stamp.category !== undefined) &&
               <li key={index} className="flex flex-col items-center font-bold h-56 max-w-[150px] min-w-[150px] category-card mx-auto">
-                <p className="pb-1 text-lg self-start">
-                  {stamp.category.title}
+                <p className="pb-1 text-base self-start">
+                  {stamp.category.title.toUpperCase()}
                 </p>
                 <NextStep category={stamp.category} title={stamp.category.title}>
                   <div className="w-5/6 mx-auto mt max-h-[192px]">

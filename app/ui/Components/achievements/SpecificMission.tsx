@@ -6,7 +6,7 @@ import Dialog from './Dialog';
 import { useState } from 'react';
 import Camera from '../../camera/Camera';
 
-const SpecificMission = ({ prop }: { prop: Stampinfo }) => {
+const SpecificMission = ({ prop }: { prop: Stampinfo; }) => {
   const [openCamera, setOpenCamera] = useState(false);
 
   const handleModal = () => {
@@ -27,6 +27,19 @@ const SpecificMission = ({ prop }: { prop: Stampinfo }) => {
     information.showModal();
   }
 
+  const rarityName = (): string => {
+    const rarityNames = [
+      {rarity: 'bronze', name: ['banana', 'stol', 'sten']}, 
+      {rarity: 'silver', name: ['korv']}, 
+      {rarity: 'guld', name: ['gravsten']}, 
+      {rarity: 'platinum', name: ['igelkott']}
+    ];  
+    
+    const index =  Math.floor(Math.random() * (3 - 0 + 1) + 0); 
+    return rarityNames[index].rarity; 
+  } 
+
+  const rarity = rarityName(); 
   return (
     <>
       {openCamera && <Camera handleModal={handleModal} />}
@@ -39,7 +52,7 @@ const SpecificMission = ({ prop }: { prop: Stampinfo }) => {
           <div className="flex mb-2">
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
               <Image src='/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>GULD</p>
+              <p className='text-[12px] text-darkGreen'>{rarity}</p>
             </div>
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
               <Image src='/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
@@ -51,9 +64,11 @@ const SpecificMission = ({ prop }: { prop: Stampinfo }) => {
             </div>
           </div>
         </div>
-        <div className="bg-green-800 size-24 rounded-full self-center" />
+        <div className="size-18 self-center" >
+          <Image src={`/Images/stamps/placeholder-${rarity}.svg`} height={100} width={100} alt='' className='' />
+        </div>
       </div>
-      <Dialog prop={prop} handleModal={handleModal} />
+      <Dialog prop={prop} rarity={rarity} handleModal={handleModal} />
     </>
   )
 }

@@ -26,6 +26,27 @@ export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithst
   
 }
 
+export const getCompletedStamps = async (accestoken: string) => {
+  try {
+    const response = await fetch( 'https://natureai.azurewebsites.net/stamps/getuserscollectedstamps',{
+      headers:{
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${accestoken}`
+      }
+    })
+
+    if(!response.ok) {
+      throw new Error(`${response.status}, ${response.statusText}`); 
+    }
+    const data = await response.json()
+    console.log(data); 
+    return await response.json(); 
+
+  } catch (error) {
+    console.log(error); 
+  }
+}
+
 // export const stampCategories = async(endpoint: 'getcategorywithstamps', query: 'categoryId', value: number) => {
 //   const cookie = await getCookie('Session'); 
   

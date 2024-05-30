@@ -4,9 +4,15 @@ import SpecificMission from "./SpecificMission";
 // Redux
 import { RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getCompletedStamps } from "@/app/lib/CC_Backend/stamps";
+import { useCookies } from "react-cookie";
+
+type CompletedStamps = {name: string; icon: null}[]
 
 const ClickedCategory = () => {
+  const [cookies] = useCookies(['accessToken']); 
+  const [completedStamps, setCompletedStamps] = useState<Partial<CompletedStamps>>({} as CompletedStamps); 
   const { stamps, clickedCategory } = useSelector((state: RootState) => state.stamp);
   const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
   const dispatch = useDispatch();
@@ -19,6 +25,15 @@ const ClickedCategory = () => {
 
     return () => { }
   }, [dispatch, markerInfo])
+
+  useEffect(() => {
+    const completedStamps = async (accessToken: string) => {
+      const response = await getCompletedStamps(accessToken);
+      setCompletedStamps(response); 
+    }
+
+    completedStamps(cookies.accessToken)
+  }, [])
 
   return (
     <div>
@@ -33,8 +48,10 @@ const ClickedCategory = () => {
       </div>
       <ul className="pt-6 space-y-4">
         {stamps !== null && stamps.map((stamp) => {
-          if (stamp.title === clickedCategory) {
-            return stamp.stamps.map((stamp, index) => <li key={index}><SpecificMission prop={stamp} /></li>)
+          if(stamp.title === clickedCategory) {
+            return stamp.stamps.map((stamp, index) =>{
+              return <li key={index}><SpecificMission prop={stamp} /></li>
+            } )
           }
           return null;
         })}

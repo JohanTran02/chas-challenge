@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import Mapbox from '../dashboard/map/Mapbox';
 
-const Dialog = ({ prop, handleModal }: { prop: Stampinfo, handleModal: () => void }) => {
+const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string | undefined;  handleModal: () => void }) => {
   const { name, facts, latitude, longitude } = prop;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ const Dialog = ({ prop, handleModal }: { prop: Stampinfo, handleModal: () => voi
           <div className="flex font-extrabold">
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
               <Image src='/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>GULD</p>
+              <p className='text-[12px] text-darkGreen'>{rarity}</p>
             </div>
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
               <Image src='/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
