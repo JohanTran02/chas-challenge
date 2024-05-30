@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <>
       <div className="h-2/5 w-full pb-6 flex flex-col justify-end items-center ">
-        <Image width={20} height={20} className="w-28 h-28 object-cover" src="/Images/profile-dog.svg" alt="" />
+        <Image width={20} height={20} className="w-28 h-28 object-cover border-4 border-neutral-100 border-radius-50 rounded-full" src="/Images/profile-dog.svg" alt="" />
         <h1 className="text-white text-base font-bold pt-6">Användarnamn</h1>
         <div className="flex">
           <h6 className="text-white text-base font-bold mr-2">23 stamps</h6>

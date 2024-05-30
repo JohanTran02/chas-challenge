@@ -21,7 +21,7 @@ export default function FriendsModalContent({ onClose, openAddFriendsModal }: { 
           </div>
         </div>
       </div>
-      <MagnifyingGlassIcon className='absolute bottom-8 right-1 w-8 cursor-pointer' onClick={openAddFriendsModal} />
+      <MagnifyingGlassIcon className='absolute bottom-8 right-6 w-8 cursor-pointer w-12 h-12' onClick={openAddFriendsModal} />
     </div>
 
   );
