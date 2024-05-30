@@ -17,7 +17,7 @@ export default function SideNav() {
   const path: string = usePathname();
   const links = [
     { name: 'Home', href: '/dashboard/', src: '/Images/home-Icon.svg', alt: 'Home icon' },
-    { name: 'Achievements', href: '/dashboard/achievements/', src: '/Images/achievements-Icon.svg', alt: 'Stamps Icon' },
+    { name: 'Achievements', href: '/dashboard/achievements/', src: '/Images/stamps.svg', alt: 'Stamps Icon' },
     { name: 'Map', href: '/dashboard/map/', src: '/Images/map-Icon.svg', alt: 'Map icon' },
     { name: 'Profile', href: '/dashboard/profile/', src: '/Images/profile-Icon.svg', alt: 'Profile icon' }
   ]

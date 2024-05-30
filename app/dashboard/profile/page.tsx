@@ -43,7 +43,8 @@ export default function Page() {
           <h6 className="text-white text-base font-bold">8 vänner</h6>
         </div>
       </div>
-      <div className="bg-white w-full px-4 pt-6 pb-16 rounded-t-3xl">
+      <div className="bg-white w-full px-4 pt-6 pb-16 rounded-t-3xl"
+        style={{height: 'calc(100vh - 310px)'}}>
         <div>
           <div className="flex justify-between">
             <h1 className="text-black text-base font-bold">DINA STAMPS</h1>

@@ -23,7 +23,7 @@ const Inputfield = ({type, property, required, error}: Input) => {
         <p className="mb-1">{label}</p>
         <input 
           type={type} 
-          className="h-16 w-full border-[1px] border-black px-2 rounded-lg" 
+          className="h-12 w-full border-[1px] border-black px-2 rounded-lg" 
           {...register(property, {
             required: required,
             pattern: pattern
