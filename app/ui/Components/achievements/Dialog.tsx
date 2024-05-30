@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
-const Dialog = ({ prop }: { prop: Stampinfo }) => {
+const Dialog = ({ prop, handleModal }: { prop: Stampinfo, handleModal: () => void }) => {
   const { name, facts } = prop;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -65,7 +65,7 @@ const Dialog = ({ prop }: { prop: Stampinfo }) => {
               <p className='text-[12px] line-clamp-6'>{facts}</p>
             </article>
           </div>
-          <div className="w-full h-[75px] flex justify-center items-end pb-[10px]" onClick={() => router.push("/camera/")}>
+          <div className="w-full h-[75px] flex justify-center items-end pb-[10px]" onClick={handleModal}>
             <button className='py-3 px-8 size-max bg-darkGreen text-[12px] text-white font-bold rounded-full'>Starta uppdrag
             </button>
           </div>

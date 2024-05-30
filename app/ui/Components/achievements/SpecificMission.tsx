@@ -3,16 +3,32 @@
 import { Stampinfo } from '@/app/lib/definitions';
 import Image from 'next/image'
 import Dialog from './Dialog';
+import { useState } from 'react';
+import Camera from '../../camera/Camera';
 
 const SpecificMission = ({ prop }: { prop: Stampinfo }) => {
+  const [openCamera, setOpenCamera] = useState(false);
+
+  const handleModal = () => {
+    if (!openCamera) {
+      const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
+      information.close();
+    }
+    else {
+      const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
+      information.showModal();
+    }
+    setOpenCamera((prev) => !prev)
+  }
+
   const openModal = (): void => {
     const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
     information.showModal();
-    return;
   }
 
   return (
     <>
+      {openCamera && <Camera handleModal={handleModal} />}
       <div
         onClick={openModal}
         className="bg-neturalWhite flex justify-between h-[125px] border-2 border-darkGreen p-2 rounded-xl">
@@ -36,7 +52,7 @@ const SpecificMission = ({ prop }: { prop: Stampinfo }) => {
         </div>
         <div className="bg-green-800 size-24 rounded-full self-center" />
       </div>
-      <Dialog prop={prop} />
+      <Dialog prop={prop} handleModal={handleModal} />
     </>
   )
 }

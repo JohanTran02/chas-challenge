@@ -64,3 +64,5 @@ export type StampCategories = {
   title: string;
   stamps: Stampinfo[];
 }
+
+export const isProdImage = process.env.NODE_ENV === "production" ? `/chas-challenge/Images/` : `/Images/`;
