@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import NextStep from './NextStep';
 import { getStampsInfo } from "@/app/lib/CC_Backend/stamps";
+import style from '@/app/ui/style/achievements/allcategories.module.css'
 import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 
@@ -16,10 +17,10 @@ async function getStamps(accessToken: string) {
 
   const [fruits, noName, noName2, furniture] = await Promise.all(response);
   const stamps: { img: string; category: any }[] = [
-    { img: '/chas-challenge/Images/hotdog-stamp.svg', category: fruits },
-    { img: '/chas-challenge/Images/banana-stamp.svg', category: noName },
-    { img: '/chas-challenge/Images/bear-stamp.svg', category: noName2 },
-    { img: '/chas-challenge/Images/flower-stamp.svg', category: furniture }
+    { img: '/Images/hotdog-stamp.svg', category: fruits },
+    { img: '/Images/banana-stamp.svg', category: noName },
+    { img: '/Images/bear-stamp.svg', category: noName2 },
+    { img: '/Images/bear-stamp.svg', category: furniture }
   ]
 
   return stamps;
@@ -47,18 +48,18 @@ const AllCategories = () => {
   // response.map(categoryId => stampCategories('getcategorywithstamps', 'categoryId', categoryId)); 
 
   return (
-    <div className='flex flex-wrap justify-around gap-8'>
-      {stamps.length > 1 && stamps.map((stamp) => {
+    <ul className={style.grid}>
+      {stamps.length > 0 && stamps.map((stamp, index) => {
         return (
           <>
             {(stamp.category !== undefined) &&
-              <div className="flex flex-col items-center font-bold h-56 w-36">
+              <li key={index} className="flex flex-col items-center font-bold h-56 max-w-[150px] min-w-[150px] category-card mx-auto">
                 <p className="pb-1 text-lg self-start">
                   {stamp.category.title}
                 </p>
                 <NextStep category={stamp.category} title={stamp.category.title}>
-                  <div className="w-5/6 mx-auto mt">
-                    <Image src={stamp.img} alt='' height={135} width={106} style={{ width: '100%', height: 'auto' }} />
+                  <div className="w-5/6 mx-auto mt max-h-[192px]">
+                    <Image src={stamp.img} alt='' height={100} width={100} style={{ width: '100%', height: 'auto'}} />
                   </div>
                   <div className="flex items-center gap-2 px-1">
                     <div className="bg-white h-2 w-full border-[1px] border-darkGreen rounded-xl">
@@ -69,11 +70,11 @@ const AllCategories = () => {
                     </div>
                   </div>
                 </NextStep>
-              </div>}
+              </li>}
           </>
         )
       })}
-    </div>
+    </ul>
   )
 }
 

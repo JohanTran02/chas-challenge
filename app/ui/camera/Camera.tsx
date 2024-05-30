@@ -62,7 +62,7 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
     return (
         <>
             <div className="bg-darkGreen fixed top-0 right-0 w-full h-full p-8 z-30">
-                <p className="text-white underline pb-2 cursor-pointer" onClick={handleModal}>Tillbaka</p>
+                <p className="text-white underline pb-4 cursor-pointer" onClick={handleModal}>Tillbaka</p>
                 <div className="relative grid h-[600px] gap-5 w-full">
                     <CameraLoader isLoading={isLoading} />
                     {(isLoading !== "idle" && isLoading !== "pending") && imageResultContent}
@@ -77,7 +77,7 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
                                     videoConstraints={videoConstraints}
                                     screenshotQuality={1}
                                 />
-                                <div className="mx-auto" onClick={capture}>
+                                <div className="mx-auto mt-4" onClick={capture}>
                                     <Image
                                         height={0}
                                         width={0}
@@ -130,7 +130,7 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
                                         <div className="flex flex-col gap-3 w-full max-w-48 mx-auto">
                                             <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={async () => {
                                                 setLoading("pending");
-                                                const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken);;
+                                                const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken);
                                                 setImageResponse(updatedImage)
                                                 setTimeout(() => {
                                                     imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");

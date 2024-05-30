@@ -65,4 +65,16 @@ export type StampCategories = {
   stamps: Stampinfo[];
 }
 
+// Mapbox style prop
+export type MapboxStyleProp = {
+  borderRadius: string;
+  background: string;
+  translate: string;
+  zIndex: string;
+  height: string;
+  cursor: string;
+  width: string;
+  inset: string;
+}
+
 export const isProdImage = process.env.NODE_ENV === "production" ? `/chas-challenge/Images/` : `/Images/`;
