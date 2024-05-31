@@ -1,11 +1,13 @@
 .signInLoader {
   margin: auto auto;
   width: 60px;
+  margin-top: 320px;
   aspect-ratio: 2;
-  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
-  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  --_g: no-repeat radial-gradient(circle closest-side, #d4d4cc 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 1000px 50%;
   background-size: calc(100% / 3) 50%;
   animation: l3 1s infinite linear;
+  position: relative; /* Ensure positioned context for the image */
 }
 
 @keyframes l3 {
@@ -21,4 +23,17 @@
   80% {
     background-position: 0% 50%, 50% 50%, 100% 100%;
   }
+}
+
+.loaderImage {
+  position: absolute; /* Position the image relative to the loader */
+  top: 50%;           /* Center the image vertically */
+  left: 50%;          /* Center the image horizontally */
+  transform: translate(-50%, -50%); /* Translate to center */
+
+  /* Add width and height to scale the SVG */
+  /* Example: Increase width to 100px */
+  /* Maintain aspect ratio */
+  width: 50%;
+  height: 50%;
 }
