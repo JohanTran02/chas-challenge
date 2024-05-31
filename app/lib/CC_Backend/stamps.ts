@@ -17,7 +17,7 @@ export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithst
       }
       
       const data = await response.json() as Stampinfo | StampCategories; 
-      // console.log(data);
+      console.log(data);
       return data
 
     } catch (error) {
@@ -40,7 +40,7 @@ export const getCompletedStamps = async (accestoken: string) => {
     }
     const data = await response.json()
     console.log(data); 
-    return await response.json(); 
+    return data; 
 
   } catch (error) {
     console.log(error); 

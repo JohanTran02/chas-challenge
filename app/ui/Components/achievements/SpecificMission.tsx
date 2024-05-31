@@ -6,7 +6,9 @@ import Dialog from './Dialog';
 import { useState } from 'react';
 import Camera from '../../camera/Camera';
 
-const SpecificMission = ({ prop }: { prop: Stampinfo; }) => {
+type Prop = { prop: Stampinfo; completedStamps?: (string | undefined)[]}
+
+const SpecificMission = ({ prop, completedStamps }: Prop) => {
   const [openCamera, setOpenCamera] = useState(false);
 
   const handleModal = () => {
@@ -60,7 +62,7 @@ const SpecificMission = ({ prop }: { prop: Stampinfo; }) => {
             </div>
             <div className="flex-1  flex flex-col items-center gap-1">
               <Image src='/Images/map-mission.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>PLATS</p>
+              <p className='text-[12px] text-darkGreen'>{prop.latitude ? 'PLATS' : 'OKÄND'}</p>
             </div>
           </div>
         </div>

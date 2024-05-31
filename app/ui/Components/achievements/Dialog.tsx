@@ -30,7 +30,7 @@ const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string
 
     <dialog
       id={`missionsModal-${name}`}
-      className="relative bg-white w-5/6 max-w-[500px] max-h-[600px] m-auto rounded-3xl border-darkGreen border-2 overflow-y-auto no-scrollbar"
+      className="relative w-5/6 max-w-[500px] max-h-[600px] m-auto rounded-3xl border-darkGreen border-2 overflow-y-auto no-scrollbar"
     >
       {/* <div className="sticky bg-white inset-0 translate-y-[15%] h-full rounded-3xl z-[-1]" /> */}
 
@@ -41,7 +41,7 @@ const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string
           className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
           <Image src='/Images/close-button.svg' width={35} height={35} className='size-4' alt='close-button' />
         </button>
-        <div className="w-full space-y-6">
+        <div className="bg-white w-full space-y-6">
           <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
           <h1 className='font-bold text-black text-center'>Uppdrag: {name}</h1>
           <div className="flex font-extrabold">
@@ -53,11 +53,11 @@ const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string
               <Image src='/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'>0,5</p>
             </div>
-            <div className="flex-1  flex flex-col items-center gap-1"
+            <div className="flex-1 flex flex-col items-center gap-1"
               onClick={goToMap}>
-              <Image src='/Images/map-mission.svg' height={35} width={35} alt='' className='size-4' />
+              <Image src={latitude ? '/Images/map-mission.svg' : '/Image/unkown.svg'} height={35} width={35} alt='' className='size-4' />
               <p className='text-[12px] text-darkGreen'>
-                PLATS
+                {latitude ? 'PLATS' : 'OKÄND'}
               </p>
             </div>
           </div>
