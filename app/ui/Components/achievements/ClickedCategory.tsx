@@ -3,7 +3,7 @@ import SpecificMission from "./SpecificMission";
 
 // Redux
 import { RootState } from "@/app/lib/redux/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCompletedStamps } from "@/app/lib/CC_Backend/stamps";
 import { useCookies } from "react-cookie";
@@ -14,26 +14,18 @@ const ClickedCategory = () => {
   const [cookies] = useCookies(['accessToken']); 
   const [completedStamps, setCompletedStamps] = useState<Partial<CompletedStamps>>({} as CompletedStamps); 
   const { stamps, clickedCategory } = useSelector((state: RootState) => state.stamp);
-  const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
-  const dispatch = useDispatch();
 
   // Resets the state to null if it has value so the marker is visible for all mini maps.
-  useEffect(() => {
-    if (markerInfo) {
-      dispatch({ type: 'map/setCoords', payload: null })
-    }
+  
 
-    return () => { }
-  }, [dispatch, markerInfo])
+  // useEffect(() => {
+  //   const completedStamps = async (accessToken: string) => {
+  //     const response = await getCompletedStamps(accessToken);
+  //     setCompletedStamps(response); 
+  //   }
 
-  useEffect(() => {
-    const completedStamps = async (accessToken: string) => {
-      const response = await getCompletedStamps(accessToken);
-      setCompletedStamps(response); 
-    }
-
-    completedStamps(cookies.accessToken)
-  }, [])
+  //   completedStamps(cookies.accessToken)
+  // }, [])
 
   return (
     <div>

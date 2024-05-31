@@ -6,6 +6,8 @@ import { getStampsInfo } from "@/app/lib/CC_Backend/stamps";
 import style from '@/app/ui/style/achievements/allcategories.module.css'
 import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
+import { RootState } from '@/app/lib/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 async function getStamps(accessToken: string) {
   const response = [
@@ -29,6 +31,9 @@ async function getStamps(accessToken: string) {
 const AllCategories = () => {
   const [cookies] = useCookies(["accessToken"]);
   const [stamps, setStamps] = useState<{ img: string; category: any }[]>({} as { img: string; category: any }[])
+  const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const updateStamps = async () => {
       const updatedStamps = await getStamps(cookies.accessToken);
@@ -36,6 +41,14 @@ const AllCategories = () => {
     }
     updateStamps();
   }, [cookies])
+
+  useEffect(() => {
+    if (markerInfo) {
+      dispatch({ type: 'map/setCoords', payload: null })
+    }
+
+    return () => { }
+  }, [])
   // AKTIVA queries
   // categoryId = 1 --> 'Fruits'
   // categoryId = 4 --> 'Furniture'
