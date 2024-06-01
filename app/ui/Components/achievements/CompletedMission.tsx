@@ -5,7 +5,7 @@ import StampStats from "./StampStats";
 
 export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo, closeModal: () => void }) {
     const { name, facts, latitude, longitude } = prop;
-    const styleProp = { height: '215px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };
+    const styleProp = { height: '290px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };
     return (<>
         <ImageHandler image={
             {
@@ -17,8 +17,8 @@ export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo
             }
         } />
         <div className="bg-white inset-0 rounded-3xl w-full h-full pb-6 px-4">
-            <div className="w-full mt-10 space-y-6">
-                <h1 className='font-bold text-darkGreen text-center text-3xl'>GRATTIS!</h1>
+            <div className="w-full pt-16 space-y-6">
+                <h1 className='font-bold text-darkGreen text-center text-3xl uppercase'>grattis!</h1>
                 <h2 className='font-bold text-black text-center'>Du har hittat en STAMPTITEL</h2>
                 <div className="flex font-extrabold">
                     <StampStats />
@@ -26,7 +26,7 @@ export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo
                 <div>
                     <ImageHandler image={
                         {
-                            src: "https://images.unsplash.com/photo-1624976172336-54d765427b6b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FyJTIwcG9ydHJhaXR8ZW58MHx8MHx8fDA%3D",
+                            src: "Pressbyran.svg",
                             height: 128,
                             width: 128,
                             alt: '',
@@ -37,7 +37,7 @@ export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo
                 </div>
 
                 <div >
-                    <h1 className="font-bold mb-3">Information</h1>
+                    <h1 className="font-bold mb-3 uppercase">Information</h1>
                     <article className='p-3 h-full text-sm border-2 border-darkGreen rounded-lg'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi aut voluptatum ipsam id iusto maiores, rem beatae illum ad laudantium!</article>
                 </div>
                 <div className="relative h-[128px] w-full overflow-hidden rounded-xl">

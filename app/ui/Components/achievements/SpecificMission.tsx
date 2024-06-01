@@ -2,32 +2,17 @@
 
 import { Stampinfo } from '@/app/lib/definitions';
 import Dialog from './Dialog';
-import { useState } from 'react';
-import Camera from '../../camera/Camera';
 import StampStats from './StampStats';
 import ImageHandler from '../../ImageHandler';
 
 type Prop = { prop: Stampinfo; completedStamps?: (string | undefined)[] }
 
 const SpecificMission = ({ prop, completedStamps }: Prop) => {
-  const [openCamera, setOpenCamera] = useState(false);
-
-  const handleModal = () => {
-    if (!openCamera) {
-      const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
-      information.close();
-    }
-    else {
-      const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
-      information.showModal();
-    }
-    setOpenCamera((prev) => !prev)
-  }
-
   const openModal = (): void => {
     document.body.style.overflowY = 'hidden';
     const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
     information.showModal();
+    information.scrollTo(0, 0);
   }
 
   const rarityName = (): string => {
@@ -45,7 +30,6 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
   const rarity = rarityName();
   return (
     <>
-      {openCamera && <Camera handleModal={handleModal} prop={prop} />}
       <div
         onClick={openModal}
         className="bg-neturalWhite flex justify-between h-[125px] border-2 border-darkGreen p-2 rounded-xl">
@@ -65,7 +49,7 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
           }} />
         </div>
       </div>
-      <Dialog prop={prop} rarity={rarity} handleModal={handleModal} />
+      <Dialog prop={prop} rarity={rarity} />
     </>
   )
 }

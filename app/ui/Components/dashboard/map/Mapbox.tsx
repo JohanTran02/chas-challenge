@@ -107,7 +107,7 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 										height: 0,
 										width: 0,
 										alt: "map pin",
-										className: "object-cover object-center size-4"
+										className: "object-cover object-center size-8"
 									}} />
 								</Marker>}
 

@@ -8,12 +8,12 @@ import { useEffect, useState } from "react";
 import { getCompletedStamps } from "@/app/lib/CC_Backend/stamps";
 import { useCookies } from "react-cookie";
 
-type CompletedStamps = {name: string; icon: null}[]
+type CompletedStamps = { name: string; icon: null }[]
 
 const ClickedCategory = () => {
-  const [cookies] = useCookies(['accessToken']); 
-  const [completedStamps, setCompletedStamps] = useState<Partial<CompletedStamps>>([] as CompletedStamps); 
-  const { stamps, clickedCategory } = useSelector((state: RootState) => state.stamp);  
+  const [cookies] = useCookies(['accessToken']);
+  const [completedStamps, setCompletedStamps] = useState<Partial<CompletedStamps>>([] as CompletedStamps);
+  const { stamps, clickedCategory } = useSelector((state: RootState) => state.stamp);
 
   // useEffect(() => {
   //   console.log(completedStamps)
@@ -38,18 +38,18 @@ const ClickedCategory = () => {
       </div>
       <ul className="pt-6 space-y-4">
         {stamps !== null && stamps.map((stamp) => {
-          return stamp.stamps.map((stamp, index) =>{
+          return stamp.stamps.map((stamp, index) => {
             const accomplishedStamps = completedStamps.length > 0 && completedStamps.map((mission) => {
-              if(mission?.name === stamp.name) 
-                return stamp.name; 
-            });  
-            
-            if(!accomplishedStamps)
+              if (mission?.name === stamp.name)
+                return stamp.name;
+            });
+
+            if (!accomplishedStamps)
               return <li key={index}><SpecificMission prop={stamp} /></li>
-            
-            if(accomplishedStamps)
+
+            if (accomplishedStamps)
               return <li key={index}><SpecificMission prop={stamp} completedStamps={accomplishedStamps} /></li>
-          } )
+          })
         })}
       </ul>
     </div>
