@@ -84,7 +84,8 @@ export type ImageType = {
   width: number,
   height: number,
   className?: string,
-  style?: CSSProperties | undefined
+  style?: CSSProperties | undefined,
+  priority?: boolean
 }
 
 export const isProdImage = process.env.NODE_ENV === "production" ? `/chas-challenge/Images/` : `/Images/`;

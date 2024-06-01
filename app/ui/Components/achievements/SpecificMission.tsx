@@ -1,10 +1,11 @@
 'use client'
 
 import { Stampinfo } from '@/app/lib/definitions';
-import Image from 'next/image'
 import Dialog from './Dialog';
 import { useState } from 'react';
 import Camera from '../../camera/Camera';
+import StampStats from './StampStats';
+import ImageHandler from '../../ImageHandler';
 
 type Prop = { prop: Stampinfo; completedStamps?: (string | undefined)[] }
 
@@ -52,22 +53,16 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
           <p className="text-sm">Uppdrag</p>
           <p className="text-darkGreen text-xl">{prop.name}</p>
           <div className="flex mb-2">
-            <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>{rarity}</p>
-            </div>
-            <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>0,5</p>
-            </div>
-            <div className="flex-1  flex flex-col items-center gap-1">
-              <Image src='/Images/map-mission.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>{prop.latitude ? 'PLATS' : 'OKÄND'}</p>
-            </div>
+            <StampStats prop={prop} />
           </div>
         </div>
         <div className="size-18 self-center" >
-          <Image src={`/Images/stamps/placeholder-${rarity}.svg`} height={100} width={100} alt='' className='' />
+          <ImageHandler image={{
+            src: `placeholder-${rarity}.svg`,
+            height: 100,
+            width: 100,
+            alt: "",
+          }} />
         </div>
       </div>
       <Dialog prop={prop} rarity={rarity} handleModal={handleModal} />

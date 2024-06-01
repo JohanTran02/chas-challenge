@@ -13,7 +13,7 @@ import { MapboxStyleProp, Stampinfo } from "@/app/lib/definitions";
 import Searchbar from "./Searchbar";
 
 // Image
-import Image from 'next/image'
+import ImageHandler from "@/app/ui/ImageHandler";
 
 // Redux
 import { RootState } from "@/app/lib/redux/store";
@@ -102,7 +102,13 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 									latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}
 									longitude={markerInfo ? Number(markerInfo.longitude) : Number(longitude)}
 									color="red">
-									<Image src={"/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
+									<ImageHandler image={{
+										src: "map-pin.svg",
+										height: 0,
+										width: 0,
+										alt: "map pin",
+										className: "object-cover object-center size-4"
+									}} />
 								</Marker>}
 
 							{(popup === "open" && !longitude) && <Popup

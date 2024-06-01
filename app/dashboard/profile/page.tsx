@@ -14,9 +14,9 @@ export default function Page() {
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
   const images = [
-    { src: "flower-stamp.svg" },
-    { src: "banana-stamp.svg" },
-    { src: "bear-stamp.svg" },
+    { src: "hotdog-stamp.svg" },
+    { src: "hotdog-stamp.svg" },
+    { src: "hotdog-stamp.svg" },
     { src: "hotdog-stamp.svg" },
   ];
 

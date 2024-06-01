@@ -1,4 +1,4 @@
-import Image from "next/image"
+import ImageHandler from "../../ImageHandler"
 
 type Friend = {
     name: string,
@@ -12,22 +12,22 @@ export default function FriendContainer({ showStamps }: { showStamps: boolean })
     const friends: Friend[] = [
         {
             name: "johan",
-            src: "/chas-challenge/Images/profile-dog.svg",
+            src: "profile-dog.svg",
             stampsAmount: 3
         },
         {
             name: "gabriel",
-            src: "/chas-challenge/Images/profile-beaver.svg",
+            src: "profile-beaver.svg",
             stampsAmount: 2
         },
         {
             name: "bengt",
-            src: "/chas-challenge/Images/profile-dog2.svg",
+            src: "profile-dog2.svg",
             stampsAmount: 36
         },
         {
             name: "poppy",
-            src: "/chas-challenge/Images/profile-cat.svg",
+            src: "profile-cat.svg",
             stampsAmount: 31
         }
     ]
@@ -38,7 +38,13 @@ export default function FriendContainer({ showStamps }: { showStamps: boolean })
                 friends.map((friend, index) => {
                     return (
                         <div className='flex items-center gap-2' key={index}>
-                            <Image width={20} height={20} className="w-20 h-20 object-cover" src={friend.src} alt="" />
+                            <ImageHandler image={{
+                                src: friend.src,
+                                alt: "",
+                                width: 0,
+                                height: 0,
+                                className: "w-20 h-20 object-cover",
+                            }} />
                             <div>
                                 <h1>{friend.name}</h1>
                                 {showStamps && <h2>{friend.stampsAmount} Stamps</h2>}

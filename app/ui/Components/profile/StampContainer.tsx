@@ -1,4 +1,4 @@
-import Image from "next/image"
+import ImageHandler from "../../ImageHandler";
 
 type Items = {
     category: string,
@@ -18,7 +18,14 @@ export default function StampContainer({ stamp }: { stamp: Items }) {
     const stampimages = stamps.map((images, index) => {
         return (
             <div className='flex items-center gap-2' key={`${images.name + index}`}>
-                <Image width={20} height={20} className="w-20 h-20 object-cover" src={images.src} alt={images.name} />
+                <ImageHandler image={{
+                    src: images.src,
+                    alt: images.name,
+                    width: 0,
+                    height: 0,
+                    className: "w-20 h-20 object-cover",
+
+                }} />
                 <div>
                     <h1>{images.name}</h1>
                     <h1>{images.description}</h1>
