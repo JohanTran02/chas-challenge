@@ -1,25 +1,19 @@
 'use client';
 
-// Icons
-// import HomeIcon from '/chas-challenge/home-icon.svg',
-// import MapIcon from '/chas-challenge/map-icon.svg',
-// import StampsIcon from '/chas-challenge/achievements-icon.svg',
-// import ProfileIcon from '/chas-challenge/profile-icon.svg',
-
 // Components
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
+import ImageHandler from '../../ImageHandler';
 
 export default function SideNav() {
 
   const path: string = usePathname();
   const links = [
-    { name: 'Home', href: '/dashboard/', src: '/Images/home-Icon.svg', alt: 'Home icon' },
-    { name: 'Achievements', href: '/dashboard/achievements/', src: '/Images/stamps.svg', alt: 'Stamps Icon' },
-    { name: 'Map', href: '/dashboard/map/', src: '/Images/map-Icon.svg', alt: 'Map icon' },
-    { name: 'Profile', href: '/dashboard/profile/', src: '/Images/profile-Icon.svg', alt: 'Profile icon' }
+    { name: 'Home', href: '/dashboard/', src: 'home-Icon.svg', alt: 'Home icon' },
+    { name: 'Achievements', href: '/dashboard/achievements/', src: 'stamps.svg', alt: 'Stamps Icon' },
+    { name: 'Map', href: '/dashboard/map/', src: 'map-Icon.svg', alt: 'Map icon' },
+    { name: 'Profile', href: '/dashboard/profile/', src: 'profile-Icon.svg', alt: 'Profile icon' }
   ]
 
   useEffect(() => {
@@ -45,14 +39,13 @@ export default function SideNav() {
               className={`flex-grow h-10 rounded-md grid place-items-center`}
             >
               <li>
-                <Image
-                  rel='icon'
-                  height={32}
-                  width={32}
-                  src={link.src} alt={link.alt}
-                  style={{ width: '32px', height: '32px' }}
-                  className={`object-cover object-center ${path !== link.href && 'brightness-[250%] grayscale-[60%]'}`}
-                />
+                <ImageHandler image={{
+                  height: 0,
+                  width: 0,
+                  src: link.src,
+                  alt: link.alt,
+                  className: `size-8 object-cover object-center ${path !== link.href && 'brightness-[250%] grayscale-[60%]'}`
+                }} />
               </li>
             </Link>
           )

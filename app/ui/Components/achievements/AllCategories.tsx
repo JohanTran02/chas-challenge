@@ -1,6 +1,6 @@
 "use client"
 
-import Image from 'next/image';
+import ImageHandler from '../../ImageHandler';
 import NextStep from './NextStep';
 import { getStampsInfo } from "@/app/lib/CC_Backend/stamps";
 import style from '@/app/ui/style/achievements/allcategories.module.css'
@@ -11,20 +11,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import SkeletonLoaderCategory from '../skeleton loaders/SkeletonLoader';
 
 async function getStamps(accessToken: string) {
-  const promise = Promise.resolve(3); 
+  const promise = Promise.resolve(3);
   const response = [
     await getStampsInfo('getcategorywithstamps', 'categoryId', 1, accessToken),
-      promise,
-      promise,
-      promise,
+    promise,
+    promise,
+    promise,
   ];
 
   const [fruits, noName, noName2, furniture] = await Promise.all(response);
   const stamps: { img: string; category: any }[] = [
-    { img: '/Images/kategori.svg', category: fruits },
-    { img: '/Images/kategori-placeholder1.svg', category: noName },
-    { img: '/Images/kategori-placeholder2.svg', category: noName2 },
-    { img: '/Images/kategori-placeholder3.svg', category: furniture }
+    { img: 'kategori.svg', category: fruits },
+    { img: 'kategori-placeholder1.svg', category: noName },
+    { img: 'kategori-placeholder2.svg', category: noName2 },
+    { img: 'kategori-placeholder3.svg', category: furniture }
   ]
 
   return stamps;
@@ -50,7 +50,7 @@ const AllCategories = () => {
     }
 
     return () => { }
-  }, [])
+  }, [dispatch, markerInfo])
   // AKTIVA queries
   // categoryId = 1 --> 'Fruits'
   // categoryId = 4 --> 'Furniture'
@@ -65,7 +65,7 @@ const AllCategories = () => {
   return (
     <ul className={style.grid}>
       {stamps.length > 0 ? stamps.map((stamp, index) => {
-        const redirect = index < 1 ? true : false; 
+        const redirect = index < 1 ? true : false;
         return (
           <>
             {(stamp.category !== undefined) &&
@@ -75,7 +75,13 @@ const AllCategories = () => {
                 </p>
                 <NextStep redirect={redirect} category={stamp.category} title={stamp.category.title}>
                   <div className="flex-[3] grid place-items-center w-5/6 mx-auto mt max-h-[192px]">
-                    <Image src={stamp.img} alt='' height={100} width={100} style={{ width: index < 1 ? '100%' : '80%', height: 'auto'}} />
+                    <ImageHandler image={{
+                      src: stamp.img,
+                      height: 100,
+                      width: 100,
+                      alt: "",
+                      style: { width: index < 1 ? '100%' : '80%', height: 'auto' }
+                    }} />
                   </div>
                   {/* <div className={`flex-1 flex items-center gap-2 px-1 ${index > 0 && 'opacity-0'}`}>
                     <div className="bg-white h-2 w-full border-[1px] border-darkGreen rounded-xl">
@@ -87,7 +93,7 @@ const AllCategories = () => {
                   </div> */}
                 </NextStep>
               </li>
-              }
+            }
           </>
         )
       }) : <SkeletonLoaderCategory />}

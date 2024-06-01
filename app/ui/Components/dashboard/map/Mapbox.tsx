@@ -13,7 +13,7 @@ import { MapboxStyleProp, Stampinfo } from "@/app/lib/definitions";
 import Searchbar from "./Searchbar";
 
 // Image
-import Image from 'next/image'
+import ImageHandler from "@/app/ui/ImageHandler";
 
 // Redux
 import { RootState } from "@/app/lib/redux/store";
@@ -22,18 +22,18 @@ import { useSelector } from "react-redux";
 
 // TS definition for props
 type props = {
-	styleProp: Partial<MapboxStyleProp>; 
-	geocontrol: boolean, 
-	navcontrol: boolean; 
-	interactive: boolean; 
-	absolute: boolean;
-	latitude?: string; 
+	styleProp: Partial<MapboxStyleProp>;
+	geocontrol: boolean,
+	navcontrol: boolean;
+	interactive: boolean;
+	latitude?: string;
 	longitude?: string;
 	name?: string;
-	facts?: string;  
+	facts?: string;
+	trackResize: boolean
 }
 
-const Mapbox = ({styleProp, geocontrol, navcontrol, interactive, latitude, longitude, name, facts}: props) => {
+const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, longitude, name, facts, trackResize }: props) => {
 	const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 	const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
 
@@ -45,13 +45,13 @@ const Mapbox = ({styleProp, geocontrol, navcontrol, interactive, latitude, longi
 	}, [setCoords])
 
 	const intitialView = (markerInfo: Stampinfo | null, coords: GeolocationCoordinates | undefined) => {
-		if(latitude && longitude) return { latitude: Number(latitude), longitude: Number(longitude), zoom: 15 }
+		if (latitude && longitude) return { latitude: Number(latitude), longitude: Number(longitude), zoom: 15 }
 		if (markerInfo) return { latitude: Number(markerInfo.latitude), longitude: Number(markerInfo.longitude), zoom: 15 }
 		return coords ? { latitude: coords.latitude, longitude: coords.longitude, zoom: 11 } :
 			{ latitude: 59.20, longitude: 18.03, zoom: 5 }
 	}
 	return (
-		<div className={style.mainStyle}>
+		<div /* className={style.mainStyle} */>
 			{
 				(coords !== undefined) &&
 				<ReactMapGL
@@ -72,10 +72,10 @@ const Mapbox = ({styleProp, geocontrol, navcontrol, interactive, latitude, longi
 					initialViewState={intitialView(markerInfo, coords)}
 					maxZoom={20}
 					minZoom={0}
-					
+					trackResize={trackResize ? trackResize : undefined}
 				>
 
-					{geocontrol && 
+					{geocontrol &&
 						<>
 							<GeolocateControl
 								style={{ borderRadius: '50%' }}
@@ -85,7 +85,7 @@ const Mapbox = ({styleProp, geocontrol, navcontrol, interactive, latitude, longi
 							<Geocoder />
 							<Searchbar />
 						</>
-						}
+					}
 
 					{navcontrol && <NavigationControl
 						position="bottom-right"
@@ -97,13 +97,19 @@ const Mapbox = ({styleProp, geocontrol, navcontrol, interactive, latitude, longi
 
 							{
 								<Marker
-								// onClick = få upp popup
-								onClick={() => setPopup('open')}
-								latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}
-								longitude={markerInfo ? Number(markerInfo.longitude) : Number(longitude)}
-								color="red">
-								<Image src={"/Images/map-pin.svg"} height={32} width={32} alt="map pin" />
-							</Marker>}
+									// onClick = få upp popup
+									onClick={() => setPopup('open')}
+									latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}
+									longitude={markerInfo ? Number(markerInfo.longitude) : Number(longitude)}
+									color="red">
+									<ImageHandler image={{
+										src: "map-pin.svg",
+										height: 0,
+										width: 0,
+										alt: "map pin",
+										className: "object-cover object-center size-8"
+									}} />
+								</Marker>}
 
 							{(popup === "open" && !longitude) && <Popup
 								latitude={markerInfo ? Number(markerInfo.latitude) : Number(latitude)}

@@ -1,54 +1,39 @@
 'use client'
 
 import { Stampinfo } from '@/app/lib/definitions';
-import Image from 'next/image'
 import Dialog from './Dialog';
-import { useState } from 'react';
-import Camera from '../../camera/Camera';
+import StampStats from './StampStats';
+import ImageHandler from '../../ImageHandler';
 
-type Prop = { prop: Stampinfo; completedStamps?: string | undefined}
+type Prop = { prop: Stampinfo; completedStamps?: string | undefined }
 
 const SpecificMission = ({ prop, completedStamps }: Prop) => {
-  const [openCamera, setOpenCamera] = useState(false);
-
-  const handleModal = () => {
-    if (!openCamera) {
-      const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
-      information.close();
-    }
-    else {
-      const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
-      information.showModal();
-    }
-    setOpenCamera((prev) => !prev)
-  }
-
   const openModal = (): void => {
     document.body.style.overflowY = 'hidden';
     const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
     information.showModal();
+    information.scrollTo(0, 0);
   }
 
   const stampState = () => {
-    if(completedStamps){
+    if (completedStamps) {
       const completedStamp: string = completedStamps;
       // console.log(completedStamp)
-      return `/Images/${completedStamp}.svg`
+      return `${completedStamp}.svg`
     }
 
     // console.log(prop.name)
-    if(prop.name){
+    if (prop.name) {
       const name = prop.name;
-      if(name === 'Orange' || name === 'Apple') return `/Images/stamps/placeholder-bronze.svg`
-      if(name === 'Banana') return `/Images/stamps/placeholder-silver.svg`
-      if(name === 'Pear' || name === 'Clementine') return `/Images/stamps/placeholder-guld.svg` 
+      if (name === 'Orange' || name === 'Apple') return `placeholder-bronze.svg`
+      if (name === 'Banana') return `placeholder-silver.svg`
+      if (name === 'Pear' || name === 'Clementine') return `placeholder-guld.svg`
     }
-  } 
+  }
 
-  const rarity = stampState() as string; 
+  const rarity = stampState() as string;
   return (
     <>
-      {openCamera && <Camera handleModal={handleModal} />}
       <div
         onClick={openModal}
         className="bg-neturalWhite flex justify-between h-[135px] border-2 border-darkGreen py-2 px-3 rounded-xl">
@@ -56,25 +41,19 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
           <p className="text-sm">Uppdrag</p>
           <p className="text-darkGreen text-xl uppercase">{prop.name}</p>
           <div className="flex mb-2">
-            <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>{prop.rarity}</p>
-            </div>
-            <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>0,5</p>
-            </div>
-            <div className="flex-1  flex flex-col items-center gap-1">
-              <Image src='/Images/map-mission.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>{prop.latitude ? 'PLATS' : 'OKÄND'}</p>
-            </div>
+            <StampStats prop={prop} />
           </div>
         </div>
         <div className="size-18 self-center" >
-          <Image src={rarity} height={100} width={100} alt='' className='' />
+          <ImageHandler image={{
+            src: `${rarity}`,
+            height: 100,
+            width: 100,
+            alt: "",
+          }} />
         </div>
       </div>
-      <Dialog prop={prop} handleModal={handleModal} />
+      <Dialog prop={prop} />
     </>
   )
 }

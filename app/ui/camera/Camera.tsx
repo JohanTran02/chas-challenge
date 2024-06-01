@@ -1,37 +1,58 @@
 "use client"
 
-import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { camera } from "@/app/lib/CC_Backend/camera";
-import Image from "next/image";
 import CameraError from "./CameraError";
 import { useCookies } from "react-cookie";
 import CameraLoader from "./CameraLoader";
-import { isProdImage } from "@/app/lib/definitions";
-import CompletedMission from "../Components/achievements/CompletedMission";
+import { Stampinfo } from "@/app/lib/definitions";
+import ImageHandler from "../ImageHandler";
 
 const videoConstraints: MediaTrackConstraints = {
     facingMode: "environment",
     frameRate: 30
 };
 
-function useImageContent({ isLoading, handleModal }: { isLoading: "idle" | "pending" | "finished" | "rejected", handleModal: () => void }) {
+function useImageContent({ isLoading, prop, setTransition, setUnlocked, setUnlockedImg, image }: {
+    isLoading: "idle" | "pending" | "finished" | "rejected",
+    prop: Stampinfo,
+    image: string | null,
+    setTransition: Dispatch<SetStateAction<string>>,
+    setUnlockedImg: Dispatch<SetStateAction<string | null>>,
+    setUnlocked: Dispatch<SetStateAction<boolean>>
+}) {
     const [imageResultContent, setImageResultContent] = useState<ReactNode>(null)
 
     useEffect(() => {
+        if (!image) return;
+
         if (isLoading.includes("finished")) {
-            setImageResultContent(<CompletedMission />)
+            setTransition("opacity-0 pointer-events-none")
+            setUnlocked(true);
+            setUnlockedImg(image);
         }
         else if (isLoading.includes("rejected")) {
             setImageResultContent(<CameraError isLoading={isLoading} addOpacity />)
+            setUnlocked(false);
         }
-        else setImageResultContent(null)
-    }, [isLoading, setImageResultContent, handleModal])
+        else {
+            setImageResultContent(null)
+            setUnlocked(false);
+        }
+
+    }, [isLoading, setImageResultContent, setTransition, prop, setUnlocked, image, setUnlockedImg])
 
     return imageResultContent;
 }
 
-export default function Camera({ handleModal }: { handleModal: () => void }) {
+export default function Camera({ prop, setTransition, setUnlocked, handleCamera, setUnlockedImg }: {
+    prop: Stampinfo,
+    setTransition: Dispatch<SetStateAction<string>>,
+    setUnlocked: Dispatch<SetStateAction<boolean>>,
+    setUnlockedImg: Dispatch<SetStateAction<string | null>>,
+    handleCamera: () => void
+}) {
     const [isLoading, setLoading] = useState<"idle" | "pending" | "finished" | "rejected">("idle");
     const [cookies] = useCookies(["accessToken"]);
     const webcamRef = useRef<Webcam>(null);
@@ -44,7 +65,7 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
         code: number | undefined;
         json: any;
     });
-    const imageResultContent = useImageContent({ isLoading, handleModal });
+    const imageResultContent = useImageContent({ isLoading, setTransition, setUnlocked, setUnlockedImg, prop, image });
 
     const capture = useCallback(() => {
         if (webcamRef.current) {
@@ -61,8 +82,14 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
 
     return (
         <>
-            <div className="bg-darkGreen fixed top-0 right-0 w-full h-full p-8 z-30">
-                <p className="text-white underline pb-4 cursor-pointer" onClick={handleModal}>Tillbaka</p>
+            <div className="bg-darkGreen w-full h-full p-8">
+                <p className="text-white underline pb-4" ><span className="cursor-pointer" onClick={() => {
+                    handleCamera()
+                    setTimeout(() => {
+                        setLoading("idle");
+                        setEnableWebcam(true);
+                    }, 500);
+                }}>Tillbaka</span></p>
                 <div className="relative grid h-[600px] gap-5 w-full">
                     <CameraLoader isLoading={isLoading} />
                     {(isLoading !== "idle" && isLoading !== "pending") && imageResultContent}
@@ -78,36 +105,41 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
                                     screenshotQuality={1}
                                 />
                                 <div className="mx-auto mt-4" onClick={capture}>
-                                    <Image
-                                        height={0}
-                                        width={0}
-                                        src={"/Images/Kameraknapp.svg"}
-                                        alt="Camera button"
-                                        className="object-cover w-20 h-20"
+                                    <ImageHandler image={{
+                                        height: 0,
+                                        width: 0,
+                                        src: "Kameraknapp.svg",
+                                        alt: "Camera button",
+                                        className: "object-cover w-20 h-20",
+                                    }}
                                     />
                                 </div>
                             </>)
                             : (<>
-                                {/* {
+                                {
                                     image ?
                                         <>
-                                            <Image
-                                                src={image}
-                                                alt="Scan"
-                                                width={0}
-                                                height={0}
-                                                className="object-cover h-[600px] w-full rounded-md"
-                                            />
-                                            <div className="flex flex-col gap-3 w-full max-w-48 mx-auto">
-                                                <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={async () => {
-                                                    setLoading("pending");
-                                                    const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken);;
-                                                    setImageResponse(updatedImage)
-                                                    setTimeout(() => {
-                                                        imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
-                                                    }, 2 * 1000);
-                                                }}>Ladda upp foto</button>
-                                                <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={() => enableCamera()}>Ta nytt foto</button>
+                                            <ImageHandler image={{
+                                                src: "Pressbyran.svg",
+                                                alt: "Scan",
+                                                width: 0,
+                                                height: 0,
+                                                className: "object-cover h-[600px] w-full rounded-md",
+                                            }} />
+                                            <div className="flex flex-col gap-3 w-full max-w-48 mx-auto mt-4">
+                                                {
+                                                    (isLoading.includes("idle")) &&
+                                                    <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg" onClick={async () => {
+                                                        setLoading("pending");
+                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken);
+                                                        setImageResponse(updatedImage)
+                                                        setTimeout(() => {
+                                                            imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
+                                                            setLoading("finished");
+                                                        }, 2 * 1000);
+                                                    }}>Ladda upp foto</button>
+                                                }
+                                                <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>
                                             </div >
                                         </> : <>
                                             <div className="relative grid h-[600px] gap-5 w-full bg-white rounded-md">
@@ -116,34 +148,11 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
                                             <div className="flex flex-col gap-3 w-full max-w-48 mx-auto">
                                                 <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={() => enableCamera()}>Ta nytt foto</button>
                                             </div>
-                                        </>} */}
-                                {
-
-                                    <>
-                                        <Image
-                                            src={"https://u-img.com/detail_images/821x646/lamborghini-speed-821-2.jpg"}
-                                            alt="Scan"
-                                            width={0}
-                                            height={0}
-                                            className="object-cover h-[600px] w-full rounded-md"
-                                        />
-                                        <div className="flex flex-col gap-3 w-full max-w-48 mx-auto">
-                                            <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={async () => {
-                                                setLoading("pending");
-                                                const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken);
-                                                setImageResponse(updatedImage)
-                                                setTimeout(() => {
-                                                    imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
-                                                }, 2 * 1000);
-                                            }}>Ladda upp foto</button>
-                                            <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={() => enableCamera()}>Ta nytt foto</button>
-                                        </div >
-                                    </>}
-
+                                        </>
+                                }
                             </>)
                     }
                 </div>
-
             </div >
         </>
     );
