@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import Mapbox from '../dashboard/map/Mapbox';
+import CompletedMission from './CompletedMission';
 
 const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string | undefined; handleModal: () => void }) => {
   const { name, facts, latitude, longitude } = prop;
@@ -34,66 +35,73 @@ const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string
     >
       {/* <div className="sticky bg-white inset-0 translate-y-[15%] h-full rounded-3xl z-[-1]" /> */}
 
-      <div className="flex flex-col w-full h-full px-4 py-6">
-        <button
-          aria-label='Close button'
-          onClick={closeModal}
-          className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
-          <Image src='/Images/close-button.svg' width={35} height={35} className='size-4' alt='close-button' />
-        </button>
-        <div className="bg-white w-full space-y-6">
-          <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
-          <h1 className='font-bold text-black text-center'>Uppdrag: {name}</h1>
-          <div className="flex font-extrabold">
-            <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>{rarity}</p>
-            </div>
-            <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
-              <Image src='/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>0,5</p>
-            </div>
-            <div className="flex-1 flex flex-col items-center gap-1"
-              onClick={goToMap}>
-              <Image src={latitude ? '/Images/map-mission.svg' : '/Image/unkown.svg'} height={35} width={35} alt='' className='size-4' />
-              <p className='text-[12px] text-darkGreen'>
-                {latitude ? 'PLATS' : 'OKÄND'}
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-3 h-[140px]">
-            <div className="w-32 border-2 border-black p-2 h-full line-clamp-4 text-[13px]">
-              Ai-genererad bild på objektet man ska fota som hjälp
-            </div>
-            <article className='flex-1 space-y-2 h-full '>
-              <h2 className='font-bold'>Beskrivning:</h2>
-              <p className='text-[12px] line-clamp-6'>{facts}</p>
-            </article>
-          </div>
+      
+      
+      <CompletedMission prop={prop} closeModal={closeModal}/> 
+      
+      
+      {
+      // <div className="flex flex-col w-full h-full px-4 py-6">
+      //   <button
+      //     aria-label='Close button'
+      //     onClick={closeModal}
+      //     className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
+      //     <Image src='/Images/close-button.svg' width={35} height={35} className='size-4' alt='close-button' />
+      //   </button>
+      //   <div className="bg-white w-full space-y-6">
+      //     <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
+      //     <h1 className='font-bold text-black text-center'>Uppdrag: {name}</h1>
+      //     <div className="flex font-extrabold">
+      //       <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
+      //         <Image src='/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
+      //         <p className='text-[12px] text-darkGreen'>{rarity}</p>
+      //       </div>
+      //       <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
+      //         <Image src='/Images/Percentage.svg' height={35} width={35} alt='' className='size-4' />
+      //         <p className='text-[12px] text-darkGreen'>0,5</p>
+      //       </div>
+      //       <div className="flex-1 flex flex-col items-center gap-1"
+      //         onClick={goToMap}>
+      //         <Image src={latitude ? '/Images/map-mission.svg' : '/Image/unkown.svg'} height={35} width={35} alt='' className='size-4' />
+      //         <p className='text-[12px] text-darkGreen'>
+      //           {latitude ? 'PLATS' : 'OKÄND'}
+      //         </p>
+      //       </div>
+      //     </div>
+      //     <div className="flex gap-3 h-[140px]">
+      //       <div className="w-32 border-2 border-black p-2 h-full line-clamp-4 text-[13px]">
+      //         Ai-genererad bild på objektet man ska fota som hjälp
+      //       </div>
+      //       <article className='flex-1 space-y-2 h-full '>
+      //         <h2 className='font-bold'>Beskrivning:</h2>
+      //         <p className='text-[12px] line-clamp-6'>{facts}</p>
+      //       </article>
+      //     </div>
 
-          <div className="relative h-[128px] w-[265px] mx-auto overflow-hidden"
-            onClick={goToMap}>
-            <Mapbox
-              styleProp={styleProp}
-              longitude={longitude}
-              latitude={latitude}
-              interactive={false}
-              navcontrol={false}
-              geocontrol={false}
-              absolute={false}
-              facts={facts}
-              name={name}
-              trackResize={false}
-            />
-          </div>
+      //     <div className="relative h-[128px] w-[265px] mx-auto overflow-hidden rounded-xl"
+      //       onClick={goToMap}>
+      //       <Mapbox
+      //         styleProp={styleProp}
+      //         longitude={longitude}
+      //         latitude={latitude}
+      //         interactive={false}
+      //         navcontrol={false}
+      //         geocontrol={false}
+      //         facts={facts}
+      //         name={name}
+      //         trackResize={false}
+      //       />
+      //     </div>
 
-          <div className="w-full h-[75px] flex justify-center items-end pb-[10px]" onClick={handleModal}>
-            <button className='py-3 px-8 size-max bg-darkGreen text-[12px] text-white font-bold rounded-full'>Starta uppdrag
-            </button>
-          </div>
+      //     <div className="w-full h-[75px] flex justify-center items-end pb-[10px]" onClick={handleModal}>
+      //       <button className='py-3 px-8 size-max bg-darkGreen text-[12px] text-white font-bold rounded-full'>Starta uppdrag
+      //       </button>
+      //     </div>
 
-        </div>
-      </div>
+      //   </div>
+      // </div>
+      
+      }
     </dialog>
 
   )

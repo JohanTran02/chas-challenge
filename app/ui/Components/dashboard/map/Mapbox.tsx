@@ -26,7 +26,6 @@ type props = {
 	geocontrol: boolean,
 	navcontrol: boolean;
 	interactive: boolean;
-	absolute: boolean;
 	latitude?: string;
 	longitude?: string;
 	name?: string;
@@ -52,7 +51,7 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 			{ latitude: 59.20, longitude: 18.03, zoom: 5 }
 	}
 	return (
-		<div className={style.mainStyle}>
+		<div /* className={style.mainStyle} */>
 			{
 				(coords !== undefined) &&
 				<ReactMapGL

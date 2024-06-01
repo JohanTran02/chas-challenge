@@ -4,7 +4,7 @@ import { Stampinfo } from "@/app/lib/definitions"
 
 export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo, closeModal: () => void }) {
     const { name, facts, latitude, longitude } = prop;
-    const styleProp = { height: '300px', width: '400px' };
+    const styleProp = { height: '215px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px'};
     return (<>
         <Image
             src={"/Images/Pressbyran.svg"}
@@ -13,10 +13,10 @@ export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo
             alt=''
             className="m-auto translate-y-[40%] relative z-10"
         />
-        <div className="flex flex-col relative bg-white inset-0 rounded-3xl w-full h-full px-4 pb-12 pt-10">
+        <div className="bg-white inset-0 rounded-3xl w-full h-full pb-6 px-4">
             <div className="w-full mt-10 space-y-6">
                 <h1 className='font-bold text-darkGreen text-center text-3xl'>GRATTIS!</h1>
-                <h1 className='font-bold text-black text-center'>Du har hittat en STAMPTITEL</h1>
+                <h2 className='font-bold text-black text-center'>Du har hittat en STAMPTITEL</h2>
                 <div className="flex font-extrabold">
                     <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
                         <Image src='/chas-challenge/Images/dollar.svg' height={35} width={35} alt='' className='size-4' />
@@ -40,7 +40,12 @@ export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo
                         className="object-cover w-full h-[128px] object-center"
                     />
                 </div>
-                <div className="relative h-[128px] w-full overflow-hidden">
+                
+                <div >
+                    <h1 className="font-bold mb-3">Information</h1>
+                    <article className='p-3 h-full text-sm border-2 border-darkGreen rounded-lg'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi aut voluptatum ipsam id iusto maiores, rem beatae illum ad laudantium!</article>
+                </div>
+                <div className="relative h-[128px] w-full overflow-hidden rounded-xl">
                     <Mapbox
                         styleProp={styleProp}
                         longitude={longitude}
@@ -48,20 +53,15 @@ export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo
                         interactive={false}
                         navcontrol={false}
                         geocontrol={false}
-                        absolute={false}
                         facts={facts}
                         name={name}
                         trackResize={false}
                     />
                 </div>
-                <div >
-                    <h1 className="font-bold mb-3">Information</h1>
-                    <article className='p-3 h-full text-sm border-2 border-darkGreen rounded-lg'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi aut voluptatum ipsam id iusto maiores, rem beatae illum ad laudantium!</article>
-                </div>
                 <div className="w-full flex justify-center">
                     <button
                         onClick={closeModal}
-                        className='py-3 px-8 size-max bg-darkGreen text-xl text-white font-bold rounded-full'>
+                        className=' bg-darkGreen py-[10px] px-[30px] text-base text-white font-bold rounded-full'>
                         Stäng
                     </button>
                 </div>
