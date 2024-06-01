@@ -50,7 +50,7 @@ const AllCategories = () => {
     }
 
     return () => { }
-  }, [])
+  }, [dispatch, markerInfo])
   // AKTIVA queries
   // categoryId = 1 --> 'Fruits'
   // categoryId = 4 --> 'Furniture'
