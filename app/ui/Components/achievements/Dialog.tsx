@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import Mapbox from '../dashboard/map/Mapbox';
 
-const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string | undefined;  handleModal: () => void }) => {
+const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string | undefined; handleModal: () => void }) => {
   const { name, facts, latitude, longitude } = prop;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -83,6 +83,7 @@ const Dialog = ({ prop, rarity, handleModal }: { prop: Stampinfo; rarity: string
               absolute={false}
               facts={facts}
               name={name}
+              trackResize={false}
             />
           </div>
 
