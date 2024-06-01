@@ -6,7 +6,7 @@ import Dialog from './Dialog';
 import { useState } from 'react';
 import Camera from '../../camera/Camera';
 
-type Prop = { prop: Stampinfo; completedStamps?: (string | undefined)[]}
+type Prop = { prop: Stampinfo; completedStamps?: (string | undefined)[] }
 
 const SpecificMission = ({ prop, completedStamps }: Prop) => {
   const [openCamera, setOpenCamera] = useState(false);
@@ -31,20 +31,20 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
 
   const rarityName = (): string => {
     const rarityNames = [
-      {rarity: 'bronze', name: ['banana', 'stol', 'sten']}, 
-      {rarity: 'silver', name: ['korv']}, 
-      {rarity: 'guld', name: ['gravsten']}, 
-      {rarity: 'platinum', name: ['igelkott']}
-    ];  
-    
-    const index =  Math.floor(Math.random() * (3 - 0 + 1) + 0); 
-    return rarityNames[index].rarity; 
-  } 
+      { rarity: 'bronze', name: ['banana', 'stol', 'sten'] },
+      { rarity: 'silver', name: ['korv'] },
+      { rarity: 'guld', name: ['gravsten'] },
+      { rarity: 'platinum', name: ['igelkott'] }
+    ];
 
-  const rarity = rarityName(); 
+    const index = Math.floor(Math.random() * (3 - 0 + 1) + 0);
+    return rarityNames[index].rarity;
+  }
+
+  const rarity = rarityName();
   return (
     <>
-      {openCamera && <Camera handleModal={handleModal} />}
+      {openCamera && <Camera handleModal={handleModal} prop={prop} />}
       <div
         onClick={openModal}
         className="bg-neturalWhite flex justify-between h-[125px] border-2 border-darkGreen p-2 rounded-xl">

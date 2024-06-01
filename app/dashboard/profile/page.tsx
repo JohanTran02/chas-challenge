@@ -2,26 +2,37 @@
 "use client"
 
 import { useState } from 'react';
-import Image from 'next/image';
 
 import StampModalContent from '@/app/ui/Components/profile/StampModalContent';
 import AddFriendsModalContent from '@/app/ui/Components/profile/AddFriendsModalContent';
 import FriendsModalContent from '@/app/ui/Components/profile/FriendsModalContent';
 import FriendContainer from '@/app/ui/Components/profile/FriendContainer';
+import ImageHandler from '@/app/ui/ImageHandler';
 
 export default function Page() {
   const [modalStamps, setModalStamps] = useState<boolean>(false);
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
   const images = [
-    { src: "/chas-challenge/Images/flower-stamp.svg" },
-    { src: "/chas-challenge/Images/banana-stamp.svg" },
-    { src: "/chas-challenge/Images/bear-stamp.svg" },
-    { src: "/chas-challenge/Images/hotdog-stamp.svg" },
+    { src: "flower-stamp.svg" },
+    { src: "banana-stamp.svg" },
+    { src: "bear-stamp.svg" },
+    { src: "hotdog-stamp.svg" },
   ];
 
   let stampImages = images.map((image, index) => {
-    return <Image width={20} height={20} key={index} className="w-20 h-20 object-cover" src={`${image.src}`} alt="" />
+    return (
+      <>
+        <ImageHandler image={{
+          src: image.src,
+          alt: "",
+          width: 20,
+          height: 20,
+          className: "w-20 h-20 object-cover"
+        }} />
+      </>
+    )
+
   })
 
   const modalTransformStamps = modalStamps ? "transition-all h-[80vh]" : "transition-all h-[0px]";
@@ -36,7 +47,13 @@ export default function Page() {
   return (
     <>
       <div className="h-2/5 w-full pb-6 flex flex-col justify-end items-center">
-        <Image width={20} height={20} className="w-20 h-20 object-cover" src="/chas-challenge/Images/profile-cat.svg" alt="" />
+        <ImageHandler image={{
+          src: "profile-cat.svg",
+          alt: "",
+          width: 20,
+          height: 20,
+          className: "w-20 h-20 object-cover"
+        }} />
         <h1 className="text-white text-base font-bold pt-6">Användarnamn</h1>
         <div className="flex">
           <h6 className="text-white text-base font-bold mr-2">23 stamps</h6>
@@ -44,7 +61,7 @@ export default function Page() {
         </div>
       </div>
       <div className="bg-white w-full px-4 pt-6 pb-16 rounded-t-3xl"
-        style={{height: 'calc(100vh - 310px)'}}>
+        style={{ height: 'calc(100vh - 310px)' }}>
         <div>
           <div className="flex justify-between">
             <h1 className="text-black text-base font-bold">DINA STAMPS</h1>

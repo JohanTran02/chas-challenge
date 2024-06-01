@@ -3,35 +3,35 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { camera } from "@/app/lib/CC_Backend/camera";
-import Image from "next/image";
 import CameraError from "./CameraError";
 import { useCookies } from "react-cookie";
 import CameraLoader from "./CameraLoader";
-import { isProdImage } from "@/app/lib/definitions";
+import { Stampinfo } from "@/app/lib/definitions";
 import CompletedMission from "../Components/achievements/CompletedMission";
+import ImageHandler from "../ImageHandler";
 
 const videoConstraints: MediaTrackConstraints = {
     facingMode: "environment",
     frameRate: 30
 };
 
-function useImageContent({ isLoading, handleModal }: { isLoading: "idle" | "pending" | "finished" | "rejected", handleModal: () => void }) {
+function useImageContent({ isLoading, handleModal, prop }: { isLoading: "idle" | "pending" | "finished" | "rejected", handleModal: () => void, prop: Stampinfo }) {
     const [imageResultContent, setImageResultContent] = useState<ReactNode>(null)
 
     useEffect(() => {
         if (isLoading.includes("finished")) {
-            setImageResultContent(<CompletedMission />)
+            setImageResultContent(<CompletedMission prop={prop} closeModal={handleModal} />)
         }
         else if (isLoading.includes("rejected")) {
             setImageResultContent(<CameraError isLoading={isLoading} addOpacity />)
         }
         else setImageResultContent(null)
-    }, [isLoading, setImageResultContent, handleModal])
+    }, [isLoading, setImageResultContent, handleModal, prop])
 
     return imageResultContent;
 }
 
-export default function Camera({ handleModal }: { handleModal: () => void }) {
+export default function Camera({ handleModal, prop }: { handleModal: () => void, prop: Stampinfo }) {
     const [isLoading, setLoading] = useState<"idle" | "pending" | "finished" | "rejected">("idle");
     const [cookies] = useCookies(["accessToken"]);
     const webcamRef = useRef<Webcam>(null);
@@ -44,7 +44,7 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
         code: number | undefined;
         json: any;
     });
-    const imageResultContent = useImageContent({ isLoading, handleModal });
+    const imageResultContent = useImageContent({ isLoading, handleModal, prop });
 
     const capture = useCallback(() => {
         if (webcamRef.current) {
@@ -78,12 +78,13 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
                                     screenshotQuality={1}
                                 />
                                 <div className="mx-auto mt-4" onClick={capture}>
-                                    <Image
-                                        height={0}
-                                        width={0}
-                                        src={"/Images/Kameraknapp.svg"}
-                                        alt="Camera button"
-                                        className="object-cover w-20 h-20"
+                                    <ImageHandler image={{
+                                        height: 0,
+                                        width: 0,
+                                        src: "Kameraknapp.svg",
+                                        alt: "Camera button",
+                                        className: "object-cover w-20 h-20",
+                                    }}
                                     />
                                 </div>
                             </>)
@@ -120,13 +121,13 @@ export default function Camera({ handleModal }: { handleModal: () => void }) {
                                 {
 
                                     <>
-                                        <Image
-                                            src={"https://u-img.com/detail_images/821x646/lamborghini-speed-821-2.jpg"}
-                                            alt="Scan"
-                                            width={0}
-                                            height={0}
-                                            className="object-cover h-[600px] w-full rounded-md"
-                                        />
+                                        <ImageHandler image={{
+                                            src: "https://u-img.com/detail_images/821x646/lamborghini-speed-821-2.jpg",
+                                            alt: "Scan",
+                                            width: 0,
+                                            height: 0,
+                                            className: "object-cover h-[600px] w-full rounded-md",
+                                        }} />
                                         <div className="flex flex-col gap-3 w-full max-w-48 mx-auto">
                                             <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={async () => {
                                                 setLoading("pending");
