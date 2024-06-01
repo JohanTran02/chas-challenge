@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import { RootState } from '@/app/lib/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import SkeletonLoader from '../SkeletonLoader';
+import SkeletonLoaderCategory from '../skeleton loaders/SkeletonLoader';
 
 async function getStamps(accessToken: string) {
   const promise = Promise.resolve(3); 
@@ -90,7 +90,7 @@ const AllCategories = () => {
               }
           </>
         )
-      }) : <SkeletonLoader />}
+      }) : <SkeletonLoaderCategory />}
     </ul>
   )
 }

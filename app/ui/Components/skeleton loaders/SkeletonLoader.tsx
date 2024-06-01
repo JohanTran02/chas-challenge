@@ -1,11 +1,12 @@
 
-const SkeletonLoader = () => {
+const SkeletonLoaderCategory = () => {
   
   const arr = [1,2,3,4]; 
   return (
     <>
-      {arr.map(() => {
+      {arr.map((index) => {
         return <div 
+        key={index}
         className="flex flex-col items-center font-bold h-56 max-w-[150px] min-w-[150px] category-card mx-auto border-2 border-black rounded-xl animate-pulse">
         <div className="flex-[3] grid place-items-center">
           <div className="w-[100px] h-[100px] bg-gray-500 rounded-full">
@@ -22,4 +23,4 @@ const SkeletonLoader = () => {
   )
 }
 
-export default SkeletonLoader
+export default SkeletonLoaderCategory;
