@@ -9,7 +9,7 @@ export default function CompletedMission({ prop, closeModal, unlockedImg }: { pr
     return (<>
         <ImageHandler image={
             {
-                src: unlockedImg,
+                src: "Pressbyran.svg",
                 height: 128,
                 width: 128,
                 alt: '',
@@ -26,10 +26,11 @@ export default function CompletedMission({ prop, closeModal, unlockedImg }: { pr
                 <div>
                     <ImageHandler image={
                         {
-                            src: "Pressbyran.svg",
+                            checkPath: true,
+                            src: unlockedImg,
                             height: 128,
                             width: 128,
-                            alt: '',
+                            alt: 'Stamp picture',
                             className: "object-cover w-full h-[128px] object-center"
                         }
                     } />

@@ -7,7 +7,7 @@ export default function ImageHandler({ image }: { image: ImageType }) {
         priority={image.priority ? image.priority : undefined}
         height={image.height}
         width={image.width}
-        src={`${isProdImage + image.src}`}
+        src={`${image.checkPath ? image.src : isProdImage + image.src}`}
         alt={image.alt}
         className={image.className}
         style={image.style}

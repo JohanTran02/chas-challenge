@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction } from "react";
-import { CameraEndpoint } from "../definitions";
+import { CameraEndpoint, Stampinfo } from "../definitions";
 
 // , setLoading: Dispatch<SetStateAction<boolean>>
-export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string) => {
+export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, stampName: string) => {
     let json;
     let code;
 
+    const image = base64.replace("data:image/jpeg;base64,", "");
     try {
         const response = await fetch('https://natureai.azurewebsites.net/' + endpoint, {
             headers: {
@@ -13,7 +13,7 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
                 Authorization: `Bearer ${accessToken}`
             },
             method: "POST",
-            body: JSON.stringify({ prompt: "banana", picture: base64 })
+            body: JSON.stringify({ prompt: stampName, picture: image })
         });
 
         if (response.status === 200) {

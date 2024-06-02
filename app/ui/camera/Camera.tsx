@@ -25,20 +25,19 @@ function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image
     const [imageResultContent, setImageResultContent] = useState<ReactNode>(null)
 
     useEffect(() => {
-        if (!image) return;
-
+        console.log(isLoading)
         if (isLoading.includes("finished")) {
             setTransition("opacity-0 pointer-events-none")
             setUnlockedImg(image);
         }
         else if (isLoading.includes("rejected")) {
             setImageResultContent(<CameraError isLoading={isLoading} addOpacity />)
-            setUnlockedImg("");
+            setUnlockedImg(null);
 
         }
         else {
             setImageResultContent(null)
-            setUnlockedImg("");
+            setUnlockedImg(null);
         }
 
     }, [isLoading, setImageResultContent, setTransition, prop, image, setUnlockedImg])
@@ -90,21 +89,21 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                         setEnableWebcam(true);
                     }, 500);
                 }}>Tillbaka</span></p>
-                <div className="relative grid h-[600px] gap-5 w-full">
+                <div className="relative h-[70%] gap-5 w-full">
                     <CameraLoader isLoading={isLoading} />
                     {(isLoading !== "idle" && isLoading !== "pending") && imageResultContent}
                     {
                         enableWebcam ? (
                             <>
                                 <Webcam
-                                    className="webcam object-cover h-[600px] border-2 border-white rounded-md"
+                                    className="webcam object-cover h-full border-2 border-white rounded-md"
                                     audio={false}
                                     ref={webcamRef}
                                     screenshotFormat="image/jpeg"
                                     videoConstraints={videoConstraints}
                                     screenshotQuality={1}
                                 />
-                                <div className="mx-auto mt-4" onClick={capture}>
+                                <div className="flex justify-center mt-4" onClick={capture}>
                                     <ImageHandler image={{
                                         height: 0,
                                         width: 0,
@@ -117,21 +116,22 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                             </>)
                             : (<>
                                 {
-                                    image ?
+                                    image && image ?
                                         <>
                                             <ImageHandler image={{
+                                                checkPath: true,
                                                 src: image,
                                                 alt: "Scan",
                                                 width: 0,
                                                 height: 0,
-                                                className: "object-cover h-[600px] w-full rounded-md",
+                                                className: "object-cover h-full w-full border-2 border-white rounded-md",
                                             }} />
                                             <div className="flex flex-col gap-3 w-full max-w-48 mx-auto mt-4">
                                                 {
                                                     (isLoading.includes("idle")) &&
                                                     <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg" onClick={async () => {
                                                         setLoading("pending");
-                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken);
+                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name);
                                                         setImageResponse(updatedImage)
                                                         setTimeout(() => {
                                                             imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
