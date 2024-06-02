@@ -14,7 +14,7 @@ export default function FriendContainer({ showStamps, modalAddFriends }: Partial
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        const response = await fetch('users.json');
+        const response = await fetch('/users.json');
         const data = await response.json();
         console.log("Fetched friends data:", data);
         setFriends(data.users);
