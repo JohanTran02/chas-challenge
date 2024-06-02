@@ -44,7 +44,7 @@ export const getCompletedStamps = async (accestoken: string, setIsLoading: Dispa
     const data = await response.json()
     dispatch({type: 'stamp/setCollectStamps', payload: data})
     setIsLoading(false); 
-    console.log(data); 
+    // console.log(data); 
     return data; 
 
   } catch (error) {

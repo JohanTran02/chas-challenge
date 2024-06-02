@@ -67,9 +67,9 @@ const AllCategories = () => {
       {stamps.length > 0 ? stamps.map((stamp, index) => {
         const redirect = index < 1 ? true : false;
         return (
-          <>
+          <li key={index}>
             {(stamp.category !== undefined) &&
-              <li key={index} className="flex flex-col items-center font-bold h-56 max-w-[150px] min-w-[150px] category-card mx-auto">
+              <div  className="flex flex-col items-center font-bold h-56 max-w-[150px] min-w-[150px] category-card mx-auto">
                 <p className="pb-1 text-base self-start">
                   {index < 1 ? 'START' : 'KOMMER SNART'}
                 </p>
@@ -92,9 +92,9 @@ const AllCategories = () => {
                     </div>
                   </div> */}
                 </NextStep>
-              </li>
+              </div>
             }
-          </>
+          </li>
         )
       }) : <SkeletonLoaderCategory />}
     </ul>

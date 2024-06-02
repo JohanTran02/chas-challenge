@@ -28,6 +28,6 @@
   /* Add width and height to scale the SVG */
   /* Example: Increase width to 100px */
   /* Maintain aspect ratio */
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
 }
