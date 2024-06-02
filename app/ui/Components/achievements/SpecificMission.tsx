@@ -9,23 +9,18 @@ import { useEffect, useState } from 'react';
 type Prop = { prop: Stampinfo; completedStamps?: string | undefined }
 
 const SpecificMission = ({ prop, completedStamps }: Prop) => {
-  const [modal, setModal] = useState<Boolean>(false); 
-
+  const [modal, setModal] = useState<Boolean>(false);
 
   useEffect(() => {
-    if(modal){
-      openModal(); 
+    if (modal) {
+      document.body.style.overflowY = 'hidden';
+      const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
+      information.showModal();
+      information.scrollTo(0, 0);
     }
 
-  }, [modal])
-  
-  const openModal = (): void => {
-    document.body.style.overflowY = 'hidden';
-    const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
-    information.showModal();
-    information.scrollTo(0, 0);
-  }
-  
+  }, [modal, prop.name])
+
   const stampState = () => {
     if (completedStamps) {
       const completedStamp: string = completedStamps;
@@ -64,7 +59,7 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
           }} />
         </div>
       </div>
-      {modal && <Dialog prop={prop} setModal={setModal}/>}
+      {modal && <Dialog prop={prop} setModal={setModal} />}
     </>
   )
 }
