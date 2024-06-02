@@ -1,44 +1,58 @@
-import Image from 'next/image'
+import ImageHandler from '../../ImageHandler';
+import StampStats from '../achievements/StampStats';
+
+
 
 const Posts = () => {
-  const userNames: { name: string; profilePic: string; stamp: { src: string; category: string }; }[] = [
-    { name: 'Lucas Lawson', profilePic: '/Images/profile-dog2.svg', stamp: { src: '/Images/hotdog-stamp.svg', category: 'KORV' } },
-    { name: 'Hallie Cortez', profilePic: '/Images/profile-cat.svg', stamp: { src: '/Images/bear-stamp.svg', category: 'BJÖRN' } },
-    { name: 'Dale Simmons', profilePic: '/Images/profile-dog.svg', stamp: { src: '/Images/hotdog-stamp.svg', category: 'KORV' } },
-    { name: 'Gertrude Barnett', profilePic: '/Images/profile-beaver.svg', stamp: { src: '/Images/banana-stamp.svg', category: 'BANAN' } },
-    { name: 'Gertrude Barnett', profilePic: '/Images/profile-beaver.svg', stamp: { src: '/Images/bear-stamp.svg', category: 'BJÖRN' } },
+  const userNames: { name: string; profilePic: string; stamp: { category: string }; }[] = [
+    { name: 'Lucas Lawson', profilePic: 'profile-dog2.svg', stamp: { category: 'KORV' } },
+    { name: 'Hallie Cortez', profilePic: 'profile-cat.svg', stamp: { category: 'BJÖRN' } },
+    { name: 'Dale Simmons', profilePic: 'profile-dog.svg', stamp: { category: 'KORV' } },
+    { name: 'Gertrude Barnett', profilePic: 'profile-beaver.svg', stamp: { category: 'BANAN' } },
+    { name: 'Gertrude Barnett', profilePic: 'profile-beaver.svg', stamp: { category: 'BJÖRN' } },
   ]
 
   return (
-    <ul>
+    <ul className='flex flex-col items-center'>
       {userNames.map((user, index) => {
 
         return (
           <li key={index}
-            className={`flex w-full h-36 border-darkGreen border-[3px]  p-[8px] rounded-md ${index !== userNames.length - 1 && 'mb-4'}`}>
-            <div className=" flex flex-col justify-between h-full flex-grow flex-shrink-0">
-              <div className="flex gap-3 items-center w-full h-[49px]">
-                <div className="h-[45px] w-[45px]">
-                  <Image src={user.profilePic} alt='profile picture' width={41} height={41} style={{ height: '100%', width: '100%' }} />
-                </div>
-                <p className='font-bold text-sm truncate'>{user.name}</p>
+            className={`bg-neutralWhite flex justify-between gap-1 w-full max-w-[361px] h-36 border-darkGreen border-[3px] p-[8px] rounded-xl ${index !== userNames.length - 1 && 'mb-4'} overflow-hidden`}>
+            <div className="flex-1 flex gap-3 items-center w-full h-[49px] mt-2">
+              <div className="h-[45px] w-[45px] border-darkGreen border-2 rounded-full">
+                <ImageHandler image={{
+                  src: user.profilePic, alt: 'profile picture', width: 0, height: 0, className: "w-full h-full"
+                }} />
               </div>
+            </div>
+            <div className=" space-y-2 h-full flex-[4] flex-shrink-0 mt-2">
+              <p className='font-bold text-sm truncate'>{user.name}</p>
               <div className="">
-                <p className="text-xs font-medium truncate ">1 nytt stamp från kategorin: {user.stamp.category}</p>
+                <p className="text-xs font-medium truncate ">har samlat ett nytt stamp: {user.stamp.category}</p>
               </div>
-              <div className="w-full h-max font-semibold mt-2">
+              <div className='flex font-extrabold'>
+                <StampStats />
+              </div>
+              {/* <div className="w-full h-max font-semibold mt-2">
                 <p className=" inline-block">Gilla</p>
                 <p className=" inline-block w-max ml-8">Kommentera</p>
-              </div>
+              </div> */}
             </div>
-            <div className="flex-grow flex-shrink-0 grid place-items-center h-full">
-              <Image src={user.stamp.src} alt='An image of a collected stamp' width={100} height={100} style={{ height: 'auto', width: 'auto' }} />
-              <p className="font-semibold mt-2">KATEGORI</p>
+            <div className="flex-1 flex-shrink-0 flex flex-col items-center h-full">
+              <div className="flex-[3] grid place-items-center">
+                <ImageHandler image={{
+                  src: "kategori.svg",
+                  alt: "An image of a collected stamp",
+                  height: 0,
+                  width: 0,
+                  className: "h-auto w-[80%]"
+                }} />
+              </div>
+              <p className="font-bold text-[15px]  text-darkGreen">KATEGORI</p>
             </div>
           </li>
-
         )
-
       })}
     </ul>
   )

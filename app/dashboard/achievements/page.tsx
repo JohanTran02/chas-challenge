@@ -4,8 +4,9 @@ export default async function Page() {
 
     return (
         <>
-            <h1 className="text-white text-base font-bold p-6">ALLA UPPDRAG</h1>
-            <div className="bg-white h-full w-full px-4 pt-6 pb-16 rounded-t-3xl overflow-y-auto no-scrollbar">
+            <h1 className="text-white text-base font-bold pl-6 pt-6 pb-3">ALLA UPPDRAG</h1>
+            <div className="bg-white w-full px-4 pt-6 pb-[80px] rounded-t-3xl"
+                style={{height: 'calc(100vh - 200px)'}}>
                 <AllCategories />
             </div>
         </>

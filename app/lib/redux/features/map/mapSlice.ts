@@ -14,7 +14,7 @@ export const mapSlice = createSlice({
   name: 'map',
   initialState,
   reducers: {
-    setCoords: (state, action: PayloadAction<Stampinfo>) => {
+    setCoords: (state, action: PayloadAction<Stampinfo | null>) => {
       state.markerInfo = action.payload;  
     }
   },

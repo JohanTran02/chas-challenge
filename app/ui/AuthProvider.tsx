@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
-import Loader from './ui/Components/Loader';
+import Loader from './Components/Loader';
 
 export function useDebounce(setLoading: Dispatch<SetStateAction<boolean>>, seconds: number) {
     useEffect(() => {

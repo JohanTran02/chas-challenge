@@ -1,51 +1,46 @@
 {
-    "users": [
-      {
-        "userID": "1",
-        "username": "john",
-        "stamps": 42,
-        "profilePicture": "/Images/profile-cat.svg"
-      },
-      {
-        "userID": "2",
-        "username": "JaneSmith",
-        "stamps": 35,
-        "profilePicture": "/Images/profile-cat.svg"
-      },
-      {
-        "userID": "3",
-        "username": "AliceJones",
-        "stamps": 27,
-        "profilePicture": "/Images/profile-cat.svg"
-      },
-      {
-        "userID": "4",
-        "username": "BobBrown",
-        "stamps": 50,
-        "profilePicture": "/Images/profile-cat.svg"
-      },
-      {
-
-        "userID": "5",
-        "username": "BobBrown",
-        "stamps": 50,
-        "profilePicture": "/Images/profile-cat.svg"
-      },
-      {
-
-        "userID": "6",
-        "username": "BobBrown",
-        "stamps": 50,
-        "profilePicture": "/Images/profile-cat.svg"
-      },  {
-
-        "userID": "7",
-        "username": "BobBrown",
-        "stamps": 50,
-        "profilePicture": "/Images/profile-cat.svg"
-      }
-  
-  
-  
-    ]
-  }
+  "users": [
+    {
+      "userID": "1",
+      "username": "john",
+      "stamps": 42,
+      "profilePicture": "profile-cat.svg"
+    },
+    {
+      "userID": "2",
+      "username": "JaneSmith",
+      "stamps": 35,
+      "profilePicture": "profile-cat.svg"
+    },
+    {
+      "userID": "3",
+      "username": "AliceJones",
+      "stamps": 27,
+      "profilePicture": "profile-cat.svg"
+    },
+    {
+      "userID": "4",
+      "username": "BobBrown",
+      "stamps": 50,
+      "profilePicture": "profile-cat.svg"
+    },
+    {
+      "userID": "5",
+      "username": "BobBrown",
+      "stamps": 50,
+      "profilePicture": "profile-cat.svg"
+    },
+    {
+      "userID": "6",
+      "username": "BobBrown",
+      "stamps": 50,
+      "profilePicture": "profile-cat.svg"
+    },
+    {
+      "userID": "7",
+      "username": "BobBrown",
+      "stamps": 50,
+      "profilePicture": "profile-cat.svg"
+    }
+  ]
+}

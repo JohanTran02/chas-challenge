@@ -37,3 +37,9 @@ video {
   object-fit: cover; */
   /* transform: rotate(90deg); */
 }
+
+@media(width < 328px){
+  .category-card{
+    min-width: 150px;
+  }
+}

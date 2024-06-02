@@ -1,6 +1,5 @@
 import React from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
 import StampContainer from './StampContainer';
 
 type Items = {
@@ -20,21 +19,21 @@ export default function StampModalContent({ onClose }: { onClose: () => void }) 
     {
       category: "string",
       stamps: [
-        { src: "/Images/flower-stamp.svg", name: "flower", "description": "flower" },
-        { src: "/Images/banana-stamp.svg", name: "banana", "description": "banana" },
-        { src: "/Images/bear-stamp.svg", name: "bear", "description": "bear" },
-        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "hotdog-stamp.svg", name: "flower", "description": "flower" },
+        { src: "hotdog-stamp.svg", name: "banana", "description": "banana" },
+        { src: "hotdog-stamp.svg", name: "bear", "description": "bear" },
+        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
       ]
     },
     {
       category: "test",
       stamps: [
-        { src: "/Images/flower-stamp.svg", name: "flower", "description": "flower" },
-        { src: "/Images/banana-stamp.svg", name: "banana", "description": "banana" },
-        { src: "/Images/bear-stamp.svg", name: "bear", "description": "bear" },
-        { src: "/Images/hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
+        { src: "hotdog-stamp.svg", name: "flower", "description": "flower" },
+        { src: "hotdog-stamp.svg", name: "banana", "description": "banana" },
+        { src: "hotdog-stamp.svg", name: "bear", "description": "bear" },
+        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
       ]
     },
   ]

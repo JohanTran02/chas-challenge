@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { FieldErrors } from "react-hook-form";
 
 export type Input = {
@@ -31,9 +32,9 @@ export type Activity = {
   coordinates: Coordinates;
 }
 
-type ImageType = 'png' | 'jpeg';
+// type ImageType = 'png' | 'jpeg';
 
-export type Base64<imageType extends ImageType> = `data:image/${imageType};base64,${string}`
+// export type Base64<imageType extends ImageType> = `data:image/${imageType};base64,${string}`
 
 
 // CC_Backend
@@ -64,3 +65,28 @@ export type StampCategories = {
   title: string;
   stamps: Stampinfo[];
 }
+
+// Mapbox style prop
+export type MapboxStyleProp = {
+  borderRadius: string;
+  background: string;
+  translate: string;
+  zIndex: string;
+  height: string;
+  cursor: string;
+  width: string;
+  inset: string;
+}
+
+export type ImageType = {
+  src: string,
+  alt: string,
+  width: number,
+  height: number,
+  className?: string,
+  style?: CSSProperties | undefined,
+  priority?: boolean
+  checkPath?: boolean
+}
+
+export const isProdImage = process.env.NODE_ENV === "production" ? `/chas-challenge/Images/` : `/Images/`;

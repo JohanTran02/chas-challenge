@@ -1,4 +1,6 @@
+import { Dispatch, SetStateAction } from "react";
 import { StampCategories, Stampinfo } from "../definitions";
+import { UnknownAction } from "@reduxjs/toolkit";
 
 export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithstamps', query: 'stampId' | 'categoryId', value: number, accessToken : string) => {
   
@@ -17,7 +19,7 @@ export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithst
       }
       
       const data = await response.json() as Stampinfo | StampCategories; 
-      // console.log(data);
+      console.log(data);
       return data
 
     } catch (error) {
@@ -26,26 +28,26 @@ export const getStampsInfo = async(endpoint: 'getstampinfo' | 'getcategorywithst
   
 }
 
-// export const stampCategories = async(endpoint: 'getcategorywithstamps', query: 'categoryId', value: number) => {
-//   const cookie = await getCookie('Session'); 
-  
-//   if(cookie){
-//     try {
-//       const response = await fetch(`https://natureai.azurewebsites.net/stamps/${endpoint}?${query}=${value}`, {
-//         headers:{
-//           'Content-Type': 'application/json',
-//           'Authorization': `Bearer ${cookie.accessToken}`
-//         }
-//       });
+export const getCompletedStamps = async (accestoken: string, setIsLoading: Dispatch<SetStateAction<boolean>>, dispatch: Dispatch<UnknownAction>) => {
+  try {
+    const response = await fetch( 'https://natureai.azurewebsites.net/stamps/getuserscollectedstamps',{
+      headers:{
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${accestoken}`
+      }
+    })
 
-//       if(!response.ok){
-//         console.log(response.status, response.statusText);
-//       }
-//       const data = await response.json() as StampCategories
-//       return data; 
+    if(!response.ok) {
+      throw new Error(`${response.status}, ${response.statusText}`); 
+    }
 
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-// }
+    const data = await response.json()
+    dispatch({type: 'stamp/setCollectStamps', payload: data})
+    setIsLoading(false); 
+    console.log(data); 
+    return data; 
+
+  } catch (error) {
+    console.log(error); 
+  }
+}

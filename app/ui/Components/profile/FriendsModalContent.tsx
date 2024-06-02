@@ -16,12 +16,12 @@ export default function FriendsModalContent({ onClose, openAddFriendsModal }: { 
               <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Sök bland vänner"></input>
             </div>
             <div className='flex flex-col mt-6 gap-6 pl-2'>
-              <FriendContainer showStamps={true} />
+              <FriendContainer />
             </div>
           </div>
         </div>
       </div>
-      <MagnifyingGlassIcon className='absolute bottom-8 right-6 w-8 cursor-pointer w-12 h-12' onClick={openAddFriendsModal} />
+      <MagnifyingGlassIcon className='absolute bottom-8 right-6 cursor-pointer w-12 h-12' onClick={openAddFriendsModal} />
     </div>
 
   );

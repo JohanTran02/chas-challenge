@@ -1,52 +1,66 @@
 "use client"
-
-import { ReactNode } from "react";
-import { StampCategories } from "@/app/lib/definitions";
 import SpecificMission from "./SpecificMission";
 
 // Redux
 import { RootState } from "@/app/lib/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+
+// react hooks
+import { useEffect, useState } from "react";
+import { getCompletedStamps } from "@/app/lib/CC_Backend/stamps";
+
+// cookies
+import { useCookies } from "react-cookie";
+
+// components
+import SkeletonLoaderMissions from "../skeleton loaders/SkeletonLoaderMissions";
+
+type CompletedStamps = { name: string; icon: null }[]
 
 const ClickedCategory = () => {
-  const { stamps, clickedCategory } = useSelector((state: RootState) => state.stamp);
+  const [cookies] = useCookies(['accessToken']);
+
+  // useState
+  const [completedStamps, setCompletedStamps] = useState<Partial<CompletedStamps>>([] as CompletedStamps);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // for skeleton loader
+
+  // redux
+  const { stamps, collectedStampsProcentage, collectedStamps } = useSelector((state: RootState) => state.stamp);
   const dispatch = useDispatch();
+  const allStamps = stamps && stamps[0].stamps;
 
-  // If the user reloads the site while on this component, it will get items from localStorage. 
   useEffect(() => {
-    if (!stamps) {
-      const allStamps = JSON.parse(localStorage.getItem('stamps') || '') as StampCategories;
-      dispatch({ type: 'stamp/setSpecificStampInfo', payload: allStamps });
-      dispatch({ type: 'stamp/setTitle', payload: allStamps.title });
-      return
+    // console.log(completedStamps)
+    const completed = async (accessToken: string) => {
+      const response = await getCompletedStamps(accessToken, setIsLoading, dispatch);
+      setCompletedStamps(response);
     }
+    completed(cookies.accessToken)
+  }, [cookies.accessToken, dispatch])
 
-    return () => { }
-  }, [dispatch, stamps])
-
-  const saveToLocalStorage = (name: string, value: StampCategories) => {
-    return localStorage.setItem(name, JSON.stringify(value));
-  }
   return (
     <div>
       <div className="flex items-center gap-2 px-1 w-full">
         <p className="flex-1 font-bold">SAMLADE STAMPS</p>
-        <div className="flex-1 flex items-center gap-4">
+        {(stamps !== null && !isLoading) && <div className="flex-1 flex items-center gap-4">
           <div className="flex-1 bg-white h-2 w-full border-[1px] border-darkGreen rounded-xl">
-            <div className="h-full w-[70%] bg-[#598f7d] rounded-sm" />
+            <div className={`h-full bg-[#598f7d] rounded-sm`}
+              style={{ width: `${collectedStampsProcentage}%` }} />
           </div>
-          <p className="text-sm font-bold">7 / 10</p>
-        </div>
+          <p className="text-sm font-bold">{collectedStamps.length} / {allStamps?.length}</p>
+        </div>}
       </div>
       <ul className="pt-6 space-y-4">
-        {stamps !== null && stamps.map((stamp) => {
-          if (stamp.title === clickedCategory) {
-            saveToLocalStorage('stamps', stamp);
-            return stamp.stamps.map((stamp, index) => <li key={index}><SpecificMission prop={stamp} /></li>)
-          }
-          return null;
-        })}
+        {(allStamps !== null && !isLoading) ? allStamps.map((stamp) => {
+          const accomplishedStamps = completedStamps.find((obj) => obj?.name === stamp.name);
+
+          if (!accomplishedStamps?.name)
+            return <li key={stamp.stampId}><SpecificMission prop={stamp} /></li>
+
+          if (accomplishedStamps)
+            return <li key={stamp.stampId}><SpecificMission prop={stamp} completedStamps={accomplishedStamps.name} /></li>
+        })
+          : <SkeletonLoaderMissions />}
       </ul>
     </div>
   )
