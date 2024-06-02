@@ -13,9 +13,9 @@ export default function FriendsModalContent({ onClose, openAddFriendsModal }: { 
           <div className='grid gap-2'>
             <h2>VÄNNER</h2>
             <div className="pt-2 relative mx-auto text-gray-600">
-              <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Sök bland vänner"></input>
+              <input className="border-2 border-gray-300 bg-neutralWhite h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Sök bland vänner"></input>
             </div>
-            <div className='flex flex-col mt-6 gap-6 pl-2'>
+            <div className='flex flex-col mt-6 gap-6'>
               <FriendContainer />
             </div>
           </div>
