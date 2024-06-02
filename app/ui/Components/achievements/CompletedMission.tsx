@@ -2,8 +2,15 @@ import ImageHandler from "../../ImageHandler";
 import Mapbox from "../dashboard/map/Mapbox"
 import { Stampinfo } from "@/app/lib/definitions"
 import StampStats from "./StampStats";
+import { Dispatch, SetStateAction } from "react";
 
-export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo, closeModal: () => void }) {
+type Prop = { 
+    prop: Stampinfo; 
+    closeModal: (setModal: Dispatch<SetStateAction<Boolean>>) => void; 
+    setModal: Dispatch<SetStateAction<Boolean>>; 
+}
+
+export default function CompletedMission({ prop, closeModal, setModal }: Prop) {
     const { name, facts, latitude, longitude } = prop;
     const styleProp = { height: '290px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };
     return (<>
@@ -55,7 +62,7 @@ export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo
                 </div>
                 <div className="w-full flex justify-center">
                     <button
-                        onClick={closeModal}
+                        onClick={() => closeModal(setModal)}
                         className=' bg-darkGreen py-[10px] px-[30px] text-base text-white font-bold rounded-full'>
                         Stäng
                     </button>

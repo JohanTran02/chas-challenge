@@ -36,7 +36,7 @@ const ClickedCategory = () => {
       setCompletedStamps(response);
     }
     completed(cookies.accessToken)
-  }, [cookies.accessToken, completedStamps, dispatch])
+  }, [cookies.accessToken, dispatch])
 
   return (
     <div>

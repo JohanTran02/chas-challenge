@@ -8,11 +8,11 @@ import Mapbox from '../dashboard/map/Mapbox';
 import CompletedMission from './CompletedMission';
 import StampStats from './StampStats';
 import ImageHandler from '../../ImageHandler';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Camera from '../../camera/Camera';
 
 
-const Dialog = ({ prop }: { prop: Stampinfo; }) => {
+const Dialog = ({ prop, setModal }: { prop: Stampinfo; setModal: Dispatch<SetStateAction<Boolean>>}) => {
   const [transition, setTransition] = useState("opacity-0 pointer-events-none");
   const [unlocked, setUnlocked] = useState(false);
   const [unlockedImg, setUnlockedImg] = useState<string | null>(null)
@@ -38,10 +38,11 @@ const Dialog = ({ prop }: { prop: Stampinfo; }) => {
     router.push('/dashboard/map/');
   }
 
-  const closeModal = (): void => {
+  const closeModal = (setModal: Dispatch<SetStateAction<Boolean>>): void => {
     document.body.style.overflowY = '';
     const information = document.getElementById(`missionsModal-${name}`) as HTMLDialogElement;
     information.close();
+    setModal(false); 
   }
 
   // Mapxbox styles
@@ -58,11 +59,11 @@ const Dialog = ({ prop }: { prop: Stampinfo; }) => {
       {/* <div className="sticky bg-white inset-0 translate-y-[15%] h-full rounded-3xl z-[-1]" /> */}
 
       {
-        unlocked ? <CompletedMission prop={prop} closeModal={closeModal} /> :
+        unlocked ? <CompletedMission prop={prop} setModal={setModal} closeModal={closeModal} /> :
           <div className="flex flex-col w-full h-full py-6">
             <button
               aria-label='Close button'
-              onClick={closeModal}
+              onClick={() => closeModal(setModal)}
               className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
               <ImageHandler image={{ src: 'close-button.svg', width: 35, height: 35, className: 'size-4', alt: 'close-button' }} />
             </button>
