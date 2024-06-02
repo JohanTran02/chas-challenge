@@ -14,19 +14,18 @@ import Camera from '../../camera/Camera';
 
 const Dialog = ({ prop }: { prop: Stampinfo; }) => {
   const [transition, setTransition] = useState("opacity-0 pointer-events-none");
-  const [unlocked, setUnlocked] = useState(false);
   const [unlockedImg, setUnlockedImg] = useState<string | null>(null)
   const { name, facts, latitude, longitude } = prop;
   const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (unlocked) {
+    if (unlockedImg) {
       document.body.style.overflowY = '';
       const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
       information.scrollTo(0, 0);
     }
-  }, [unlocked, prop])
+  }, [unlockedImg, prop])
 
   const handleCamera = () => {
     transition.includes("opacity-0") ? setTransition("opacity-100") : setTransition("opacity-0 pointer-events-none");
@@ -53,12 +52,12 @@ const Dialog = ({ prop }: { prop: Stampinfo; }) => {
       className="relative w-5/6 max-w-[500px] max-h-[600px] m-auto rounded-3xl border-darkGreen bg-darkGreen border-2 overflow-y-auto no-scrollbar"
     >
       <div className={`transition-opacity ${transition} fixed top-0 left-0 z-40 w-full h-full`}>
-        <Camera prop={prop} handleCamera={handleCamera} setTransition={setTransition} setUnlocked={setUnlocked} setUnlockedImg={setUnlockedImg} />
+        <Camera prop={prop} handleCamera={handleCamera} setTransition={setTransition} setUnlockedImg={setUnlockedImg} />
       </div>
       {/* <div className="sticky bg-white inset-0 translate-y-[15%] h-full rounded-3xl z-[-1]" /> */}
 
       {
-        unlocked ? <CompletedMission prop={prop} closeModal={closeModal} /> :
+        unlockedImg ? <CompletedMission prop={prop} closeModal={closeModal} unlockedImg={unlockedImg} /> :
           <div className="flex flex-col w-full h-full py-6">
             <button
               aria-label='Close button'

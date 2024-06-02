@@ -3,13 +3,13 @@ import Mapbox from "../dashboard/map/Mapbox"
 import { Stampinfo } from "@/app/lib/definitions"
 import StampStats from "./StampStats";
 
-export default function CompletedMission({ prop, closeModal }: { prop: Stampinfo, closeModal: () => void }) {
+export default function CompletedMission({ prop, closeModal, unlockedImg }: { prop: Stampinfo, closeModal: () => void, unlockedImg: string }) {
     const { name, facts, latitude, longitude } = prop;
     const styleProp = { height: '290px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };
     return (<>
         <ImageHandler image={
             {
-                src: "Pressbyran.svg",
+                src: unlockedImg,
                 height: 128,
                 width: 128,
                 alt: '',

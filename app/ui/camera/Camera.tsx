@@ -14,13 +14,13 @@ const videoConstraints: MediaTrackConstraints = {
     frameRate: 30
 };
 
-function useImageContent({ isLoading, prop, setTransition, setUnlocked, setUnlockedImg, image }: {
+function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image }: {
     isLoading: "idle" | "pending" | "finished" | "rejected",
     prop: Stampinfo,
     image: string | null,
     setTransition: Dispatch<SetStateAction<string>>,
     setUnlockedImg: Dispatch<SetStateAction<string | null>>,
-    setUnlocked: Dispatch<SetStateAction<boolean>>
+    // setUnlocked: Dispatch<SetStateAction<boolean>>
 }) {
     const [imageResultContent, setImageResultContent] = useState<ReactNode>(null)
 
@@ -29,27 +29,27 @@ function useImageContent({ isLoading, prop, setTransition, setUnlocked, setUnloc
 
         if (isLoading.includes("finished")) {
             setTransition("opacity-0 pointer-events-none")
-            setUnlocked(true);
             setUnlockedImg(image);
         }
         else if (isLoading.includes("rejected")) {
             setImageResultContent(<CameraError isLoading={isLoading} addOpacity />)
-            setUnlocked(false);
+            setUnlockedImg("");
+
         }
         else {
             setImageResultContent(null)
-            setUnlocked(false);
+            setUnlockedImg("");
         }
 
-    }, [isLoading, setImageResultContent, setTransition, prop, setUnlocked, image, setUnlockedImg])
+    }, [isLoading, setImageResultContent, setTransition, prop, image, setUnlockedImg])
 
     return imageResultContent;
 }
 
-export default function Camera({ prop, setTransition, setUnlocked, handleCamera, setUnlockedImg }: {
+export default function Camera({ prop, setTransition, handleCamera, setUnlockedImg }: {
     prop: Stampinfo,
     setTransition: Dispatch<SetStateAction<string>>,
-    setUnlocked: Dispatch<SetStateAction<boolean>>,
+    // setUnlocked: Dispatch<SetStateAction<boolean>>,
     setUnlockedImg: Dispatch<SetStateAction<string | null>>,
     handleCamera: () => void
 }) {
@@ -65,7 +65,7 @@ export default function Camera({ prop, setTransition, setUnlocked, handleCamera,
         code: number | undefined;
         json: any;
     });
-    const imageResultContent = useImageContent({ isLoading, setTransition, setUnlocked, setUnlockedImg, prop, image });
+    const imageResultContent = useImageContent({ isLoading, setTransition, setUnlockedImg, prop, image });
 
     const capture = useCallback(() => {
         if (webcamRef.current) {
@@ -120,7 +120,7 @@ export default function Camera({ prop, setTransition, setUnlocked, handleCamera,
                                     image ?
                                         <>
                                             <ImageHandler image={{
-                                                src: "Pressbyran.svg",
+                                                src: image,
                                                 alt: "Scan",
                                                 width: 0,
                                                 height: 0,
@@ -135,7 +135,6 @@ export default function Camera({ prop, setTransition, setUnlocked, handleCamera,
                                                         setImageResponse(updatedImage)
                                                         setTimeout(() => {
                                                             imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
-                                                            setLoading("finished");
                                                         }, 2 * 1000);
                                                     }}>Ladda upp foto</button>
                                                 }
