@@ -5,7 +5,7 @@ import { RxDotFilled } from "react-icons/rx";
 import Link from 'next/link'
 import ImageHandler from "../../ImageHandler";
 
-const GetStarted = () => {
+const GetStarted = ({dispatch}: {dispatch: Dispatch<SetStateAction<boolean | null>>}) => {
   const [activeContainer, setActiveContainer] = useState<number>(0)
   const colors = ['green', 'blue', 'purple']
 
@@ -29,7 +29,7 @@ const GetStarted = () => {
       <div
         onScrollCapture={() => onScroll(setActiveContainer)}
         id="carousel"
-        className="flex w-full h-full rounded-2xl overflow-x-scroll snap-x no-scrollbar">
+        className="flex w-full h-full max-w-[400px] rounded-2xl overflow-x-scroll snap-x no-scrollbar">
         <div id="container1" className="flex-none h-full w-full snap-center" >
           <div className="space-y-6 px-6 pt-6 pb-12">
             <div className="bg-darkGray w-3/6 h-8 rounded-md" />
@@ -90,11 +90,13 @@ const GetStarted = () => {
         })}
       </ul>
 
-      <Link href={'/chas-challenge/dashboard'}>
-        <p className={`text-end font-bold pt-8 underline`}>
-          {activeContainer === 2 ? 'Kom igång' : 'Hoppa över'}
-        </p>
-      </Link>
+      <p className={`text-end font-bold pt-3 underline text-darkGreen`}
+        onClick={() => dispatch(false)}
+        aria-label="button"
+        >
+        {activeContainer === 2 ? 'Kom igång' : 'Hoppa över'}
+      </p>
+      
     </div>
   )
 }
