@@ -60,7 +60,7 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
             src: `${rarity}`,
             height: 100,
             width: 100,
-            alt: "",
+            alt: "mission placeholder",
           }} />
         </div>
       </div>
