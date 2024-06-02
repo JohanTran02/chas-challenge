@@ -1,54 +1,45 @@
-import React from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/lib/redux/store";
 import StampContainer from './StampContainer';
 
-type Items = {
-  category: string,
-  stamps: Stamp[]
-}
-
-type Stamp = {
-  src: string,
-  name: string,
-  description: string,
-}
-
 export default function StampModalContent({ onClose }: { onClose: () => void }) {
-
-  const stamps: Items[] = [
-    {
-      category: "string",
-      stamps: [
-        { src: "hotdog-stamp.svg", name: "flower", "description": "flower" },
-        { src: "hotdog-stamp.svg", name: "banana", "description": "banana" },
-        { src: "hotdog-stamp.svg", name: "bear", "description": "bear" },
-        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-      ]
-    },
-    {
-      category: "test",
-      stamps: [
-        { src: "hotdog-stamp.svg", name: "flower", "description": "flower" },
-        { src: "hotdog-stamp.svg", name: "banana", "description": "banana" },
-        { src: "hotdog-stamp.svg", name: "bear", "description": "bear" },
-        { src: "hotdog-stamp.svg", name: "hotdog", "description": "hotdog" },
-      ]
-    },
-  ]
-
+  const { collectedStamps } = useSelector((state: RootState) => state.stamp);
+  const stamps = ["banana", "banana", "banana", "banana"]
   return (
     <div className="w-full relative">
-      <XMarkIcon className="absolute top-1 right-1 w-8 cursor-pointer" onClick={onClose} />
-      <div className='flex flex-col gap-5 p-4 h-[70vh]'>
-        <h1>Dina Stamps</h1>
+      <XMarkIcon className="absolute top-4 right-2 w-8 cursor-pointer" onClick={onClose} />
+      <div className='flex flex-col gap-5 p-4 h-[73vh]'>
         <div className='grid gap-4 overflow-scroll no-scrollbar'>
-          {
-            stamps.map((stamp) => {
-              return <StampContainer stamp={stamp} key={stamp.category} />
-            })
-          }
+          <div className='grid gap-2 '>
+            <h1 className='uppercase font-bold text-lg ml-4'>Start</h1>
+            <div className='grid grid-cols-2 gap-5 '>
+              {
+                stamps.map((stamp) => {
+                  return (
+                    <>
+                      <div className='mx-auto space-y-2' key={`${stamp}`}>
+                        <StampContainer stamp={stamp} />
+                        <h1 className='text-center text-xl font-bold capitalize'>{stamp}</h1>
+                      </div>
+                    </>
+                  )
+                })
+              }
+              {
+                stamps.map((stamp) => {
+                  return (
+                    <>
+                      <div className='mx-auto space-y-2' key={`${stamp}`}>
+                        <StampContainer stamp={stamp} />
+                        <h1 className='text-center text-xl font-bold capitalize'>{stamp}</h1>
+                      </div>
+                    </>
+                  )
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>

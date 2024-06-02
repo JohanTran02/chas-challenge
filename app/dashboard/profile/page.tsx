@@ -31,7 +31,6 @@ export default function Page() {
         }} />
       </>
     )
-
   })
 
   const modalTransformStamps = modalStamps ? "transition-all h-[80vh]" : "transition-all h-[0px]";

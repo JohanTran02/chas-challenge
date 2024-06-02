@@ -10,42 +10,42 @@ import GetStarted from '../signin/GetStarted';
 
 // react hook
 import { useEffect, useState } from 'react';
-import { get } from 'http';
+import { isProdPath } from '@/app/lib/definitions';
 
 const Header = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
-  const [getStarted, setGetStarted] = useState<boolean | null>(null); 
+  const [getStarted, setGetStarted] = useState<boolean | null>(null);
   const pathname = usePathname();
   const logo = 'Logo.svg';
 
   useEffect(() => {
-    if(getStarted){
+    if (getStarted) {
       const body = document.body as HTMLBodyElement;
-      const modal = document.getElementById('getstarted-modal') as HTMLDialogElement; 
-      body.style.overflow = 'hidden'; 
-      modal.showModal(); 
+      const modal = document.getElementById('getstarted-modal') as HTMLDialogElement;
+      body.style.overflow = 'hidden';
+      modal.showModal();
     }
 
-    if(getStarted === false){
+    if (getStarted === false) {
       const body = document.body as HTMLBodyElement;
-      const modal = document.getElementById('getstarted-modal') as HTMLDialogElement; 
+      const modal = document.getElementById('getstarted-modal') as HTMLDialogElement;
       body.style.overflow = 'auto';
-      modal.close(); 
+      modal.close();
       setGetStarted(null)
     }
 
   }, [getStarted])
   return (
     <>
-      { 
-        (getStarted || getStarted === false) && 
+      {
+        (getStarted || getStarted === false) &&
         <dialog id='getstarted-modal'
           className='m-auto rounded-2xl p-4 outline-none no-scrollbar border-4 border-darkGreen'>
-          <GetStarted dispatch={setGetStarted}/>
+          <GetStarted dispatch={setGetStarted} />
         </dialog>
       }
-      <header className={`w-full h-24 ${(pathname === '/chas-challenge' || pathname === "/camera/" || pathname === "/dashboard/map/") && 'hidden'}`}>
-        <div className={`bg-neturalWhite w-full h-20 flex justify-between items-center px-4 relative z-20 ${pathname === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
+      <header className={`w-full h-24 ${(pathname === '/chas-challenge' || pathname === "/camera/" || pathname === "/dashboard/map/") ? 'hidden' : ""}`}>
+        <div className={`bg-neutralWhite w-full h-full pb-4 flex justify-between items-center px-4 relative z-20 ${pathname === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
           <ImageHandler image={{
             priority: true,
             src: logo,
@@ -63,7 +63,7 @@ const Header = () => {
             </div> :
 
             <div className="flex flex-col items-center justify-end gap-1 h-full"
-              onClick={() => removeCookie('accessToken', { path: '/', domain: 'localhost' })}
+              onClick={() => removeCookie('accessToken', { path: '/', domain: isProdPath })}
             >
               <ImageHandler image={{
                 priority: true,

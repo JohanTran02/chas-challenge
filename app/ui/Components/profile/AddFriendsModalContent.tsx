@@ -4,8 +4,8 @@ export default function AddFriendsModalContent({ onClose, modalAddFriends }: { o
 
   return (
     <div className="w-full relative">
-      <XMarkIcon className="absolute top-1 right-1 w-8 cursor-pointer" onClick={onClose} />
-      <div className='flex flex-col gap-5 p-4 h-[70vh]'>
+      <XMarkIcon className="absolute top-4 right-2 w-8 cursor-pointer" onClick={onClose} />
+      <div className='flex flex-col gap-5 p-4 h-[73vh]'>
         <div className='grid gap-4 overflow-scroll no-scrollbar'>
           <div className='grid gap-2'>
             <h2>Användare</h2>
