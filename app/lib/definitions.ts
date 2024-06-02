@@ -91,3 +91,4 @@ export type ImageType = {
 }
 
 export const isProdImage = process.env.NODE_ENV === "production" ? `/chas-challenge/Images/` : `/Images/`;
+export const isProdPath = process.env.NODE_ENV === "production" ? `johantran02.github.io` : `localhost`;

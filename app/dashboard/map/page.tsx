@@ -13,7 +13,7 @@ export default function Page() {
 
     return (
         <>
-            <Mapbox styleProp={styles} geocontrol={true} navcontrol={true} interactive={true} trackResize={false} />
+            <Mapbox styleProp={styles} geocontrol={true} navcontrol={true} interactive={true} trackResize={true} />
         </>
     );
 }

@@ -17,7 +17,6 @@ export default function Page() {
     { src: "hotdog-stamp.svg" },
     { src: "hotdog-stamp.svg" },
     { src: "hotdog-stamp.svg" },
-    { src: "hotdog-stamp.svg" },
   ];
 
   let stampImages = images.map((image, index) => {
@@ -26,13 +25,12 @@ export default function Page() {
         <ImageHandler image={{
           src: image.src,
           alt: "",
-          width: 20,
-          height: 20,
-          className: "w-20 h-20 object-cover"
+          width: 100,
+          height: 100,
+          className: "size-24 object-cover"
         }} />
       </>
     )
-
   })
 
   const modalTransformStamps = modalStamps ? "transition-all h-[80vh]" : "transition-all h-[0px]";
@@ -44,24 +42,27 @@ export default function Page() {
   const openAddFriendsModal = () => setModalAddFriends(true);
   const closeModalAddFriends = () => setModalAddFriends(false);
 
+  // style={{ height: 'calc(100vh - 310px)' }}
   return (
     <>
-      <div className="h-2/5 w-full pb-6 flex flex-col justify-end items-center">
-        <ImageHandler image={{
-          src: "profile-cat.svg",
-          alt: "",
-          width: 20,
-          height: 20,
-          className: "w-20 h-20 object-cover"
-        }} />
-        <h1 className="text-white text-base font-bold pt-6">Användarnamn</h1>
-        <div className="flex">
-          <h6 className="text-white text-base font-bold mr-2">23 stamps</h6>
-          <h6 className="text-white text-base font-bold">4 vänner</h6>
+      <div className="w-full flex flex-col justify-end items-center py-6 space-y-2">
+        <div className=''>
+          <ImageHandler image={{
+            src: "profile-cat.svg",
+            alt: "",
+            width: 100,
+            height: 100,
+            className: "size-24 object-cover border-4 border-white rounded-full"
+          }} />
         </div>
+
+        <div className='text-center space-y-1'>
+          <h1 className="text-white text-xl font-bold mx-auto uppercase">Användarnamn</h1>
+          <h2 className="text-white text-sm font-bold">23 stamps<span className='px-2'>&#x2022;</span>4 vänner</h2>
+        </div>
+
       </div>
-      <div className="bg-white w-full px-4 pt-6 pb-16 rounded-t-3xl"
-        style={{ height: 'calc(100vh - 310px)' }}>
+      <div className="bg-white w-full px-4 pt-6 pb-16 rounded-t-3xl">
         <div>
           <div className="flex justify-between">
             <h1 className="text-black text-base font-bold">DINA STAMPS</h1>
@@ -80,8 +81,8 @@ export default function Page() {
               SE ALLA
             </h6>
           </div>
-          <div className='grid grid-cols-2 gap-2 pt-6'>
-            <FriendContainer showStamps={false} />
+          <div className='grid grid-cols-2 gap-2 pt-6 '>
+            <FriendContainer showStamps />
           </div>
         </div>
       </div>
@@ -98,7 +99,7 @@ export default function Page() {
 
       {/* Add Friends Modal */}
       <div className={`bg-neutral-100 fixed bottom-0 w-full left-0 ${modalTransformAddFriends} duration-300 rounded-t-2xl`}>
-        <AddFriendsModalContent onClose={closeModalAddFriends} />
+        <AddFriendsModalContent onClose={closeModalAddFriends} modalAddFriends={modalAddFriends} />
       </div>
     </>
   );

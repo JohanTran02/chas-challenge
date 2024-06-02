@@ -8,7 +8,7 @@ type Friend = {
   profilePicture: string;
 };
 
-export default function FriendContainer() {
+export default function FriendContainer({ showStamps, modalAddFriends }: Partial<{ showStamps: boolean, modalAddFriends: boolean }>) {
   const [friends, setFriends] = useState<Friend[]>([]);
 
   useEffect(() => {
@@ -31,20 +31,25 @@ export default function FriendContainer() {
   return (
     <>
       {displayedFriends.map((friend) => (
-        <div className="flex items-center justify-between gap-2 pt-4" key={friend.userID}>
-          <div className="flex items-center gap-2">
-            <ImageHandler image={{
-              src: friend.profilePicture,
-              alt: friend.username,
-              width: 20,
-              height: 20,
-              className: "w-20 h-20 object-cover",
-            }} />
-            <div>
-              <h1>{friend.username}</h1>
-              <h2>{friend.stamps} Stamps</h2>
-            </div>
+        <div className="flex items-center gap-4" key={friend.userID}>
+          <ImageHandler image={{
+            src: friend.profilePicture,
+            alt: friend.username,
+            width: 100,
+            height: 100,
+            className: showStamps ? "size-9 object-cover" : "size-20 object-cover",
+          }} />
+          <div>
+            <h1>{friend.username}</h1>
+            {showStamps ? undefined : <h1>{friend.stamps} Stamps</h1>}
           </div>
+          {
+            modalAddFriends ? <button
+              type="button"
+              className="text-sm text-neutral-100 bg-darkGreen border-darkGreen text-nowrap px-2 py-2 rounded-3xl border-[1px] font-semibold ml-auto ">
+              Lägg till vän
+            </button> : undefined
+          }
         </div>
       ))}
     </>

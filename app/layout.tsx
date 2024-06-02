@@ -12,7 +12,7 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en" className='no-scrollbar'>
-        <body className={`bg-[#f6f5ef] w-screen min-h-screen mx-auto flex flex-col h-auto overflow-x-hidden max-w-[600px] pb-[34px] relative ${inter.className}`}>
+        <body className={`w-screen min-h-screen mx-auto flex flex-col h-auto overflow-x-hidden max-w-[600px] pb-[34px] relative ${inter.className}`}>
           <AuthProvider>
             <Header />
             <main>{children}</main>
