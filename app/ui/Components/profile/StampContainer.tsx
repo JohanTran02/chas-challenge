@@ -21,8 +21,8 @@ export default function StampContainer({ stamp }: { stamp: Items }) {
                 <ImageHandler image={{
                     src: images.src,
                     alt: images.name,
-                    width: 0,
-                    height: 0,
+                    width: 20,
+                    height: 20,
                     className: "w-20 h-20 object-cover",
 
                 }} />

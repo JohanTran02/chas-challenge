@@ -8,11 +8,11 @@ import Mapbox from '../dashboard/map/Mapbox';
 import CompletedMission from './CompletedMission';
 import StampStats from './StampStats';
 import ImageHandler from '../../ImageHandler';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Camera from '../../camera/Camera';
 
 
-const Dialog = ({ prop }: { prop: Stampinfo; }) => {
+const Dialog = ({ prop, setModal }: { prop: Stampinfo; setModal: Dispatch<SetStateAction<Boolean>> }) => {
   const [transition, setTransition] = useState("opacity-0 pointer-events-none");
   const [unlockedImg, setUnlockedImg] = useState<string | null>(null)
   const { name, facts, latitude, longitude } = prop;
@@ -37,14 +37,15 @@ const Dialog = ({ prop }: { prop: Stampinfo; }) => {
     router.push('/dashboard/map/');
   }
 
-  const closeModal = (): void => {
+  const closeModal = (setModal: Dispatch<SetStateAction<Boolean>>): void => {
     document.body.style.overflowY = '';
     const information = document.getElementById(`missionsModal-${name}`) as HTMLDialogElement;
     information.close();
+    setModal(false);
   }
 
   // Mapxbox styles
-  const styleProp = { height: '400px', width: '365px', inset: '0 0 0 0', translate: '-60px -95px' };
+  const styleProp = { height: '400px', width: '365px', inset: '0 0 0 0', translate: '-50px -135px' };
   return (
 
     <dialog
@@ -57,15 +58,15 @@ const Dialog = ({ prop }: { prop: Stampinfo; }) => {
       {/* <div className="sticky bg-white inset-0 translate-y-[15%] h-full rounded-3xl z-[-1]" /> */}
 
       {
-        unlockedImg ? <CompletedMission prop={prop} closeModal={closeModal} unlockedImg={unlockedImg} /> :
-          <div className="flex flex-col w-full h-full py-6">
+        unlockedImg ? <CompletedMission prop={prop} setModal={setModal} closeModal={closeModal} unlockedImg={unlockedImg} /> :
+          <div className="flex flex-col w-full h-full">
             <button
               aria-label='Close button'
-              onClick={closeModal}
+              onClick={() => closeModal(setModal)}
               className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
               <ImageHandler image={{ src: 'close-button.svg', width: 35, height: 35, className: 'size-4', alt: 'close-button' }} />
             </button>
-            <div className="bg-white w-full space-y-6">
+            <div className="bg-white w-full space-y-6 px-4 py-6">
               <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
               <h1 className='font-bold text-black text-center'>Uppdrag: {name}</h1>
               <div className="flex font-extrabold">
@@ -104,7 +105,6 @@ const Dialog = ({ prop }: { prop: Stampinfo; }) => {
             </div>
           </div>
       }
-
     </dialog>
 
   )

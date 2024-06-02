@@ -8,8 +8,8 @@ export default function StampStats({ prop }: { prop?: Stampinfo }) {
                 <ImageHandler image={{
                     src: "dollar.svg",
                     alt: "",
-                    height: 0,
-                    width: 0,
+                    height: 14,
+                    width: 14,
                     className: "size-4"
                 }} />
                 <p className='text-[12px] text-darkGreen capitalize'>{prop?.rarity ? prop.rarity : "guld"}</p>
@@ -18,8 +18,8 @@ export default function StampStats({ prop }: { prop?: Stampinfo }) {
                 <ImageHandler image={{
                     src: "Percentage.svg",
                     alt: "",
-                    height: 0,
-                    width: 0,
+                    height: 14,
+                    width: 14,
                     className: "size-4",
                 }} />
                 <p className='text-[12px] text-darkGreen'>0,5</p>
@@ -28,8 +28,8 @@ export default function StampStats({ prop }: { prop?: Stampinfo }) {
                 <ImageHandler image={{
                     src: "map-mission.svg",
                     alt: "",
-                    height: 0,
-                    width: 0,
+                    height: 14,
+                    width: 14,
                     className: "size-4"
                 }} />
                 <p className='text-[12px] text-darkGreen'>

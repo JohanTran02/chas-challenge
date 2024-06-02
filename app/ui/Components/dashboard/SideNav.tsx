@@ -40,8 +40,8 @@ export default function SideNav() {
             >
               <li>
                 <ImageHandler image={{
-                  height: 0,
-                  width: 0,
+                  height: 32,
+                  width: 32,
                   src: link.src,
                   alt: link.alt,
                   className: `size-8 object-cover object-center ${path !== link.href && 'brightness-[250%] grayscale-[60%]'}`

@@ -105,8 +105,8 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                 />
                                 <div className="flex justify-center mt-4" onClick={capture}>
                                     <ImageHandler image={{
-                                        height: 0,
-                                        width: 0,
+                                        height: 32,
+                                        width: 32,
                                         src: "Kameraknapp.svg",
                                         alt: "Camera button",
                                         className: "object-cover w-20 h-20",
@@ -122,8 +122,8 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                 checkPath: true,
                                                 src: image,
                                                 alt: "Scan",
-                                                width: 0,
-                                                height: 0,
+                                                width: 32,
+                                                height: 32,
                                                 className: "object-cover h-full w-full border-2 border-white rounded-md",
                                             }} />
                                             <div className="flex flex-col gap-3 w-full max-w-48 mx-auto mt-4">

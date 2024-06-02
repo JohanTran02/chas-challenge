@@ -36,8 +36,8 @@ export default function FriendContainer() {
             <ImageHandler image={{
               src: friend.profilePicture,
               alt: friend.username,
-              width: 0,
-              height: 0,
+              width: 20,
+              height: 20,
               className: "w-20 h-20 object-cover",
             }} />
             <div>

@@ -104,8 +104,8 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 									color="red">
 									<ImageHandler image={{
 										src: "map-pin.svg",
-										height: 0,
-										width: 0,
+										height: 32,
+										width: 32,
 										alt: "map pin",
 										className: "object-cover object-center size-8"
 									}} />

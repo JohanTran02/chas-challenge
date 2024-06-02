@@ -1,4 +1,5 @@
 'use client'
+// Herbert.Robbins@gmail.com
 
 // react-hook-form
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
@@ -28,7 +29,9 @@ export default function SignIn() {
     // log in
     if (!createAccount) {
       console.log(data);
-      const { code, json, error } = await account("account/login", data);
+      const {email, password} = data; 
+      console.log({email, password})
+      const { code, json, error } = await account("account/login", {email, password});
 
       if (code === 200) {
         // dispatch({type: 'user/onlineState', payload: data});

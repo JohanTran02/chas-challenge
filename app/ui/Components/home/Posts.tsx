@@ -22,7 +22,7 @@ const Posts = () => {
             <div className="flex-1 flex gap-3 items-center w-full h-[49px] mt-2">
               <div className="h-[45px] w-[45px] border-darkGreen border-2 rounded-full">
                 <ImageHandler image={{
-                  src: user.profilePic, alt: 'profile picture', width: 0, height: 0, className: "w-full h-full"
+                  src: user.profilePic, alt: 'profile picture', width: 32, height: 32, className: "w-full h-full"
                 }} />
               </div>
             </div>
@@ -44,8 +44,8 @@ const Posts = () => {
                 <ImageHandler image={{
                   src: "kategori.svg",
                   alt: "An image of a collected stamp",
-                  height: 0,
-                  width: 0,
+                  height: 32,
+                  width: 32,
                   className: "h-auto w-[80%]"
                 }} />
               </div>
