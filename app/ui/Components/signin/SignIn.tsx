@@ -1,5 +1,6 @@
 'use client'
 // Herbert.Robbins@gmail.com
+// Charlie Bush.
 
 // react-hook-form
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
@@ -46,7 +47,7 @@ export default function SignIn() {
     // create account
     if (createAccount && data.password === data.confirmPassword) {
       console.log(data);
-      const { code } = await account("account/register", data);
+      const { code } = await account("account/register", data, setCreateAccount);
       if (code === 200) {
         setUser(data)
       }
@@ -96,12 +97,14 @@ export default function SignIn() {
                 required={true}
                 property={"email"}
                 error={methods.formState.errors}
+                createAccount={createAccount && createAccount}
               />
               <Inputfield
                 type={"password"}
                 required={true}
                 property={"password"}
                 error={methods.formState.errors}
+                createAccount={createAccount && createAccount}
               />
               {createAccount &&
                 <Inputfield

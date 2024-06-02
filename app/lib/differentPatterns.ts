@@ -1,14 +1,24 @@
-export const differentPatterns = (property: string) => {
+export const differentPatterns = (property: string, createAccount: boolean | undefined) => {
   let pattern;
   let errorMessage;
-  if(property === 'email'){
+
+  if(property === 'email' && createAccount){
     pattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
     errorMessage = 'Ogiltig mejladress. Vänligen ange en giltig mejladress.' 
-  } 
 
-  if(property === 'password'){
-    pattern = /^(?=.*[A-Z])(?=.*\d)(?!.*<.*>).*.{6,}$/;
-    errorMessage = 'Vänligen ange ett lösenord som innehåller minst en stor bokstav, en siffra och är minst 6 tecken lång.'; 
+  } else if(property === 'email' && !createAccount){
+    pattern = /^(?!.*[>]).*$/; // No HTML tags
+    errorMessage = 'Ogiltig inmatning.'; 
+  }
+
+
+  if(property === 'password' && createAccount){
+    pattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+    errorMessage = 'Lösenordet måste innehålla minst 6 tecken, minst en stor bokstav, en liten bokstav, en siffra och ett specialtecken.'; 
+
+  } else if(property === 'password' && createAccount){
+    pattern = /^(?!.*[>]).*$/; // No HTML tags
+    errorMessage = 'Ogiltig inmatning.';
   }
 
   if(property === 'validate'){

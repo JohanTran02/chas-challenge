@@ -5,7 +5,8 @@ export type Input = {
   type: string;
   required: boolean;
   property: 'email' | 'password' | 'confirmPassword' | 'displayName';
-  error: Partial<FieldErrors<UserValues>>
+  error: Partial<FieldErrors<UserValues>>; 
+  createAccount?: boolean | undefined; 
 }
 
 export type UserValues = {

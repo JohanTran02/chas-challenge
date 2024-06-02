@@ -1,10 +1,10 @@
+import { Dispatch, SetStateAction } from "react";
 import { AccountEndpoint, CookiesForUser, UserValues } from "../definitions";
 
-export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) => {
+export const account = async (endpoint: AccountEndpoint, userInfo: UserValues, dispatch?: Dispatch<SetStateAction<boolean>>) => {
   let json;
   let code;
   let error: { code: string; description: string } | undefined;
-
   
   try {
     const response = await fetch('https://natureai.azurewebsites.net/' + endpoint, {
@@ -14,6 +14,10 @@ export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) =
       },
       body: JSON.stringify(userInfo)
     });
+
+    if(response.status === 400 && endpoint === 'account/login') alert('Fel mailadress eller lösenord!'); 
+    if(response.status === 400 && endpoint === 'account/register') alert('Kontot är upptagen!'); 
+    
 
     if (response.status === 200) {
       code = response.status;
@@ -31,8 +35,11 @@ export const account = async (endpoint: AccountEndpoint, userInfo: UserValues) =
     }
 
   } catch (error) {
-    console.error('Something went wrong fetching data:', error);
+    dispatch && dispatch(false); 
+    // console.error('Something went wrong fetching data:', error);
   }
 
   return { code, json, error };
 }
+
+

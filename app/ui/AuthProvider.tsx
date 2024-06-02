@@ -20,7 +20,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
     const [isLoading, setLoading] = useState(true);
     const router = useRouter();
-
+    
     useDebounce(setLoading, 1);
 
     useEffect(() => {
@@ -34,18 +34,21 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         }
     }, [router, cookies]);
 
-
     return (
         <>
             {
-                isLoading &&
+                isLoading ? 
+                
                 <div className="fixed inset-0 grid place-content-center bg-darkGreen w-full h-full z-30">
                     <Loader />
-                </div>
+                </div> 
+                
+                : 
+
+                <CookiesProvider>
+                    {children}
+                </CookiesProvider>
             }
-            <CookiesProvider>
-                {children}
-            </CookiesProvider>
         </>
     );
 }
