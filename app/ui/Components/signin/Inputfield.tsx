@@ -5,15 +5,14 @@ import { differentPatterns } from "@/app/lib/differentPatterns";
 // style
 import style from '@/app/ui/style/signin/form.module.css'; 
 
-const Inputfield = ({type, property, required, error}: Input) => {
+const Inputfield = ({type, property, required, error, createAccount}: Input) => {
   const { register } = useFormContext(); 
-  const { pattern, errorMessage } = differentPatterns(property);
+  const { pattern, errorMessage } = differentPatterns(property, createAccount);
   
   const setLabel = (property: string) => {
     if(property === 'displayName') return 'Användarnam';
     if(property === 'email') return 'Mailadress';
-    if(property === 'password') return 'Lösenord';
-    if(property === 'confirmPassword') return 'Bekfräfta lösenord';
+    if(property === ('password' || 'confirmPassword')) return 'Lösenord';
   }
   const label = setLabel(property); 
 

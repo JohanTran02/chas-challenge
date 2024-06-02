@@ -96,12 +96,14 @@ export default function SignIn() {
                 required={true}
                 property={"email"}
                 error={methods.formState.errors}
+                createAccount={createAccount && createAccount}
               />
               <Inputfield
                 type={"password"}
                 required={true}
                 property={"password"}
                 error={methods.formState.errors}
+                createAccount={createAccount && createAccount}
               />
               {createAccount &&
                 <Inputfield
