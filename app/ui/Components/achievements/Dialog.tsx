@@ -81,8 +81,8 @@ const Dialog = ({ prop, setModal }: { prop: Stampinfo; setModal: Dispatch<SetSta
                   <p className='text-[12px] line-clamp-6'>{facts}</p>
                 </article>
               </div>
-
-              <div className="relative h-[128px] w-[265px] mx-auto overflow-hidden rounded-xl"
+            
+              {prop.latitude && <div className="relative h-[128px] w-[265px] mx-auto overflow-hidden rounded-xl"
                 onClick={goToMap}>
                 <Mapbox
                   styleProp={styleProp}
@@ -95,7 +95,7 @@ const Dialog = ({ prop, setModal }: { prop: Stampinfo; setModal: Dispatch<SetSta
                   name={name}
                   trackResize={false}
                 />
-              </div>
+              </div>}
 
               <div className="w-full h-[75px] flex justify-center items-end pb-[10px]" onClick={handleCamera}>
                 <button className='py-3 px-8 size-max bg-darkGreen text-[12px] text-white font-bold rounded-full'>Starta uppdrag
