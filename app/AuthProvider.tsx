@@ -24,7 +24,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     useDebounce(setLoading, 1);
 
     useEffect(() => {
-        console.log("Checking cookies", cookies);
+        console.log("Checking cookies", cookies.accessToken);
         if (cookies.accessToken) {
             console.log("Access token found, redirecting to /dashboard");
             router.push("/dashboard");
@@ -34,17 +34,18 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         }
     }, [router, cookies]);
 
-    if (isLoading) {
-        return (
-            <div className="fixed inset-0 bg-darkGreen z-30 flex items-center justify-center">
-                <Loader />
-            </div>
-        );
-    }
 
     return (
-        <CookiesProvider>
-            {children}
-        </CookiesProvider>
+        <>
+            {
+                isLoading &&
+                <div className="fixed inset-0 grid place-content-center bg-darkGreen w-full h-full z-30">
+                    <Loader />
+                </div>
+            }
+            <CookiesProvider>
+                {children}
+            </CookiesProvider>
+        </>
     );
 }
