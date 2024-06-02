@@ -46,7 +46,7 @@ const Dialog = ({ prop, setModal }: { prop: Stampinfo; setModal: Dispatch<SetSta
   }
 
   // Mapxbox styles
-  const styleProp = { height: '400px', width: '365px', inset: '0 0 0 0', translate: '-60px -95px' };
+  const styleProp = { height: '400px', width: '365px', inset: '0 0 0 0', translate: '-50px -135px' };
   return (
 
     <dialog
@@ -60,14 +60,14 @@ const Dialog = ({ prop, setModal }: { prop: Stampinfo; setModal: Dispatch<SetSta
 
       {
         unlocked ? <CompletedMission prop={prop} setModal={setModal} closeModal={closeModal} /> :
-          <div className="flex flex-col w-full h-full py-6">
+          <div className="flex flex-col w-full h-full">
             <button
               aria-label='Close button'
               onClick={() => closeModal(setModal)}
               className="absolute right-0 top-0 my-6 mx-6 font-bold text-2xl text-darkGreen">
               <ImageHandler image={{ src: 'close-button.svg', width: 35, height: 35, className: 'size-4', alt: 'close-button' }} />
             </button>
-            <div className="bg-white w-full space-y-6">
+            <div className="bg-white w-full space-y-6 px-4 py-6">
               <div className="bg-green-800 size-32 rounded-full self-center mx-auto" />
               <h1 className='font-bold text-black text-center'>Uppdrag: {name}</h1>
               <div className="flex font-extrabold">
@@ -106,7 +106,6 @@ const Dialog = ({ prop, setModal }: { prop: Stampinfo; setModal: Dispatch<SetSta
             </div>
           </div>
       }
-
     </dialog>
 
   )
