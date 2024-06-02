@@ -10,9 +10,10 @@ const Inputfield = ({type, property, required, error, createAccount}: Input) => 
   const { pattern, errorMessage } = differentPatterns(property, createAccount);
   
   const setLabel = (property: string) => {
-    if(property === 'displayName') return 'Användarnam';
+    if(property === 'displayName') return 'Användarnamn';
     if(property === 'email') return 'Mailadress';
-    if(property === ('password' || 'confirmPassword')) return 'Lösenord';
+    if(property === 'password') return 'Lösenord';
+    if(property === 'confirmPassword') return 'Bekfräfta lösenord';
   }
   const label = setLabel(property); 
 
