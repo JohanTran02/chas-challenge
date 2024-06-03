@@ -5,7 +5,6 @@ import StampStats from "./StampStats";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { RootState } from "@/app/lib/redux/store";
 import { useSelector } from "react-redux";
-import { getUserLocation } from "@/app/lib/map/geolocation";
 
 type Prop = {
     stamp: Stampinfo;
@@ -15,21 +14,21 @@ type Prop = {
 }
 
 export default function CompletedMission({ stamp, closeModal, setModal, unlockedImg }: Prop) {
-    const {stamps, collectedStampsWithCoords} = useSelector((state: RootState) => state.stamp); 
-    const [coords, setCoords] = useState<{latitude: string; longitude: string}>()
+    const { stamps, collectedStampsWithCoords } = useSelector((state: RootState) => state.stamp);
+    const [coords, setCoords] = useState<{ latitude: string; longitude: string }>()
 
     useEffect(() => {
-       console.log(collectedStampsWithCoords)
-       collectedStampsWithCoords.filter((obj) => {
-            if(obj.name === stamp.name) {
+        console.log(collectedStampsWithCoords)
+        collectedStampsWithCoords.filter((obj) => {
+            if (obj.name === stamp.name) {
                 const coords = obj.coordinates.map((coord) => coord.replace(/[^\d.]/g, ''))
-                setCoords({latitude: coords[0], longitude: coords[1]});
-                return true;  
-            } 
-            return;           
-       })
+                setCoords({ latitude: coords[0], longitude: coords[1] });
+                return true;
+            }
+            return;
+        })
 
-    }, [])
+    }, [collectedStampsWithCoords, stamp.name])
 
     const { name, facts, latitude, longitude } = stamp;
     const styleProp = { height: '290px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };

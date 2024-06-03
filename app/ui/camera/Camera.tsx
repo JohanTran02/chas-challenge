@@ -55,13 +55,6 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
     const [image, setImage] = useState<string | null>("");
     const [enableWebcam, setEnableWebcam] = useState<boolean>(true);
     const [coords, setCoords] = useState<GeolocationCoordinates | undefined>();
-    const [imageResponse, setImageResponse] = useState<{
-        code: number | undefined;
-        json: any;
-    }>({} as {
-        code: number | undefined;
-        json: any;
-    });
     const imageResultContent = useImageContent({ isLoading, setTransition, setUnlockedImg, prop, image });
 
     useEffect(() => {
@@ -134,8 +127,7 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                     <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg" onClick={async () => {
                                                         setLoading("pending");
                                                         getUserLocation("get", setCoords);
-                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name, [coords?.latitude.toString() as string, coords?.longitude.toString() as string,], setLoading);
-                                                        setImageResponse(updatedImage)
+                                                        await camera("ai/readimage", image as string, cookies.accessToken, prop.name, [coords?.latitude.toString() as string, coords?.longitude.toString() as string,], setLoading);
                                                     }}>Ladda upp foto</button>
                                                 }
                                                 <button className="rounded-3xl text-white bg-darkGreen border-2 border-white p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>

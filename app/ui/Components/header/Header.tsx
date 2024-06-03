@@ -10,13 +10,12 @@ import GetStarted from '../signin/GetStarted';
 
 // react hook
 import { useEffect, useState } from 'react';
-import { cookieExpireTime, cookieSettings, isProdPath } from '@/app/lib/definitions';
+import { cookieSettings } from '@/app/lib/definitions';
 
 const Header = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken', "displayName"]);
   const [getStarted, setGetStarted] = useState<boolean | null>(null);
   const pathname = usePathname();
-  const logo = 'Logo.svg';
 
   useEffect(() => {
     if (getStarted) {
@@ -65,7 +64,7 @@ const Header = () => {
             <div className="flex flex-col items-center justify-end gap-1 h-full"
               onClick={() => {
                 removeCookie('displayName', cookieSettings);
-                removeCookie("accessToken", cookieSettings)
+                removeCookie("accessToken", cookieSettings);
               }}
             >
               <ImageHandler image={{
@@ -77,7 +76,7 @@ const Header = () => {
                 className: 'size-12',
               }} />
 
-        
+
             </div>
           }
         </div>

@@ -9,7 +9,6 @@ import Geocoder from "./Geocoder";
 // Hooks
 import { useEffect, useState } from "react";
 import { MapboxStyleProp, Stampinfo } from "@/app/lib/definitions";
-import Searchbar from "./Searchbar";
 
 // Image
 import ImageHandler from "@/app/ui/ImageHandler";
@@ -83,7 +82,6 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 								trackUserLocation
 							/>
 							<Geocoder />
-							<Searchbar />
 						</>
 					}
 
@@ -92,20 +90,20 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 						style={{ borderRadius: '10px' }}
 					/>}
 
-					{(minimap && coords && !latitude) && 
-					<Marker
-						// onClick = få upp popup
-						latitude={coords.latitude}
-						longitude={coords.longitude}
-						color="red">
-						<ImageHandler image={{
-							src: "map-pin.svg",
-							height: 32,
-							width: 32,
-							alt: "map pin",
-							className: "object-cover object-center size-8"
-						}} />
-					</Marker>}
+					{(minimap && coords && !latitude) &&
+						<Marker
+							// onClick = få upp popup
+							latitude={coords.latitude}
+							longitude={coords.longitude}
+							color="red">
+							<ImageHandler image={{
+								src: "map-pin.svg",
+								height: 32,
+								width: 32,
+								alt: "map pin",
+								className: "object-cover object-center size-8"
+							}} />
+						</Marker>}
 
 					{(markerInfo || (latitude || longitude)) &&
 						<>

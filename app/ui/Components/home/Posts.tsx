@@ -1,20 +1,33 @@
 import ImageHandler from '../../ImageHandler';
 import StampStats from '../achievements/StampStats';
 
-
-
 const Posts = () => {
   const userNames: { name: string; profilePic: string; stamp: { category: string; rarity: string }; }[] = [
-    { name: 'Lucas Lawson', profilePic: 'profile-dog2.svg', stamp: { 
-      category: 'IGELKOTT', rarity: 'platinum'}},
-    { name: 'Hallie Cortez', profilePic: 'profile-cat.svg', stamp: { 
-      category: 'STEN', rarity: 'brons' }},
-    { name: 'Dale Simmons', profilePic: 'profile-dog.svg', stamp: { 
-      category: 'STOL', rarity: 'brons' }},
-    { name: 'Gertrude Barnett', profilePic: 'profile-beaver.svg', stamp: { 
-      category: 'BANAN', rarity: 'brons'} },
-    { name: 'Gertrude Barnett', profilePic: 'profile-beaver.svg', stamp: { 
-      category: 'STOL', rarity: 'brons'} },
+    {
+      name: 'Lucas Lawson', profilePic: 'profile-dog2.svg', stamp: {
+        category: 'IGELKOTT', rarity: 'platinum'
+      }
+    },
+    {
+      name: 'Hallie Cortez', profilePic: 'profile-cat.svg', stamp: {
+        category: 'STEN', rarity: 'brons'
+      }
+    },
+    {
+      name: 'Dale Simmons', profilePic: 'profile-dog.svg', stamp: {
+        category: 'STOL', rarity: 'brons'
+      }
+    },
+    {
+      name: 'Gertrude Barnett', profilePic: 'profile-beaver.svg', stamp: {
+        category: 'BANAN', rarity: 'brons'
+      }
+    },
+    {
+      name: 'Gertrude Barnett', profilePic: 'profile-beaver.svg', stamp: {
+        category: 'STOL', rarity: 'brons'
+      }
+    },
   ]
 
   return (
@@ -27,10 +40,10 @@ const Posts = () => {
             <div className="flex-1 flex gap-3 items-center w-full h-[49px] mt-2">
               <div className="h-[40px] w-[40px] border-darkGreen border-2 rounded-full">
                 <ImageHandler image={{
-                  src: user.profilePic, 
-                  alt: 'profile picture', 
-                  width: 32, 
-                  height: 32, 
+                  src: user.profilePic,
+                  alt: 'profile picture',
+                  width: 32,
+                  height: 32,
                   className: "w-full h-full"
                 }} />
               </div>
@@ -41,7 +54,7 @@ const Posts = () => {
                 <p className="text-xs font-medium truncate ">har samlat ett nytt stamp: {user.stamp.category}</p>
               </div>
               <div className='flex font-extrabold'>
-                <StampStats fakeRarity={user.stamp.rarity}/>
+                <StampStats fakeRarity={user.stamp.rarity} />
               </div>
               {/* <div className="w-full h-max font-semibold mt-2">
                 <p className=" inline-block">Gilla</p>

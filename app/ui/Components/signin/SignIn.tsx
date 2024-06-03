@@ -1,6 +1,5 @@
 'use client'
-// Herbert.Robbins@gmail.com
-// Charlie Bush.
+
 
 // react-hook-form
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
@@ -10,9 +9,7 @@ import Inputfield from "./Inputfield";
 import { useState } from "react";
 
 //TS 
-import { isProdPath, UserValues, cookieExpireTime, cookieSettings } from "@/app/lib/definitions";
-// import Update from "./Update";
-// import GetStarted from "./GetStarted";
+import { UserValues, cookieSettings } from "@/app/lib/definitions";
 
 // Redux
 import { account, google } from "@/app/lib/CC_Backend/account";
@@ -24,7 +21,6 @@ import GoogleButton from "./GoogleButton";
 export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken', "displayName"]);
-  const [user, setUser] = useState<UserValues | null>(null);
   const [loading, setLoading] = useState<boolean>(false); // Add loading state
 
   // hook use form
@@ -38,8 +34,6 @@ export default function SignIn() {
       const { code, json, error } = await account("account/login", { email, password }, setLoading);
 
       if (code === 200) {
-        // dispatch({type: 'user/onlineState', payload: data});
-        setUser(data)
         setCookie('accessToken', json.user.accessToken, cookieSettings);
         setCookie('displayName', json.user.displayName, cookieSettings);
 
@@ -50,12 +44,7 @@ export default function SignIn() {
 
     // create account
     if (createAccount && data.password === data.confirmPassword) {
-      console.log(data);
-      const { code } = await account("account/register", data, setLoading);
-      if (code === 200) {
-        setUser(data);
-      }
-      return;
+      await account("account/register", data, setLoading);
     }
 
     if (createAccount && data.password !== data.confirmPassword) {
