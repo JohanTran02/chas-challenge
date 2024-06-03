@@ -43,7 +43,7 @@ const ClickedCategory = () => {
       <div className="flex items-center gap-2 px-1 w-full">
         <p className="flex-1 font-bold">SAMLADE STAMPS</p>
         {(stamps !== null && !isLoading) && <div className="flex-1 flex items-center gap-4">
-          <div className="flex-1 bg-white h-2 w-full border-[1px] border-darkGreen rounded-xl">
+          <div className="flex-1 bg-white h-2 w-full border-[1.5px] border-darkGreen rounded-xl">
             <div className={`h-full bg-[#598f7d] rounded-sm`}
               style={{ width: `${collectedStampsProcentage}%` }} />
           </div>
@@ -55,10 +55,10 @@ const ClickedCategory = () => {
           const accomplishedStamps = completedStamps.find((obj) => obj?.name === stamp.name);
 
           if (!accomplishedStamps?.name)
-            return <li key={stamp.stampId}><SpecificMission prop={stamp} /></li>
+            return <li key={stamp.stampId}><SpecificMission stamp={stamp} /></li>
 
           if (accomplishedStamps)
-            return <li key={stamp.stampId}><SpecificMission prop={stamp} completedStamps={accomplishedStamps.name} /></li>
+            return <li key={stamp.stampId}><SpecificMission stamp={stamp} completedStamps={accomplishedStamps.name} /></li>
         }).reverse()
           : <SkeletonLoaderMissions />}
       </ul>

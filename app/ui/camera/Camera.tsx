@@ -8,6 +8,7 @@ import { useCookies } from "react-cookie";
 import CameraLoader from "./CameraLoader";
 import { Stampinfo } from "@/app/lib/definitions";
 import ImageHandler from "../ImageHandler";
+import { getUserLocation } from "@/app/lib/map/geolocation";
 
 const videoConstraints: MediaTrackConstraints = {
     facingMode: "environment",
@@ -56,6 +57,7 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
     const webcamRef = useRef<Webcam>(null);
     const [image, setImage] = useState<string | null>("");
     const [enableWebcam, setEnableWebcam] = useState<boolean>(true);
+    const [coords, setCoords] = useState<GeolocationCoordinates | undefined>();
     const [imageResponse, setImageResponse] = useState<{
         code: number | undefined;
         json: any;
@@ -64,6 +66,10 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
         json: any;
     });
     const imageResultContent = useImageContent({ isLoading, setTransition, setUnlockedImg, prop, image });
+
+    useEffect(() => {
+        getUserLocation("get", setCoords)
+    }, [setCoords])
 
     const capture = useCallback(() => {
         if (webcamRef.current) {
@@ -130,13 +136,13 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                     (isLoading.includes("idle")) &&
                                                     <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg" onClick={async () => {
                                                         setLoading("pending");
-                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name);
+                                                        getUserLocation("get", setCoords);
+                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name, [coords?.latitude.toString() as string, coords?.longitude.toString() as string,], setLoading);
                                                         setImageResponse(updatedImage)
-                                                        const result = (imageResponse.code === 200 && imageResponse.json === true)
-
-                                                        setTimeout(() => {
-                                                            result ? setLoading("finished") : setLoading("rejected");
-                                                        }, 2 * 1000);
+                                                        // const result = (imageResponse.code === 200 && imageResponse.json === true)
+                                                        // setTimeout(() => {
+                                                        //     result ? setLoading("finished") : setLoading("rejected");
+                                                        // }, 3 * 1000);
                                                     }}>Ladda upp foto</button>
                                                 }
                                                 <button className="rounded-3xl text-white bg-darkGreen border-2 border-white p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>

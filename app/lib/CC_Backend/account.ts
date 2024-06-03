@@ -43,4 +43,24 @@ export const account = async (
   }
 
   return { code, json, error };
-};
+}
+
+
+export const google = async () => {
+
+  try {
+    const response = await fetch('https://natureai.azurewebsites.net/account/login-google');
+
+    if (!response.ok) {
+      console.log(response.status, response.statusText)
+      return
+    }
+
+    const data = await response.json();
+    console.log(data)
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}

@@ -51,16 +51,6 @@ const AllCategories = () => {
 
     return () => { }
   }, [dispatch, markerInfo])
-  // AKTIVA queries
-  // categoryId = 1 --> 'Fruits'
-  // categoryId = 4 --> 'Furniture'
-
-  // ICKE AKTIVA queries
-  // categoryId = 2 --> 'Fruits'
-  // categoryId = 3 --> 'Fruits'
-
-
-  // response.map(categoryId => stampCategories('getcategorywithstamps', 'categoryId', categoryId)); 
 
   return (
     <ul className={style.grid}>
@@ -74,23 +64,15 @@ const AllCategories = () => {
                   {index < 1 ? 'START' : 'KOMMER SNART'}
                 </p>
                 <NextStep redirect={redirect} category={stamp.category} title={stamp.category.title}>
-                  <div className="flex-[3] grid place-items-center w-5/6 mx-auto mt max-h-[192px]">
+                  <div className="flex-[3] grid place-items-center max-h-[192px]">
                     <ImageHandler image={{
                       src: stamp.img,
                       height: 100,
                       width: 100,
                       alt: "",
-                      style: { width: index < 1 ? '100%' : '80%', height: 'auto' }
+                      style: { width: index < 1 ? '95%' : '80%', height: 'auto' }
                     }} />
                   </div>
-                  {/* <div className={`flex-1 flex items-center gap-2 px-1 ${index > 0 && 'opacity-0'}`}>
-                    <div className="bg-white h-2 w-full border-[1px] border-darkGreen rounded-xl">
-                      <div className="h-full w-[70%] bg-[#598f7d] rounded-sm" />
-                    </div>
-                    <div className="flex-grow flex-shrink-0">
-                      <p className={`text-sm font-bold`}>7 / 10</p>
-                    </div>
-                  </div> */}
                 </NextStep>
               </div>
             }
