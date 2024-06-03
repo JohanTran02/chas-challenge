@@ -67,16 +67,14 @@ const Header = () => {
             >
               <ImageHandler image={{
                 priority: true,
-                src: 'settings.svg',
+                src: 'logga.svg',
                 width: 50,
                 height: 50,
                 alt: 'Application logo',
-                className: 'size-6',
+                className: 'size-12',
               }} />
 
-              <p className='text-darkGreen underline text-[12px] font-bold'>
-                Logga ut
-              </p>
+        
             </div>
           }
         </div>

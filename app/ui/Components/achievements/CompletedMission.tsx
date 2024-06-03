@@ -17,7 +17,7 @@ export default function CompletedMission({ prop, closeModal, setModal, unlockedI
     return (<>
         <ImageHandler image={
             {
-                src: `${prop.name.toLowerCase()}.svg`,
+                src: "Pressbyran.svg",
                 height: 128,
                 width: 128,
                 alt: '',

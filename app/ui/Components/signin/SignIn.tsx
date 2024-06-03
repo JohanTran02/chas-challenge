@@ -18,10 +18,13 @@ import { isProdPath, UserValues } from "@/app/lib/definitions";
 import { account } from "@/app/lib/CC_Backend/account";
 import { useCookies } from "react-cookie";
 
+import LoginLoader from "./LoginLoader"; // Import your loader component
+
 export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
   const [user, setUser] = useState<UserValues | null>(null);
+  const [loading, setLoading] = useState<boolean>(false); // Add loading state
 
   // hook use form
   const methods = useForm<UserValues>();
@@ -32,13 +35,12 @@ export default function SignIn() {
       console.log(data);
       const { email, password } = data;
       console.log({ email, password })
-      const { code, json, error } = await account("account/login", { email, password });
+      const { code, json, error } = await account("account/login", { email, password }, undefined, setLoading);
 
       if (code === 200) {
         // dispatch({type: 'user/onlineState', payload: data});
-        setUser(data)
+        setUser(data);
         setCookie('accessToken', json.user.accessToken, { path: "/", httpOnly: false, secure: true, domain: isProdPath });
-
       } else if (code !== 200 && error) {
         alert(error.description);
       }
@@ -47,37 +49,35 @@ export default function SignIn() {
     // create account
     if (createAccount && data.password === data.confirmPassword) {
       console.log(data);
-      const { code } = await account("account/register", data, setCreateAccount);
+      const { code } = await account("account/register", data, undefined, setLoading);
       if (code === 200) {
-        setUser(data)
+        setUser(data);
       }
-      return
+      return;
     }
 
-    if (createAccount && data.password !== data.confirmPassword)
+    if (createAccount && data.password !== data.confirmPassword) {
       alert('Lösenordet stämmer inte, försök igen.');
-    return
+    }
+    return;
   }
-
-  // const handleUserState = (state: boolean): ReactNode => {
-  //   if (state === true) return <GetStarted />
-  //   if (state === false) return <Update />
-  // }
 
   return (
     <>
       <div className="h-11/12 w-full max-w-[600px] mt-10">
-        {!createAccount && <div className="flex flex-col justify-between h-48 w-full max-w-[456px] mx-auto text-center   text-darkGreen">
-          <div className="flex-1">
-            <h1 className="font-bold text-3xl">Upptäck världen utanför!</h1>
+        {loading && <LoginLoader />} {/* Display the loader based on the loading state */}
+        {!createAccount && (
+          <div className="flex flex-col justify-between h-48 w-full max-w-[456px] mx-auto text-center text-darkGreen">
+            <div className="flex-1">
+              <h1 className="font-bold text-3xl">Upptäck världen utanför!</h1>
+            </div>
+            <div className="flex-1">
+              <p className="text-darkGreen font-bold">
+                Gå i grupp eller själv, fota, samla och lär dig mer om saker utanför din dörr.
+              </p>
+            </div>
           </div>
-          <div className="flex-1">
-            <p className="text-darkGreen font-bold">
-              Gå i grupp eller själv, fota, samla och lär dig mer om saker utanför din dörr.
-            </p>
-          </div>
-
-        </div>}
+        )}
         <FormProvider {...methods}>
           <form
             onSubmit={methods.handleSubmit(onSubmit)}
@@ -86,12 +86,14 @@ export default function SignIn() {
               {createAccount ? 'Skapa konto' : 'Logga in'}
             </p>
             <div className="flex flex-col gap-4">
-              {createAccount && <Inputfield
-                type="text"
-                required={true}
-                property="displayName"
-                error={methods.formState.errors}
-              />}
+              {createAccount && (
+                <Inputfield
+                  type="text"
+                  required={true}
+                  property="displayName"
+                  error={methods.formState.errors}
+                />
+              )}
               <Inputfield
                 type={"text"}
                 required={true}
@@ -106,17 +108,18 @@ export default function SignIn() {
                 error={methods.formState.errors}
                 createAccount={createAccount && createAccount}
               />
-              {createAccount &&
+              {createAccount && (
                 <Inputfield
                   type={"password"}
                   required={true}
                   property={"confirmPassword"}
                   error={methods.formState.errors}
-                />}
+                />
+              )}
             </div>
             <div className="flex justify-between mt-2">
               <p
-                onClick={() => setCreateAccount((prev => !prev))}
+                onClick={() => setCreateAccount(prev => !prev)}
                 className="underline">
                 {!createAccount ? 'Skapa konto' : 'Logga in'}
               </p>
