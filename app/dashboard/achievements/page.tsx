@@ -11,4 +11,3 @@ export default async function Page() {
         </>
     );
 }
-// h-[calc(100vh-200px)]

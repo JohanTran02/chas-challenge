@@ -1,11 +1,10 @@
 'use client'
 
 // Mapbox 
-import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup, Layer, Source, MapboxStyle } from "react-map-gl";
+import ReactMapGL, { NavigationControl, GeolocateControl, Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getUserLocation } from "@/app/lib/map/geolocation";
 import Geocoder from "./Geocoder";
-import style from '@/app/ui/style/map/mapbox.module.css'
 
 // Hooks
 import { useEffect, useState } from "react";
@@ -52,7 +51,7 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 			{ latitude: 59.20, longitude: 18.03, zoom: 11 }
 	}
 	return (
-		<div /* className={style.mainStyle} */>
+		<div>
 			{
 				(coords !== undefined) &&
 				<ReactMapGL

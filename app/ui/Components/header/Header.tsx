@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { cookieExpireTime, cookieSettings, isProdPath } from '@/app/lib/definitions';
 
 const Header = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken', "displayName"]);
   const [getStarted, setGetStarted] = useState<boolean | null>(null);
   const pathname = usePathname();
   const logo = 'Logo.svg';
@@ -48,7 +48,7 @@ const Header = () => {
         <div className={`bg-neutralWhite w-full h-full pb-4 flex justify-between items-center px-4 relative z-20 ${pathname === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
           <ImageHandler image={{
             priority: true,
-            src: logo,
+            src: "Component1.svg",
             width: 50,
             height: 50,
             alt: 'Application logo',
@@ -63,20 +63,21 @@ const Header = () => {
             </div> :
 
             <div className="flex flex-col items-center justify-end gap-1 h-full"
-              onClick={() => removeCookie("accessToken", cookieSettings)}
+              onClick={() => {
+                removeCookie('displayName', cookieSettings);
+                removeCookie("accessToken", cookieSettings)
+              }}
             >
               <ImageHandler image={{
                 priority: true,
-                src: 'settings.svg',
+                src: 'logga.svg',
                 width: 50,
                 height: 50,
                 alt: 'Application logo',
-                className: 'size-6',
+                className: 'size-12',
               }} />
 
-              <p className='text-darkGreen underline text-[12px] font-bold'>
-                Logga ut
-              </p>
+        
             </div>
           }
         </div>

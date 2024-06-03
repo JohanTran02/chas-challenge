@@ -8,9 +8,8 @@ export default async function Page() {
             <div className="bg-white max-w-[600px] h-full mx-auto px-4 pt-6 rounded-3xl">
                 <div className="flex-1 h-[100%] pb-[90px]">
                     <Posts />
-                </div> 
+                </div>
             </div>
         </>
-        // null
     )
 }
