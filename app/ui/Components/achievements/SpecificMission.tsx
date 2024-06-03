@@ -13,10 +13,13 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
 
   useEffect(() => {
     if (modal) {
-      document.body.style.overflowY = 'hidden';
+      const body = document.body; 
+      body.scrollTo({top: 0, left: 0,  behavior: 'instant'});
+      body.style.overflowY = 'hidden';
+
       const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;
       information.showModal();
-      information.scrollTo(0, 0);
+      information.scrollTo({top: 0, left: 0,  behavior: 'instant'});
     }
 
   }, [modal, prop.name])
@@ -31,10 +34,10 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
     // console.log(prop.name)
     if (prop.name) { 
       const name = prop.name;
-      // if (name === 'Orange' || name === 'Apple') return `placeholder-bronze.svg`;
-      if (name === 'Banan' || name === 'Sten' || name === 'Stol') return `placeholder-silver.svg`;
-      if (name === ('Gunters Korvar')) return `placeholder-guld.svg`;
-      if (name === 'Gravsten' || name === 'Igelkott') return `placeholder-platinum.svg`;
+      if (name === 'Stol' || name === 'Sten' || name === 'Banan') return `placeholder-bronze.svg`;
+      if (name === 'Gunters Korvar') return `placeholder-silver.svg`;
+      if (name === 'Gravsten') return `placeholder-guld.svg`;
+      if (name === 'Igelkott') return `placeholder-platinum.svg`;
     }
   }
 
@@ -57,10 +60,11 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
             height: 100,
             width: 100,
             alt: "mission placeholder",
+            className: 'object-contain size-24'
           }} />
         </div>
       </div>
-      {modal && <Dialog prop={prop} setModal={setModal} />}
+      {modal && <Dialog stamp={prop} rarityPlaceholder={rarity} setModal={setModal} />}
     </>
   )
 }
