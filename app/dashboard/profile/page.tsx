@@ -1,4 +1,3 @@
-// Import components with useState dynamically
 "use client"
 
 import { useState } from 'react';
@@ -10,8 +9,10 @@ import FriendContainer from '@/app/ui/Components/profile/FriendContainer';
 import ImageHandler from '@/app/ui/ImageHandler';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/lib/redux/store';
+import { useCookies } from 'react-cookie';
 
 export default function Page() {
+  const [cookies] = useCookies(["displayName"])
   const [modalStamps, setModalStamps] = useState<boolean>(false);
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
@@ -42,7 +43,6 @@ export default function Page() {
   const openAddFriendsModal = () => setModalAddFriends(true);
   const closeModalAddFriends = () => setModalAddFriends(false);
 
-  // style={{ height: 'calc(100vh - 310px)' }}
   return (
     <>
       <div className="w-full flex flex-col justify-end items-center py-6 space-y-2">
@@ -57,7 +57,7 @@ export default function Page() {
         </div>
 
         <div className='text-center space-y-1'>
-          <h1 className="text-white text-xl font-bold mx-auto uppercase">Användarnamn</h1>
+          <h1 className="text-white text-xl font-bold mx-auto uppercase">{cookies.displayName ? cookies.displayName : "användarnamn"}</h1>
           <h2 className="text-white text-sm font-bold">23 stamps<span className='px-2'>&#x2022;</span>4 vänner</h2>
         </div>
 

@@ -21,7 +21,7 @@ import GoogleButton from "./GoogleButton";
 
 export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken', "displayName"]);
   const [user, setUser] = useState<UserValues | null>(null);
 
   // hook use form
@@ -39,6 +39,7 @@ export default function SignIn() {
         // dispatch({type: 'user/onlineState', payload: data});
         setUser(data)
         setCookie('accessToken', json.user.accessToken, cookieSettings);
+        setCookie('displayName', json.user.displayName, cookieSettings);
 
       } else if (code !== 200 && error) {
         alert(error.description);

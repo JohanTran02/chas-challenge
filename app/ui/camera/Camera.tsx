@@ -21,7 +21,6 @@ function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image
     image: string | null,
     setTransition: Dispatch<SetStateAction<string>>,
     setUnlockedImg: Dispatch<SetStateAction<string | null>>,
-    // setUnlocked: Dispatch<SetStateAction<boolean>>
 }) {
     const [imageResultContent, setImageResultContent] = useState<ReactNode>(null)
 
@@ -48,7 +47,6 @@ function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image
 export default function Camera({ prop, setTransition, handleCamera, setUnlockedImg }: {
     prop: Stampinfo,
     setTransition: Dispatch<SetStateAction<string>>,
-    // setUnlocked: Dispatch<SetStateAction<boolean>>,
     setUnlockedImg: Dispatch<SetStateAction<string | null>>,
     handleCamera: () => void
 }) {
@@ -139,10 +137,6 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                         getUserLocation("get", setCoords);
                                                         const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name, [coords?.latitude.toString() as string, coords?.longitude.toString() as string,], setLoading);
                                                         setImageResponse(updatedImage)
-                                                        // const result = (imageResponse.code === 200 && imageResponse.json === true)
-                                                        // setTimeout(() => {
-                                                        //     result ? setLoading("finished") : setLoading("rejected");
-                                                        // }, 3 * 1000);
                                                     }}>Ladda upp foto</button>
                                                 }
                                                 <button className="rounded-3xl text-white bg-darkGreen border-2 border-white p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>

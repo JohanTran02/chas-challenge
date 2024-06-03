@@ -34,11 +34,6 @@ export type Activity = {
   coordinates: Coordinates;
 }
 
-// type ImageType = 'png' | 'jpeg';
-
-// export type Base64<imageType extends ImageType> = `data:image/${imageType};base64,${string}`
-
-
 // CC_Backend
 export type AccountEndpoint = 'account/register' | 'account/logout' | 'account/login';
 export type CameraEndpoint = 'ai/readimage';

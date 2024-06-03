@@ -27,11 +27,9 @@ const SpecificMission = ({ stamp, completedStamps }: Prop) => {
   const stampState = () => {
     if (completedStamps) {
       const completedStamp: string = completedStamps;
-      // console.log(completedStamp)
       return `${completedStamp}.svg`.toLowerCase().replace(/\\s+/g, '');
     }
 
-    // console.log(prop.name)
     if (stamp.name) {
       const name = stamp.name;
       if (name === 'Stol' || name === 'Sten' || name === 'Banan') return `placeholder-bronze.svg`;
