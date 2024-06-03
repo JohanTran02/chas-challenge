@@ -10,7 +10,7 @@ import GetStarted from '../signin/GetStarted';
 
 // react hook
 import { useEffect, useState } from 'react';
-import { isProdPath } from '@/app/lib/definitions';
+import { cookieExpireTime, cookieSettings, isProdPath } from '@/app/lib/definitions';
 
 const Header = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
@@ -58,12 +58,12 @@ const Header = () => {
           />
           {pathname !== '/dashboard/profile/' ?
             <div className={`bg-darkGreen grid place-items-center size-8 rounded-full mt-4 self-end ${(pathname === '/signin/') && 'opacity-0'}`}
-              onClick={() => {if(pathname !== '/signin/') setGetStarted(true)}}>
+              onClick={() => { if (pathname !== '/signin/') setGetStarted(true) }}>
               <p className="text-white">i</p>
             </div> :
 
             <div className="flex flex-col items-center justify-end gap-1 h-full"
-              onClick={() => removeCookie("accessToken", { path: "/", httpOnly: false, secure: true, domain: isProdPath })}
+              onClick={() => removeCookie("accessToken", cookieSettings)}
             >
               <ImageHandler image={{
                 priority: true,

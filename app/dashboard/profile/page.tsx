@@ -50,8 +50,8 @@ export default function Page() {
           <ImageHandler image={{
             src: "profile-cat.svg",
             alt: "",
-            width: 100,
-            height: 100,
+            width: 130,
+            height: 130,
             className: "size-24 object-cover border-4 border-white rounded-full"
           }} />
         </div>

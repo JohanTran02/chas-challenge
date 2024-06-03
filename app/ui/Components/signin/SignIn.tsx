@@ -10,7 +10,7 @@ import Inputfield from "./Inputfield";
 import { useState } from "react";
 
 //TS 
-import { isProdPath, UserValues } from "@/app/lib/definitions";
+import { isProdPath, UserValues, cookieExpireTime, cookieSettings } from "@/app/lib/definitions";
 // import Update from "./Update";
 // import GetStarted from "./GetStarted";
 
@@ -37,7 +37,7 @@ export default function SignIn() {
       if (code === 200) {
         // dispatch({type: 'user/onlineState', payload: data});
         setUser(data)
-        setCookie('accessToken', json.user.accessToken, { path: "/", httpOnly: false, secure: true, domain: isProdPath });
+        setCookie('accessToken', json.user.accessToken, cookieSettings);
 
       } else if (code !== 200 && error) {
         alert(error.description);
