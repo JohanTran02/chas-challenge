@@ -48,7 +48,7 @@ const Header = () => {
         <div className={`bg-neutralWhite w-full h-full pb-4 flex justify-between items-center px-4 relative z-20 ${pathname === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
           <ImageHandler image={{
             priority: true,
-            src: logo,
+            src: "Component1.svg",
             width: 50,
             height: 50,
             alt: 'Application logo',
