@@ -4,15 +4,14 @@ import { AccountEndpoint, CookiesForUser, UserValues } from "../definitions";
 export const account = async (
   endpoint: AccountEndpoint,
   userInfo: UserValues,
-  dispatch?: Dispatch<SetStateAction<boolean>>,
-  setLoading?: Dispatch<SetStateAction<boolean>>
+  setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   let json;
   let code;
   let error: { code: string; description: string } | undefined;
 
   try {
-    setLoading && setLoading(true); // Start loading
+    setLoading(true); // Start loading
     const response = await fetch('https://natureai.azurewebsites.net/' + endpoint, {
       method: "POST",
       headers: {
@@ -35,13 +34,12 @@ export const account = async (
     if (!response.ok) {
       json = await response.json() as string
       console.log(response.status, response.statusText, '- json response:', json) // on error
+      setLoading(false);
     }
 
   } catch (error) {
-    dispatch && dispatch(false);
+    setLoading(false);
     console.error('Something went wrong fetching data:', error);
-  } finally {
-    setLoading && setLoading(false); // End loading
   }
 
   return { code, json, error };

@@ -32,10 +32,9 @@ export default function SignIn() {
   const onSubmit: SubmitHandler<UserValues> = async (data) => {
     // log in
     if (!createAccount) {
-      console.log(data);
       const { email, password } = data;
       console.log({ email, password })
-      const { code, json, error } = await account("account/login", { email, password }, undefined, setLoading);
+      const { code, json, error } = await account("account/login", { email, password }, setLoading);
 
       if (code === 200) {
         // dispatch({type: 'user/onlineState', payload: data});
@@ -49,7 +48,7 @@ export default function SignIn() {
     // create account
     if (createAccount && data.password === data.confirmPassword) {
       console.log(data);
-      const { code } = await account("account/register", data, undefined, setLoading);
+      const { code } = await account("account/register", data, setLoading);
       if (code === 200) {
         setUser(data);
       }
