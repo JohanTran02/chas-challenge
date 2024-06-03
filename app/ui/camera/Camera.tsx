@@ -33,7 +33,6 @@ function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image
         else if (isLoading.includes("rejected")) {
             setImageResultContent(<CameraError isLoading={isLoading} addOpacity />)
             setUnlockedImg(null);
-
         }
         else {
             setImageResultContent(null)
@@ -133,19 +132,21 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                         setLoading("pending");
                                                         const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name);
                                                         setImageResponse(updatedImage)
+                                                        const result = (imageResponse.code === 200 && imageResponse.json === true)
+
                                                         setTimeout(() => {
-                                                            imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
+                                                            result ? setLoading("finished") : setLoading("rejected");
                                                         }, 2 * 1000);
                                                     }}>Ladda upp foto</button>
                                                 }
-                                                <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>
+                                                <button className="rounded-3xl text-white bg-darkGreen border-2 border-white p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>
                                             </div >
                                         </> : <>
-                                            <div className="relative grid h-[600px] gap-5 w-full bg-white rounded-md">
+                                            <div className="relative grid h-full gap-5 w-full bg-white rounded-md">
                                                 <CameraError isLoading={isLoading} addOpacity={true} />
                                             </div>
-                                            <div className="flex flex-col gap-3 w-full max-w-48 mx-auto">
-                                                <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={() => enableCamera()}>Ta nytt foto</button>
+                                            <div className="flex flex-col gap-3 w-full max-w-48 mx-auto mt-4">
+                                                <button className="rounded-3xl text-white bg-darkGreen border-2 border-white p-2 font-semibold text-lg" onClick={() => enableCamera()}>Ta nytt foto</button>
                                             </div>
                                         </>
                                 }
