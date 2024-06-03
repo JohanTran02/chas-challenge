@@ -46,7 +46,7 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 	const intitialView = (markerInfo: Stampinfo | null, coords: GeolocationCoordinates | undefined) => {
 		if (latitude && longitude) return { latitude: Number(latitude), longitude: Number(longitude), zoom: 15 }
 		if (markerInfo) return { latitude: Number(markerInfo.latitude), longitude: Number(markerInfo.longitude), zoom: 15 }
-		return coords ? { latitude: coords.latitude, longitude: coords.longitude, zoom: 11 } :
+		return coords ? { latitude: coords.latitude, longitude: coords.longitude, zoom: 15 } :
 			{ latitude: 59.20, longitude: 18.03, zoom: 11 }
 	}
 	return (
