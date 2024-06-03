@@ -1,7 +1,7 @@
 import { CameraEndpoint, Stampinfo } from "../definitions";
 
 // , setLoading: Dispatch<SetStateAction<boolean>>
-export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, stampName: string) => {
+export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, stampName: string, coords: string[] | undefined) => {
     let json;
     let code;
 
@@ -13,7 +13,7 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
                 Authorization: `Bearer ${accessToken}`
             },
             method: "POST",
-            body: JSON.stringify({ prompt: stampName, picture: image })
+            body: JSON.stringify({ prompt: stampName, picture: image, coordinates: coords })
         });
 
         if (response.status === 200) {
@@ -31,7 +31,6 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
             console.log(response.status, response.statusText, '- json response:', json) // on error
             alert(errorMessage.description);
             // setLoading(false);
-
         }
 
     } catch (error) {
