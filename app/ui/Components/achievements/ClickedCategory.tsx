@@ -59,7 +59,7 @@ const ClickedCategory = () => {
 
           if (accomplishedStamps)
             return <li key={stamp.stampId}><SpecificMission prop={stamp} completedStamps={accomplishedStamps.name} /></li>
-        })
+        }).reverse()
           : <SkeletonLoaderMissions />}
       </ul>
     </div>

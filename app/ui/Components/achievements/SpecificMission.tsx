@@ -29,11 +29,12 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
     }
 
     // console.log(prop.name)
-    if (prop.name) {
+    if (prop.name) { 
       const name = prop.name;
-      if (name === 'Orange' || name === 'Apple') return `placeholder-bronze.svg`;
-      if (name === 'Banana') return `placeholder-silver.svg`;
-      if (name === 'Pear' || name === 'Clementine') return `placeholder-guld.svg`;
+      // if (name === 'Orange' || name === 'Apple') return `placeholder-bronze.svg`;
+      if (name === 'Banan' || name === 'Sten' || name === 'Stol') return `placeholder-silver.svg`;
+      if (name === ('Gunters Korvar')) return `placeholder-guld.svg`;
+      if (name === 'Gravsten' || name === 'Igelkott') return `placeholder-platinum.svg`;
     }
   }
 
