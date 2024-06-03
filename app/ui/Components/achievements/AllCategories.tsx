@@ -59,9 +59,9 @@ const AllCategories = () => {
         return (
           <li key={index}>
             {(stamp.category !== undefined) &&
-              <div  className="flex flex-col items-center font-bold h-56 max-w-[150px] min-w-[150px] category-card mx-auto">
+              <div className="flex flex-col items-center font-bold h-56 max-w-[150px] min-w-[150px] category-card mx-auto">
                 <p className="pb-1 text-base self-start">
-                  {index < 1 ? 'START' : 'KOMMER SNART'}
+                  {index < 1 ? 'INTRO' : 'KOMMER SNART'}
                 </p>
                 <NextStep redirect={redirect} category={stamp.category} title={stamp.category.title}>
                   <div className="flex-[3] grid place-items-center max-h-[192px]">

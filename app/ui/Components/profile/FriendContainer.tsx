@@ -16,7 +16,7 @@ export default function FriendContainer({ showStamps, modalAddFriends }: Partial
       try {
         const response = await fetch('/users.json');
         const data = await response.json();
-        console.log("Fetched friends data:", data);
+        // console.log("Fetched friends data:", data);
         setFriends(data.users);
       } catch (error) {
         console.error("Failed to fetch friends:", error);
