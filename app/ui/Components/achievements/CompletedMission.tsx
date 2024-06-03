@@ -36,7 +36,7 @@ export default function CompletedMission({ stamp, closeModal, setModal, unlocked
         <div className="h-full w-full bg-darkGreen relative">
             <ImageHandler image={
                 {
-                    src: `${stamp.name.toLowerCase()}.svg`,
+                    src: `${stamp.name.replace(" ", "").toLowerCase()}.svg`,
                     height: 128,
                     width: 128,
                     alt: '',
