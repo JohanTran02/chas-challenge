@@ -1,7 +1,7 @@
-import { CameraEndpoint, Stampinfo } from "../definitions";
+import { Dispatch, SetStateAction } from "react";
+import { CameraEndpoint } from "../definitions";
 
-// , setLoading: Dispatch<SetStateAction<boolean>>
-export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, stampName: string, coords: string[] | undefined) => {
+export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, stampName: string, coords: string[] | undefined, setLoading: Dispatch<SetStateAction<"idle" | "pending" | "finished" | "rejected">>) => {
     let json;
     let code;
 
@@ -20,7 +20,7 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
             json = await response.json();
             code = response.status;
             console.log('Status code is 200 and the fetching proccess has been successfully completed!', json)
-            // setLoading(false);
+            setLoading("finished");
             return { code, json };
         }
 
@@ -30,7 +30,7 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
 
             console.log(response.status, response.statusText, '- json response:', json) // on error
             alert(errorMessage.description);
-            // setLoading(false);
+            setLoading("rejected");
         }
 
     } catch (error) {
