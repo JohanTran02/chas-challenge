@@ -44,7 +44,7 @@ const StartMission = ({ stamp, goToMap, handleCamera, setModal, closeModal, rari
         <div className="flex gap-3 h-[140px]">
           <div className="w-32 border-2 border-black h-full line-clamp-4 text-[13px]">
             <ImageHandler image={{
-              src: `${stamp.name.toLowerCase()}.png`,
+              src: `${stamp.name.replace(" ", "").toLowerCase()}.jpg`,
               alt: `${stamp.name}`,
               width: 150,
               height: 150,
