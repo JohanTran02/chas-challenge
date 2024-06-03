@@ -34,23 +34,6 @@ export default function CompletedMission({ stamp, closeModal, setModal, unlocked
     const styleProp = { height: '290px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };
     return (
         <div className="h-full w-full bg-darkGreen relative">
-            <ImageHandler image={{
-                src: "Stjärnavituppdrag.svg",
-                alt: "star",
-                width: 40,
-                height: 40,
-                className: 'size-12 absolute top-[28px] left-[65px]',
-                // checkPath: true
-            }} />
-            <ImageHandler image={{
-                src: "Stjärnauppdrag.svg",
-                alt: "star",
-                width: 40,
-                height: 40,
-                className: 'size-12 absolute top-[155px] right-16',
-                // checkPath: true
-            }} />
-
             <ImageHandler image={
                 {
                     src: `${stamp.name.toLowerCase()}.svg`,
