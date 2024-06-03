@@ -43,7 +43,8 @@ export default function SignIn() {
 
     // create account
     if (createAccount && data.password === data.confirmPassword) {
-      await account("account/register", data, setLoading);
+      const { code } = await account("account/register", data, setLoading);
+      if(code === 200) setCreateAccount(false); 
     }
 
     if (createAccount && data.password !== data.confirmPassword) {
@@ -55,7 +56,7 @@ export default function SignIn() {
   return (
     <>
       <div className="h-11/12 w-full max-w-[600px] mt-10">
-        {loading && <LoginLoader />} {/* Display the loader based on the loading state */}
+        {loading && <LoginLoader createAccount={createAccount}/>} {/* Display the loader based on the loading state */}
         {!createAccount && (
           <div className="flex flex-col justify-between h-48 w-full max-w-[456px] mx-auto text-center text-darkGreen">
             <div className="flex-1">
