@@ -30,7 +30,6 @@ const ClickedCategory = () => {
   const allStamps = stamps && stamps[0].stamps;
 
   useEffect(() => {
-    // console.log(completedStamps)
     const completed = async (accessToken: string) => {
       const response = await getCompletedStamps(accessToken, setIsLoading, dispatch);
       setCompletedStamps(response);

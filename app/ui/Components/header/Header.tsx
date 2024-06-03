@@ -63,8 +63,8 @@ const Header = () => {
 
             <div className="flex flex-col items-center justify-end gap-1 h-full"
               onClick={() => {
-                removeCookie('displayName', cookieSettings);
                 removeCookie("accessToken", cookieSettings);
+                removeCookie('displayName', cookieSettings);
               }}
             >
               <ImageHandler image={{

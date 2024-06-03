@@ -16,7 +16,7 @@ import { account, google } from "@/app/lib/CC_Backend/account";
 import { useCookies } from "react-cookie";
 
 import LoginLoader from "./LoginLoader"; // Import your loader component
-import GoogleButton from "./GoogleButton";
+// import GoogleButton from "./GoogleButton";
 
 export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
@@ -30,7 +30,6 @@ export default function SignIn() {
     // log in
     if (!createAccount) {
       const { email, password } = data;
-      console.log({ email, password })
       const { code, json, error } = await account("account/login", { email, password }, setLoading);
 
       if (code === 200) {
@@ -117,10 +116,10 @@ export default function SignIn() {
               <p className="">Glömt lösenord?</p>
             </div>
 
-            {!createAccount && <div className="mt-6 mb-16"
+            {/* {!createAccount && <div className="mt-6 mb-16"
               onClick={() => google()}>
               <GoogleButton />
-            </div>}
+            </div>} */}
 
             <div className="flex justify-center mt-8">
               <button

@@ -22,7 +22,6 @@ export default function SideNav() {
       // This line makes sure that the map covers the whole screen and disables the scrollbar.
       body.scrollIntoView({ behavior: 'instant', inline: 'start', block: 'start' });
       body.style.overflowY = 'hidden';
-      console.log(path)
     }
     if (path !== '/dashboard/map') document.body.style.overflowY = 'auto';
     return

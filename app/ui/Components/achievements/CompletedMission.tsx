@@ -14,7 +14,7 @@ type Prop = {
 }
 
 export default function CompletedMission({ stamp, closeModal, setModal, unlockedImg }: Prop) {
-    const { stamps, collectedStampsWithCoords } = useSelector((state: RootState) => state.stamp);
+    const { collectedStampsWithCoords } = useSelector((state: RootState) => state.stamp);
     const [coords, setCoords] = useState<{ latitude: string; longitude: string }>()
 
     useEffect(() => {

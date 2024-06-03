@@ -56,10 +56,6 @@ const Posts = () => {
               <div className='flex font-extrabold'>
                 <StampStats fakeRarity={user.stamp.rarity} />
               </div>
-              {/* <div className="w-full h-max font-semibold mt-2">
-                <p className=" inline-block">Gilla</p>
-                <p className=" inline-block w-max ml-8">Kommentera</p>
-              </div> */}
             </div>
             <div className="flex-1 flex-shrink-0 flex flex-col items-center h-full">
               <div className="flex-[3] grid place-items-center h-max w-[75px]">
