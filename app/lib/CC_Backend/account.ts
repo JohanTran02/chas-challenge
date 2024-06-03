@@ -43,3 +43,21 @@ export const account = async (endpoint: AccountEndpoint, userInfo: UserValues, d
 }
 
 
+export const google = async () => {
+  
+  try {
+    const response = await fetch('https://natureai.azurewebsites.net/account/login-google'); 
+    
+    if(!response.ok) {
+      console.log(response.status, response.statusText)
+      return
+    }
+
+    const data = await response.json(); 
+    console.log(data)
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}

@@ -15,8 +15,9 @@ import { isProdPath, UserValues } from "@/app/lib/definitions";
 // import GetStarted from "./GetStarted";
 
 // Redux
-import { account } from "@/app/lib/CC_Backend/account";
+import { account, google } from "@/app/lib/CC_Backend/account";
 import { useCookies } from "react-cookie";
+import GoogleButton from "./GoogleButton";
 
 export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
@@ -114,7 +115,7 @@ export default function SignIn() {
                   error={methods.formState.errors}
                 />}
             </div>
-            <div className="flex justify-between mt-2">
+            <div className="flex justify-between mt-3 font-bold text-[14px]">
               <p
                 onClick={() => setCreateAccount((prev => !prev))}
                 className="underline">
@@ -122,10 +123,16 @@ export default function SignIn() {
               </p>
               <p className="">Glömt lösenord?</p>
             </div>
+
+            {!createAccount && <div className="mt-6 mb-16"
+              onClick={() => google()}>
+              <GoogleButton />
+            </div>}
+
             <div className="flex justify-center mt-8">
               <button
                 type="submit"
-                className="bg-darkGreen text-white text-nowrap px-8 py-3 w-3/6 max-w-44 rounded-3xl border-[1px] border-darkGreen text-l font-semibold">
+                className="bg-darkGreen text-white text-nowrap px-8 py-3 w-3/6 max-w-44 rounded-3xl border-[1px] border-darkGreen text-l font-semibold hover:bg-neutralWhite hover:text-darkGreen">
                 {!createAccount ? 'Logga in' : 'Skapa konto'}
               </button>
             </div>
