@@ -8,27 +8,29 @@ import AddFriendsModalContent from '@/app/ui/Components/profile/AddFriendsModalC
 import FriendsModalContent from '@/app/ui/Components/profile/FriendsModalContent';
 import FriendContainer from '@/app/ui/Components/profile/FriendContainer';
 import ImageHandler from '@/app/ui/ImageHandler';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/lib/redux/store';
 
 export default function Page() {
   const [modalStamps, setModalStamps] = useState<boolean>(false);
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
-  const images = [
-    { src: "hotdog-stamp.svg", key: "test1" },
-    { src: "hotdog-stamp.svg", key: "test2" },
-    { src: "hotdog-stamp.svg", key: "test3" },
-  ];
+  const { collectedStamps } = useSelector((state: RootState) => state.stamp);
 
-  let stampImages = images.map((image) => {
-    return (
-      <ImageHandler image={{
-        src: image.src,
-        alt: "",
-        width: 100,
-        height: 100,
-        className: "size-24 object-cover"
-      }} key={image.key} />
-    )
+  let stampImages = collectedStamps.map((stamp, index) => {
+    if (index < 3) {
+      return (
+        <ImageHandler image={{
+          src: `${stamp.toLowerCase()}.svg`,
+          alt: stamp,
+          width: 100,
+          height: 100,
+          className: "size-24 object-cover"
+        }} key={stamp} />
+      )
+    }
+
+    return null;
   })
 
   const modalTransformStamps = modalStamps ? "transition-all h-[80vh]" : "transition-all h-[0px]";

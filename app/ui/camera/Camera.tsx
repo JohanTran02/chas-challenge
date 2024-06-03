@@ -33,7 +33,6 @@ function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image
         else if (isLoading.includes("rejected")) {
             setImageResultContent(<CameraError isLoading={isLoading} addOpacity />)
             setUnlockedImg(null);
-
         }
         else {
             setImageResultContent(null)
@@ -133,8 +132,10 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                         setLoading("pending");
                                                         const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name);
                                                         setImageResponse(updatedImage)
+                                                        const result = (imageResponse.code === 200 && imageResponse.json === true)
+
                                                         setTimeout(() => {
-                                                            imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
+                                                            result ? setLoading("finished") : setLoading("rejected");
                                                         }, 2 * 1000);
                                                     }}>Ladda upp foto</button>
                                                 }

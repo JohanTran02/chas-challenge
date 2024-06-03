@@ -25,11 +25,11 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
     if (completedStamps) {
       const completedStamp: string = completedStamps;
       // console.log(completedStamp)
-      return `${completedStamp}.svg`
+      return `${completedStamp}.svg`.toLowerCase().replace(/\\s+/g, '');
     }
 
     // console.log(prop.name)
-    if (prop.name) { 
+    if (prop.name) {
       const name = prop.name;
       // if (name === 'Orange' || name === 'Apple') return `placeholder-bronze.svg`;
       if (name === 'Banan' || name === 'Sten' || name === 'Stol') return `placeholder-silver.svg`;
