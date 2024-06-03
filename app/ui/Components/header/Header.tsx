@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { cookieExpireTime, cookieSettings, isProdPath } from '@/app/lib/definitions';
 
 const Header = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken', "displayName"]);
   const [getStarted, setGetStarted] = useState<boolean | null>(null);
   const pathname = usePathname();
   const logo = 'Logo.svg';
@@ -63,7 +63,10 @@ const Header = () => {
             </div> :
 
             <div className="flex flex-col items-center justify-end gap-1 h-full"
-              onClick={() => removeCookie("accessToken", cookieSettings)}
+              onClick={() => {
+                removeCookie('displayName', cookieSettings);
+                removeCookie("accessToken", cookieSettings)
+              }}
             >
               <ImageHandler image={{
                 priority: true,

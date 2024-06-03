@@ -39,7 +39,7 @@ const ClickedCategory = () => {
   }, [cookies.accessToken, dispatch])
 
   return (
-    <div>
+    <div className="pb-12">
       <div className="flex items-center gap-2 px-1 w-full">
         <p className="flex-1 font-bold">SAMLADE STAMPS</p>
         {(stamps !== null && !isLoading) && <div className="flex-1 flex items-center gap-4">

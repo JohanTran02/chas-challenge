@@ -23,6 +23,7 @@ export const account = async (
     if (response.status === 400 && endpoint === 'account/login') alert('Fel mailadress eller lösenord!');
     if (response.status === 400 && endpoint === 'account/register') alert('Kontot är upptagen!');
 
+
     if (response.status === 200) {
       code = response.status;
       json = endpoint === "account/login" ?
