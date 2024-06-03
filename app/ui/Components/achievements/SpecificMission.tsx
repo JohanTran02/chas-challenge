@@ -12,9 +12,9 @@ const SpecificMission = ({ prop, completedStamps }: Prop) => {
   const [modal, setModal] = useState<Boolean>(false);
 
   useEffect(() => {
+    const body = document.body; 
     if (modal) {
-      const body = document.body; 
-      body.scrollTo({top: 0, left: 0,  behavior: 'instant'});
+      body.scrollIntoView();
       body.style.overflowY = 'hidden';
 
       const information = document.getElementById(`missionsModal-${prop.name}`) as HTMLDialogElement;

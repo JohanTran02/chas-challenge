@@ -27,7 +27,6 @@ const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder }: { stamp: Stampinf
       information.scrollTo(0, 0);
     } else {
       body.scrollIntoView();
-      body.style.overflowY = 'auto'
     }
   }, [unlockedImg, stamp])
 
