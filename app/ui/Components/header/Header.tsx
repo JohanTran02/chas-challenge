@@ -58,7 +58,7 @@ const Header = () => {
           />
           {pathname !== '/dashboard/profile/' ?
             <div className={`bg-darkGreen grid place-items-center size-8 rounded-full mt-4 self-end ${(pathname === '/signin/') && 'opacity-0'}`}
-              onClick={() => setGetStarted(true)}>
+              onClick={() => {if(pathname !== '/signin/') setGetStarted(true)}}>
               <p className="text-white">i</p>
             </div> :
 
