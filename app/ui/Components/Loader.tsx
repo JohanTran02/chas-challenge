@@ -6,6 +6,7 @@ const Loader = () => {
     <div>
       <div className='flex flex-col justify-center items-center gap-4'>
         <ImageHandler image={{
+          priority: true,
           src: "Component3.svg",
           alt: "Loading",
           width: 60,

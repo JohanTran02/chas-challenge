@@ -14,22 +14,20 @@ export default function Page() {
   const [modalFriends, setModalFriends] = useState<boolean>(false);
   const [modalAddFriends, setModalAddFriends] = useState<boolean>(false);
   const images = [
-    { src: "hotdog-stamp.svg" },
-    { src: "hotdog-stamp.svg" },
-    { src: "hotdog-stamp.svg" },
+    { src: "hotdog-stamp.svg", key: "test1" },
+    { src: "hotdog-stamp.svg", key: "test2" },
+    { src: "hotdog-stamp.svg", key: "test3" },
   ];
 
-  let stampImages = images.map((image, index) => {
+  let stampImages = images.map((image) => {
     return (
-      <>
-        <ImageHandler image={{
-          src: image.src,
-          alt: "",
-          width: 100,
-          height: 100,
-          className: "size-24 object-cover"
-        }} />
-      </>
+      <ImageHandler image={{
+        src: image.src,
+        alt: "",
+        width: 100,
+        height: 100,
+        className: "size-24 object-cover"
+      }} key={image.key} />
     )
   })
 
