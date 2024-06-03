@@ -1,12 +1,13 @@
 import { CSSProperties } from "react";
 import { FieldErrors } from "react-hook-form";
+import { CookieSetOptions } from "universal-cookie";
 
 export type Input = {
   type: string;
   required: boolean;
   property: 'email' | 'password' | 'confirmPassword' | 'displayName';
-  error: Partial<FieldErrors<UserValues>>; 
-  createAccount?: boolean | undefined; 
+  error: Partial<FieldErrors<UserValues>>;
+  createAccount?: boolean | undefined;
 }
 
 export type UserValues = {
@@ -92,3 +93,17 @@ export type ImageType = {
 
 export const isProdImage = process.env.NODE_ENV === "production" ? `/chas-challenge/Images/` : `/Images/`;
 export const isProdPath = process.env.NODE_ENV === "production" ? `johantran02.github.io` : `localhost`;
+
+export function cookieExpireTime(hours: number) {
+  var now = new Date();
+  now.setTime(now.getTime() + hours * 3600 * 1000);
+  return now;
+}
+
+export const cookieSettings: CookieSetOptions = {
+  path: "/",
+  httpOnly: false,
+  secure: true,
+  domain: isProdPath,
+  expires: cookieExpireTime(1)
+}

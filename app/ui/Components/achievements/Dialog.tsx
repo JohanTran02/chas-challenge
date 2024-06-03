@@ -10,16 +10,16 @@ import Camera from '../../camera/Camera';
 import StartMission from './StartMission';
 
 
-const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder }: { stamp: Stampinfo; rarityPlaceholder: string; setModal: Dispatch<SetStateAction<Boolean>> }) => {
+const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder, completedStamps }: { stamp: Stampinfo; rarityPlaceholder: string; setModal: Dispatch<SetStateAction<Boolean>>, completedStamps?: string | undefined }) => {
   const [transition, setTransition] = useState("opacity-0 pointer-events-none");
   const [unlockedImg, setUnlockedImg] = useState<string | null>(null)
   const [openCamera, setOpenCamera] = useState<boolean>(false)
   const { name, facts, latitude, longitude } = stamp;
   const router = useRouter();
   const dispatch = useDispatch();
-
+  console.log(completedStamps)
   useEffect(() => {
-    const body = document.body; 
+    const body = document.body;
     if (unlockedImg) {
       body.style.overflowY = 'hidden';
       body.scrollIntoView();
@@ -31,7 +31,7 @@ const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder }: { stamp: Stampinf
   }, [unlockedImg, stamp])
 
   const handleCamera = () => {
-    setOpenCamera(prev => !prev); 
+    setOpenCamera(prev => !prev);
     transition.includes("opacity-0") ? setTransition("opacity-100") : setTransition("opacity-0 pointer-events-none");
   }
 
@@ -60,15 +60,15 @@ const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder }: { stamp: Stampinf
       {/* <div className="sticky bg-white inset-0 translate-y-[15%] h-full rounded-3xl z-[-1]" /> */}
 
       {
-        unlockedImg ? <CompletedMission prop={stamp} setModal={setModal} closeModal={closeModal} unlockedImg={unlockedImg} /> : 
-        <StartMission 
-          stamp={stamp} 
-          goToMap={goToMap}
-          setModal={setModal}
-          handleCamera={handleCamera}
-          closeModal={closeModal} 
-          rarityPlaceholder={rarityPlaceholder}
-        />
+        (unlockedImg || completedStamps) ? <CompletedMission stamp={stamp} setModal={setModal} closeModal={closeModal} unlockedImg={unlockedImg} /> :
+          <StartMission
+            stamp={stamp}
+            goToMap={goToMap}
+            setModal={setModal}
+            handleCamera={handleCamera}
+            closeModal={closeModal}
+            rarityPlaceholder={rarityPlaceholder}
+          />
       }
     </dialog>
 

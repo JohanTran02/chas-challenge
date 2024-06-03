@@ -55,10 +55,10 @@ const ClickedCategory = () => {
           const accomplishedStamps = completedStamps.find((obj) => obj?.name === stamp.name);
 
           if (!accomplishedStamps?.name)
-            return <li key={stamp.stampId}><SpecificMission prop={stamp} /></li>
+            return <li key={stamp.stampId}><SpecificMission stamp={stamp} /></li>
 
           if (accomplishedStamps)
-            return <li key={stamp.stampId}><SpecificMission prop={stamp} completedStamps={accomplishedStamps.name} /></li>
+            return <li key={stamp.stampId}><SpecificMission stamp={stamp} completedStamps={accomplishedStamps.name} /></li>
         }).reverse()
           : <SkeletonLoaderMissions />}
       </ul>

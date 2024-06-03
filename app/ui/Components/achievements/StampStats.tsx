@@ -1,7 +1,7 @@
 import { Stampinfo } from "@/app/lib/definitions";
 import ImageHandler from "../../ImageHandler";
 
-export default function StampStats({ prop, fakeRarity }: Partial<{ prop: Stampinfo, fakeRarity: string}>) {
+export default function StampStats({ stamp, fakeRarity }: Partial<{ stamp: Stampinfo, fakeRarity: string }>) {
 
     return (
         <>
@@ -13,7 +13,7 @@ export default function StampStats({ prop, fakeRarity }: Partial<{ prop: Stampin
                     width: 14,
                     className: "size-4"
                 }} />
-                <p className='text-[12px] text-darkGreen capitalize'>{prop?.rarity ? prop.rarity : fakeRarity}</p>
+                <p className='text-[12px] text-darkGreen capitalize'>{stamp?.rarity ? stamp.rarity : fakeRarity}</p>
             </div>
             <div className="flex-1 border-r-[1px] border-gray-400 flex flex-col items-center gap-1">
                 <ImageHandler image={{
@@ -34,7 +34,7 @@ export default function StampStats({ prop, fakeRarity }: Partial<{ prop: Stampin
                     className: "size-4"
                 }} />
                 <p className='text-[12px] text-darkGreen'>
-                    {prop?.latitude ? 'PLATS' : 'OKÄND'}
+                    {stamp?.latitude ? 'PLATS' : 'OKÄND'}
                 </p>
             </div>
         </>

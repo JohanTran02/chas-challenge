@@ -136,6 +136,7 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                     (isLoading.includes("idle")) &&
                                                     <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg" onClick={async () => {
                                                         setLoading("pending");
+                                                        getUserLocation("get", setCoords);
                                                         const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name, [coords?.latitude.toString() as string, coords?.longitude.toString() as string,]);
                                                         setImageResponse(updatedImage)
                                                         const result = (imageResponse.code === 200 && imageResponse.json === true)
