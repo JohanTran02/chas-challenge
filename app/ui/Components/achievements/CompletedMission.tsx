@@ -14,7 +14,8 @@ type Prop = {
 export default function CompletedMission({ prop, closeModal, setModal, unlockedImg }: Prop) {
     const { name, facts, latitude, longitude } = prop;
     const styleProp = { height: '290px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };
-    return (<>
+    return (
+    <div className="h-full w-full bg-darkGreen">
         <ImageHandler image={
             {
                 src: "Pressbyran.svg",
@@ -71,6 +72,6 @@ export default function CompletedMission({ prop, closeModal, setModal, unlockedI
                 </div>
             </div>
         </div>
-    </>
+    </div>
     )
 }

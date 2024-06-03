@@ -14,16 +14,20 @@ const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder }: { stamp: Stampinf
   const [transition, setTransition] = useState("opacity-0 pointer-events-none");
   const [unlockedImg, setUnlockedImg] = useState<string | null>(null)
   const [openCamera, setOpenCamera] = useState<boolean>(false)
-  const [missionsModal, setMissionsModal] = useState<boolean>(true)
   const { name, facts, latitude, longitude } = stamp;
   const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const body = document.body; 
     if (unlockedImg) {
-      document.body.style.overflowY = '';
+      body.style.overflowY = 'hidden';
+      body.scrollIntoView();
       const information = document.getElementById(`missionsModal-${stamp.name}`) as HTMLDialogElement;
       information.scrollTo(0, 0);
+    } else {
+      body.scrollIntoView();
+      body.style.overflowY = 'auto'
     }
   }, [unlockedImg, stamp])
 
@@ -49,7 +53,7 @@ const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder }: { stamp: Stampinf
 
     <dialog
       id={`missionsModal-${name}`}
-      className={`relative w-5/6 max-w-[500px] max-h-[600px] m-auto rounded-3xl border-darkGreen  border-2 overflow-y-auto no-scrollbar ${missionsModal ? 'bg-neutralWhite' : 'bg-darkGreen'}`}
+      className={`relative w-5/6 max-w-[500px] max-h-[600px] m-auto rounded-3xl border-darkGreen  border-2 overflow-y-auto no-scrollbar`}
     >
       {openCamera && <div className={`transition-opacity ${transition} fixed top-0 left-0 z-40 w-full h-full`}>
         <Camera prop={stamp} handleCamera={handleCamera} setTransition={setTransition} setUnlockedImg={setUnlockedImg} />
