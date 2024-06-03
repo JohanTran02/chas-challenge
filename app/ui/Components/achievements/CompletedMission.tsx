@@ -2,7 +2,10 @@ import ImageHandler from "../../ImageHandler";
 import Mapbox from "../dashboard/map/Mapbox"
 import { Stampinfo } from "@/app/lib/definitions"
 import StampStats from "./StampStats";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { RootState } from "@/app/lib/redux/store";
+import { useSelector } from "react-redux";
+import { getUserLocation } from "@/app/lib/map/geolocation";
 
 type Prop = {
     stamp: Stampinfo;
@@ -12,10 +15,43 @@ type Prop = {
 }
 
 export default function CompletedMission({ stamp, closeModal, setModal, unlockedImg }: Prop) {
+    const {stamps, collectedStampsWithCoords} = useSelector((state: RootState) => state.stamp); 
+    const [coords, setCoords] = useState<{latitude: string; longitude: string}>()
+
+    useEffect(() => {
+       console.log(collectedStampsWithCoords)
+       collectedStampsWithCoords.filter((obj) => {
+            if(obj.name === stamp.name) {
+                const coords = obj.coordinates.map((coord) => coord.replace(/[^\d.]/g, ''))
+                setCoords({latitude: coords[0], longitude: coords[1]});
+                return true;  
+            } 
+            return;           
+       })
+
+    }, [])
+
     const { name, facts, latitude, longitude } = stamp;
     const styleProp = { height: '290px', width: '400px', inset: '0 0 0 0', translate: '-60px -90px' };
     return (
-        <div className="h-full w-full bg-darkGreen">
+        <div className="h-full w-full bg-darkGreen relative">
+            <ImageHandler image={{
+                src: "Stjärnavituppdrag.svg",
+                alt: "star",
+                width: 40,
+                height: 40,
+                className: 'size-12 absolute top-[28px] left-[65px]',
+                // checkPath: true
+            }} />
+            <ImageHandler image={{
+                src: "Stjärnauppdrag.svg",
+                alt: "star",
+                width: 40,
+                height: 40,
+                className: 'size-12 absolute top-[155px] right-16',
+                // checkPath: true
+            }} />
+
             <ImageHandler image={
                 {
                     src: `${stamp.name.toLowerCase()}.svg`,
@@ -26,8 +62,8 @@ export default function CompletedMission({ stamp, closeModal, setModal, unlocked
                 }
             } />
             <div className="bg-white inset-0 rounded-3xl w-full h-full pb-6 px-4">
-                <div className="w-full pt-16 space-y-6">
-                    <h1 className='font-bold text-darkGreen text-center text-3xl uppercase'>grattis!</h1>
+                <div className="w-full pt-[85px] space-y-6">
+                    <h1 className='font-bold text-darkGreen text-center text-2xl uppercase'>grattis!</h1>
                     <h2 className='font-bold text-black text-center'>Du har hittat en <span className="uppercase">{stamp.name}</span></h2>
                     <div className="flex font-extrabold">
                         <StampStats stamp={stamp} />
@@ -53,14 +89,15 @@ export default function CompletedMission({ stamp, closeModal, setModal, unlocked
                     <div className="relative h-[128px] w-full overflow-hidden rounded-xl">
                         <Mapbox
                             styleProp={styleProp}
-                            longitude={longitude}
-                            latitude={latitude}
+                            longitude={coords?.longitude ? coords.longitude : longitude}
+                            latitude={coords?.latitude ? coords.latitude : latitude}
                             interactive={false}
                             navcontrol={false}
                             geocontrol={false}
                             facts={facts}
                             name={name}
                             trackResize={false}
+                            minimap={true}
                         />
                     </div>
                     <div className="w-full flex justify-center">

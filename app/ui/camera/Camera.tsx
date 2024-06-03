@@ -26,7 +26,6 @@ function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image
     const [imageResultContent, setImageResultContent] = useState<ReactNode>(null)
 
     useEffect(() => {
-        console.log(isLoading)
         if (isLoading.includes("finished")) {
             setTransition("opacity-0 pointer-events-none")
             setUnlockedImg(image);
@@ -108,7 +107,7 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                     videoConstraints={videoConstraints}
                                     screenshotQuality={1}
                                 />
-                                <div className="flex justify-center mt-4" onClick={capture}>
+                                <div className="flex justify-center mt-10" onClick={capture}>
                                     <ImageHandler image={{
                                         height: 32,
                                         width: 32,

@@ -15,7 +15,7 @@ import { useCookies } from "react-cookie";
 // components
 import SkeletonLoaderMissions from "../skeleton loaders/SkeletonLoaderMissions";
 
-type CompletedStamps = { name: string; icon: null }[]
+type CompletedStamps = { name: string; coordinates: string[] }[]
 
 const ClickedCategory = () => {
   const [cookies] = useCookies(['accessToken']);

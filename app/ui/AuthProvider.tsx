@@ -9,7 +9,7 @@ export function useDebounce(setLoading: Dispatch<SetStateAction<boolean>>, secon
     useEffect(() => {
         const handler = setTimeout(() => {
             setLoading(false);
-            console.log("Debounce finished, setting loading to false");
+            // console.log("Debounce finished, setting loading to false");
         }, seconds * 1000);
 
         return () => clearTimeout(handler);
@@ -24,12 +24,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     useDebounce(setLoading, 1);
 
     useEffect(() => {
-        console.log("Checking cookies", cookies.accessToken);
+        // console.log("Checking cookies", cookies.accessToken);
         if (cookies.accessToken) {
-            console.log("Access token found, redirecting to /dashboard");
+            // console.log("Access token found, redirecting to /dashboard");
             router.push("/dashboard");
         } else {
-            console.log("No access token, redirecting to /signin");
+            // console.log("No access token, redirecting to /signin");
             router.push("/signin");
         }
     }, [router, cookies]);

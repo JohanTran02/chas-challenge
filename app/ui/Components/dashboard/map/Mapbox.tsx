@@ -31,9 +31,10 @@ type props = {
 	name?: string;
 	facts?: string;
 	trackResize: boolean
+	minimap?: boolean
 }
 
-const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, longitude, name, facts, trackResize }: props) => {
+const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, longitude, name, facts, trackResize, minimap }: props) => {
 	const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 	const markerInfo = useSelector((state: RootState) => state.map.markerInfo);
 
@@ -48,7 +49,7 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 		if (latitude && longitude) return { latitude: Number(latitude), longitude: Number(longitude), zoom: 15 }
 		if (markerInfo) return { latitude: Number(markerInfo.latitude), longitude: Number(markerInfo.longitude), zoom: 15 }
 		return coords ? { latitude: coords.latitude, longitude: coords.longitude, zoom: 11 } :
-			{ latitude: 59.20, longitude: 18.03, zoom: 5 }
+			{ latitude: 59.20, longitude: 18.03, zoom: 11 }
 	}
 	return (
 		<div /* className={style.mainStyle} */>
@@ -91,6 +92,21 @@ const Mapbox = ({ styleProp, geocontrol, navcontrol, interactive, latitude, long
 						position="bottom-right"
 						style={{ borderRadius: '10px' }}
 					/>}
+
+					{(minimap && coords && !latitude) && 
+					<Marker
+						// onClick = få upp popup
+						latitude={coords.latitude}
+						longitude={coords.longitude}
+						color="red">
+						<ImageHandler image={{
+							src: "map-pin.svg",
+							height: 32,
+							width: 32,
+							alt: "map pin",
+							className: "object-cover object-center size-8"
+						}} />
+					</Marker>}
 
 					{(markerInfo || (latitude || longitude)) &&
 						<>

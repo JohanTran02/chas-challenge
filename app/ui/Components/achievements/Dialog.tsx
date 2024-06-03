@@ -17,7 +17,7 @@ const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder, completedStamps }: 
   const { name, facts, latitude, longitude } = stamp;
   const router = useRouter();
   const dispatch = useDispatch();
-  console.log(completedStamps)
+
   useEffect(() => {
     const body = document.body;
     if (unlockedImg) {
@@ -52,8 +52,7 @@ const Dialog = ({ stamp: stamp, setModal, rarityPlaceholder, completedStamps }: 
 
     <dialog
       id={`missionsModal-${name}`}
-      className={`relative bg-neturalWhite w-5/6 max-w-[500px] max-h-[600px] m-auto rounded-3xl border-darkGreen  border-2 overflow-y-auto no-scrollbar`}
-    >
+      className={`relative bg-neturalWhite w-5/6 max-w-[500px] max-h-[600px] m-auto rounded-3xl border-darkGreen  border-2 overflow-y-auto no-scrollbar`}>
       {openCamera && <div className={`transition-opacity ${transition} fixed top-0 left-0 z-40 w-full h-full`}>
         <Camera prop={stamp} handleCamera={handleCamera} setTransition={setTransition} setUnlockedImg={setUnlockedImg} />
       </div>}

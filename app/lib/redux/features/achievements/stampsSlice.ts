@@ -7,13 +7,14 @@ export interface Stamp {
   clickedCategory: string; 
   collectedStamps: string[];
   collectedStampsProcentage: number; 
-
+  collectedStampsWithCoords: {name: string; coordinates: string[]}[]
 }
 
 const initialState: Stamp = {
   stamps: null,
   clickedCategory: '',
   collectedStamps: [],
+  collectedStampsWithCoords: [],
   collectedStampsProcentage: 0,
 }
 
@@ -30,8 +31,9 @@ export const stampSlice = createSlice({
       state.clickedCategory = action.payload; 
     },
 
-    setCollectStamps: (state, action: PayloadAction<{icon: null; name: string}[]>) => {
+    setCollectStamps: (state, action: PayloadAction<{coordinates: string[]; name: string}[]>) => {
       const payload = action.payload; 
+      state.collectedStampsWithCoords = action.payload; 
 
       const filterdList: string[] = payload.map((obj) => obj.name); 
       state.collectedStamps = filterdList.filter((name, index) => filterdList.indexOf(name) === index); 
@@ -39,6 +41,7 @@ export const stampSlice = createSlice({
       
       // state.collectedStamps = action.payload;
     }, 
+
     addToCollectedStamp: (state, action: PayloadAction<string>) => {
       state.collectedStamps.push(action.payload); 
     }
