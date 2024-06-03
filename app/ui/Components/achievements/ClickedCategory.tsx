@@ -43,7 +43,7 @@ const ClickedCategory = () => {
       <div className="flex items-center gap-2 px-1 w-full">
         <p className="flex-1 font-bold">SAMLADE STAMPS</p>
         {(stamps !== null && !isLoading) && <div className="flex-1 flex items-center gap-4">
-          <div className="flex-1 bg-white h-2 w-full border-[1px] border-darkGreen rounded-xl">
+          <div className="flex-1 bg-white h-2 w-full border-[1.5px] border-darkGreen rounded-xl">
             <div className={`h-full bg-[#598f7d] rounded-sm`}
               style={{ width: `${collectedStampsProcentage}%` }} />
           </div>

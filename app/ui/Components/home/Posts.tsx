@@ -20,9 +20,13 @@ const Posts = () => {
           <li key={index}
             className={`bg-neutralWhite flex justify-between gap-1 w-full max-w-[361px] h-36 border-darkGreen border-[3px] p-[8px] rounded-xl ${index !== userNames.length - 1 && 'mb-4'} overflow-hidden`}>
             <div className="flex-1 flex gap-3 items-center w-full h-[49px] mt-2">
-              <div className="h-[45px] w-[45px] border-darkGreen border-2 rounded-full">
+              <div className="h-[40px] w-[40px] border-darkGreen border-2 rounded-full">
                 <ImageHandler image={{
-                  src: user.profilePic, alt: 'profile picture', width: 32, height: 32, className: "w-full h-full"
+                  src: user.profilePic, 
+                  alt: 'profile picture', 
+                  width: 32, 
+                  height: 32, 
+                  className: "w-full h-full"
                 }} />
               </div>
             </div>
@@ -46,7 +50,7 @@ const Posts = () => {
                   alt: "An image of a collected stamp",
                   height: 32,
                   width: 32,
-                  className: "h-auto w-[80%]"
+                  className: " size-24"
                 }} />
               </div>
               <p className="font-bold text-[15px]  text-darkGreen">KATEGORI</p>
