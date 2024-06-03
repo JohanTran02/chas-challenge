@@ -8,6 +8,7 @@ import { useCookies } from "react-cookie";
 import CameraLoader from "./CameraLoader";
 import { Stampinfo } from "@/app/lib/definitions";
 import ImageHandler from "../ImageHandler";
+import { getUserLocation } from "@/app/lib/map/geolocation";
 
 const videoConstraints: MediaTrackConstraints = {
     facingMode: "environment",
@@ -33,7 +34,6 @@ function useImageContent({ isLoading, prop, setTransition, setUnlockedImg, image
         else if (isLoading.includes("rejected")) {
             setImageResultContent(<CameraError isLoading={isLoading} addOpacity />)
             setUnlockedImg(null);
-
         }
         else {
             setImageResultContent(null)
@@ -57,6 +57,7 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
     const webcamRef = useRef<Webcam>(null);
     const [image, setImage] = useState<string | null>("");
     const [enableWebcam, setEnableWebcam] = useState<boolean>(true);
+    const [coords, setCoords] = useState<GeolocationCoordinates | undefined>();
     const [imageResponse, setImageResponse] = useState<{
         code: number | undefined;
         json: any;
@@ -65,6 +66,10 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
         json: any;
     });
     const imageResultContent = useImageContent({ isLoading, setTransition, setUnlockedImg, prop, image });
+
+    useEffect(() => {
+        getUserLocation("get", setCoords)
+    }, [setCoords])
 
     const capture = useCallback(() => {
         if (webcamRef.current) {
@@ -131,21 +136,22 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                                     (isLoading.includes("idle")) &&
                                                     <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg" onClick={async () => {
                                                         setLoading("pending");
-                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name);
+                                                        const updatedImage = await camera("ai/readimage", image as string, cookies.accessToken, prop.name, [coords?.latitude.toString() as string, coords?.longitude.toString() as string,]);
                                                         setImageResponse(updatedImage)
+                                                        const result = (imageResponse.code === 200 && imageResponse.json === true)
                                                         setTimeout(() => {
-                                                            imageResponse.code === 200 && imageResponse.json ? setLoading("finished") : setLoading("rejected");
-                                                        }, 2 * 1000);
+                                                            result ? setLoading("finished") : setLoading("rejected");
+                                                        }, 3 * 1000);
                                                     }}>Ladda upp foto</button>
                                                 }
-                                                <button className="rounded-2xl bg-white text-darkGreen p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>
+                                                <button className="rounded-3xl text-white bg-darkGreen border-2 border-white p-2 font-semibold text-lg justify-self-end" onClick={enableCamera}>Ta nytt foto</button>
                                             </div >
                                         </> : <>
-                                            <div className="relative grid h-[600px] gap-5 w-full bg-white rounded-md">
+                                            <div className="relative grid h-full gap-5 w-full bg-white rounded-md">
                                                 <CameraError isLoading={isLoading} addOpacity={true} />
                                             </div>
-                                            <div className="flex flex-col gap-3 w-full max-w-48 mx-auto">
-                                                <button className="rounded-xl bg-white text-darkGreen p-1 font-semibold text-lg" onClick={() => enableCamera()}>Ta nytt foto</button>
+                                            <div className="flex flex-col gap-3 w-full max-w-48 mx-auto mt-4">
+                                                <button className="rounded-3xl text-white bg-darkGreen border-2 border-white p-2 font-semibold text-lg" onClick={() => enableCamera()}>Ta nytt foto</button>
                                             </div>
                                         </>
                                 }

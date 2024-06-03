@@ -1,7 +1,7 @@
 import { CameraEndpoint, Stampinfo } from "../definitions";
 
 // , setLoading: Dispatch<SetStateAction<boolean>>
-export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, stampName: string) => {
+export const camera = async (endpoint: CameraEndpoint, base64: string, accessToken: string, stampName: string, coords: string[] | undefined) => {
     let json;
     let code;
 
@@ -13,7 +13,7 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
                 Authorization: `Bearer ${accessToken}`
             },
             method: "POST",
-            body: JSON.stringify({ prompt: stampName, picture: image })
+            body: JSON.stringify({ prompt: stampName, picture: image, coordinates: coords })
         });
 
         if (response.status === 200) {
@@ -21,9 +21,10 @@ export const camera = async (endpoint: CameraEndpoint, base64: string, accessTok
             code = response.status;
             console.log('Status code is 200 and the fetching proccess has been successfully completed!', json)
             // setLoading(false);
+            return { code, json };
         }
 
-        if (!response.ok) {
+        if (response.status !== 200) {
             json = await response.json();
             const errorMessage: { code: string; description: string } = await json[0];
 

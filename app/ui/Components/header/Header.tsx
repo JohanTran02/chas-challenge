@@ -63,7 +63,7 @@ const Header = () => {
             </div> :
 
             <div className="flex flex-col items-center justify-end gap-1 h-full"
-              onClick={() => removeCookie('accessToken', { path: '/', domain: isProdPath })}
+              onClick={() => removeCookie("accessToken", { path: "/", httpOnly: false, secure: true, domain: isProdPath })}
             >
               <ImageHandler image={{
                 priority: true,
