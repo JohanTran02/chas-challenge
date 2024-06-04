@@ -97,6 +97,7 @@ export default function Camera({ prop, setTransition, handleCamera, setUnlockedI
                                     screenshotFormat="image/jpeg"
                                     videoConstraints={videoConstraints}
                                     screenshotQuality={1}
+                                    playsInline={true}
                                 />
                                 <div className="flex justify-center mt-10" onClick={capture}>
                                     <ImageHandler image={{
