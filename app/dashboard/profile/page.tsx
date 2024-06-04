@@ -22,7 +22,7 @@ export default function Page() {
     if (index < 3) {
       return (
         <ImageHandler image={{
-          src: `${stamp.toLowerCase()}.svg`,
+          src: `${stamp.toLowerCase().replace(" ", "")}.svg`,
           alt: stamp,
           width: 100,
           height: 100,
@@ -58,7 +58,7 @@ export default function Page() {
 
         <div className='text-center space-y-1'>
           <h1 className="text-white text-xl font-bold mx-auto uppercase">{cookies.displayName ? cookies.displayName : "användarnamn"}</h1>
-          <h2 className="text-white text-sm font-bold">0 stamps<span className='px-2'>&#x2022;</span>0 vänner</h2>
+          <h2 className="text-white text-sm font-bold">{collectedStamps.length} stamps<span className='px-2'>&#x2022;</span>0 vänner</h2>
         </div>
 
       </div>
