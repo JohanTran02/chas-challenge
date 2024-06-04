@@ -43,7 +43,7 @@ const Header = () => {
           <GetStarted dispatch={setGetStarted} />
         </dialog>
       }
-      <header className={`w-full h-24 ${(pathname === '/chas-challenge' || pathname === "/camera/" || pathname === "/dashboard/map/") ? 'hidden' : ""}`}>
+      <header className={`w-full h-20 ${(pathname === '/chas-challenge' || pathname === "/camera/" || pathname === "/dashboard/map/") ? 'hidden' : ""}`}>
         <div className={`bg-neutralWhite w-full h-full pb-4 flex justify-between items-center px-4 relative z-20 ${pathname === '/dashboard/map' && 'opacity-0 pointer-events-none'}`}>
           <ImageHandler image={{
             priority: true,

@@ -37,13 +37,13 @@ export default function CompletedMission({ stamp, closeModal, setModal, unlocked
             <ImageHandler image={
                 {
                     src: `${stamp.name.replace(" ", "").toLowerCase()}.svg`,
-                    height: 128,
-                    width: 128,
+                    height: 168,
+                    width: 168,
                     alt: '',
                     className: "m-auto translate-y-[40%] relative z-10"
                 }
             } />
-            <div className="bg-white inset-0 rounded-3xl w-full h-full pb-6 px-4">
+            <div className="bg-white inset-0 rounded-3xl w-full h-full pb-4 px-4">
                 <div className="w-full pt-[85px] space-y-6">
                     <h1 className='font-bold text-darkGreen text-center text-2xl uppercase'>grattis!</h1>
                     <h2 className='font-bold text-black text-center'>Du har hittat en <span className="uppercase">{stamp.name}</span></h2>
