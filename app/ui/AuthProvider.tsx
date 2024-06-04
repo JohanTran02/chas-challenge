@@ -22,16 +22,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const [accessToken, setAccessToken] = useState<null | string>(cookies.accessToken);
     const router = useRouter();
 
-    const url = window.document.location; 
-    const access_token = new URLSearchParams(url.search).get('token');
-    console.log(url)
-    
-    
-    if(!accessToken && access_token){
-        setCookie('accessToken', access_token, cookieSettings);
+    useEffect(() => {
+        const url = window.location; 
+        const access_token = new URLSearchParams(url.search).get('token');
+        console.log(url)
 
-    }
-
+        if(!accessToken && access_token){
+            setCookie('accessToken', access_token, cookieSettings);
+    
+        }
+    }, [accessToken])
+    
     useEffect(() => {
         if (cookies.accessToken) {
             router.push("/dashboard");
