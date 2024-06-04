@@ -29,9 +29,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
         if(!accessToken && access_token){
             setCookie('accessToken', access_token, cookieSettings);
-    
         }
-    }, [accessToken])
+    }, [accessToken, setCookie])
     
     useEffect(() => {
         if (cookies.accessToken) {

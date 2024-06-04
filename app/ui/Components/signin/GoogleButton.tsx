@@ -7,7 +7,7 @@ const GoogleButton = () => {
       <div className="flex bg-white rounded-lg border-[1px] border-black">
         <div className="flex-1  flex justify-end items-center pr-8">
           <ImageHandler image={{
-            src: "/Images/google.svg",
+            src: "google.svg",
             alt: "google icon",
             width: 35,
             height: 35,
