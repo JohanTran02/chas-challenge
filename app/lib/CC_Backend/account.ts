@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { AccountEndpoint, CookiesForUser, UserValues } from "../definitions";
+import { AccountEndpoint, CookiesForUser, UserValues, cookieSettings } from "../definitions";
+import { useCookies } from "react-cookie";
 
 export const account = async (
   endpoint: AccountEndpoint,
@@ -46,22 +47,4 @@ export const account = async (
   return { code, json, error };
 }
 
-
-export const google = async () => {
-
-  try {
-    const response = await fetch('https://natureai.azurewebsites.net/account/login-google');
-
-    if (!response.ok) {
-      console.log(response.status, response.statusText)
-      return
-    }
-
-    const data = await response.json();
-    console.log(data)
-
-  } catch (error) {
-    console.log(error)
-  }
-
-}
+// http://localhost:3000/signin?token=eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJoamFsbWFyLnN0cmFubmluZ2VAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI5NzQ5MjY2NC1lMDgxLTQ0ZjktYjFjMi0yMWI2NjViNWI0MGMiLCJleHAiOjE3MTc0OTI0NDYsImlzcyI6Im5hdHVyZWFpIiwiYXVkIjoibmF0dXJlYWlfYXBpIn0.whXZY5Rmk8j1KshSYduK6QB6P7x5FypldZ1eCrWMTB0

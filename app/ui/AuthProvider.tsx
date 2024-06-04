@@ -1,9 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
-import { CookiesProvider, useCookies } from 'react-cookie';
 import Loader from './Components/Loader';
+import { useRouter } from 'next/navigation';
+import { cookieSettings } from '../lib/definitions';
+import { CookiesProvider, useCookies } from 'react-cookie';
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 export function useDebounce(setLoading: Dispatch<SetStateAction<boolean>>, seconds: number) {
     useEffect(() => {
@@ -20,15 +21,29 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const [isLoading, setLoading] = useState(true);
     const router = useRouter();
 
-    useDebounce(setLoading, 1);
+    const url = window.location; 
+    const access_token = new URLSearchParams(url.search).get('token');
+    console.log(url)
+    
+    
+    if(access_token){
+        setCookie('accessToken', access_token, cookieSettings);
+        useDebounce(setLoading, 1);
+        useEffect(() => {
+            router.push('/dashboard/')
+        }, [router, cookies]);
 
-    useEffect(() => {
-        if (cookies.accessToken) {
-            router.push("/dashboard");
-        } else {
-            router.push("/signin");
-        }
-    }, [router, cookies]);
+    } else {
+        useDebounce(setLoading, 1);
+        useEffect(() => {
+            if (cookies.accessToken) {
+                router.push("/dashboard");
+            } else {
+                router.push("/signin");
+            }
+        }, [router, cookies]);
+    }
+
 
     return (
         <>

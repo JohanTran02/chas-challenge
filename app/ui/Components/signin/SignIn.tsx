@@ -12,7 +12,7 @@ import { useState } from "react";
 import { UserValues, cookieSettings } from "@/app/lib/definitions";
 
 // Redux
-import { account, google } from "@/app/lib/CC_Backend/account";
+import { account } from "@/app/lib/CC_Backend/account";
 import { useCookies } from "react-cookie";
 
 import LoginLoader from "./LoginLoader"; // Import your loader component
