@@ -17,7 +17,7 @@ export default function StampModalContent({ onClose }: { onClose: () => void }) 
               {
                 collectedStamps.map((stamp, index) => {
                   return (
-                    <div className='mx-auto space-y-2' key={index}>
+                    <div className='mx-auto space-y-2 flex flex-col items-center' key={index}>
                       <StampContainer stamp={stamp} />
                       <h1 className='text-center text-xl font-bold capitalize'>{stamp}</h1>
                     </div>
