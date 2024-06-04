@@ -58,7 +58,7 @@ export default function Page() {
 
         <div className='text-center space-y-1'>
           <h1 className="text-white text-xl font-bold mx-auto uppercase">{cookies.displayName ? cookies.displayName : "användarnamn"}</h1>
-          <h2 className="text-white text-sm font-bold">23 stamps<span className='px-2'>&#x2022;</span>4 vänner</h2>
+          <h2 className="text-white text-sm font-bold">0 stamps<span className='px-2'>&#x2022;</span>0 vänner</h2>
         </div>
 
       </div>
@@ -70,7 +70,7 @@ export default function Page() {
               SE ALLA
             </h6>
           </div>
-          <div className="flex justify-evenly mt-4">
+          <div className="flex justify-start gap-8 mt-4">
             {stampImages}
           </div>
         </div>
