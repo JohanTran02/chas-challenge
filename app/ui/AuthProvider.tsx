@@ -22,7 +22,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const [accessToken, setAccessToken] = useState<null | string>(cookies.accessToken);
     const router = useRouter();
 
-    const url = window.location; 
+    const url = window.document.location; 
     const access_token = new URLSearchParams(url.search).get('token');
     console.log(url)
     
