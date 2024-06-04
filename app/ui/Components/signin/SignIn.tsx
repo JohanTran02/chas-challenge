@@ -16,7 +16,7 @@ import { account } from "@/app/lib/CC_Backend/account";
 import { useCookies } from "react-cookie";
 
 import LoginLoader from "./LoginLoader"; // Import your loader component
-// import GoogleButton from "./GoogleButton";
+import GoogleButton from "./GoogleButton";
 
 export default function SignIn() {
   const [createAccount, setCreateAccount] = useState<boolean>(false);
@@ -117,10 +117,12 @@ export default function SignIn() {
               <p className="">Glömt lösenord?</p>
             </div>
 
-            {/* {!createAccount && <div className="mt-6 mb-16"
-              onClick={() => google()}>
-              <GoogleButton />
-            </div>} */}
+            {!createAccount && <div className="mt-6 mb-16">
+              <a 
+                href="https://natureai.azurewebsites.net/account/login-google"
+                className=""><GoogleButton />
+              </a>
+            </div>}
 
             <div className="flex justify-center mt-8">
               <button

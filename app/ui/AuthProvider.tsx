@@ -19,6 +19,7 @@ export function useDebounce(setLoading: Dispatch<SetStateAction<boolean>>, secon
 export default function AuthProvider({ children }: { children: ReactNode }) {
     const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
     const [isLoading, setLoading] = useState(true);
+    const [accessToken, setAccessToken] = useState<null | string>(cookies.accessToken);
     const router = useRouter();
 
     const url = window.location; 
@@ -26,7 +27,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     console.log(url)
     
     
-    if(access_token){
+    if(!accessToken && access_token){
         setCookie('accessToken', access_token, cookieSettings);
         useDebounce(setLoading, 1);
         useEffect(() => {

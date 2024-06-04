@@ -65,6 +65,7 @@ const Header = () => {
               onClick={() => {
                 removeCookie("accessToken", cookieSettings);
                 removeCookie('displayName', cookieSettings);
+                window.location.reload()
               }}
             >
               <ImageHandler image={{
