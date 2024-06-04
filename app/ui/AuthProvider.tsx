@@ -29,19 +29,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     
     if(!accessToken && access_token){
         setCookie('accessToken', access_token, cookieSettings);
-        useEffect(() => {
-            router.push('/dashboard/')
-        }, [router, cookies]);
 
-    } else {
-        useEffect(() => {
-            if (cookies.accessToken) {
-                router.push("/dashboard");
-            } else {
-                router.push("/signin");
-            }
-        }, [router, cookies]);
     }
+
+    useEffect(() => {
+        if (cookies.accessToken) {
+            router.push("/dashboard");
+        } else {
+            router.push("/signin");
+        }
+    }, [router, cookies]);
+    
     
     useDebounce(setLoading, 1);
 
