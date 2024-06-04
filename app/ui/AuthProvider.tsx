@@ -29,13 +29,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     
     if(!accessToken && access_token){
         setCookie('accessToken', access_token, cookieSettings);
-        useDebounce(setLoading, 1);
         useEffect(() => {
             router.push('/dashboard/')
         }, [router, cookies]);
 
     } else {
-        useDebounce(setLoading, 1);
         useEffect(() => {
             if (cookies.accessToken) {
                 router.push("/dashboard");
@@ -44,7 +42,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
             }
         }, [router, cookies]);
     }
-
+    
+    useDebounce(setLoading, 1);
 
     return (
         <>
