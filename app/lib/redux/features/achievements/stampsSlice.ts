@@ -37,7 +37,7 @@ export const stampSlice = createSlice({
 
       const filterdList: string[] = payload.map((obj) => obj.name); 
       state.collectedStamps = filterdList.filter((name, index) => filterdList.indexOf(name) === index); 
-      state.collectedStampsProcentage = parseFloat(((state.collectedStamps.length / 5) * 100).toFixed(2));
+      state.collectedStampsProcentage = parseFloat(((state.collectedStamps.length / 6) * 100).toFixed(2));
       
       // state.collectedStamps = action.payload;
     }, 

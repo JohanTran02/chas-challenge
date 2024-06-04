@@ -5,7 +5,7 @@ export default function StampContainer({ stamp }: { stamp: string }) {
         <>
             <div key={stamp}>
                 <ImageHandler image={{
-                    src: `${stamp.toLowerCase()}.svg`,
+                    src: `${stamp.toLowerCase().replace(' ', '')}.svg`,
                     alt: stamp.toLowerCase(),
                     width: 120,
                     height: 120,
