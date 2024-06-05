@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Xplore
 
-## Getting Started
+Xplore är en webbapplikation som uppmuntrar människor att upptäcka Sveriges natur på ett roligt och interaktivt sätt genom att samla på "stamps". Stamps är uppdrag som man kan samla genom att använda kameran för att ta bilder av de föremål som uppdraget kräver. När en bild godkänns, erhåller användaren en avklarad stamp med en minikarta och en nål som visar platsen där stampen hittades.
+<br>
 
-First, run the development server:
+## Installera
 
-```bash
+```
+git clone https://github.com/JohanTran02/chas-challenge
+cd chas-challenge
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Funktioner
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Bildigenkänning med OpenAi - [OpenAi](https://platform.openai.com/docs/guides/vision)
+- Autentisering med Google Auth0 för en säker och smidig inloggning - [Google Auth0](https://cloud.google.com/api-gateway/docs/authenticating-users-auth0)
+- En karta som kan hitta enhetens koordinater och visa en filtrerad lista över platser runt om i världen baserat på inmatningsfältets innehåll. - [Mapbox](https://visgl.github.io/react-map-gl/docs)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Verktyg
 
-## Learn More
+- Next.js version 14.2.1
+- Tailwind version 3.4.1
+- Typescript version 5
+- Trello [Projektplanering](https://trello.com/b/plJwoQk7/chas-challenge)
+- Mapbox-gl-geocoder version 3.3.0
+- Mapbox-gl version 3.3.0
+- React-webcam version 7.2.0
+- React hook form version 7.51.4
+- Redux toolkit version 2.2.4
+- React Cookie version 7.1.4
+- Google Authentication
+  <br>
 
-To learn more about Next.js, take a look at the following resources:
+## Svagheter
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Applikationen körs i webbläsaren istället för som en specifik mobilapplikation. Detta innebär att appen endast körs i webbläsare, vilket kan vara en nackdel eftersom alla webbläsare inte är lika avancerade. Till exempel uppstod problem med kameran i webbläsare som Safari och Opera GX. Dessa problem hade kunnat undvikas om applikationen hade utvecklats med ramverk som är anpassade för mobilapplikationer, som React Native. Cookies var svårt att implementera eftersom Next.js använder SSR(Server Side Rendering) och funktionalitet med API-anrop från Node.js server. Dokumentationen visar att klienten kan lägga cookies genom att skicka en HTTP-begäran eller -svar till servern men problemet var att det inte gick att skapa en cookie när sidan var hostad. Det beror på att en cookie som skapas genom HTTP-anrop är en dynamisk funktion som returnerar ett värde som inte går att veta i förväg. Filstrukturen för projektet var också fylld med mappar som gjorde mappträdet som gjorde det tidskrävande för att hitta rätt komponenter.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Styrkor
 
-## Deploy on Vercel
+Next.js kommer med extra funktionalitet som optimerar prestandan på hemsidan. Bilder och länkar blir optimerade med komponenter som kommer med ramverket. Med Länk-komponenten börjar upphämtningen av sidan när den syns på skärmen. Funktionalitet som layout och page gör att inte hela sidan inte laddas om utan bara komponenter som skiljer sig från varandra. Med Next.js blir mappträdet själva navigeringen mellan sidorna vilket gör det tydligare när man ska programmera och ändra på komponenterna till skillnad från React Router som används för att manuellt ange navigeringen för olika sidor.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Gruppmedlemmar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Filip Hällgren
+- Isak Tilahun
+- Johan Tran
